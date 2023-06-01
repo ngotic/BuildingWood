@@ -1,0 +1,266 @@
+/* COMMON */
+
+  @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@800&family=Noto+Sans+KR:wght@700&display=swap');
+
+
+@font-face {
+    font-family: 'TTWanjudaedunsancheB';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/TTWanjudaedunsancheB.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* @font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+} */
+
+
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 600;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-SemiBold.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-SemiBold.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-SemiBold.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-SemiBold.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-SemiBold.ttf') format("truetype");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+:root{
+    --main-font-sub-family : Pretendard-Regular;
+    /* --main-font-family : 'Nanum Gothic', sans-serif; */
+    --main-font-family : 'Pretendard';
+    --main-content-font-family : Pretendard-Regular;
+    --main-font-color : #90D940;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    color:#777;
+}
+
+
+body {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    word-break: break-all;
+}
+
+/* HEADER */
+.header-area {
+    position: relative; /* 여기도 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 3;
+    background-color: white;
+    border-bottom: 2px solid #eee;
+}
+
+.navbar-fade {
+    animation-name: navbar-fade;
+    animation-duration: 0.5s;
+    -webkit-animation-name: navbar-fade;
+    -webkit-animation-duration: 0.5s;
+}
+
+@keyframes navbar-fade {
+    from { opacity: .4}
+    to { opacity: 1 }
+}
+
+@-webkit-keyframes navbar-fade {
+    from { opacity: .4}
+    to { opacity: 1 }
+}
+
+.header-area.navbar-fixed {
+    position: fixed; /*여기도*/
+}
+
+.header-area > #navbar {
+    width: calc(100% - 120px);
+    margin: 0 60px;
+    overflow: hidden;
+}
+
+@media (min-width: 992px) {
+    .header-area > #navbar {
+        max-width: 900px;
+        margin: 0 auto;
+        overflow: visible;
+        background-color: white;
+    }
+}
+
+@media (min-width: 1200px) {
+    .header-area > #navbar {
+        max-width: 1000px;
+    }    
+}
+
+.header-area > #navbar > div .navbar-brand {
+    display: inline-block;
+    position: relative;
+    top: 50%;
+    background-image: url();
+    transform: translateY(-50%);
+    font-size: 32px;
+    cursor: pointer;
+    font-family: var(--main-font-family); 
+    color: var(--main-font-color);
+    
+}
+
+.header-area > #navbar > .navbar-toggler * {
+    font-size: 32px;
+}
+
+.header-area > #navbar > .navbar-toggler {
+    float: right;
+    height: 70px;
+    line-height: 70px;
+    font-size: 32px;
+    cursor: pointer;
+}
+
+@media(min-width: 992px) {
+    .header-area > #navbar > .navbar-toggler {
+        display: none;
+
+    }
+}
+
+.header-area > #navbar > .navbar-menu {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 1);
+    top: 73px;
+    width: 100%;
+    height: 0;
+    /* left: 4rem; */
+    transition: 1s ease;
+    overflow: hidden;
+    font-family: var(--main-font-family); 
+    color:#777;
+    
+    
+}
+
+.cardoutline{
+    border-radius: 15px;
+}
+
+.imgoutline{
+    padding: 5px;
+    border-radius: 0;
+}
+.header-area > #navbar > .navbar-menu.show {
+    height: 352px;
+}
+
+.header-area > #navbar > .navbar-menu > .nav-item {
+    float: none;
+    display: block;
+    height: 50px;
+    line-height: 50px;
+}
+
+
+
+.header-area > #navbar > .navbar-menu > .nav-item .nav-link:hover{
+    color: var(--main-font-color);
+}
+
+.header-area > #navbar > .navbar-menu > .nav-item > .nav-link {
+    display: block;
+    padding-left: 50px;
+    color: #20C163;
+    cursor: pointer;
+    /* border-bottom: 1px solid #eee; */
+
+}
+
+
+@media (max-width: 992px) {
+    .header-area > #navbar > .navbar-menu {
+        height: 390px;
+    }
+    .header-area > #navbar .dropdown-menu.show .dropdown-item{
+        color: #777;
+    }
+    .header-area > #navbar .dropdown-menu.show li .dropdown-item:hover{
+        background-color: white;
+    }
+     .header-area > #navbar > .navbar-menu > .nav-item:hover * {
+        background-color: #eee; 
+    } 
+}    
+
+@media (min-width: 992px) {
+    
+    .header-area > #navbar > .navbar-menu {
+        position: relative;
+        top: 0;
+        width: auto;
+        height: auto;
+        transition: none;
+        overflow: visible;
+    }
+
+    .header-area > #navbar > .navbar-menu.show {
+        height: auto;
+        
+    }
+
+    .header-area > #navbar > .navbar-menu > .nav-item {
+        display: inline-block;
+        height: 70px;
+        line-height: 70px;
+    }
+    .header-area > #navbar .dropdown-menu.show .dropdown-item{
+        color: #777;
+    }
+
+    .header-area > #navbar .dropdown-menu.show li .dropdown-item:hover{
+        background-color: #eee;
+    }
+
+    .header-area > #navbar > .navbar-menu > .nav-item > .nav-link {
+        display: block;
+        padding: 0 20px;
+        color: #777;
+    }
+}
+
+/* WELCOME AREA */
+.main-container {
+    font-size: 14px; 
+    height: 100px;
+	max-width: 1000px;
+	margin: 0 auto;
+    margin-top: 30px;
+    font-family: var(--main-content-font-family);
+}
+
+/* WELCOME AREA */
+.container {
+    font-size: 14px; 
+    max-width: 1000px;
+    margin-top: 30px;    
+    font-family: var(--main-content-font-family);
+    
+} 
