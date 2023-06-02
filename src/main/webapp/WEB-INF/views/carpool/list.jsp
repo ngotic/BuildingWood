@@ -14,7 +14,7 @@
 	}
 	
 	#table {
-		width: 1000px;
+		width: 1300px;
 		margin: auto;
 	}
 	
@@ -56,6 +56,7 @@
 	  border-radius: 12px;
 	  flex-direction: column;
 	  background-color: var(--dl-color-default-gray2);
+	  cursor: pointer;
 	}
 	
 	.info-frame-top {
@@ -225,6 +226,59 @@
 	
       <div class="carpool-card">
       
+        <div class="info-frame" onclick="location.href='/wood/carpool/view.do';">
+        
+          <div class="info-frame-top">
+            <img
+              src="https://blog.kakaocdn.net/dn/bz3MnR/btshKQsi5R3/Jn6ha5hed0yM6xE7P3iUik/img.gif"
+              alt="프로필"
+              class="profile"
+            />
+            <span class="start">
+              <span>출발지</span>
+            </span>
+           <span class="narrow"> → </span>
+            <span class="end">
+              <span>도착지</span>
+            </span>
+          </div>
+          
+          <div class="info-frame-bottom">
+            <span class="nickname">
+              <span>닉네임</span>
+            </span>
+            <span class="gender">
+              <span>(여)</span>
+            </span>
+            <span class="datetime">
+              <span>05.30 (화) 오후 5시</span>
+            </span>
+          </div>
+          
+          <div class="price-frame">
+            <span class="price">
+              <span style="color: rgba(45, 180, 0, 1);">10000원</span>
+            </span>
+          </div>
+          
+        </div>
+        
+        <div class="status-frame">
+          <span class="status">
+            <span style="color: white;">모집 중</span>
+          </span>
+        </div>
+        
+      </div>
+      
+    </div>
+    </td>
+
+	<td style="border: none;">
+	<div class="carpool-list">
+	
+      <div class="carpool-card">
+      
         <div class="info-frame">
         
           <div class="info-frame-top">
@@ -273,6 +327,59 @@
     </div>
     </td>
 
+	<td style="border: none;">
+	<div class="carpool-list">
+	
+      <div class="carpool-card">
+      
+        <div class="info-frame">
+        
+          <div class="info-frame-top">
+            <img
+              src="https://blog.kakaocdn.net/dn/bz3MnR/btshKQsi5R3/Jn6ha5hed0yM6xE7P3iUik/img.gif"
+              alt="프로필"
+              class="profile"
+            />
+            <span class="start">
+              <span>출발지</span>
+            </span>
+           <span class="narrow"> → </span>
+            <span class="end">
+              <span>도착지</span>
+            </span>
+          </div>
+          
+          <div class="info-frame-bottom">
+            <span class="nickname">
+              <span>닉네임</span>
+            </span>
+            <span class="gender">
+              <span>(여)</span>
+            </span>
+            <span class="datetime">
+              <span>05.30 (화) 오후 5시</span>
+            </span>
+          </div>
+          
+          <div class="price-frame">
+            <span class="price">
+              <span style="color: rgba(45, 180, 0, 1);">10000원</span>
+            </span>
+          </div>
+          
+        </div>
+        
+        <div class="status-frame" style="background-color:#CCC">
+          <span class="status">
+            <span style="color: white;">모집 완료</span>
+          </span>
+        </div>
+        
+      </div>
+      
+    </div>
+    </td>
+	
 	
 	</tr>
 	</tbody>

@@ -225,7 +225,8 @@
 	}
 	
 	.datetime-frame {
-		gap: 8px;
+	  gap: 8px;
+	  right: 0px;
 	  display: flex;
 	  align-self: stretch;
 	  align-items: flex-start;
@@ -441,6 +442,7 @@
 	  font-stretch: normal;
 	  text-decoration: none;
 	}
+	
 
 </style>
 </head>
@@ -544,7 +546,8 @@
             </div>
           </button>
           
-          <button class="del-frame" onclick="location.href='/wood/carpool/del.do';">
+          <!-- <button class="del-frame" onclick="location.href='/wood/carpool/del.do';"> -->
+          <button class="del-frame" onclick="salert();">
  			<div class="del-box">
               <span class="del">
               	<span>삭제</span>
@@ -555,10 +558,47 @@
           <button class="back-frame" onclick="location.href='/wood/carpool/list.do';">
  			<div class="back-box">
               <span class="back">
-              	<span>dlwjs</span>
+              	<span>이전</span>
               </span>
             </div>
           </button>
+          
+          
+		<!-- Add the library (only one file) -->
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<script>
+		    function salert() {
+		      new Swal({
+		        title: "확인",
+		        text: "정말 선택하신 항목으 삭제하시겠습니까?",
+		        icon: "warning",
+		        confirmButtonText: "Yes",
+		        confirmButtonColor: '#2db400',
+		        showCancelButton: true,
+		        cancelButtonText: "No",
+		        cancelButtonColor: '#999'
+		      }).then((result) => {
+		        if(result.value){
+		            new Swal("삭제", "성공적으로 삭제되었습니다", "success")
+		            .then(function(){
+		            	location.href='/wood/carpool/list.do';
+		            	/* 삭제 시 list로 이동 */
+		            });
+		        } else if (result.dismiss == "cancel"){
+		            new Swal({
+				        title: "취소",
+				        text: "삭제 취소",
+				        icon: "error",
+				        /* confirmButtonText: "Yes",
+				        confirmButtonColor: '#2db400',
+				        showCancelButton: true,
+				        cancelButtonText: "No", */
+				        confirmButtonColor: '#2db400'
+				      });
+		        }
+		      });
+		    }
+		</script>
           
         </div>
       </div>
