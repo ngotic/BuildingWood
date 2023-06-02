@@ -1,34 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-    
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://me2.do/5BvBFJ57">
+<%@ include file="/WEB-INF/views/include/asset.jsp" %>
 <style>
-
 </style>
 </head>
 <body>
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+	<!-- template.jsp > index.jsp -->
+	<%@ include file="/WEB-INF/views/include/header.jsp" %>
+	<section class="container">
+		<h1>카풀<small> 수정하기</small></h1>
+	</section>
+	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 <script>
 
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-

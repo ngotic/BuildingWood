@@ -23,7 +23,7 @@
 		padding-top: 5px;
 	}
 	
-	.group1243-container {
+	.carpool-list {
 	  width: 100%;
 	  height: 250px;
 	  display: flex;
@@ -32,7 +32,8 @@
 	  flex-direction: column;
 	  font-size: 0.8rem;
 	}
-	.group1243-group1243 {
+	
+	.carpool-card {
 	  width: 360px;
 	  height: 205.2798614501953px;
 	  display: flex;
@@ -40,7 +41,8 @@
 	  align-items: flex-start;
 	  flex-shrink: 1;
 	}
-	.group1243-vertcard {
+	
+	.info-frame {
 	  gap: 12px;
 	  top: 15.276639938354492px;
 	  left: 0px;
@@ -55,7 +57,8 @@
 	  flex-direction: column;
 	  background-color: var(--dl-color-default-gray2);
 	}
-	.group1243-top {
+	
+	.info-frame-top {
 	  gap: 38px;
 	  display: flex;
 	  padding: 0 0 0 19px;
@@ -63,23 +66,27 @@
 	  align-items: center;
 	  flex-shrink: 0;
 	}
-	.group1243-avatar {
+	
+	.profile {
 	  width: 48px;
 	  height: 48px;
+	  border-radius: 50%;
 	}
-	.group1243-text {
+	
+	.start {
 	  color: rgba(0, 0, 0, 1);
 	  height: auto;
 	  font-size: 18px;
 	  font-style: Semi Bold;
 	  text-align: center;
-	  font-family: Inter;
+	  /* font-family: Inter; */
 	  font-weight: 700;
 	  line-height: normal;
 	  font-stretch: normal;
 	  text-decoration: none;
 	}
-	.group1243-frameiconarrowright {
+	
+	/* .group1243-frameiconarrowright {
 	  width: 17px;
 	  height: 15px;
 	  display: flex;
@@ -87,14 +94,16 @@
 	  align-items: flex-start;
 	  flex-shrink: 1;
 	}
+	
 	.group1243-vector {
 	  top: 0px;
 	  left: 0px;
 	  width: 17px;
 	  height: 15px;
 	  position: absolute;
-	}
-	.group1243-text02 {
+	} */
+	
+	.end {
 	  color: rgba(0, 0, 0, 1);
 	  height: auto;
 	  font-size: 18px;
@@ -106,7 +115,8 @@
 	  font-stretch: normal;
 	  text-decoration: none;
 	}
-	.group1243-text04 {
+	
+	.info-frame-bottom {
 	  gap: 4px;
 	  width: 328px;
 	  display: flex;
@@ -114,28 +124,32 @@
 	  align-items: flex-start;
 	  flex-shrink: 0;
 	}
-	.group1243-text05 {
+	
+	.nickname {
 	  color: var(--dl-color-default-gray7);
 	  width: 44px;
 	  height: auto;
 	  text-align: left;
 	  line-height: normal;
 	}
-	.group1243-text07 {
+	
+	.gender {
 	  color: var(--dl-color-default-gray7);
 	  width: 89px;
 	  height: auto;
 	  text-align: left;
 	  line-height: normal;
 	}
-	.group1243-text09 {
+	
+	.datetime {
 	  color: rgba(0, 0, 0, 1);
 	  width: 182px;
 	  height: auto;
 	  text-align: left;
 	  line-height: normal;
 	}
-	.group1243-bottom {
+	
+	.price-frame {
 	  gap: 37px;
 	  display: flex;
 	  padding: 0 0 0 19px;
@@ -144,7 +158,8 @@
 	  flex-shrink: 0;
 	  justify-content: flex-end;
 	}
-	.group1243-text11 {
+	
+	.price {
 	  color: rgba(45, 180, 0, 1);
 	  height: auto;
 	  font-size: 32px;
@@ -156,7 +171,8 @@
 	  font-stretch: normal;
 	  text-decoration: none;
 	}
-	.group1243-frame30152 {
+	
+	.status-frame {
 	  gap: 10px;
 	  top: 0px;
 	  left: 272.968505859375px;
@@ -171,7 +187,8 @@
 	  background-color: rgba(255, 121, 121, 1);
 	  justify-content: space-around;
 	}
-	.group1243-text13 {
+	
+	.status {
 	  color: rgba(255, 255, 255, 1);
 	  position: absolute;
 	  font-size: 14px;
@@ -193,7 +210,8 @@
 		<div id="search">
 		<a>강남구 역삼동</a>
 		<a>Search</a>
-		<a>글쓰기</a>
+		<button type="button" class="add primary"
+				onclick="location.href='/wood/carpool/add.do?mode=new';">글쓰기</button>
 		</div>	
 	
 	</section>	
@@ -203,46 +221,55 @@
 	<tr>
 	
 	<td style="border: none;">
-	<div class="group1243-container">
-      <div class="group1243-group1243">
-        <div class="group1243-vertcard">
-          <div class="group1243-top">
+	<div class="carpool-list">
+	
+      <div class="carpool-card">
+      
+        <div class="info-frame">
+        
+          <div class="info-frame-top">
             <img
-              src="wood/asset/images/cat01.jpg"
+              src="https://blog.kakaocdn.net/dn/bz3MnR/btshKQsi5R3/Jn6ha5hed0yM6xE7P3iUik/img.gif"
               alt="프로필"
-              class="group1243-avatar"
+              class="profile"
             />
-            <span class="group1243-text">
+            <span class="start">
               <span>출발지</span>
             </span>
            <span class="narrow"> → </span>
-            <span class="group1243-text02">
+            <span class="end">
               <span>도착지</span>
             </span>
           </div>
-          <div class="group1243-text04">
-            <span class="group1243-text05 Title1">
+          
+          <div class="info-frame-bottom">
+            <span class="nickname">
               <span>닉네임</span>
             </span>
-            <span class="group1243-text07 Title1">
-              <span>(성별)</span>
+            <span class="gender">
+              <span>(여)</span>
             </span>
-            <span class="group1243-text09 Body2">
+            <span class="datetime">
               <span>05.30 (화) 오후 5시</span>
             </span>
           </div>
-          <div class="group1243-bottom">
-            <span class="group1243-text11">
+          
+          <div class="price-frame">
+            <span class="price">
               <span style="color: rgba(45, 180, 0, 1);">10000원</span>
             </span>
           </div>
+          
         </div>
-        <div class="group1243-frame30152">
-          <span class="group1243-text13">
-            <span style="color: white;">모집 종료</span>
+        
+        <div class="status-frame">
+          <span class="status">
+            <span style="color: white;">모집 중</span>
           </span>
         </div>
+        
       </div>
+      
     </div>
     </td>
 
