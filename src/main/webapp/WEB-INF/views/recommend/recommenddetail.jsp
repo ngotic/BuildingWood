@@ -307,6 +307,7 @@
     <div id="main">
       <div id="map">지도</div>
       <table id="list">
+       
       
       <!-- 지도 -->
       	 <tr>
@@ -382,7 +383,8 @@
          <!-- 이미지 -->
       </table>
    </div>
-         
+
+         <button type="button" class="btn btn-outline-secondary" onclick="setBounds()">지도 범위 재설정 하기</button>
          
       <!-- 댓글 -->
       <section class="mb-5">
@@ -494,7 +496,11 @@
 	});
 	
 	// 마커가 지도 위에 표시되도록 설정합니다
-	marker.setMap(map);  
+	marker.setMap(map);
+	
+	// 지도를 재설정할 범위정보를 가지고 있을 LatLngBounds 객체를 생성합니다
+	var bounds = new kakao.maps.LatLngBounds(); 
+	bounds.extend(new kakao.maps.LatLng(37.49804838498247, 127.03198091216792));
 	
 	// 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 	var content = '<div class="customoverlay">' +
@@ -513,6 +519,13 @@
 	    content: content,
 	    yAnchor: 1 
 	});
+	
+	
+	function setBounds() {
+	    // LatLngBounds 객체에 추가된 좌표들을 기준으로 지도의 범위를 재설정합니다
+	    // 이때 지도의 중심좌표와 레벨이 변경될 수 있습니다
+	    map.setBounds(bounds);
+	}
 	
 	
 	
