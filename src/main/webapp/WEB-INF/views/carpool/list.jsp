@@ -233,13 +233,13 @@
           </div>
           <div class="group1243-bottom">
             <span class="group1243-text11">
-              <span>10000원</span>
+              <span style="color: rgba(45, 180, 0, 1);">10000원</span>
             </span>
           </div>
         </div>
         <div class="group1243-frame30152">
           <span class="group1243-text13">
-            <span>모집 종료</span>
+            <span style="color: white;">모집 종료</span>
           </span>
         </div>
       </div>

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/list.do")
+@WebServlet("/carpool/list.do")
 public class List extends HttpServlet {
 
 	@Override
@@ -17,7 +17,7 @@ public class List extends HttpServlet {
 
 		//CarpoolList.java
 
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/list.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/carpool/list.jsp");
 		dispatcher.forward(req, resp);
 
 	}
