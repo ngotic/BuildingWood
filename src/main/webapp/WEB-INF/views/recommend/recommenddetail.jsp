@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,42 +7,56 @@
 <title>Insert title here</title>
 <%@ include file="/WEB-INF/views/include/asset.jsp" %>
 
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" >
 
 <style data-tag="reset-style-sheet">
       html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
     </style>
-    <style data-tag="default-style-sheet">
-      html {
-        font-family: Inter;
-        font-size: 16px;
-      }
+<style data-tag="default-style-sheet">
 
-      body {
-        font-weight: 400;
-        font-style:normal;
-        text-decoration: none;
-        text-transform: none;
-        letter-spacing: normal;
-        line-height: 1.15;
-        color: var(--dl-color-gray-black);
-        background-color: var(--dl-color-gray-white);
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
 
-      }
-     .frame-group1222 {
-     top: 162px;
-     /* left: 156px; */
-     width: 194px;
-     height: 43px;
-     display: flex;
-     position: absolute;
-     align-items: flex-start;
-     flex-shrink: 1;
-     border-color: #cccccc;
-     border-width: 0.5px;
-     border-radius: 30px;
-     background-color: rgba(255, 255, 255, 1);
+    html {
+      font-family: Inter;
+      font-size: 16px;
+    }
+
+    body {
+      font-weight: 400;
+      font-style:normal;
+      text-decoration: none;
+      text-transform: none;
+      letter-spacing: normal;
+      line-height: 1.15;
+      color: var(--dl-color-gray-black);
+      background-color: var(--dl-color-gray-white);
+
+    }
+   .frame-group1222 {
+   top: 162px;
+   /* left: 156px; */
+   width: 194px;
+   height: 43px;
+   display: flex;
+   position: absolute;
+   align-items: flex-start;
+   flex-shrink: 1;
+   border-color: #cccccc;
+   border-width: 0.5px;
+   border-radius: 30px;
+   background-color: rgba(255, 255, 255, 1);
    }
    .frame-mappin {
      top: 7px;
@@ -123,9 +138,10 @@
    }
    .mb-5 {
     margin-bottom: 3rem!important;
-    width: 870px;
+    width: 900px;
     margin: 0 auto;
     padding-left: 10px;
+    
    }
    
    
@@ -134,22 +150,23 @@
       display: flex;
       align-items: flex-start;
       justify-content: center;
+      font-family: 'Pretendard-Regular';
    }
    
    #map {
       border: 1px solid #CCC;
       width: 450px;
-       height: 400px;
-       margin: 0 50px 50px 0;
+      height: 465px;
+      margin: 8px 30px 50px 0;
    }
    
    #list {
-      width: 340px;
+      width: 400px;
       margin-top: 0;
    }
    
    #rec-comment {
-   width: 720px;
+   width: 750px;
     display: inline-block;
    }
    #rec-comment-arrow {
@@ -158,7 +175,7 @@
    .btn-add1 {
     height: 60px;
     position: absolute;
-    left: 748px;
+    left: 778px;
     top: 17px;
     border-radius: 5px;
    }
@@ -194,16 +211,9 @@
    .map-menu {
    height: 20px;
    }
-
-	/* .ekko-lightbox-nav-overlay a {
-    color: goldenrod;
-	}
-	.gallery-title {
-	    text-align: left;
-		font-weight: 500;
-		border-bottom: 0.3px solid tomato;
-		margin-top: 25px;
-	} */
+   .map-head {
+   width:66px;
+   }
 	
 	.container.gallery-container {
     background-color: #fff;
@@ -237,6 +247,9 @@
     margin-bottom: 30px;
     transition: 0.2s ease-in-out;
     box-shadow: 0 2px 3px rgba(0,0,0,0.2);
+    height: 100px;
+    display: block;
+    object-fit: cover;
 }
 
 
@@ -252,7 +265,9 @@
 .baguetteBox-button {
     background-color: transparent !important;
 }
-
+.row > div {
+	padding-right: 0px;
+}
 
 @media(max-width: 768px) {
     body {
@@ -264,16 +279,15 @@
     }
 }
 
-</style>
-<style>
+.customoverlay {position:relative;bottom:85px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;}
+.customoverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}
+.customoverlay a {display:block;text-decoration:none;color:#000;text-align:center;border-radius:6px;font-size:14px;font-weight:bold;overflow:hidden;background: #d95050;background: tomato url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
+.customoverlay .title {display:block;text-align:center;background:#fff;margin-right:35px;padding:10px 15px;font-size:14px;font-weight:bold;}
+.customoverlay:after {content:'';position:absolute;margin-left:-12px;left:50%;bottom:-12px;width:22px;height:12px;background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+
 </style>
 
-<link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
-      data-tag="font"
-    />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" >
+
 </head>
 <body>
    <!-- template.jsp > index.jsp -->
@@ -292,59 +306,71 @@
          
     <div id="main">
       <div id="map">지도</div>
-      <table id="list">         
+      <table id="list">
+      
+      <!-- 지도 -->
+      	 <tr>
+			<td style="display:flex; cursor:pointer;" data-lat="37.49804838498247" data-lng="127.03198091216792" class="item"></td>
+		 </tr>
+      
+      
          <tr>
-            <td class="map-all">이름</td>
+         	<td class="map-head">가게명</td>
+            <td class="map-all">육전식당4호점</td>
          </tr>
          <tr>
-            <td class="map-all">별점</td>
+         	<td class="map-head">별점</td>
+            <td class="map-all">★★★★★</td>
          </tr>
          <tr>
-            <td class="map-menu">메뉴(가격)</td>
+         	<td class="map-head">한줄평</td>
+            <td class="map-all">나의 인생 삼겹살</td>
          </tr>
          <tr>
-            <td class="map-menu">메뉴(가격)</td>
+         	<td class="map-head">메뉴</td>
+            <td class="map-menu">목살 (150g) - 17,000원</td>
          </tr>
          <tr>
-            <td class="map-menu">메뉴(가격)</td>
+         	<td class="map-head"> </td>
+            <td class="map-menu">삼겹살 (150g) - 17,000원</td>
          </tr>
          <tr>
-            <td class="map-all">주소</td>
+         	<td class="map-head"> </td>
+            <td class="map-menu">항정살 (150g) - 19,000원</td>
          </tr>
          <tr>
+         	<td class="map-head"> </td>
+            <td class="map-menu">육전돼지불백 - 9000원</td>
+         </tr>
+         <tr>
+         	<td class="map-head">주소</td>
+            <td class="map-all">서울 강남구 역삼동 823-10</td>
+         </tr>
+         <tr>
+         	<td class="map-head"> </td>
             <td class="map-gallary">
             
 				<div class="tz-gallery">
 			        <div class="row">
 			
 			            <div class="col-sm-12 col-md-4">
-			                <a class="lightbox" href="https://unsplash.it/1200/768.jpg?image=251">
-			                    <img src="https://unsplash.it/1200/768.jpg?image=251" alt="Bridge">
+			                <a class="lightbox" href="/wood/asset/rec_img/육전식당4호점1.jpg">
+			                    <img src="/wood/asset/rec_img/육전식당4호점1.jpg" alt="img1">
 			                </a>
 			            </div>
 			            <div class="col-sm-6 col-md-4">
-			                <a class="lightbox" href="https://unsplash.it/1200/768.jpg?image=252">
-			                    <img src="https://unsplash.it/1200/768.jpg?image=252" alt="Park">
+			                <a class="lightbox" href="/wood/asset/rec_img/육전식당4호점2.jpg">
+			                    <img src="/wood/asset/rec_img/육전식당4호점2.jpg" alt="img2">
 			                </a>
 			            </div>
 			            <div class="col-sm-6 col-md-4">
-			                <a class="lightbox" href="https://unsplash.it/1200/768.jpg?image=253">
-			                    <img src="https://unsplash.it/1200/768.jpg?image=253" alt="Tunnel">
+			                <a class="lightbox" href="/wood/asset/rec_img/육전식당4호점3.jpg">
+			                    <img src="/wood/asset/rec_img/육전식당4호점3.jpg" alt="img3">
 			                </a>
 			            </div>
 			            <div class="col-sm-6 col-md-4">
-			                <a class="lightbox" href="https://unsplash.it/1200/768.jpg?image=254">
-			                    <img src="https://unsplash.it/1200/768.jpg?image=254" alt="Traffic">
-			                </a>
-			            </div>
-			            <div class="col-sm-6 col-md-4">
-			                <a class="lightbox" href="https://unsplash.it/1200/768.jpg?image=255">
-			                    <img src="https://unsplash.it/1200/768.jpg?image=255" alt="Coast">
-			                </a>
-			            </div> 
-			            <div class="col-sm-6 col-md-4">
-			                <a class="lightbox" href="https://unsplash.it/1200/768.jpg?image=256">
-			                    <img src="https://unsplash.it/1200/768.jpg?image=256" alt="Rails">
+			                <a class="lightbox" href="/wood/asset/rec_img/육전식당4호점4.jpg">
+			                    <img src="/wood/asset/rec_img/육전식당4호점4.jpg" alt="img4">
 			                </a>
 			            </div>
 			        </div>
@@ -360,7 +386,7 @@
          
       <!-- 댓글 -->
       <section class="mb-5">
-          <div class="card bg-light">
+          <div class="card bg-light" style="border-color: #eee">
           
               <div class="card-body">
                   <!-- Comment form-->
@@ -427,12 +453,14 @@
           </div> 
       </section><!-- mb-5 댓글 -->
       
+
       <br><br><br><br><br><br>
    
    <%@ include file="/WEB-INF/views/include/footer.jsp" %>
    
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c436ba63a01d9316c75c3b9b08e2475c"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
-  
+
 <script>
 
 	function del(seq) {
@@ -441,6 +469,63 @@
 	
 	baguetteBox.run('.tz-gallery');
 	
+	
+	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+	
+	var options = { //지도를 생성할 때 필요한 기본 옵션
+		center: new kakao.maps.LatLng(37.49804838498247, 127.03198091216792), //지도의 중심좌표.
+		level: 3 //지도의 레벨(확대, 축소 정도)
+	};
+	
+	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+	
+	var imageSrc = '/wood/asset/rec_img/marker.png', // 마커이미지의 주소입니다    
+    imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
+    imageOption = {offset: new kakao.maps.Point(32, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+
+	// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+	var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+	    markerPosition = new kakao.maps.LatLng(37.49804838498247, 127.03198091216792); // 마커가 표시될 위치입니다
+	
+	// 마커를 생성합니다
+	var marker = new kakao.maps.Marker({
+	  position: markerPosition,
+	  image: markerImage // 마커이미지 설정 
+	});
+	
+	// 마커가 지도 위에 표시되도록 설정합니다
+	marker.setMap(map);  
+	
+	// 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+	var content = '<div class="customoverlay">' +
+	    '  <a href="https://map.kakao.com/link/map/11394059" target="_blank">' +
+	    '    <span class="title">역전식당4호점</span>' +
+	    '  </a>' +
+	    '</div>';
+	
+	// 커스텀 오버레이가 표시될 위치입니다 
+	var position = new kakao.maps.LatLng(37.49804838498247, 127.03198091216792);  
+	
+	// 커스텀 오버레이를 생성합니다
+	var customOverlay = new kakao.maps.CustomOverlay({
+	    map: map,
+	    position: position,
+	    content: content,
+	    yAnchor: 1 
+	});
+	
+	
+	
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+

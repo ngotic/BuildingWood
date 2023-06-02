@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,13 @@
  html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
 </style>
 <style data-tag="default-style-sheet">
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
       html {
         font-family: Inter;
         font-size: 16px;
@@ -100,9 +108,9 @@
     top: 100px;
     left: 180px;
     width: 320px;
-    height: 480px;
+    height: 400px;
     display: inline-block;
-    padding: 20px;
+    padding: 30px;
     margin: 15px 11px;
     position: relative;
     box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.15000000596046448);
@@ -110,11 +118,12 @@
     border-radius: 20px;
     justify-content: center;
     background-color: rgba(255, 255, 255, 1);
+    font-family: 'Pretendard-Regular';
 }
 .frame1-rectangle12 {
-  	width: 280px;
+  	/* width: 280px; */
     height: 195px;
-    border-radius: 20px;
+    border-radius: 5px;
     text-align: center;
     padding-left: 0px;
     object-fit: fill;
@@ -129,6 +138,7 @@
   align-items: flex-start;
   flex-shrink: 0;
   flex-direction: column;
+  font-family: 'Pretendard-Regular';
 }
 .frame1-text17 {
   color: rgba(62, 73, 88, 1);
@@ -143,6 +153,7 @@
   font-stretch: normal;
   text-decoration: none;
   margin: 10px 0px;
+  font-family: 'Pretendard-Regular';
   
 }
 .frame1-frame13 {
@@ -150,11 +161,13 @@
   display: flex;
   align-items: flex-start;
   margin: 10px 0px;
+  font-family: 'Pretendard-Regular';
 }
 .frame1-frame12 {
   gap: 4px;
   display: flex;
   align-items: flex-start;
+  font-family: 'Pretendard-Regular';
 }
 .frame1-group {
   width: 17px;
@@ -163,6 +176,7 @@
   position: relative;
   align-items: flex-start;
   flex-shrink: 1;
+  font-family: 'Pretendard-Regular';
 }
 .frame1-star {
   top: 0px;
@@ -170,6 +184,7 @@
   width: 17px;
   height: 17px;
   position: absolute;
+  font-family: 'Pretendard-Regular';
 }
 .frame1-text19 {
   color: rgba(62, 73, 88, 1);
@@ -183,6 +198,7 @@
   line-height: 136.00000143051147%;
   font-stretch: normal;
   text-decoration: none;
+  font-family: 'Pretendard-Regular';
 }
 .frame1-text21 {
   color: rgba(62, 73, 88, 1);
@@ -196,6 +212,7 @@
   line-height: 136.00000143051147%;
   font-stretch: normal;
   text-decoration: none;
+  font-family: 'Pretendard-Regular';
 }
 .frame1-frame11 {
   gap: 10px;
@@ -214,12 +231,14 @@
   line-height: 136.00000143051147%;
   font-stretch: normal;
   text-decoration: none;
+  font-family: 'Pretendard-Regular';
 }
 .frame1-frame10 {
   gap: 11px;
   display: flex;
   align-items: center;
   margin: 10px 0px;
+  font-family: 'Pretendard-Regular';
 }
 .frame1-group34 {
   width: 28px;
@@ -228,6 +247,7 @@
   position: relative;
   align-items: flex-start;
   flex-shrink: 1;
+  font-family: 'Pretendard-Regular';
 }
 .frame1-ellipse2 {
   top: 0px;
@@ -264,6 +284,7 @@
   line-height: 136.00000143051147%;
   font-stretch: normal;
   text-decoration: none;
+  font-family: 'Pretendard-Regular';
 }
 .frame1-frame1401 {
   gap: 11px;
@@ -326,62 +347,33 @@
 	
 	<div class="frame1-propertycardbig1">
             <img
-              src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/a6678233-f9fe-40a4-84a5-9d2d1fe31607/d7f1a4ef-0f7b-4408-9a54-e1a6e7bf8f62?org_if_sml=183525"
+              src="/wood/asset/rec_img/육전식당4호점1.jpg"
               alt="Rectangle121081"
               class="frame1-rectangle12"
             />
             <div class="frame1-frame14">
               <span class="frame1-text17">
-                <span>Fully Furnished Smart Studio Apartment</span>
+                <span>육전식당4호점</span>
               </span>
               <div class="frame1-frame13">
                 <div class="frame1-frame12">
                   <div class="frame1-group">
-                    <!-- <img
-                      src="public/external/star1081-bwku.svg"
-                      alt="Star1081"
-                      class="frame1-star"
-                    /> -->
                     <span class="material-symbols-outlined" id="recommend-star">grade</span>
                   </div>
-                  <span class="frame1-text19"><span>4.8</span></span>
+                  <span class="frame1-text19"><span>5</span></span>
                 </div>
-                <span class="frame1-text21"><span>Mercedes Vito</span></span>
               </div>
               <div class="frame1-frame11">
                 <span class="frame1-text23">
-                  <span>2 guests | 1 bedroom | 2 bathroom</span>
+                  <span>나의 인생 삼겹살</span>
                 </span>
               </div>
               <div class="frame1-frame10">
-                <div class="frame1-group34">
-                  <img
-                    src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/a6678233-f9fe-40a4-84a5-9d2d1fe31607/69f38428-8c40-47dc-9c3b-77b8002674de?org_if_sml=1516"
-                    alt="Ellipse21081"
-                    class="frame1-ellipse2"
-                  />
-                  <div class="frame1-group33">
-                    <img
-                      src="public/external/vector1081-0mf8.svg"
-                      alt="Vector1081"
-                      class="frame1-vector"
-                    />
-                  </div>
+                  <span>서울 강남구 역삼동 823-10</span>
                 </div>
-                <span class="frame1-text25">
-                  <span>Entire Studio Apartment</span>
-                </span>
-              </div>
-              <div class="frame1-frame1401">
-                <img
-                  src="public/external/svgiconheart1101-u5e.svg"
-                  alt="SVGiconheart1101"
-                  class="frame1-s-giconheart"
-                />
-              </div>
             </div>
           </div>
-          
+	
 	
 	</main>
 	
