@@ -203,7 +203,7 @@
 		}
 		
 		a.link-hover span:hover{
-			color:red;
+			color:#962D2D;
 			text-decoration: none;
 		}
 		
@@ -218,30 +218,31 @@
                 </div>
             </div>
             <div class="login_container">
-                <div class="block_title d-flex justify-content-center">
+                <div class="block_title d-flex justify-content-center mb-1">
                     <img src="/wood/asset/img/logo.png" width="70%">
                 </div>
-                <div>
-                    <label for="formEmailInput" class="form-label">아이디</label>
-                    <input type="text" class="login_input" id="formEmailInput" placeholder="아이디를 입력해주세요.">
-                </div>
-                <div>
-                    <label for="formPwInput" class="form-label">비밀번호</label>
-                    <input type="text" class="login_input" id="formPwInput" placeholder="비밀번호를 입력해주세요.">
-                </div>
-
-                <div class="login_link_text mt-2 mb-1" style="float: left;">
-                    <input type="checkbox" name="remember-me" id="remember"> 
-                    <label for="remember">로그인 유지</label>
-                    <a href="" style="text-decoration: none;" class="link-hover">
-                        <span style="float:right;">비밀번호가 기억이 안나요?</span>
-                    </a>
-                </div>
-
+                <form id="form1" action="/wood/user/login.do" method="POST">
+	                <div>
+	                    <label for="formIdInput" class="form-label">아이디</label>
+	                    <input type="text" class="login_input" id="formIdInput" name="id" placeholder="아이디를 입력해주세요." required>
+	                </div>
+	                <div>
+	                    <label for="formPwInput" class="form-label">비밀번호</label>
+	                    <input type="text" class="login_input" id="formPwInput" name="password" placeholder="비밀번호를 입력해주세요." required>
+	                </div>
+	
+	                <div class="login_link_text mt-2 mb-1" style="float: left;">
+	                    <input type="checkbox" name="remember-me" id="remember"> 
+	                    <label for="remember">로그인 유지</label>
+	                    <a href="" style="text-decoration: none;" class="link-hover">
+	                        <span style="float:right;">비밀번호가 기억이 안나요?</span>
+	                    </a>
+	                </div>
+				</form>
                 <div class="login_link_text mb-4" >
                     <span>계정이 없나요?</span>
-                    <a href="" class="me-2 link-hover">
-                        <span style="float:right;">회원가입하기</span>
+                    <a href="/wood/user/register.do" class="me-2 link-hover">
+                        <span style="float:right;">회원가입</span>
                     </a>
                 </div>
 
@@ -254,12 +255,43 @@
                 <div>
                     <button class="login_input naver_btn"><img src="/wood/asset/img/naverlogo.png" id ="naverlogo" height="25" style="margin-right: 5px;">네이버 로그인</button>
                 </div>
+                
+                
+                <div>
+                <h4>아래 버튼은 테스트 용도</h4>
+				<!-- 버튼하나 눌러버리면 hidden 태그에 담긴 것이 서버로 넘어가서 로그인이 된다.  -->
+				<form method="POST" action="/wood/user/login.do">
+					<input type="hidden" name="id" value="owFSkN242">
+					<input type="hidden" name="password" value="OIQetu252">
+					<input type="submit" value="일반유저">
+				</form>
+				
+				<form method="POST" action="/wood/user/login.do">
+					<input type="hidden" name="id" value="admin">
+					<input type="hidden" name="password" value="0000">
+					<input type="submit" value="관리자">
+				</form>
+				</div>
             </div>
         
+        
     </section>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+     
 <script>
-
+	
+	$('.default_btn').click(function(){
+		$('#form1').submit();
+	});
+	
+	$('.google_btn').click(function(){
+		
+	});
+	
+	$('.naver_btn').click(function(){
+		
+	});
+	
     const text = [ `<p class="projectname_f typing-text">&nbsp가까운 이웃들을 연결하는</p>`,
      `<p class='projectname_sub typing-text2'>&nbsp;새로운 소셜 네트워크</p>`,
      `<p class='projectname typing-text3'>빌딩숲.</p>`];
@@ -284,7 +316,7 @@
         })
     } 
     
-printAll();
+	printAll();
 </script>
 </body>
 </html>

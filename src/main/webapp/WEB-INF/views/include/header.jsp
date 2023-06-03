@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
 	   .navbar-menu .nav-item:hover{
         border-bottom: 3px solid #7ED321;
@@ -67,15 +68,28 @@
 						<li><a class="dropdown-item" href="">건의게시판</a></li>        
                     </ul>
                 </div>  -->
-
-				<div class="nav-item"><a href = "" class="nav-link" >회원가입</a></div>
-                <div class="nav-item" >
-                    <a href = "" class="nav-link" id="">
-                         로그인
+				<c:if test="${empty id}">
+					<div class="nav-item"><a href = "" class="nav-link" >회원가입</a></div>
+				</c:if>
+				
+                <div class="nav-item dropdown" >
+                    <a href = "" id="" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
+                    	<c:if test="${empty id}">
+                         	로그인
+                        </c:if>
+                        <c:if test="${not empty id}">
+                         	${nickname}
+                        </c:if>
 						 <span class="material-symbols-outlined align-middle icon-color" style="border-radius: 50%;background-color: #fff">
                             person
                         </span>
                     </a>
+                    <c:if test="${not empty id}">
+                     <ul class="dropdown-menu" >
+                        <li><a class="dropdown-item" href="/wood/user/logout.do">로그아웃</a></li>
+						<li><a class="dropdown-item" href="">마이페이지</a></li>
+                    </ul>
+                    </c:if>
                 </div> 
 			</div>
 		</nav>

@@ -29,7 +29,7 @@
 				</td>
 			</tr>
 			<tr>
-				<th>신청자</th>
+				<th>동호회장</th>
 				<td>${cbdto.nickname}</td>
 				<th>건물명</th>
 				<td>${cbdto.buildingname}</td>
