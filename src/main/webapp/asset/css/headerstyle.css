@@ -62,7 +62,7 @@ body {
 
 /* HEADER */
 .header-area {
-    position: relative; /* 여기도 */
+    position: sticky; /* 여기도 */
     top: 0;
     left: 0;
     width: 100%;

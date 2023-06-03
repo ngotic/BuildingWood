@@ -1,0 +1,174 @@
+@charset "UTF-8";
+
+/*
+topic 수정
+      신청
+      삭제
+*/
+
+/* 신청하기 */
+.greencolor{
+	border : 1px solid #99D685;
+	background-color : #99D685;
+	color : white;
+	font-weight:bold;
+	border-radius:0px;
+}
+
+.greencolor:hover{
+	border : 1px solid #1CC061;
+	background-color : white;
+	color :#1CC061;
+	font-weight:bold;
+	border-radius:0px;
+}
+
+
+/* 상세보기 */
+.bluecolor{
+	border : 1px solid #24CBD6;
+	background-color : #24CBD6;
+	color : white;
+	font-weight:bold;
+	border-radius:0px;
+}
+
+.bluecolor:hover{
+	border : 1px solid #20A6FC;
+	background-color : white;
+	color :#20A6FC;
+	font-weight:bold;
+	border-radius:0px;
+}
+
+
+.pinkcolor{
+	
+	border : 1px solid #FF7E7E;
+	background-color : #FF7E7E;
+	color : white;
+	font-weight:bold;
+	border-radius:0px;
+}
+
+.pinkcolor:hover{
+	border : 1px solid #FF7E7E;
+	background-color : white;
+	color :#FF7E7E;
+	font-weight:bold;
+	border-radius:0px;
+}
+
+.acuacolor{
+	background-color : #24CBD6;
+	color : white;
+}
+
+
+input, textarea, button, select {
+	border: 1px solid #BBB;
+	border-radius: 3px;
+	outline: none;
+	resize: none;
+	padding: 7px;	
+	margin: 0;
+}
+
+input[type=text]:read-only, textarea:read-only {
+	cursor: not-allowed;
+	background-color: #FFF;
+}
+
+input[type=text]:disabled, textarea:disabled {
+	cursor: not-allowed;
+	background-color: #EEE;
+}
+
+input[type=text], input[type=password], textarea, button, select {
+	/* width: 300px; */
+}
+
+input[type=button], input[type=submit], button {
+	padding: 5px 10px;
+	background-color: #EFEFEF;
+	cursor: pointer;
+	min-height: 36px;
+}
+
+input[type=button].primary, input[type=submit].primary, button.primary {
+	/* background-color: rgba(100, 149, 237, .2); */
+	background-color: #DEDEDE;
+}
+
+input[type=button].primary:hover, input[type=submit].primary:hover, button.primary:hover {
+	/* background-color: rgba(100, 149, 237, .3); */
+	background-color: #EFEFEF;
+}
+
+input[type=button]:hover, input[type=submit]:hover, button:hover {
+	background-color: #DEDEDE;
+}
+
+
+button {
+	position: relative;
+	left: 0;
+	top: 0;
+	padding-left: 35px;
+}
+button .material-symbols-outlined {
+	position: absolute;
+	left: 10px;
+	top: 4px;
+}
+button.edit::before {
+	font-family: 'Material Symbols Outlined';
+  	content: '\e745';
+	position: absolute;
+	left: 11px;
+	top: 3px;
+	font-size: 1.25rem;
+}
+
+button.detail::before {
+	font-family: 'Material Symbols Outlined';
+  	content: '\e3c8';
+	position: absolute;
+	left: 11px;
+	top: 3px;
+	font-size: 1.25rem;
+}
+
+button.group::before {
+	font-family: 'Material Symbols Outlined';
+  	content: '\f233';
+	position: absolute;
+	left: 11px;
+	top: 3px;
+	font-size: 1.25rem;
+}
+
+button.back::before {
+	font-family: 'Material Symbols Outlined';
+  	content: '\e5c4';
+	position: absolute;
+	left: 11px;
+	top: 3px;
+	font-size: 1.25rem;
+}
+
+
+button.add::before {
+	font-family: 'Material Symbols Outlined';
+  	content: '\e146';
+	position: absolute;
+	left: 11px;
+	top: 3px;
+	font-size: 1.25rem;
+}
+
+
+
+
+
+
