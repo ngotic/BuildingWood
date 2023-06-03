@@ -21,7 +21,7 @@ public class Detail extends HttpServlet {
 		//View.java
 		ClubDAO cdao = new ClubDAO();
 		String hseq = req.getParameter("hseq");
-		String id = "nqeFKf555"; 
+		String id = "WJssd875"; 
 		
 		ClubBoardDTO cbdto= cdao.readClubBoard(hseq, id);  
 		

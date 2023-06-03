@@ -167,6 +167,15 @@ button.add::before {
 	font-size: 1.25rem;
 }
 
+button.note_add::before {
+	font-family: 'Material Symbols Outlined';
+  	content: '\e399';
+	position: absolute;
+	left: 11px;
+	top: 3px;
+	font-size: 1.25rem;
+}
+
 
 
 

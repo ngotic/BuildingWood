@@ -15,7 +15,7 @@ public class Index extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//Index.java
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/index.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/main.jsp");
 		dispatcher.forward(req, resp);
 
 	}

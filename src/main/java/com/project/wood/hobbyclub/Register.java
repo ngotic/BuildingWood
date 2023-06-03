@@ -46,7 +46,6 @@ public class Register extends HttpServlet {
 		PrintWriter writer = resp.getWriter();
 		writer.print(obj);
 		writer.close();
-		
 
 	}
 

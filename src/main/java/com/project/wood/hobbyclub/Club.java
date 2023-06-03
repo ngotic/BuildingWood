@@ -37,11 +37,10 @@ public class Club extends HttpServlet {
 		// club.java
 		// List<ClubDTO> list = cdao.list(); // 이건 add에서만 
 		//cbdao
-		String id = "nqeFKf555"; 
+		String id = "WJssd875"; 
 		List<ClubBoardDTO> cblist = cbdao.boardlist(id);
 		
-		// list.stream().filter(null);
-		
+		//list.stream().filter(null);
 		//cblist = cbdao.statuscheck(cblist);
 		System.out.println(cblist);
 		

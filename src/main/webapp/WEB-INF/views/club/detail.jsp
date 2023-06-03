@@ -6,7 +6,6 @@
 <title>Insert title here</title>
 <%@ include file="/WEB-INF/views/include/asset.jsp" %>
 <link rel="stylesheet" href="/wood/asset/css/clubBtn.css">
-<link rel="stylesheet" href="resources/css/plugin/datepicker/bootstrap-datepicker.css">
 <style>
 </style>
 </head>
@@ -26,12 +25,12 @@
 					</c:if>
 				</td>
 				<td colspan="2" class="text-center">
-					<img src="/wood/clubupload/야구.jpg" width=300>
+					<img src="/wood/clubupload/${cbdto.clubpic}" width=300>
 				</td>
 			</tr>
 			<tr>
 				<th>신청자</th>
-				<td>${cbdto.id}</td>
+				<td>${cbdto.nickname}</td>
 				<th>건물명</th>
 				<td>${cbdto.buildingname}</td>
 			</tr>

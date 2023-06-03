@@ -19,5 +19,8 @@ public class ClubBoardDTO {
 	private String opendate;
 	private String amount;
 	
-	private String status; // 신청중 가입중 
+	private String status;   // 신청중 가입중 
+	private String nickname; // 
+	private String clubpic;      // 동호회 사진
+	
 }

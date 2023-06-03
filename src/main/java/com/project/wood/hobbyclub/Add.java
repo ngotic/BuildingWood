@@ -17,13 +17,13 @@ import com.project.wood.hobbyclub.repository.ClubDTO;
 
 @WebServlet("/club/add.do")
 public class Add extends HttpServlet {
-
+	
+	ClubDAO cdao = new ClubDAO();
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//Add.java
-		
-		ClubDAO cdao = new ClubDAO();
-		String id = "nqeFKf555"; 
+		String id = "WJssd875"; 
 		ClubDTO cdto= cdao.readMemberClub(id); // 1. 그 회원이 개설한 동호회 정보 꺼내줘 ~ 
 		req.setAttribute("cdto", cdto);
 		System.out.println(cdto);
@@ -51,7 +51,6 @@ public class Add extends HttpServlet {
 		cbDto.setContent(content);
 		
 		int result = cdao.addClubBoard(cbDto);
-		req.setAttribute("result", result);
 		
 		if(result == 1 ) {
 			resp.sendRedirect("/wood/club/club.do");

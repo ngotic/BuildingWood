@@ -28,7 +28,7 @@
 				</tr>
 				<tr>
 					<th>신청자</th>
-					<td>${cdto.id}</td>
+					<td>${cdto.nickname}</td>
 					<th>건물명</th>
 					<td>${cdto.buildingname}</td>
 				</tr>
@@ -43,14 +43,14 @@
 				<tr>
 					<th>모집인원</th>
 					<td>
-						<div class="input-group input-group-sm mb-3">
+						<div class="input-group input-group-sm">
 						  <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" min="0" max="20" value=5 name="recruits">
 						  <span class="input-group-text" id="inputGroup-sizing-sm" style="width:3rem;">명</span>
 						</div>
 					</td>
 					<th>개설날짜</th>
 					<td>${cdto.opendate}</td>
-				<tr>
+				</tr>
 				<tr>
 					<th>모집시작</th>
 					<td><input type="date" class="form-control" id="startdate" name="openregdate"/></td>
@@ -62,7 +62,7 @@
 		</form>
 		<div class="text-end">
 				<button class="back greencolor" onclick="location.href='/wood/club/club.do';">돌아가기</button>
-				<button id="addbtn" class="group bluecolor" onclick="location.href='/wood/club/add.do';">등록하기</button>
+				<button id="addbtn" class="group bluecolor">등록하기</button>
 		</div>
 	</section>
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>

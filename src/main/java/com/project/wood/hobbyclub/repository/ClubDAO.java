@@ -28,7 +28,8 @@ public class ClubDAO {
 				// 개설자의 빌딩이름도 같이 출력해줘 
 				String sql = "select c.*, to_char(opendate, 'yyyy-mm-dd') as opendatestring,"
 						+ "(select name from tblBuilding b where b.buildingseq = a.buildingseq) "
-						+ " as buildingname from tblClub c inner join tbladdress a"
+						+ " as buildingname, (select nickname from tblMember where id = c.id) as nickname"
+						+ " from tblClub c inner join tbladdress a"
 						+ " on c.id = a.id";
 				// 쿼리문 띄어쓰기 잘쓰자...
 				
@@ -48,8 +49,9 @@ public class ClubDAO {
 					dto.setAmount(rs.getString("amount"));
 					dto.setPic(rs.getString("pic"));
 					dto.setOpendate(rs.getString("opendatestring"));
-					dto.setClose(rs.getString("close"));
+					dto.setApprove(rs.getString("approve"));
 					dto.setBuildingname(rs.getString("buildingname"));
+					dto.setNickname(rs.getString("nickname"));
 					list.add(dto);
 					
 				}
@@ -65,14 +67,13 @@ public class ClubDAO {
 		try {
 			// 개설자의 빌딩이름도 같이 출력해줘 
 			String sql = "select c.*, to_char(opendate, 'yyyy-mm-dd') as opendatestring,"
-					+ "(select name from tblBuilding b where b.buildingseq = a.buildingseq) "
-					+ " as buildingname from tblClub c inner join tbladdress a"
-					+ " on c.id = a.id and c.id = ?";
+					   + "(select name from tblBuilding b where b.buildingseq = a.buildingseq)  as buildingname,"
+					   + "(select nickname from tblMember where id=c.id) as nickname "
+					   + "from tblClub c inner join tbladdress a "
+					   + "on c.id = a.id and c.id = ?";
 			// 쿼리문 띄어쓰기 잘쓰자...
-			
 			pstat = conn.prepareStatement(sql);
-			// address에서 회원이름을 가지고 건물 seq를 찾고
-			// 건물 seq로 건물 이름조회
+			// 건물 seq로 건물 이름조회 address에서 회원이름을 가지고 건물 seq를 찾고
 			pstat.setString(1, id);
 			rs = pstat.executeQuery();
 			
@@ -84,8 +85,9 @@ public class ClubDAO {
 				dto.setAmount(rs.getString("amount"));
 				dto.setPic(rs.getString("pic"));
 				dto.setOpendate(rs.getString("opendatestring"));
-				dto.setClose(rs.getString("close"));
+				dto.setApprove(rs.getString("approve"));
 				dto.setBuildingname(rs.getString("buildingname"));
+				dto.setNickname(rs.getString("nickname"));
 				return dto;
 			}
 			
@@ -123,7 +125,7 @@ public class ClubDAO {
 	public List<ClubBoardDTO> boardlist(String id) { // 지역별
 		
 		try {
-				String sql = "select hc.*,c.*,  b.buildingseq, b.name as buildingname\r\n"
+				String sql = "select hc.*,c.*,  b.buildingseq, b.name as buildingname, (select nickname from tblMember where id=c.id) as nickname "
 						+ "from tblHobbyClub hc \r\n"
 						+ "    inner join tblclub c on hc.clubseq = c.clubseq \r\n"
 						+ "        inner join tbladdress a on c.id = a.id \r\n"
@@ -153,6 +155,7 @@ public class ClubDAO {
 					dto.setBuildingname(rs.getString("buildingname"));
 					dto.setOpendate(rs.getString("opendate"));
 					dto.setAmount(rs.getString("amount"));
+					dto.setNickname(rs.getString("nickname"));
 					list.add(dto);
 				}
 				
@@ -235,7 +238,7 @@ public class ClubDAO {
 	public ClubBoardDTO readClubBoard(String hseq, String id) {
 		
 		try {
-			String sql =   "select hc.*,c.*,  b.buildingseq, b.name as buildingname \r\n"
+			String sql =   "select hc.*,c.*, c.pic as clubpic, b.buildingseq, b.name as buildingname, (select nickname from tblMember where id=c.id) as nickname \r\n"
 					     + "from tblHobbyClub hc \r\n"
 					     + "    inner join tblclub c on hc.clubseq = c.clubseq and hc.hobbyclubseq = ? \r\n"
 					     + "        inner join tbladdress a on c.id = a.id \r\n"
@@ -264,6 +267,8 @@ public class ClubDAO {
 				dto.setBuildingname(rs.getString("buildingname"));
 				dto.setOpendate(rs.getString("opendate"));
 				dto.setAmount(rs.getString("amount"));
+				dto.setClubpic(rs.getString("clubpic"));
+				dto.setNickname(rs.getString("nickname"));
 
 			}
 			
@@ -271,8 +276,30 @@ public class ClubDAO {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		return null;
 	}
-	return null;
+
+	public int addClub(ClubDTO cdto) {
+		
+		try {
+			// id, name, intro, amount, pic, opendate, approve
+			String sql = "insert into tblClub values(clubseq.nextVal, ?, ?, ?, ?, ?, ?, default )";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, cdto.getId());
+			pstat.setString(2, cdto.getName());
+			pstat.setString(3, cdto.getIntro());
+			pstat.setString(4, cdto.getAmount());
+			pstat.setString(5, cdto.getPic());
+			pstat.setString(6, cdto.getOpendate());
+			
+			return pstat.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 	
 }
