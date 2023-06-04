@@ -173,7 +173,7 @@
 		            <div class="datetime">06/05(화) 17:30</div>
 	              </div>
 	            </div>
-	            <div class="card-body" style="border-bottom: 1px solid #d8d8d8">
+	            <div class="card-body">
 	            	<div class="card-text">
 		            	<div>
 		            		<span class="arrival-region">시/도</span>
@@ -185,17 +185,17 @@
 						</div>
 		            </div>
 	            </div>
-	            <div class="card-body content-area">
+	            <!-- <div class="card-body content-area">
 	            	<div class="card-text">
-		              	<div class="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam egestas sed sem ut malesuada.</div>
+		              	<div class="content">내용적는칸 생략</div>
 		            </div>
-	            </div>
+	            </div> -->
 	            <div class="card-body">
 	            	<div class="card-text bottom-frame">
 	            		<span class="count-frame">
 	            			<span>0/2명 모집</span>
 	            		</span>
-		              	<span class="price">희망가격</span>
+		              	<span class="price">내용생략</span>
 		            </div>
 	            </div>
 	          </div>
