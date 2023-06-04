@@ -72,9 +72,9 @@
 	}
 	
 	.content {
-		/* overflow: hidden;
+		overflow: hidden;
 		text-overflow: ellipsis;
-		white-space: nowrap; */
+		white-space: nowrap;
 	}
 	
 	.count-frame {

@@ -443,11 +443,6 @@
 	  text-decoration: none;
 	}
 	
-	.back-icon {
-		width: 20px;
-		height: 20px;
-	}
-	
 
 </style>
 </head>
@@ -463,7 +458,7 @@
         
           <div class="profile-frame">
             <img
-              src="https://www.studiopeople.kr/common/img/default_profile.png"
+              src="https://blog.kakaocdn.net/dn/bz3MnR/btshKQsi5R3/Jn6ha5hed0yM6xE7P3iUik/img.gif"
               alt="프로필사진"
               class="profile"
             />
@@ -471,7 +466,7 @@
           
           <div class="nickname-frame">
             <span class="nickname">
-              <span>닉네임</span>
+              <span>오리너구리</span>
             </span>
           </div>
           
@@ -561,7 +556,7 @@
           <button class="back-frame" onclick="location.href='/wood/carpool/list.do';">
  			<div class="back-box">
               <span class="back">
-              	<img class="back-icon" alt="뒤로가기" src="/wood/asset/img/back-icon.png">
+              	<span>이전</span>
               </span>
             </div>
           </button>
@@ -589,8 +584,8 @@
 				        confirmButtonColor: '#2db400'
 				      })
 		            .then(function(){
-		            	location.href='/wood/carpool/view.do';
-		            	/* 신청 완료 시 신청 버튼이 신청중으로 바뀌어야함 */
+		            	location.href='/wood/carpool/list.do';
+		            	/* 삭제 시 list로 이동 */
 		            });
 		        } else if (result.dismiss == "cancel"){
 		            new Swal({
