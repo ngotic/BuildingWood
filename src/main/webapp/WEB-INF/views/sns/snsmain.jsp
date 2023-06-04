@@ -47,7 +47,7 @@
 
       }
      .frame-group1222 {
-	  top: 530px;
+	  top: 300px;
 	  right: 300px;
 	  width: 194px;
 	  height: 43px;
@@ -314,22 +314,10 @@
 <body>
 	<!-- template.jsp > index.jsp -->
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
-	
-	<div>
-		<img src="/wood/asset/img/snsmain.jpg" class="img-fluid" alt="Responsive image" style="width:100%; margin-top:70px;">
-		</div>
 	<section class="container">
 		<div style="text-align:center;">
 		<!-- <h1>지역 SNS <small>메인</small></h1> -->
 		</div>
-			<div style="text-align:right; margin-right:78px; font-size:20px;">
-				<div class="frame-group1222">
-		           <div class="frame-mappin">
-		             	<span class="material-symbols-outlined">location_on</span>
-		           </div>
-	           <span class="frame-text15"><span>강남구 삼성동</span></span>
-				</div>
-			</div>
 		<div class="wrap">
 			<div id="content">
 				<div id="cheader" >
@@ -348,9 +336,9 @@
 								</div>
 								<div id="usercontent">
 									<div id="userid"  style="margin-bottom:15px;">
-										userid
+										${dto.id}
 									</div>
-									<textarea id="add_useritem" name="add_useritem">내용입력</textarea>
+									<textarea id="add_useritem" name="add_useritem"></textarea>
 								<button type="submit" class="add">등록하기</button>
 								</div>
 							</div>
@@ -884,6 +872,7 @@
 		else if($('#addsnscontent').text()=="글쓰기"){
 			$("#snsaddboard").show(1000);
 			$('#addsnscontent').text("접기");
+			$('#add_useritem').focus();
 			$('#board').animate({
 				scrollTop:0
 			},1000);
@@ -935,6 +924,7 @@
 	// marker.setMap(null);    
 
 	
+	//클릭이벤트
 	kakao.maps.event.addListener(marker, 'click', function(mouseEvent) {        
 	    
 		

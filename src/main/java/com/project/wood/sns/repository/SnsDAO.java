@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import com.test.my.DBUtil;
+
 
 
 public class SnsDAO {
@@ -15,9 +15,9 @@ public class SnsDAO {
 	private ResultSet rs;
 	
 	public SnsDAO() {
-		this.conn =DBUtil.open("jdbc:oracle:thin:@localhost:1521:xe","team","java1234");
+		this.conn= new DBConnect().getConn();
 	}
-
+	
 	public SnsDTO getSNSList() {
 		
 		try {
@@ -27,19 +27,17 @@ public class SnsDAO {
 			 * "select m.profile ,m.nickname ,b.content, b.regdate , b.editdate from tblSnsBoard b inner join tblMember m on b.id = m.id"
 			 * ;
 			 */
-			String sql = "select * from tblsnsBoard";
+			String sql = "select * from tblsnsboard";
 			pstat = conn.prepareStatement(sql);
 			rs = pstat.executeQuery();
-
 			if (rs.next()) {
 				SnsDTO dto = new SnsDTO();
 				
-				dto.setSnsboardseq("Snsboardseq");
-				dto.setId("id");
-				dto.setBoardcategoryseq("boardcategory");
-				dto.setBuildingseq("buildingseq");
-				dto.setContent("content");
-				
+				dto.setSnsboardseq(rs.getString("snsboardseq"));
+				dto.setId(rs.getString("id"));
+				dto.setBoardcategoryseq(rs.getString("boardcategoryseq"));
+				dto.setBuildingseq(rs.getString("buildingseq"));
+				dto.setContent(rs.getString("content"));
 				/*
 				 * dto.setProfile(rs.getString("m.profile"));
 				 * dto.setNickname(rs.getString("m.nickname"));
