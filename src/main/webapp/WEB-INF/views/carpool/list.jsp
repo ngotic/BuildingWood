@@ -11,6 +11,10 @@
 
 <style>
 
+	div.col-4 {
+		padding-bottom: 30px;
+	}
+
 	div.card {
 		cursor: pointer;
 		font-size: 1rem;
@@ -96,7 +100,8 @@
 		padding: 2px;
 		text-align: right;
 		color: #2db400;
-		font-size: 1.2rem;
+		font-size: 1.4rem;
+		top: 2px;
 	}
 	
 	
@@ -141,24 +146,11 @@
 		</div>	
 		
 
-		<br><br><br>
-		<table>
-			<h2>ㅇㅇ</h2>
-			<c:forEach items="${list}" var="dto">
-			<tr>
-				<td>${dto.carpoolseq}</td>
-				<td>${dto.regdate}</td>
-				<td>${dto.departures}</td>
-				<td>${dto.arrivals}</td>
-			</tr>
-			</c:forEach>
-		</table>
-		<br><br><br>
-
 		
-
+			
 		<div class="container">
 	      <div class="row">
+		<c:forEach items="${list}" var="dto">
 	      
 	      	<!-- 테스트1 -->
 	      	<div class="col-4">
@@ -171,8 +163,8 @@
 	              />
 	              <div class="user-info" style="margin-left: 10px;">
 	              	<div>
-		              <span class="nickname">닉네임</span>
-		              <span class="gender">(성별)</span>
+		              <span class="nickname"></span>
+		              <span class="gender">()</span>
 		            </div>
 		            <div class="rating">
 		              <img
@@ -180,46 +172,49 @@
 			            alt="RatingStar"
 			            class="rating-star"
 			          />
-		              <span class="rating-score">4.7 (3)</span>
+		              <span class="rating-score"> (${dto.count})</span>
 		            </div>
 	              </div>
 	            </div>
 	            
-	            <div class="card-body" style="border-bottom: 1px solid #d8d8d8">
+	            <div class="card-body" style="border-bottom: 1px solid #EBEBEB">
 	              <div class="card-text">
-		            <div class="datetime">06/05(화) 17:30</div>
+		            <div class="datetime">${dto.departtime}</div>
 	              </div>
 	            </div>
 	            <div class="card-body">
-	            	<div class="card-text">
+	            	<div class="card-text" style="padding-top: 6px; margin-bottom: -5px;">
 		            	<div>
 		            		<span class="departure-region">시/도</span>
-		            		<span class="departures">출발지: ${dto.departures}</span>
+		            		<span class="departures">${dto.departures}</span>
 		            	</div>
 		              	<div>
 							<span class="arrival-region">시/도</span>
-		            		<span class="arrivals">도착지</span>
+		            		<span class="arrivals">${dto.arrivals}</span>
 						</div>
 		            </div>
 	            </div>
+	            
 	            <!-- <div class="card-body content-area">
 	            	<div class="card-text">
 		              	<div class="content">내용적는칸 생략</div>
 		            </div>
 	            </div> -->
+	            
 	            <div class="card-body">
 	            	<div class="card-text bottom-frame">
 	            		<span class="count-frame">
-	            			<span>0/2명 모집</span>
+	            			<span>0/${dto.recruit}명 모집</span>
 	            		</span>
-		              	<span class="price">내용생략</span>
+		              	<span class="price">${dto.fee}원</span>
 		            </div>
 	            </div>
 	          </div>
 	        </div>
 	     
 	     
-			<!-- 테스트2 -->
+	     
+			<!-- 테스트2
 	        <div class="col-4">
 	          <div class="card" onclick="location.href='/wood/carpool/view.do';">
 	            <div class="card-header">
@@ -276,9 +271,9 @@
 	            </div>
 	          </div>
 	        </div>
+	        -->
 	        
-	        
-	        <!-- 테스트3 -->
+	        <!--테스트3
 	        <div class="col-4">
 	          <div class="card" onclick="location.href='/wood/carpool/view.do';">
 	            <div class="card-header">
@@ -334,7 +329,7 @@
 		            </div>
 	            </div>
 	            
-	          <!-- 모집 종료 -->
+	          모집 종료
 	          <div class="end">
 	          		<div class="end-frame">
 	          			<span>모집 종료</span>
@@ -342,9 +337,11 @@
 		          </div>
 		      </div>
 	        
-	        </div> 
+	        </div>  -->
+	       
 	        
 	        
+    	</c:forEach>
 	      </div>
 	    </div>
     

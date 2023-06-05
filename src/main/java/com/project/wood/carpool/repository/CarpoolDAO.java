@@ -54,13 +54,64 @@ public class CarpoolDAO {
 		
 		try {
 			
-			String sql = "select * from tblCarpool order by seq desc";
-
+			//String sql = "select * from tblCarpool order by carpoolseq desc";
+			String sql = "select tblCarpool.*, (select count from tblDriver inner join tblCarpool on tblDriver.driverseq = tblCarpool.driverseq) as count from tblCarpool order by carpoolseq desc";
+			
+			
 			stat = conn.createStatement();
 			rs = stat.executeQuery(sql);
 			
 			
 			while (rs.next()) {
+				
+				CarpoolDTO dto = new CarpoolDTO();
+				
+				dto.setRegdate(rs.getString("regdate"));
+				dto.setDeparttime(rs.getString("departtime"));
+				dto.setDepartures(rs.getString("departures"));
+				dto.setArrivals(rs.getString("arrivals"));
+				dto.setFee(rs.getInt("fee"));
+				dto.setStatus(rs.getString("status"));
+				dto.setRecruit(rs.getString("recruit"));
+				
+				
+				//dto.setNickname(rs.getString("nickname"));
+				//dto.setGender(rs.getString("gender"));
+				
+				//dto.setScore(rs.getInt("score"));
+				dto.setCount(rs.getInt("count"));
+				
+				
+				list.add(dto);
+				
+			}
+			
+			return list;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+		
+	}
+	
+	
+	/*
+	public CarpoolDTO get(String carpoolseq) {
+		
+		try {
+			
+			String sql = "select tblCarpool.*, (select score from tblDriver where driverseq = tblCarpool.driverseq) as score from tblCarpool where seq = ?";
+			
+			
+			pstat = conn.prepareStatement(sql);
+			
+			pstat.setString(1, carpoolseq);
+			
+			rs = pstat.executeQuery();
+			
+			if (rs.next()) {
 				
 				CarpoolDTO dto = new CarpoolDTO();
 				
@@ -76,18 +127,23 @@ public class CarpoolDAO {
 				dto.setStatus(rs.getString("status"));
 				dto.setRecruit(rs.getString("recruit"));
 				
-				list.add(dto);
+//				dto.setNickname(rs.getString("nickname"));
+//				dto.setGender(rs.getString("gender"));
+//				
+//				dto.setScore(rs.getInt("score"));
+//				dto.setCount(rs.getInt("count"));
+				
+				return dto;
 				
 			}
-			
-			return list;
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return list;
+		return null;
 		
 	}
+	*/
 
 }
