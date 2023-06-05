@@ -10,10 +10,13 @@ public class CarpoolDTO {
 	private String driverseq;
 	private String content;
 	private String regdate;
-	private String arrivals;
+	private String departtime;
 	private String departures; 
+	private String arrivals;
 	private int fee;
 	private String status;
 	private String recruit;
+	
+	
 	
 }

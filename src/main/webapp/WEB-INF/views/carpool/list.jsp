@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -140,11 +141,27 @@
 		</div>	
 		
 
+		<br><br><br>
+		<table>
+			<h2>ㅇㅇ</h2>
+			<c:forEach items="${list}" var="dto">
+			<tr>
+				<td>${dto.carpoolseq}</td>
+				<td>${dto.regdate}</td>
+				<td>${dto.departures}</td>
+				<td>${dto.arrivals}</td>
+			</tr>
+			</c:forEach>
+		</table>
+		<br><br><br>
+
+		
+
 		<div class="container">
 	      <div class="row">
 	      
 	      	<!-- 테스트1 -->
-	        <div class="col-4">
+	      	<div class="col-4">
 	          <div class="card" onclick="location.href='/wood/carpool/view.do';">
 	            <div class="card-header">
 	              <img
@@ -176,12 +193,12 @@
 	            <div class="card-body">
 	            	<div class="card-text">
 		            	<div>
-		            		<span class="arrival-region">시/도</span>
-		            		<span class="arrivals">출발지</span>
+		            		<span class="departure-region">시/도</span>
+		            		<span class="departures">출발지: ${dto.departures}</span>
 		            	</div>
 		              	<div>
-							<span class="departure-region">시/도</span>
-		            		<span class="departures">도착지</span>
+							<span class="arrival-region">시/도</span>
+		            		<span class="arrivals">도착지</span>
 						</div>
 		            </div>
 	            </div>
@@ -328,10 +345,10 @@
 	        </div> 
 	        
 	        
-	        
 	      </div>
 	    </div>
     
+	    
     
 	    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>

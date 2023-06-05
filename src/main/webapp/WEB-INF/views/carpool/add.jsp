@@ -142,40 +142,6 @@
                 <label for="fname">출발지</label>
                 <div class="sort">
 	                <div>
-	                	<select name="arrivalRegion" id="arrivalRegion" class="option02 select2-hidden-accessible form-control" 
-	                		required data-select2-id="select2-data-arrivalRegion" tabindex="-1" aria-hidden="true" 
-	                		style="width: 60px; text-align: center;">
-	                                        <option value="" data-select2-id="select2-data-6-k4qz">시/도</option>
-	                                        <option value="서울">서울</option>
-	                                        <option value="경기">경기</option>
-	                                        <option value="인천">인천</option>
-	                                        <option value="강원">강원</option>
-	                                        <option value="부산">부산</option>
-	                                        <option value="대구">대구</option>
-	                                        <option value="광주">광주</option>
-	                                        <option value="대전">대전</option>
-	                                        <option value="울산">울산</option>
-	                                        <option value="세종">세종</option>
-	                                        <option value="충북">충북</option>
-	                                        <option value="충남">충남</option>
-	                                        <option value="전북">전북</option>
-	                                        <option value="전남">전남</option>
-	                                        <option value="경북">경북</option>
-	                                        <option value="경남">경남</option>
-	                                        <option value="제주">제주</option>
-	                                        <option value="기타">기타</option>
-	                	</select>
-	                </div>
-	                <div style="width: 545px;">
-	                	<input type="text" class="form-control" id="arrivals" placeholder="상세 출발지를 입력해주세요." name="arrivals">
-	                </div>
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label for="lname">도착지</label>
-                <div class="sort">
-	                <div>
 	                	<select name="departureRegion" id="departureRegion" class="option02 select2-hidden-accessible form-control" 
 	                		required data-select2-id="select2-data-departureRegion" tabindex="-1" aria-hidden="true" 
 	                		style="width: 60px; text-align: center;">
@@ -201,7 +167,41 @@
 	                	</select>
 	                </div>
 	                <div style="width: 545px;">
-	                	<input type="text" class="form-control" id="departures" placeholder="상세 도착지를 입력해주세요." name="departures">
+	                	<input type="text" class="form-control" id="departures" placeholder="상세 출발지를 입력해주세요." name="departures">
+	                </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="lname">도착지</label>
+                <div class="sort">
+	                <div>
+	                	<select name="arrivalRegion" id="arrivalRegion" class="option02 select2-hidden-accessible form-control" 
+	                		required data-select2-id="select2-data-arrivalRegion" tabindex="-1" aria-hidden="true" 
+	                		style="width: 60px; text-align: center;">
+	                                        <option value="" data-select2-id="select2-data-6-k4qz">시/도</option>
+	                                        <option value="서울">서울</option>
+	                                        <option value="경기">경기</option>
+	                                        <option value="인천">인천</option>
+	                                        <option value="강원">강원</option>
+	                                        <option value="부산">부산</option>
+	                                        <option value="대구">대구</option>
+	                                        <option value="광주">광주</option>
+	                                        <option value="대전">대전</option>
+	                                        <option value="울산">울산</option>
+	                                        <option value="세종">세종</option>
+	                                        <option value="충북">충북</option>
+	                                        <option value="충남">충남</option>
+	                                        <option value="전북">전북</option>
+	                                        <option value="전남">전남</option>
+	                                        <option value="경북">경북</option>
+	                                        <option value="경남">경남</option>
+	                                        <option value="제주">제주</option>
+	                                        <option value="기타">기타</option>
+	                	</select>
+	                </div>
+	                <div style="width: 545px;">
+	                	<input type="text" class="form-control" id="arrivals" placeholder="상세 도착지를 입력해주세요." name="arrivals">
 	                </div>
                 </div>   
             </div>
