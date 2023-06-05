@@ -1,6 +1,7 @@
 package com.project.wood.sns;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,10 +20,12 @@ public class SnsMain extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		SnsDAO dao = new SnsDAO();
-		SnsDTO dto = dao.getSNSList();
+		List<SnsDTO> list = dao.getSNSList();
 		
+		List<SnsDTO> plist = dao.getPicList();
 		
-		req.setAttribute("dto", dto);
+		req.setAttribute("plist", plist);
+		req.setAttribute("list", list);
 		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/sns/snsmain.jsp");

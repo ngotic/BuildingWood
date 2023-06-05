@@ -177,7 +177,7 @@
 		height:830px;
 	}
 
-	#boardcontent{
+	.boardcontent{
 		width:90%;
 		height:400px;
 		background-color:white;
@@ -194,9 +194,7 @@
 		margin: 10px auto;
 	}
 
-	#imagebox{
-		background-color:none;
-	}
+	
 	.modal_imagebox{
 		text-align:center;
 		align-items: center;
@@ -309,7 +307,65 @@
 		background-color:rgb(219,219,219);
 		color:white;
 	}
+	.imagebox{
+		 width: 450px;
+		  height: 300px;
+		  position: relative;
+		  overflow:hidden;
+	}
+	
+	li{
+  list-style-type: none;
+}
+
+
+.slides{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2500px; /* 슬라이드할 사진과 마진 총 넓이 */
+  transition: left 0.3s ; 
+  /*ease-out: 처음에는 느렸다가 점점 빨라짐*/
+}
+
+/* 첫 번째 슬라이드 가운데에 정렬하기위해
+첫번째 슬라이드만 margin-left조정 */
+/* 슬라이드들 옆으로 정렬 */
+.slides li:not(:last-child){
+  float: left;
+}
+
+.slides li{
+  float: left;
+}
+
+.controller span{
+  position:absolute;
+  background-color: transparent;
+  color: black;
+  text-align: center;
+  border-radius: 50%;
+  padding: 10px 20px;
+  top: 50%;
+  font-size: 1.3em;
+  cursor: pointer;
+}
+
+/* 이전, 다음 화살표에 마우스 커서가 올라가 있을때 */
+.controller span:hover{
+  background-color: rgba(128, 128, 128, 0.11);
+}
+
+.prev{
+  left: 10px;
+}
+
+
+.next{
+  right: 10px;
+}
 </style>
+
 </head>
 <body>
 	<!-- template.jsp > index.jsp -->
@@ -336,34 +392,51 @@
 								</div>
 								<div id="usercontent">
 									<div id="userid"  style="margin-bottom:15px;">
-										${dto.id}
+										${dto.nickname}
 									</div>
 									<textarea id="add_useritem" name="add_useritem"></textarea>
 								<button type="submit" class="add">등록하기</button>
 								</div>
 							</div>
 						</form>
+						
+						<c:forEach items="${list}" var="dto">
+						<div class="boardcontent" style="position:relative;">
+							<div id="usericon" style="display:inline-block; width:50px; height:400px; margin-right:5px;">
+								<!-- 유저 이미지 넣기  -->
+								<img alt="" src="/wood/asset/img/${dto.profile}" style="width:50px;">
+							</div>
+							<div id="usercontent" style="position:relative;">
+								<div id="userid">
+									${dto.nickname}
+								</div>
+								<div id="useritem">
+									${dto.content}
+								</div>
+								<div class="imagebox" data-count="${dto.cpic}">
+								    <ul class="slides" style="width:calc(${dto.cpic} * 450px)"> 
+								   		<c:forEach items="${plist }" var="pic">
+							   			<c:if test="${dto.snsboardseq==pic.snsboardseq}">
+								     		<li><img alt="" src="/wood/asset/img/${pic.pic}" style="width:450px; "></li>
+								     	</c:if>
+								     	</c:forEach>
+								    </ul>  
+								    <p class="controller">
+								      
+								      <!-- &lang: 왼쪽 방향 화살표
+								      &rang: 오른쪽 방향 화살표 -->
+								      <span class="prev">&lang;</span>  
+								      <span class="next">&rang;</span>
+								    </p>
+								  </div>
+						       
 							
-						<div id="boardcontent" style="position:relative;">
-							<div id="usericon" style="display:inline-block; width:50px; height:400px; margin-right:5px;">
-								<!-- 유저 이미지 넣기  -->
-								<img alt="" src="/wood/asset/img/logo.png" style="width:50px;">
-							</div>
-							<div id="usercontent" style="position:relative;">
-								<div id="userid">
-									userid
-								</div>
-								<div id="useritem">
-									오늘 날씨가 덥다ㅏㅏㅏㅏ
-								</div>
-								<div id="imagebox">
-									<img alt="" src="/wood/asset/img/logo.png" style="width:300px;">
-								</div>
 								<div id="react">
 									<div id="like">
 										<span class="material-symbols-outlined">
 											favorite
 										</span>
+										${dto.clike }
 									</div>
 									<div id="comment">
 										 <span class="material-symbols-outlined" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -373,128 +446,7 @@
 								</div>
 							</div>
 						</div>
-						<div id="boardcontent">
-							<div id="usericon" style="display:inline-block; width:50px; height:400px; margin-right:5px;">
-								<!-- 유저 이미지 넣기  -->
-								<img alt="" src="/wood/asset/img/logo.png" style="width:50px;">
-							</div>
-							<div id="usercontent" style="position:relative;">
-								<div id="userid">
-									userid
-								</div>
-								<div id="useritem">
-									오늘 날씨가 덥다ㅏㅏㅏㅏ
-								</div>
-								<div id="imagebox">
-									<img alt="" src="/wood/asset/img/logo.png" style="width:300px;">
-								</div>
-								<div id="react">
-									<div id="like">
-										<span class="material-symbols-outlined">
-											favorite
-										</span>
-									</div>
-									<div id="comment">
-									
-										 <span class="material-symbols-outlined" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-											chat_bubble
-										</span>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div id="boardcontent">
-							<div id="usericon" style="display:inline-block; width:50px; height:400px; margin-right:5px;">
-								<!-- 유저 이미지 넣기  -->
-								<img alt="" src="/wood/asset/img/logo.png" style="width:50px;">
-							</div>
-							<div id="usercontent" style="position:relative;">
-								<div id="userid">
-									userid
-								</div>
-								<div id="useritem">
-									오늘 날씨가 덥다ㅏㅏㅏㅏ
-								</div>
-								<div id="imagebox">
-									<img alt="" src="/wood/asset/img/logo.png" style="width:300px;">
-								</div>
-								<div id="react">
-									<div id="like">
-										<span class="material-symbols-outlined">
-											favorite
-										</span>
-									</div>
-									<div id="comment">
-										 <span class="material-symbols-outlined" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-											chat_bubble
-										</span>
-									</div>
-									<div class="box snshash">
-										날씨 더움 왜이래!날씨 더움 왜이래!날씨 더움 왜이래!
-									</div>
-								</div>
-							</div>
-						</div>
-						<div id="boardcontent">
-							<div id="usericon" style="display:inline-block; width:50px; height:400px; margin-right:5px;">
-								<!-- 유저 이미지 넣기  -->
-								<img alt="" src="/wood/asset/img/logo.png" style="width:50px;">
-							</div>
-							<div id="usercontent" style="position:relative;">
-								<div id="userid">
-									userid
-								</div>
-								<div id="useritem">
-									오늘 날씨가 덥다ㅏㅏㅏㅏ
-								</div>
-								<div id="imagebox">
-									<img alt="" src="/wood/asset/img/logo.png" style="width:300px;">
-								</div>
-								<div id="react">
-									<div id="like">
-										<span class="material-symbols-outlined">
-											favorite
-										</span>
-									</div>
-									<div id="comment">
-									
-										 <span class="material-symbols-outlined" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-											chat_bubble
-										</span>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div id="boardcontent">
-							<div id="usericon" style="display:inline-block; width:50px; height:400px; margin-right:5px;">
-								<!-- 유저 이미지 넣기  -->
-								<img alt="" src="/wood/asset/img/logo.png" style="width:50px;">
-							</div>
-							<div id="usercontent" style="position:relative;">
-								<div id="userid">
-									userid
-								</div>
-								<div id="useritem">
-									오늘 날씨가 덥다ㅏㅏㅏㅏ
-								</div>
-								<div id="imagebox">
-									<img alt="" src="/wood/asset/img/logo.png" style="width:300px;">
-								</div>
-								<div id="react">
-									<div id="like">
-										<span class="material-symbols-outlined">
-											favorite
-										</span>
-									</div>
-									<div id="comment">
-									
-										 <span class="material-symbols-outlined" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-											chat_bubble
-										</span>
-									</div>
-								</div>
-							</div>
-						</div>
+						</c:forEach>
 					</div>
 				</div>
 
@@ -945,8 +897,60 @@
 	});
 	
 	
+	let currentIdx =0; //현재 슬라이드 index
+	let slideCount =0; // 슬라이드 개수
+	const prev = document.querySelector('.prev'); //이전 버튼
+	const next = document.querySelector('.next'); //다음 버튼
+	const slideWidth = 450; //한개의 슬라이드 넓이
+	
+	
+	$('.prev').on('mousedown', function () {
+		if(slideCount!=$(this).parent().parent().data("count")-1){
+			slideCount=$(this).parent().parent().data("count")-1;
+			currentIdx=0;
+			
+			$('.slides').css("left",0);
+		}
+	});
+
+	$('.prev').on('click', function () {
+		if(currentIdx<=0){
+			currentIdx=0;
+		}
+		else if(slideCount<currentIdx){
+			currentIdx=0;
+		}
+		else{
+		  $(this).parent().parent().children().css("left",$(this).parent().parent().children().position().left + 450);
+		  currentIdx--;
+		}
+	});
 	
 
+	$('.next').on('mousedown', function () {
+		if(slideCount!=$(this).parent().parent().data("count")-1){
+			slideCount=$(this).parent().parent().data("count")-1;
+			currentIdx=0;
+			$('.slides').css("left",0);
+		}
+	});
+	
+	$('.next').on('click', function () {
+		
+		if(currentIdx==slideCount){
+			currentIdx=slideCount;
+		}
+		else if(slideCount<currentIdx){
+			currentIdx=0;
+		}
+		else{
+		  $(this).parent().parent().children().css("left",$(this).parent().parent().children().position().left - 450);
+		  currentIdx++;
+		}
+	 
+	});
+	
+	 
 </script>
 </body>
 </html>

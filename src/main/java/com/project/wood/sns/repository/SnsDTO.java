@@ -15,5 +15,9 @@ public class SnsDTO {
 	
 	private String nickname;
 	private String profile;
+	private String clike;
+	private String pic;
+	private String cpic;
+	
 	
 }
