@@ -28,7 +28,7 @@ public class AuthFilter implements Filter{
 		HttpSession session = req.getSession();
 		
 		System.out.println(req.getRequestURI());
-		
+		/*
 		if (session.getAttribute("id") == null ) {  
 			if (!req.getRequestURI().equals("/wood/index.do") && !req.getRequestURI().contains("login")) {
 				PrintWriter writer = ((HttpServletResponse)response).getWriter();
@@ -37,7 +37,7 @@ public class AuthFilter implements Filter{
 				writer.close();
 				return ;
 			}
-		}
+		}*/
 		// TODO : 로그인 후 바로가는 메인 페이지를 제작해야함
 		//        그 때 그 페이지로 리다이렉트 
 		
