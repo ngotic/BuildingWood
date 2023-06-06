@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -276,6 +278,15 @@
 	  padding-bottom: 10px;
 	}
 	
+	.content-frame {
+		display: flex;
+		position: absolute;
+	}
+	
+	
+	
+	/* 버튼 */
+
 	.apply-frame {
 	  top: 615px;
 	  left: 36.5%;
@@ -471,14 +482,20 @@
           
           <div class="nickname-frame">
             <span class="nickname">
-              <span>닉네임</span>
+              <span>${dto.nickname}</span>
             </span>
           </div>
           
           <!-- 성별, 레벨(?) -->
           <div class="user-info-frame">
             <span class="user-info">
-              <span>(여)</span>
+              <span>
+              		<c:if test = "${dto.gender eq 'M'}">
+		        		(남)
+		        	</c:if>
+		        	<c:if test = "${dto.gender eq 'F'}">
+		        		(여)
+		        	</c:if></span>
             </span>
           </div>
           
@@ -489,8 +506,8 @@
               alt="RatingStar"
               class="rating-star"
             />
-            <span>5.0</span>
-            <span> (99)</span>
+            <span>${dto.score}</span>
+            <span> (${dto.count})</span>
           </div>
           
           <!-- 출발지, 도착지, 날짜시간, 가격 -->
@@ -500,7 +517,8 @@
               
                 <div class="start-frame">
                   <span class="start">
-                    <span>한독빌딩</span>
+                  	<span style="color: #2db400">${dto.departurescity}</span>
+                    <span> ${dto.departures}</span>
                   </span>
                 </div>
                 
@@ -514,26 +532,35 @@
                 
                 <div class="end-frame">
                   <span class="end">
-                    <span>고속터미널</span>
+                    <span style="color: #2db400">${dto.arrivalscity}</span>
+                    <span> ${dto.arrivals}</span>
                   </span>
                 </div>
                 
                 <div class="datetime-frame">
                 	<span class="datetime">
-                		<span>06.05(월) 오후 5시 30분</span>
+                		<span>${dto.ttime}</span>
                 	</span>
                 </div>       
                 
                 <div class="price-frame">
                   <span class="price">
-                    <span style="color: rgba(45, 180, 0, 1);">5000원</span>
+                    <span style="color: rgba(45, 180, 0, 1);">${dto.fee}원</span>
                   </span>
                 </div>
               </div>
+              
+              
             </div>
           </div>
           
-          <button class="edit-frame" onclick="location.href='/wood/carpool/edit.do';">
+          <!-- 내용 -->      
+          <div class="content-frame">
+          	${dto.content} view 디자인변경해야함나중에
+          </div>
+    
+          
+          <button class="edit-frame" onclick="location.href='/wood/carpool/edit.do?carpoolseq=${dto.carpoolseq}';">
  			<div class="edit-box">
               <span class="edit">
               	<span>수정</span>

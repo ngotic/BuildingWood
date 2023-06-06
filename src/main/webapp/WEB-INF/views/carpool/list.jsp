@@ -5,10 +5,136 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>list 수정 중</title>
+<title>빌딩숲</title>
 <%@ include file="/WEB-INF/views/include/asset.jsp" %>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
+
+<!-- 검색 -->
+<style>
+
+		.search-box-frame {
+		  width: 1030px;
+		  height: 83px;
+		  display: flex;
+		  position: relative;
+		  align-items: flex-start;
+		  flex-shrink: 0;
+		}
+
+		.component-container1 {
+		  gap: 112px;
+		  top: 21px;
+		  left: 211px;
+		  /* width: 665px; */
+		  height: 38px;
+		  display: flex;
+		  position: absolute;
+		  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) ;
+		  align-items: center;
+		  flex-shrink: 0;
+		  justify-content: center;
+		  border-radius: 5px;
+		}
+		
+		.component-search {
+		  gap: 8px;
+		  width: 601px;
+		  display: flex;
+		  flex-grow: 1;
+		  align-items: flex-start;
+		  flex-shrink: 0;
+		  flex-direction: column;
+		}
+
+		.search-text-input {
+		  width: 100%;
+		  gap: 8px;
+		  display: flex;
+		  padding: 11px;
+		  overflow: hidden;
+		  flex-grow: 1;
+		  align-items: center;
+		  background-color: var(--dl-color-base-white);
+		}
+		
+		.search-select {
+			border: none;
+		}
+		
+		.search-icon {
+		  width: 20px;
+		  height: 20px;
+		}
+		
+		input[type="text"]:focus, .search-select:focus {
+      		outline: none;
+    	}
+		
+		.search-text-area {
+		  color: rgba(117, 117, 117, 1);
+		  height: auto;
+		  flex-grow: 1;
+		  text-align: left;
+		  line-height: 22px;
+		  width: 100%;
+		}
+		
+		.search-button-frame {
+		  top: 21px;
+		  left: 826px;
+		  width: 100px;
+		  height: 40px;
+		  display: flex;
+		  position: absolute;
+		  align-items: flex-start;
+		  flex-shrink: 1;
+		  background-color: #2db400;
+		  border-radius: 50px;
+		}
+		
+		.search-button {
+		  top: 8px;
+		  left: 27px;
+		  height: auto;
+		  position: absolute;
+		  font-size: 17px;
+		  font-style: Medium;
+		  text-align: center;
+		  font-family: Inter;
+		  font-weight: 500;
+		  line-height: 24px;
+		  font-stretch: normal;
+		  text-decoration: none;
+		}
+	
+
+</style>
+
+
+<!-- 글쓰기 -->
+<style>
+
+	.add-button-frame {
+		width: 100px;
+		height: 38px;
+		border: 1px solid #999;
+		border-radius: 12px;
+		display: flex;
+		justify-content: center;
+		margin-left: 995px;
+		margin-bottom: -10px;
+	}
+	
+	.add-button {
+		background: none;
+		border: none;
+	}
+
+</style>
+
+
+<!-- 카풀 카드 리스트 -->
 <style>
 
 	div.col-4 {
@@ -135,26 +261,68 @@
 	<!-- template.jsp > index.jsp -->
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
 	<section class="container">
-		<h1><small>carpool.list2</small></h1>
+		<h1><small>카풀 게시판</small></h1>
+	
+	
+		<!-- 검색 -->
+		<form id="searchForm" action="/wood/carpool/list.do" method="GET">
+		<div class="search-box-frame">
 		
+	        <div class="component-container1">
+	          <div class="component-search">
+	          	
+	            
+	              <div class="search-text-input">
+		          	  <select class="search-select" name="column">
+							<option value="">선택</option>
+							<option value="departures">출발지</option>
+							<option value="arrivals">도착지</option>
+					  </select>
+	                <img
+	                  src="/wood/asset/img/search-icon.png"
+	                  alt="search-icon"
+	                  class="search-icon"
+	                />
+	                <span class="search-text-area TextMMedium">
+	                  <input type="text" name="word" class="long" required placeholder="Search someting here..."
+	                  		 style="width: 100%; border: none;">
+	                </span>
+	              </div>
+
+	            
+	          </div>
+	        </div>
+
+	        <div class="search-button-frame" style="border: none;">
+	          <input type="submit" value="Search" class="search-button" 
+	          		 style="color: white; background: none; border: none;">
+	    	</div>
+	    	
+	    </div>
+	    </form>
 		
-		<div id="search">
-		<a>강남구 역삼동</a>
-		<a>Search</a>
-		<button type="button" class="add primary"
-				onclick="location.href='/wood/carpool/add.do?mode=new';">글쓰기</button>
-		</div>	
 		
 
 		
-			
+		<!-- 글쓰기 버튼 -->
+		<div class="add-button-frame">
+			<button type="button" class="add-button"
+				onclick="location.href='/wood/carpool/add.do?mode=new';">글쓰기</button>
+		</div>	
+
+	
+
+		
+
+		<!-- 카풀 카드 리스트 -->
 		<div class="container">
 	      <div class="row">
 		<c:forEach items="${list}" var="dto">
 	      
 	      	<!-- 테스트1 -->
 	      	<div class="col-4">
-	          <div class="card" onclick="location.href='/wood/carpool/view.do';">
+	          <div class="card" onclick="location.href='/wood/carpool/view.do?carpoolseq=${dto.carpoolseq}';">
+	          
 	            <div class="card-header">
 	              <img
 	              src="https://www.studiopeople.kr/common/img/default_profile.png"
@@ -163,8 +331,15 @@
 	              />
 	              <div class="user-info" style="margin-left: 10px;">
 	              	<div>
-		              <span class="nickname"></span>
-		              <span class="gender">()</span>
+		              <span class="nickname">${dto.nickname}</span>
+		              <span class="gender">
+		              		<c:if test = "${dto.gender eq 'M'}">
+		              			(남)
+		              		</c:if>
+		              		<c:if test = "${dto.gender eq 'F'}">
+		              			(여)
+		              		</c:if>
+		              </span>
 		            </div>
 		            <div class="rating">
 		              <img
@@ -172,34 +347,29 @@
 			            alt="RatingStar"
 			            class="rating-star"
 			          />
-		              <span class="rating-score"> (${dto.count})</span>
+		              <span class="rating-score">${dto.score} (${dto.count})</span>
 		            </div>
 	              </div>
 	            </div>
 	            
 	            <div class="card-body" style="border-bottom: 1px solid #EBEBEB">
 	              <div class="card-text">
-		            <div class="datetime">${dto.departtime}</div>
+		            <div class="datetime">${dto.ttime}</div>
 	              </div>
 	            </div>
+	            
 	            <div class="card-body">
 	            	<div class="card-text" style="padding-top: 6px; margin-bottom: -5px;">
 		            	<div>
-		            		<span class="departure-region">시/도</span>
+		            		<span class="departure-region">${dto.departurescity}</span>
 		            		<span class="departures">${dto.departures}</span>
 		            	</div>
 		              	<div>
-							<span class="arrival-region">시/도</span>
+							<span class="arrival-region">${dto.arrivalscity}</span>
 		            		<span class="arrivals">${dto.arrivals}</span>
 						</div>
 		            </div>
 	            </div>
-	            
-	            <!-- <div class="card-body content-area">
-	            	<div class="card-text">
-		              	<div class="content">내용적는칸 생략</div>
-		            </div>
-	            </div> -->
 	            
 	            <div class="card-body">
 	            	<div class="card-text bottom-frame">
@@ -212,134 +382,16 @@
 	          </div>
 	        </div>
 	     
-	     
-	     
-			<!-- 테스트2
-	        <div class="col-4">
-	          <div class="card" onclick="location.href='/wood/carpool/view.do';">
-	            <div class="card-header">
-	              <img
-	              src="https://www.studiopeople.kr/common/img/default_profile.png"
-	              alt="프로필"
-	              class="profile"
-	              />
-	              <div class="user-info" style="margin-left: 10px;">
-	              	<div>
-		              <span class="nickname">닉네임</span>
-		              <span class="gender">(성별)</span>
-		            </div>
-		            <div class="rating">
-		              <img
-			            src="/wood/asset/img/star.png"
-			            alt="RatingStar"
-			            class="rating-star"
-			          />
-		              <span class="rating-score">4.7 (3)</span>
-		            </div>
-	              </div>
-	            </div>
-	            
-	            <div class="card-body" style="border-bottom: 1px solid #d8d8d8">
-	              <div class="card-text">
-		            <div class="datetime">06/05(화) 17:30</div>
-	              </div>
-	            </div>
-	            <div class="card-body" style="border-bottom: 1px solid #d8d8d8">
-	            	<div class="card-text">
-		            	<div>
-		            		<span class="arrival-region">시/도</span>
-		            		<span class="arrivals">출발지</span>
-		            	</div>
-		              	<div>
-							<span class="departure-region">시/도</span>
-		            		<span class="departures">도착지</span>
-						</div>
-		            </div>
-	            </div>
-	            <div class="card-body content-area">
-	            	<div class="card-text">
-		              	<div class="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </div>
-		            </div>
-	            </div>
-	            <div class="card-body">
-	            	<div class="card-text bottom-frame">
-	            		<span class="count-frame">
-	            			<span>0/2명 모집</span>
-	            		</span>
-		              	<span class="price">희망가격</span>
-		            </div>
-	            </div>
-	          </div>
-	        </div>
-	        -->
+
 	        
-	        <!--테스트3
-	        <div class="col-4">
-	          <div class="card" onclick="location.href='/wood/carpool/view.do';">
-	            <div class="card-header">
-	              <img
-	              src="https://www.studiopeople.kr/common/img/default_profile.png"
-	              alt="프로필"
-	              class="profile"
-	              />
-	              <div class="user-info" style="margin-left: 10px;">
-	              	<div>
-		              <span class="nickname">닉네임</span>
-		              <span class="gender">(성별)</span>
-		            </div>
-		            <div class="rating">
-		              <img
-			            src="/wood/asset/img/star.png"
-			            alt="RatingStar"
-			            class="rating-star"
-			          />
-		              <span class="rating-score">4.7 (3)</span>
-		            </div>
-	              </div>
-	            </div>
-	            
-	            <div class="card-body" style="border-bottom: 1px solid #d8d8d8">
-	              <div class="card-text">
-		            <div class="datetime">06/05(화) 17:30</div>
-	              </div>
-	            </div>
-	            <div class="card-body" style="border-bottom: 1px solid #d8d8d8">
-	            	<div class="card-text">
-		            	<div>
-		            		<span class="arrival-region">시/도</span>
-		            		<span class="arrivals">출발지</span>
-		            	</div>
-		              	<div>
-							<span class="departure-region">시/도</span>
-		            		<span class="departures">도착지</span>
-						</div>
-		            </div>
-	            </div>
-	            <div class="card-body content-area">
-	            	<div class="card-text">
-		              	<div class="content">Lorem ipsum dolor sit amet,</div>
-		            </div>
-	            </div>
-	            <div class="card-body">
-	            	<div class="card-text bottom-frame">
-	            		<span class="count-frame">
-	            			<span>0/2명 모집</span>
-	            		</span>
-		              	<span class="price">희망가격</span>
-		            </div>
-	            </div>
-	            
-	          모집 종료
+			  <!--모집 종료
 	          <div class="end">
 	          		<div class="end-frame">
 	          			<span>모집 종료</span>
 	          		</div>
 		          </div>
-		      </div>
-	        
-	        </div>  -->
-	       
-	        
+		      </div> -->
+		      
 	        
     	</c:forEach>
 	      </div>
@@ -355,6 +407,8 @@
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 	
 <script>
+
+	
 
 </script>
 </body>

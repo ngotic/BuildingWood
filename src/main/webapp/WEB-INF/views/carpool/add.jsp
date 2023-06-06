@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
-<title>Bootstrap Form</title>
+<title>빌딩숲</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -12,6 +13,13 @@
     </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
     </script>
+    <link href="dist/css/datepicker.min.css" rel="stylesheet" type="text/css">
+    
+        <script src="dist/js/datepicker.min.js"></script>
+
+        <!-- Include English language -->
+        <script src="dist/js/i18n/datepicker.en.js"></script>
+        
 	<%@ include file="/WEB-INF/views/include/asset.jsp" %>
 	
 <style>
@@ -136,13 +144,14 @@
 	    <h2 class="text-center">글쓰기</h2> 
 	    
 	    <div class="container" style="width:65%;">
-        <form action="#">
         
+        
+        <form method="POST" action="/wood/carpool/add.do">
             <div class="form-group">
                 <label for="fname">출발지</label>
                 <div class="sort">
 	                <div>
-	                	<select name="departureRegion" id="departureRegion" class="option02 select2-hidden-accessible form-control" 
+	                	<select name="departurescity"  class="option02 select2-hidden-accessible form-control" 
 	                		required data-select2-id="select2-data-departureRegion" tabindex="-1" aria-hidden="true" 
 	                		style="width: 60px; text-align: center;">
 	                                        <option value="" data-select2-id="select2-data-6-k4qz">시/도</option>
@@ -167,7 +176,7 @@
 	                	</select>
 	                </div>
 	                <div style="width: 545px;">
-	                	<input type="text" class="form-control" id="departures" placeholder="상세 출발지를 입력해주세요." name="departures">
+	                	<input type="text" class="form-control" name="departures" id="departures" placeholder="상세 출발지를 입력해주세요." name="departures">
 	                </div>
                 </div>
             </div>
@@ -176,7 +185,7 @@
                 <label for="lname">도착지</label>
                 <div class="sort">
 	                <div>
-	                	<select name="arrivalRegion" id="arrivalRegion" class="option02 select2-hidden-accessible form-control" 
+	                	<select name="arrivalscity" id="arrivalscity" class="option02 select2-hidden-accessible form-control" 
 	                		required data-select2-id="select2-data-arrivalRegion" tabindex="-1" aria-hidden="true" 
 	                		style="width: 60px; text-align: center;">
 	                                        <option value="" data-select2-id="select2-data-6-k4qz">시/도</option>
@@ -201,29 +210,31 @@
 	                	</select>
 	                </div>
 	                <div style="width: 545px;">
-	                	<input type="text" class="form-control" id="arrivals" placeholder="상세 도착지를 입력해주세요." name="arrivals">
+	                	<input type="text" class="form-control" name="arrivals" id="arrivals" placeholder="상세 도착지를 입력해주세요." name="arrivals">
 	                </div>
                 </div>   
             </div>
             
             <div class="sort">
+            	
 	            <div class="form-group block-size">
 	                <label for="date">날짜</label>
-	                <input type="date" class="form-control" id="date" placeholder="날짜" name="date">
+	                <input name="ttime" type="date" class="form-control" placeholder="날짜">
 	            </div>
             
 	            <div class="form-group block-size">
 	                <label for="time">시간</label>
-	                <input type="time" class="form-control" id="time" placeholder="시간" name="time">
-	            </div>
+	                <input name="ttime" type="time" class="form-control" placeholder="시간">
+	            </div> 
+	           
             </div>
             
             <div class="sort">
             	<div class="form-group block-size">
 	                <label for="count">인원</label>
 	                <!-- <input type="number" class="form-control" id="count" placeholder="인원을 선택하세요." name="count"> -->
-	                <select name="count" id="count" class="form-control" tabindex="-1" aria-hidden="true">
-                                        <option value="" data-select2-id="select2-data-8-at93">인원을 선택하세요.</option>
+	                <select name="recruit" class="form-control" tabindex="-1" aria-hidden="true">
+                                        <option value="">인원을 선택하세요.</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
@@ -234,8 +245,8 @@
 	            <!-- 요금 10원 단위, 0 미만 불가능하게 설정 -->
 	            <div class="form-group block-size">
 	                <label for="price">희망가격</label>
-	                <input type="number" class="form-control" id="price" placeholder="0" name="price"
-	                		min="0" step="10">
+	                <input type="number" class="form-control" name="fee" placeholder="0" name="price"
+	                		min="0" step="500">
 	            </div>
             </div>
             
@@ -244,22 +255,8 @@
 	            <textarea name="content" id="content" class="form-control" rows="8" placeholder="상세 내용을 설명해 주세요."></textarea>
 	        </div>                       
 
-            <!-- <div class="form-group form-check" style="padding-top: 13px; padding-bottom: 3px;">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" name="remember">
-                    Remember me
-                </label>
-            </div> -->
-            
-            <!-- <button type="submit" class="btn" style="background-color: #2db400; color: white;">
-                확인
-            </button>
-            
-          	<button class="btn" style="border: 1px solid #777; color: #777;">
-	            뒤로가기
-	       	</button> -->
 	       	
-	       	<button class="add-frame" onclick="location.href='/wood/carpool/view.do';">  
+	       	<button class="add-frame">  
 	            <div class="add-box">
 	              <span class="add">
 	                <span style="color: white;">등록하기</span>
@@ -274,7 +271,9 @@
 	              </span>
 	            </div>
 	        </button>
-            
+	        
+			
+	        
         </form>
     	</div>
     	
@@ -282,6 +281,8 @@
 	
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 <script>
+	
+
 	
 </script>
 </body>

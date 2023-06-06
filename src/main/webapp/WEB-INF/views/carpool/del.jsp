@@ -11,9 +11,15 @@
 <body>
 	<!-- template.jsp > index.jsp -->
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
+	
+	
 	<section class="container">
 		<h1>카풀<small> 삭제하기</small></h1>
 	</section>
+	
+	
+	
+	
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 <script>
 
