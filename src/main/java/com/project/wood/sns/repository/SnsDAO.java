@@ -26,7 +26,7 @@ public class SnsDAO {
 		try {
 
 			List<SnsDTO> list = new ArrayList<SnsDTO>();
-			String sql = "select * from snslist";
+			String sql = "select * from snslist where buildingseq = 1 order by regdate desc";
 			stat = conn.createStatement();
 			rs = stat.executeQuery(sql);
 			while (rs.next()) {
@@ -40,13 +40,13 @@ public class SnsDAO {
 				dto.setClike(rs.getString("clike"));
 				dto.setSnsboardseq(rs.getString("snsboardseq"));
 				dto.setCpic(rs.getString("cpic"));
+				dto.setBuildingseq(rs.getString("buildingseq"));
 				list.add(dto);
 				
 			}
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("에러");
 		}
 		
 		return null;
@@ -56,7 +56,7 @@ public class SnsDAO {
 		
 		try {
 			List<SnsDTO> plist = new ArrayList<SnsDTO>();
-			String sql = "select tblsnspic.*, (select count(*) from tblsnspic where tblsnspic.snsboardseq = tblsnsboard.snsboardseq) as cpic from tblsnsboard left outer join tblsnspic on tblsnsboard.snsboardseq=tblsnspic.snsboardseq";
+			String sql = "select tblsnspic.*, (select count(*) from tblsnspic where tblsnspic.snsboardseq = tblsnsboard.snsboardseq) as cpic from tblsnsboard left outer join tblsnspic on tblsnsboard.snsboardseq=tblsnspic.snsboardseq order by tblsnsboard.regdate desc";
 			stat = conn.createStatement();
 			rs = stat.executeQuery(sql);
 			while (rs.next()) {
@@ -71,7 +71,6 @@ public class SnsDAO {
 			return plist;
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("픽에러");
 		}
 		
 		return null;

@@ -31,7 +31,6 @@ public class SnsMain extends HttpServlet {
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/sns/snsmain.jsp");
 		dispatcher.forward(req, resp);
 		
-		
 
 	}
 

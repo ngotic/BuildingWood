@@ -195,10 +195,15 @@
 	}
 
 	
-	.modal_imagebox{
+	#modal_imagebox {
+		position:relative;
+		width:600px;
+		height:600px;
 		text-align:center;
+		vertical-align:center;
 		align-items: center;
 		background-size:contain;
+		overflow:hidden;
 	}
 	#react{
 		position:absolute;
@@ -225,6 +230,12 @@
 		object-fit: cover;
 	}
 	.modal_usernick{
+		display:inline-block;
+		width:110px;
+		font-size:12px;
+		font-weight: bold;
+	}
+	#modal_usernick{
 		display:inline-block;
 		width:110px;
 		font-size:12px;
@@ -375,6 +386,59 @@
 	margin-left: 12px;
 	margin-right: 12px;
 }
+
+.mslides{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2500px; /* 슬라이드할 사진과 마진 총 넓이 */
+  transition: left 0.3s ; 
+  /*ease-out: 처음에는 느렸다가 점점 빨라짐*/
+}
+
+
+.mslides li:not(:last-child){
+  float: left;
+}
+
+.mslides li{
+  float: left;
+}
+
+.mcontroller span{
+  position:absolute;
+  background-color: transparent;
+  color: black;
+  text-align: center;
+  border-radius: 50%;
+  padding: 10px 20px;
+  top: 50%;
+  font-size: 1.3em;
+  cursor: pointer;
+}
+
+/* 이전, 다음 화살표에 마우스 커서가 올라가 있을때 */
+.mcontroller span:hover{
+  background-color: rgba(128, 128, 128, 0.11);
+}
+
+.mprev{
+  left: 10px;
+}
+
+
+.mnext{
+  right: 10px;
+}
+.mcol{
+	width:126px;
+	margin-top:-100px;
+	background-color:black;
+	height:130px;
+	padding:0 0 0 0;
+	margin-left: 12px;
+	margin-right: 12px;
+}
 </style>
 
 </head>
@@ -424,7 +488,8 @@
 							</div>
 						</form>
 						
-						<c:forEach items="${list}" var="dto">
+						<c:forEach items="${list}" var="dto" varStatus="status">
+						  
 						<div class="boardcontent" style="position:relative;">
 							<div id="usericon" style="display:inline-block; width:50px; height:400px; margin-right:5px;">
 								<!-- 유저 이미지 넣기  -->
@@ -437,11 +502,12 @@
 								<div id="useritem">
 									${dto.content}
 								</div>
-								<div class="imagebox" data-count="${dto.cpic}">
+								
+								<div class="imagebox" data-count="${dto.cpic}" id="send_modal">
 								    <ul class="slides" style="width:calc(${dto.cpic} * 450px)"> 
-								   		<c:forEach items="${plist }" var="pic">
+								   		<c:forEach items="${plist}" var="pic">
 							   			<c:if test="${dto.snsboardseq==pic.snsboardseq}">
-								     		<li><img alt="" src="/wood/asset/img/${pic.pic}" style="width:450px; "></li>
+								     		<li><img alt="" src="/wood/asset/img/${pic.pic}" style="width:450px; height:300px; "></li>
 								     	</c:if>
 								     	</c:forEach>
 								    </ul>  
@@ -463,9 +529,9 @@
 										${dto.clike }
 									</div>
 									<div id="comment">
-										 <span class="material-symbols-outlined" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+										 <button class="material-symbols-outlined" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" data-snsboardseq="${dto.snsboardseq}" data-content="${dto.content}" data-clike="${dto.clike }" data-profile="${dto.profile}" data-nickname="${dto.nickname}" data-cpic="${dto.cpic}" data-index="${status.index}">
 											chat_bubble
-										</span>
+										</button>
 									</div>
 								</div>
 							</div>
@@ -502,22 +568,16 @@
      	<table>
      		<tr>
      			<!-- 이미지  -->
-     			<td rowspan='4' style="width:600px; height:700px;">
-     				<div class="modal_imagebox">
-     					<img alt="" src="/wood/asset/img/logo.png">
-     				</div>
+     			<td rowspan='4' style="width:600px; height:700px; display:relative;">
+     				<div class="modal_imagebox" id="modal_imagebox"></div>
      			</td>
      			<!-- 오른쪽  -->
      			<td style="width:400px;height:70px; border-bottom:3px solid black;" >
-     				<div class="u_imagebox box">
+     				<div class="u_imagebox box" id="u_imagebox">
      					<img alt="" src="/wood/asset/img/logo.png" class="comment_userimage">
      				</div>
-     				<div class="modal_usernick">
-							멋있는하이에나943
-					</div>
-					<div class="modal_comment">
-							오늘 날씨가 너무 덥네요
-					</div>
+     				<div id="modal_usernick"></div>
+					<div class="modal_comment" id="modal_content"></div>
      				
      			</td>
      		</tr>
@@ -543,176 +603,6 @@
 							</div>
 	     				</div>
 	     			<!--댓글2  -->
-	     				<div class="modal_commentbox" >
-	     					<span>
-	     						<img alt="" src="/wood/asset/img/logo.png" class="comment_userimage">
-		     				</span>
-		     				<div class="modal_usernick">
-								<div class="top">
-									멋있는하이에나943
-								</div>
-								<div>
-									<button class="to_comment" value="멋있는하이에나943">답글 달기</button>
-								</div>
-							</div>
-							<div class="modal_comment top">
-								아이스크림... 드릴까요?
-							</div>
-	     				</div>
-	     				<!--댓글2  -->
-	     				<div class="modal_commentbox" >
-	     					<span>
-	     						<img alt="" src="/wood/asset/img/logo.png" class="comment_userimage">
-		     				</span>
-		     				<div class="modal_usernick">
-								<div class="top">
-									멋있는하이에나943
-								</div>
-								<div>
-									<button class="to_comment" value="멋있는하이에나943">답글 달기</button>
-								</div>
-							</div>
-							<div class="modal_comment top">
-								아이스크림... 드릴까요?
-							</div>
-	     				</div>
-	     				<!--댓글2  -->
-	     				<div class="modal_commentbox" >
-	     					<span>
-	     						<img alt="" src="/wood/asset/img/logo.png" class="comment_userimage">
-		     				</span>
-		     				<div class="modal_usernick">
-								<div class="top">
-									멋있는하이에나943
-								</div>
-								<div>
-									<button class="to_comment" value="멋있는하이에나943">답글 달기</button>
-								</div>
-							</div>
-							<div class="modal_comment top">
-								아이스크림... 드릴까요?
-							</div>
-	     				</div>
-	     				<!--댓글2  -->
-	     				<div class="modal_commentbox" >
-	     					<span>
-	     						<img alt="" src="/wood/asset/img/logo.png" class="comment_userimage">
-		     				</span>
-		     				<div class="modal_usernick">
-								<div class="top">
-									멋있는하이에나943
-								</div>
-								<div>
-									<button class="to_comment" value="멋있는하이에나943">답글 달기</button>
-								</div>
-							</div>
-							<div class="modal_comment top">
-								아이스크림... 드릴까요?
-							</div>
-	     				</div>
-	     				<!--댓글2  -->
-	     				<div class="modal_commentbox" >
-	     					<span>
-	     						<img alt="" src="/wood/asset/img/logo.png" class="comment_userimage">
-		     				</span>
-		     				<div class="modal_usernick">
-								<div class="top">
-									멋있는하이에나943
-								</div>
-								<div>
-									<button class="to_comment" value="멋있는하이에나943">답글 달기</button>
-								</div>
-							</div>
-							<div class="modal_comment top">
-								아이스크림... 드릴까요?
-							</div>
-	     				</div>
-	     				<!--댓글2  -->
-	     				<div class="modal_commentbox" >
-	     					<span>
-	     						<img alt="" src="/wood/asset/img/logo.png" class="comment_userimage">
-		     				</span>
-		     				<div class="modal_usernick">
-								<div class="top">
-									멋있는하이에나943
-								</div>
-								<div>
-									<button class="to_comment" value="멋있는하이에나943">답글 달기</button>
-								</div>
-							</div>
-							<div class="modal_comment top">
-								아이스크림... 드릴까요?
-							</div>
-	     				</div>
-	     				<!--댓글2  -->
-	     				<div class="modal_commentbox" >
-	     					<span>
-	     						<img alt="" src="/wood/asset/img/logo.png" class="comment_userimage">
-		     				</span>
-		     				<div class="modal_usernick">
-								<div class="top">
-									멋있는하이에나943
-								</div>
-								<div>
-									<button class="to_comment" value="멋있는하이에나943">답글 달기</button>
-								</div>
-							</div>
-							<div class="modal_comment top">
-								아이스크림... 드릴까요?
-							</div>
-	     				</div>
-	     				<!--댓글2  -->
-	     				<div class="modal_commentbox" >
-	     					<span>
-	     						<img alt="" src="/wood/asset/img/logo.png" class="comment_userimage">
-		     				</span>
-		     				<div class="modal_usernick">
-								<div class="top">
-									멋있는하이에나943
-								</div>
-								<div>
-									<button class="to_comment" value="멋있는하이에나943">답글 달기</button>
-								</div>
-							</div>
-							<div class="modal_comment top">
-								아이스크림... 드릴까요?
-							</div>
-	     				</div>
-	     				<!--댓글2  -->
-	     				<div class="modal_commentbox" >
-	     					<span>
-	     						<img alt="" src="/wood/asset/img/logo.png" class="comment_userimage">
-		     				</span>
-		     				<div class="modal_usernick">
-								<div class="top">
-									멋있는하이에나943
-								</div>
-								<div>
-									<button class="to_comment" value="멋있는하이에나943">답글 달기</button>
-								</div>
-							</div>
-							<div class="modal_comment top">
-								아이스크림... 드릴까요?
-							</div>
-	     				</div>
-	     				<!--댓글2  -->
-	     				<div class="modal_commentbox" >
-	     					<span>
-	     						<img alt="" src="/wood/asset/img/logo.png" class="comment_userimage">
-		     				</span>
-		     				<div class="modal_usernick">
-								<div class="top">
-									멋있는하이에나943
-								</div>
-								<div>
-									<button class="to_comment" value="멋있는하이에나943">답글 달기</button>
-								</div>
-							</div>
-							<div class="modal_comment top">
-								아이스크림... 드릴까요?
-							</div>
-	     				</div>
-	     				<!--댓글2  -->
 	     				<div class="modal_commentbox" >
 	     					<span>
 	     						<img alt="" src="/wood/asset/img/logo.png" class="comment_userimage">
@@ -857,7 +747,6 @@
 	let slideCount =0; // 슬라이드 개수
 	const prev = document.querySelector('.prev'); //이전 버튼
 	const next = document.querySelector('.next'); //다음 버튼
-	const slideWidth = 450; //한개의 슬라이드 넓이
 	
 	
 	$('.prev').on('mousedown', function () {
@@ -906,7 +795,59 @@
 	 
 	});
 	
+		
+	    	
+    	$(document).ready(function() {     
+            $('#staticBackdrop').on('show.bs.modal', function(event) {       
+            	var Idx =1; //현재 슬라이드 index
+            	const snsboardseq=$(event.relatedTarget).data('snsboardseq');
+            	const index= 1+$(event.relatedTarget).data('index');
+            	const content=$(event.relatedTarget).data('content');
+    	        const clike=$(event.relatedTarget).data('clike');
+    	        const profile="/wood/asset/img/"+$(event.relatedTarget).data('profile');
+    	        const nickname=$(event.relatedTarget).data('nickname');
+    	        const cpic=$(event.relatedTarget).data('cpic');
+    	        console.log(index);
+    	        $("#modal_usernick").text(nickname);
+    	        $("#u_imagebox").html("<img alt="+"\"\" src=\""+profile+"\"class=\"comment_userimage\">");
+    	        $("#modal_content").text(content); 
+    	        let str= $("#boardwrap").children().eq(index).find("#send_modal").html().substring();
+    	        str=str.replaceAll('450px','600px');
+    	        str=str.replaceAll('300px','600px');
+    	        str=str.replaceAll('class=\"','class=\"m');
+    	        $("#modal_imagebox").html(str); 
+    	        
+    	    	console.log(snsboardseq);
+    	    	
+    	    	$('.mprev').on('click', function () {
+    	    		if(Idx<=1){
+    	    			Idx=1;
+    	    		}
+    	    		else{
+    	    		 $(".mslides").css("left",$(".mslides").position().left + 600);
+    	    		  Idx--;
+    	    		}
+    	    	});
+    	    	
+    	    	$('.mnext').on('click', function () {
+    	    		if(Idx>=cpic){
+    	    			Idx=cpic;
+    	    		}
+    	    		else{
+   	    			 $(".mslides").css("left",$(".mslides").position().left - 600);
+    	    		  Idx++;
+    	    		}
+    	    	 
+    	    	});
+    	    	
+            });
+            
+            
+        });
+	        
 	 
 </script>
+
+
 </body>
 </html>
