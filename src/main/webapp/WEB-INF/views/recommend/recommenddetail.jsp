@@ -664,6 +664,7 @@
 	bounds.extend(new kakao.maps.LatLng(${dto.lat}, ${dto.lng}));
 	
 	// 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+	// 클릭시 카카오맵으로 이동하는 링크
 	var content = '<div class="customoverlay">' +
 	    '  <a href="https://map.kakao.com/link/map/11394059" target="_blank">' +
 	    '    <span class="title">${dto.title}</span>' +
