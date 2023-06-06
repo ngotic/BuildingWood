@@ -10,6 +10,16 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
+   <filter>
+  	<filter-name>auth</filter-name>
+  	<filter-class>com.project.wood.filter.AuthFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>auth</filter-name>
+  	<url-pattern>*.do</url-pattern>
+  </filter-mapping>
+  
     <!-- 어떤 요청 + 필터 등록 -->
   <filter>
   	<filter-name>encoding</filter-name>

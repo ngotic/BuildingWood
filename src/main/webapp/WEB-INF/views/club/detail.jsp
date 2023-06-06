@@ -83,7 +83,6 @@ function getSpecificDate(pattn, num){
     
     month_ = month_ < 10? '0'+month_:month_;
     day_   = day_ < 10? '0'+day_:day_;
-    
     return year_+pattn+month_+pattn+day_;
 }
 

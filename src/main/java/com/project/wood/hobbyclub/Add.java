@@ -23,7 +23,7 @@ public class Add extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//Add.java
-		String id = "WJssd875"; 
+		String id = (String)req.getSession().getAttribute("id"); 
 		ClubDTO cdto= cdao.readMemberClub(id); // 1. 그 회원이 개설한 동호회 정보 꺼내줘 ~ 
 		req.setAttribute("cdto", cdto);
 		System.out.println(cdto);

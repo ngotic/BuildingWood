@@ -83,14 +83,11 @@
 	  text-decoration: none;
 	  
 	}
-	span.material-symbols-outlined {
-    margin-top: 1px;
-    color: tomato;
-	}
+	
 	.frame-text15 > span {
 	color: tomato;
 	}
-
+	
 </style>
 </head>
 <body>
@@ -99,6 +96,7 @@
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
 	<section class="container">
 		<h1 class="text-center mt-3">동호회 게시판</h1>
+		
 		<div class="text-end">
 			<button class="group bluecolor" onclick="location.href='/wood/club/addclub.do';">동호회 개설</button>
 			<button class="note_add greencolor" onclick="location.href='/wood/club/add.do';">동호회 모집</button>
@@ -131,7 +129,8 @@
 					</div>
 				 </div>
 				 
-	
+				
+				
 			 </c:forEach>
 		</div>
 		

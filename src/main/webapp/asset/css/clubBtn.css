@@ -177,6 +177,24 @@ button.note_add::before {
 }
 
 
+button.forward::before {
+	font-family: 'Material Symbols Outlined';
+  	content: '\e154';
+	position: absolute;
+	left: 11px;
+	top: 3px;
+	font-size: 1.25rem;
+}
+
+
+button.search-check::before {
+	font-family: 'Material Symbols Outlined';
+  	content: '\f800';
+	position: absolute;
+	left: 11px;
+	top: 3px;
+	font-size: 1.25rem;
+}
 
 
 

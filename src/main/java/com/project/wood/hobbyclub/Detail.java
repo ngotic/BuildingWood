@@ -13,7 +13,7 @@ import com.project.wood.hobbyclub.repository.ClubBoardDTO;
 import com.project.wood.hobbyclub.repository.ClubDAO;
 
 
-@WebServlet("/club/detailsssss.do")
+@WebServlet("/club/detail.do")
 public class Detail extends HttpServlet {
 
 	@Override
@@ -21,7 +21,7 @@ public class Detail extends HttpServlet {
 		//View.java
 		ClubDAO cdao = new ClubDAO();
 		String hseq = req.getParameter("hseq");
-		String id = "WJssd875"; 
+		String id = (String)req.getSession().getAttribute("id"); 
 		
 		ClubBoardDTO cbdto= cdao.readClubBoard(hseq, id);  
 		

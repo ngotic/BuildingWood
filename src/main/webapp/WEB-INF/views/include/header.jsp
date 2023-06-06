@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" href="/wood/asset/css/clubBtn.css">
 <style>
 	   .navbar-menu .nav-item:hover{
         border-bottom: 3px solid #7ED321;
@@ -21,7 +22,32 @@
     .icon-color {
         color : #FF5B5B;
     }
+    
+    .modal-backdrop {
+		z-index:0;
+	}
 	
+	.modal-dialog {
+	    max-width: var(--bs-modal-width);
+	    margin-right: auto;
+	    margin-top: 80px;
+	}
+	/* .modal-content {
+	    transform: translate(250px, 10px) !important;
+	} */
+	.custom-card{
+		border : 1px solid #eee;
+		border-radius: 5px;
+		background-color:#F2F4FC;
+		font-size:14px;
+	}
+	.btn-close{
+		font-size:12px;
+	}
+	span.material-symbols-outlined {
+    margin-top: 1px;
+    color: tomato;
+	}
 </style>
 <body>
 <header class="header-area navbar-fade" id="header">
@@ -71,9 +97,9 @@
 				<c:if test="${empty id}">
 					<div class="nav-item"><a href = "" class="nav-link" >회원가입</a></div>
 				</c:if>
-				
+			
                 <div class="nav-item dropdown" >
-                    <a href = "" id="" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
+                    <a href = "" id="" class="nav-link dropdown-toggle icon-color" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
                     	<c:if test="${empty id}">
                          	로그인
                         </c:if>
@@ -87,11 +113,98 @@
                     <c:if test="${not empty id}">
                      <ul class="dropdown-menu" >
                         <li><a class="dropdown-item" href="/wood/user/logout.do">로그아웃</a></li>
-						<li><a class="dropdown-item" href="">마이페이지</a></li>
+						<li><a class="dropdown-item" href="/wood/admin/admin.do">마이페이지</a></li>
                     </ul>
                     </c:if>
                 </div> 
+               	<c:if test="${not empty id}">
+					<div class="nav-item">
+						<a href = "" class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal">알림
+							<span class="material-symbols-outlined align-middle" style="border-radius: 50%;background-color: #fff; font-size:18px;" >favorite</span>
+							<span class="badge rounded-pill" style="background-color: #FF5B5B; font-size:8px;" >0</span>
+						</a>
+					</div>
+				</c:if>
+
 			</div>
+			
+			
+			
+			<!-- Modal -->
+			<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">알림창</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+   		<div class="card custom-card" >
+		  <div class="card-body">
+		    <h5 class="card-title mb-3">
+		    	<span class="material-symbols-outlined align-middle">check_circle</span> <span class="align-middle">알림</span>
+		    	<button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
+		    </h5>
+		    <h6 class="card-subtitle mb-2 text-muted">동호회 게시판</h6>
+		    
+		    <p class="card-text">
+		    	동호회 개설이 승인되었습니다.
+		    </p>
+		    
+		    <div class="text-end">
+				<button class="forward pinkcolor" onclick="location.href='/wood/club/addclub.do';">게시판으로 이동</button>
+				<button class="search-check greencolor" onclick="location.href='/wood/club/add.do';">확인하기</button>
+			</div>
+		  </div>
+		</div>
+		
+		<div class="card custom-card" >
+		  <div class="card-body">
+		    <h5 class="card-title mb-3">
+		    	<span class="material-symbols-outlined align-middle">check_circle</span> <span class="align-middle">알림</span>
+		    	<button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
+		    </h5>
+		    
+		    <h6 class="card-subtitle mb-2 text-muted">동호회 게시판</h6>
+		    
+		    <p class="card-text">
+		    	동호회 개설이 승인되었습니다.
+		    </p>
+		    
+		    <div class="text-end">
+				<button class="forward pinkcolor" onclick="location.href='/wood/club/addclub.do';">게시판으로 이동</button>
+				<button class="search-check greencolor" onclick="location.href='/wood/club/add.do';">확인하기</button>
+			</div>
+		  </div>
+		</div>
+		
+		<div class="card custom-card" >
+		  <div class="card-body">
+		    <h5 class="card-title mb-3">
+		    	<span class="material-symbols-outlined align-middle">check_circle</span> <span class="align-middle">알림</span>
+		    	<button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
+		    </h5>
+		    <h6 class="card-subtitle mb-2 text-muted">동호회 게시판</h6>
+		    
+		    <p class="card-text">
+		    	동호회 개설이 승인되었습니다.
+		    </p>
+		    
+		    <div class="text-end">
+				<button class="forward pinkcolor" onclick="location.href='/wood/club/addclub.do';">게시판으로 이동</button>
+				<button class="search-check greencolor" onclick="location.href='/wood/club/add.do';">확인하기</button>
+			</div>
+		  </div>
+		</div>
+		
+      </div>
+    </div>
+  </div>
+</div>
+			
+			
 		</nav>
 
 </header>

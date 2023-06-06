@@ -210,6 +210,7 @@
 </style>
 </head>
 <body>
+	
     <!--  -->
     <section class="mainbackground">
             <div class="homeintro">
@@ -223,18 +224,18 @@
                 </div>
                 <form id="form1" action="/wood/user/login.do" method="POST">
 	                <div>
-	                    <label for="formIdInput" class="form-label">아이디</label>
-	                    <input type="text" class="login_input" id="formIdInput" name="id" placeholder="아이디를 입력해주세요." required>
+	                    <label for="formIdInput" class="form-label" >아이디</label>
+	                    <input type="text" class="login_input" id="formIdInput" name="id" placeholder="아이디를 입력해주세요." value="${cookie.id.value}" required>
 	                </div>
 	                <div>
 	                    <label for="formPwInput" class="form-label">비밀번호</label>
-	                    <input type="text" class="login_input" id="formPwInput" name="password" placeholder="비밀번호를 입력해주세요." required>
+	                    <input type="password" class="login_input" id="formPwInput" name="password" placeholder="비밀번호를 입력해주세요." required>
 	                </div>
 	
 	                <div class="login_link_text mt-2 mb-1" style="float: left;">
-	                    <input type="checkbox" name="remember-me" id="remember"> 
-	                    <label for="remember">로그인 유지</label>
-	                    <a href="" style="text-decoration: none;" class="link-hover">
+	                    <input type="checkbox" name="remember" id="remember" ${empty cookie.id.value ? "":"checked"}> 
+	                    <label for="remember">아이디 기억</label>
+	                    <a href="/wood/user/findpw.do" style="text-decoration: none;" class="link-hover">
 	                        <span style="float:right;">비밀번호가 기억이 안나요?</span>
 	                    </a>
 	                </div>
@@ -271,25 +272,65 @@
 					<input type="hidden" name="password" value="0000">
 					<input type="submit" value="관리자">
 				</form>
+				
+				<a class="dropdown-item" href="/wood/user/logout.do" >로그아웃</a> 
 				</div>
             </div>
         
         
     </section>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-     
+    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
 <script>
 	
+	let msg  = "${msg}";
+	
+	if ( msg == "LOGIN_ERR") 
+		new Swal('로그인 실패', '아이디나 비밀번호가 틀렸습니다.','error');
+	
+	/* 	
+	let child;
+	function openPopUp() {
+		child= window.open("https://nid.naver.com/nidlogin.logout", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,width=1,height=1");
+	}
+	
+	function Logout(){
+	  	openPopUp();
+	    setTimeout(function() {
+			closePopUp();
+			}, 500);
+	}
+	function closePopUp(){
+		child.close();
+	} */
+	
+	 function formCheck(){
+		let id = $('#formIdInput');
+		if( id.val()=='' ) { 
+			alert("아이디를 입력해 주세요.");
+			id.focus();
+			return false;
+		}
+		let pw = $('#formPwInput');
+		if( pw.val()=='' ) { 
+			alert("비밀번호를 입력해 주세요.");
+			pw.focus();
+			return false;
+		}	
+		return true;
+	}
+	
 	$('.default_btn').click(function(){
-		$('#form1').submit();
+		if(formCheck())
+			$('#form1').submit();
 	});
 	
 	$('.google_btn').click(function(){
-		
+		location.href = "${googleUrl}";
 	});
 	
 	$('.naver_btn').click(function(){
-		
+		location.href = "${naverUrl}";
 	});
 	
     const text = [ `<p class="projectname_f typing-text">&nbsp가까운 이웃들을 연결하는</p>`,
