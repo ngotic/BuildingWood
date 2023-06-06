@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,29 +46,45 @@
 
     }
    .frame-group1222 {
-   top: 162px;
-   /* left: 156px; */
-   width: 194px;
-   height: 43px;
-   display: flex;
-   position: absolute;
-   align-items: flex-start;
-   flex-shrink: 1;
-   border-color: #cccccc;
-   border-width: 0.5px;
-   border-radius: 30px;
-   background-color: rgba(255, 255, 255, 1);
-   }
-   .frame-mappin {
-     top: 7px;
-     left: 32px;
-     width: 26px;
-     height: 28px;
-     display: flex;
-     position: absolute;
-     align-items: flex-start;
-     flex-shrink: 1;
-   }
+	  top: 162px;
+	  /* left: 156px; */
+	  width: 194px;
+	  height: 43px;
+	  display: flex;
+	  align-items: flex-start;
+	  flex-shrink: 1;
+	  border-color: #cccccc;
+	  border-width: 0.5px;
+	  border-radius: 30px;
+	  background-color: rgba(255, 255, 255, 1);
+	  margin-top: 8px;
+	}
+	.frame-mappin {
+	  top: 8px;
+	  left: 30px;
+	  width: 26px;
+	  height: 28px;
+	  display: flex;
+	  align-items: flex-start;
+	  flex-shrink: 1;
+	  position: relative;
+	}
+	.frame-text15 {
+	  top: 9px;
+	  left: 36px;
+	  color: rgba(255, 95, 95, 1);
+	  height: auto;
+	  font-size: 17px;
+	  font-style: Medium;
+	  text-align: left;
+	  font-family: Inter;
+	  font-weight: 500;
+	  line-height: 24px;
+	  font-stretch: normal;
+	  text-decoration: none;
+	  position: relative;
+	  font-family: 'Pretendard-Regular';
+	}
    .frame-pin-stroke {
      top: 0px;
      left: 0px;
@@ -88,21 +105,6 @@
      width: 10px;
      height: 9px;
      position: absolute;
-   }
-   .frame-text15 {
-     top: 9px;
-     left: 65px;
-     color: rgba(255, 95, 95, 1);
-     height: auto;
-     position: absolute;
-     font-size: 17px;
-     font-style: Medium;
-     text-align: left;
-     font-family: Inter;
-     font-weight: 500;
-     line-height: 24px;
-     font-stretch: normal;
-     text-decoration: none;
    }
    span.material-symbols-outlined {
     margin-top: 1px;
@@ -144,6 +146,10 @@
     
    }
    
+   .menu-row {
+   	margin:10px;
+   }
+   
    
    
    #main {
@@ -157,7 +163,7 @@
       border: 1px solid #CCC;
       width: 450px;
       height: 465px;
-      margin: 8px 30px 50px 0;
+      margin: 8px 30px 0px 0;
    }
    
    #list {
@@ -166,25 +172,29 @@
    }
    
    #rec-comment {
-   width: 750px;
+   width: 775px;
     display: inline-block;
+    font-family: 'Pretendard-Regular';
    }
    #rec-comment-arrow {
    margin:5px 3px 0 0;
    }
    .btn-add1 {
-    height: 60px;
+    height: 61px;
     position: absolute;
-    left: 778px;
-    top: 17px;
+    left: 789px;
+    top: 61px;
     border-radius: 5px;
+    background-color: #ffffff;
+    border: 1px solid #DEE2E6;
    }
    
    .fw-bold > span {
-    background-color: #eee;
+   background-color: #eee;
     border-radius: 10px;
     font-size: 1.5rem;
     cursor: pointer;
+    margin-left: 35px; 
    }
    .fw-bold > button {
     background-color: #eee;
@@ -204,15 +214,67 @@
     top: 90px;
     left: 240px; 
    }
+   .rec-content {
+    margin: 5px 8px 32px 10px;
+    text-align: justify;
+    font-family: 'Pretendard-Regular';
+    font-size: 15px;
+    letter-spacing: 0px;
+    line-height: 19px;
+   }
+   .rec-content-score {
+   	margin: 5px 8px 10px 10px;
+   	color: gold;
+   }
+   .rec-content-score span {
+   color: #CCC;
+   }
+   #rec-comment-list {
+   	margin-bottom: 0rem !important;
+   	padding-left: 10px;
+   }
+   .rounded-circle {
+   width:40px;
+   }   
+   .fw-bold { 
+   font-weight: 600!important;
+    font-size: 15px;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    /* justify-content: space-evenly; */
+    align-items: center;
+    font-family: 'Pretendard';
+   }
+   .flex-shrink-0 {
+   	flex-shrink: 0!important;
+    padding-top: 3px;
+   }
+   .rec-date {
+   	font-size:13px;
+   	color: #aaa;
+   }
    
    .map-all {
    height: 40px;
    }
+   .map-all span {
+   color: gold;
+   }
    .map-menu {
-   height: 20px;
+   height: 22px;
    }
    .map-head {
    width:66px;
+   color: tomato;
+   padding: 10px 0;
+   }
+   #btn-ori {
+    width: 880px;
+    text-align: left;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    font-family: 'Pretendard-Regular';
    }
 	
 	.container.gallery-container {
@@ -279,6 +341,40 @@
     }
 }
 
+/* 별점추가 */
+#myform fieldset{
+    display: inline-block;
+    direction: rtl;
+    border:0;
+    margin-left: 6px;
+}
+#myform fieldset legend{
+    text-align: right;
+}
+#myform input[type=radio]{
+    display: none;
+}
+#myform label{
+    font-size: 2em;
+    color: transparent;
+    text-shadow: 0 0 0 #DDD;
+    transition: text-shadow 0.2s linear;
+}
+#myform label:hover{
+    text-shadow: 0 0 0 gold;
+}
+#myform label:hover ~ label{
+    text-shadow: 0 0 0 gold;
+}
+#myform input[type=radio]:checked ~ label{
+    text-shadow: 0 0 0 gold;
+}
+.text-bold {
+	font-size: 15px;
+	color: #888;
+}
+
+
 .customoverlay {position:relative;bottom:85px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;}
 .customoverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}
 .customoverlay a {display:block;text-decoration:none;color:#000;text-align:center;border-radius:6px;font-size:14px;font-weight:bold;overflow:hidden;background: #d95050;background: tomato url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
@@ -299,7 +395,7 @@
            <div class="frame-mappin">
              <span class="material-symbols-outlined">location_on</span>
            </div>
-           <span class="frame-text15"><span>강남구 역삼동</span></span>
+           <span class="frame-text15"><span><%= (String)session.getAttribute("location") %></span></span>
          </div>
    </section>
          
@@ -311,41 +407,33 @@
       
       <!-- 지도 -->
       	 <tr>
-			<td style="display:flex; cursor:pointer;" data-lat="37.49804838498247" data-lng="127.03198091216792" class="item"></td>
+			<td style="display:flex; cursor:pointer;" data-lat="${dto.lat}" data-lng="${dto.lng}" class="item"></td>
 		 </tr>
       
       
          <tr>
          	<td class="map-head">가게명</td>
-            <td class="map-all">육전식당4호점</td>
+            <td class="map-all">${dto.title}</td>
          </tr>
          <tr>
          	<td class="map-head">별점</td>
-            <td class="map-all">★★★★★</td>
+            <td class="map-all"><span>★</span>${dto.avgscore}</td>
          </tr>
          <tr>
          	<td class="map-head">한줄평</td>
-            <td class="map-all">나의 인생 삼겹살</td>
+            <td class="map-all">${dto.content}</td>
          </tr>
          <tr>
-         	<td class="map-head">메뉴</td>
-            <td class="map-menu">목살 (150g) - 17,000원</td>
+         	<td class="map-head menu-row" rowspan="${mcountdto.mcnt}">메뉴</td>
          </tr>
+         <c:forEach items="${mlist}" var="mdto">
          <tr>
-         	<td class="map-head"> </td>
-            <td class="map-menu">삼겹살 (150g) - 17,000원</td>
+            <td class="map-menu">${mdto.menu} - <fmt:formatNumber value="${mdto.price}"/>원</td>
          </tr>
-         <tr>
-         	<td class="map-head"> </td>
-            <td class="map-menu">항정살 (150g) - 19,000원</td>
-         </tr>
-         <tr>
-         	<td class="map-head"> </td>
-            <td class="map-menu">육전돼지불백 - 9000원</td>
-         </tr>
+         </c:forEach>
          <tr>
          	<td class="map-head">주소</td>
-            <td class="map-all">서울 강남구 역삼동 823-10</td>
+            <td class="map-all">${dto.fulladdress}</td>
          </tr>
          <tr>
          	<td class="map-head"> </td>
@@ -353,27 +441,29 @@
             
 				<div class="tz-gallery">
 			        <div class="row">
-			
-			            <div class="col-sm-12 col-md-4">
-			                <a class="lightbox" href="/wood/asset/rec_img/육전식당4호점1.jpg">
-			                    <img src="/wood/asset/rec_img/육전식당4호점1.jpg" alt="img1">
-			                </a>
-			            </div>
+						
+						<c:forEach items="${ilist}" var="idto">
 			            <div class="col-sm-6 col-md-4">
-			                <a class="lightbox" href="/wood/asset/rec_img/육전식당4호점2.jpg">
-			                    <img src="/wood/asset/rec_img/육전식당4호점2.jpg" alt="img2">
+			                <a class="lightbox" href="/wood/asset/rec_img/${idto.pic}">
+			                    <img src="/wood/asset/rec_img/${idto.pic}" alt="img1">
 			                </a>
 			            </div>
-			            <div class="col-sm-6 col-md-4">
-			                <a class="lightbox" href="/wood/asset/rec_img/육전식당4호점3.jpg">
-			                    <img src="/wood/asset/rec_img/육전식당4호점3.jpg" alt="img3">
-			                </a>
-			            </div>
-			            <div class="col-sm-6 col-md-4">
-			                <a class="lightbox" href="/wood/asset/rec_img/육전식당4호점4.jpg">
-			                    <img src="/wood/asset/rec_img/육전식당4호점4.jpg" alt="img4">
-			                </a>
-			            </div>
+			            </c:forEach>
+			            
+			           <%-- 사진 없을 때
+			           <c:forEach items="${ilist}" var="idto">
+                        <div class="col-sm-6 col-md-4">
+                            <a class="lightbox" href="/wood/asset/rec_img/${idto.pic}">
+                                <c:if test="${empty idto.pic}">
+                                    <img src="/path/to/placeholder/image" alt="사진이 존재하지 않습니다.">
+                                    <p>사진이 존재하지 않습니다.</p>
+                                </c:if>
+                                <c:if test="${not empty idto.pic}">
+                                    <img src="/wood/asset/rec_img/${idto.pic}" alt="img1">
+                                </c:if>
+                            </a>
+                        </div>
+                       </c:forEach> --%>
 			        </div>
 			    </div>
 			    
@@ -384,48 +474,110 @@
       </table>
    </div>
 
-         <button type="button" class="btn btn-outline-secondary" onclick="setBounds()">지도 범위 재설정 하기</button>
+         <div id="btn-ori"><button type="button" class="btn btn-outline-secondary btn-sm"  onclick="setBounds()">지도 범위 재설정 하기</button></div>
          
       <!-- 댓글 -->
       <section class="mb-5">
           <div class="card bg-light" style="border-color: #eee">
           
               <div class="card-body">
-                  <!-- Comment form-->
-                  <form class="mb-4" id="rec-comment"><textarea class="form-control" rows="2" placeholder="가게 평가를 남겨주세요!"></textarea></form>
-                  <input type="submit" value="등록하기" id="btn btn-add" class="btn-add1" style="margin:0 0 5px 10px">
+                  <!-- 댓글 작성 -->
                   
-                  <!-- Comment with nested comments-->
-                  <div class="d-flex mb-4">
-                      <!-- Parent comment-->
-                      <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..."></div>
-                      <div class="ms-3">
-                          <div class="fw-bold">Commenter Name
-                         	 	<span class="material-symbols-outlined rec-comment-edit" onclick="location.href='';">edit</span>
-                         	 	
-                          		<button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"><span class="material-symbols-outlined rec-comment-del">delete</span></button>
-                          			<!-- Modal -->
-									<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-									  <div class="modal-dialog">
-									    <div class="modal-content">
-									      <div class="modal-header">
-									        <h1 class="modal-title fs-5" id="exampleModalLabel">댓글삭제</h1>
-									        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-									      </div>
-									      <div class="modal-body">삭제하시겠습니까?</div>
-									      <div class="modal-footer">
-									        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-									        <button type="button" class="btn btn-success" onclick="del(${dto.seq});">Delete</button>
-									      </div>
-									    </div>
-									  </div>
-									</div>
-                          </div>
-                          If you're going to lead a space frontier, it has to be government; it'll never be private enterprise. Because the space frontier is dangerous, and it's expensive, and it has unquantified risks.
-                          
+                  <form class="mb-4" id="rec-comment" method="POST" action="/wood/recommend/reccomment.do">
+	                  <div class="mb-2" id="myform">
+						<fieldset>
+							<span class="text-bold">별점을 선택해주세요</span>
+							<input type="radio" name="reviewStar" value="5" id="rate1"><label
+								for="rate1">★</label>
+							<input type="radio" name="reviewStar" value="4" id="rate2"><label
+								for="rate2">★</label>
+							<input type="radio" name="reviewStar" value="3" id="rate3" checked><label
+								for="rate3">★</label>
+							<input type="radio" name="reviewStar" value="2" id="rate4"><label
+								for="rate4">★</label>
+							<input type="radio" name="reviewStar" value="1" id="rate5"><label
+								for="rate5">★</label>
+						</fieldset>
+					 </div>
+                  
+	                <textarea class="form-control" name="comment" rows="2" placeholder="가게 평가를 남겨주세요!" required></textarea>
+	                <input type="submit" value="등록" name="comment" id="btn btn-add" class="btn-add1" style="margin:0 0 5px 10px; width:70px">
+                  	
+                  	<input type="hidden" name="recommendseq" value="${dto.recommendseq}">
+					<input type="hidden" name="restaurantseq" value="${dto.restaurantseq}">
+					<input type="hidden" name="column" value="${column}">
+					<input type="hidden" name="word" value="${word}">
+					<input type="hidden" name="search" value="${search}">
+                  </form>
+                  
+                  
+            <!-- 댓글 목록 -->
+			<c:forEach items="${clist}" var="cdto" varStatus="status">
+                <div class="d-flex mb-4" id="rec-comment-list">
+                    <!-- 일반 댓글-->
+                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..."></div>
+                    <div class="ms-3">
+                        <div class="fw-bold">${cdto.nickname}
+                            <c:if test="${not empty id && (id == cdto.id || lv == '0')}">
+                            
+                            	<!-- 수정 -->
+                                <span class="material-symbols-outlined rec-comment-edit" onclick="editComment(this);">edit</span>
+
+								<!-- 삭제 -->
+                                <form method="POST" action="/wood/recommend/reccommentdel.do">
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal${status.index}"><span class="material-symbols-outlined rec-comment-del">delete</span></button>
+
+                                    <!-- 삭제 Modal -->
+                                    <div class="modal fade" id="exampleModal${status.index}" tabindex="-1" aria-labelledby="exampleModalLabel${status.index}" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel${status.index}">댓글삭제</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">삭제하시겠습니까?</div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-success" onclick="delComment('${cdto.rcseq}')">Delete</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="rcseq" value="${cdto.rcseq}">
+                                    <input type="hidden" name="recommendseq" value="${dto.recommendseq}">
+                                    <input type="hidden" name="restaurantseq" value="${dto.restaurantseq}">
+                                    <input type="hidden" name="column" value="${column}">
+                                    <input type="hidden" name="word" value="${word}">
+                                    <input type="hidden" name="search" value="${search}">
+                                </form>
+                            </c:if>
+                        </div>
+                        <div class="rec-date">${cdto.writedate}</div>
+                    </div>
+                </div>
+                <div class="rec-content-score">
+                    <c:if test="${cdto.commentscore == '1'}">
+                        ★<span>☆☆☆☆</span>
+                    </c:if>
+                    <c:if test="${cdto.commentscore == '2'}">
+                        ★★<span>☆☆☆</span>
+                    </c:if>
+                    <c:if test="${cdto.commentscore == '3'}">
+                        ★★★<span>☆☆</span>
+                    </c:if>
+                    <c:if test="${cdto.commentscore == '4'}">
+                        ★★★★<span>☆</span>
+                    </c:if>
+                    <c:if test="${cdto.commentscore == '5'}">
+                        ★★★★★
+                    </c:if>
+                </div>
+
+                <div class="rec-content">${cdto.content}</div>
+            </c:forEach>
                           
                           <!-- Child comment 1-->
-                          <div class="d-flex mt-4">
+                          <!-- <div class="d-flex mt-4">
                           <span class="material-symbols-outlined" id="rec-comment-arrow">subdirectory_arrow_right</span>
                               <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..."></div>
                               <div class="ms-3">
@@ -434,13 +586,13 @@
                           				<span class="material-symbols-outlined rec-comment-edit">delete</span>
                                   </div>
                                   And under those conditions, you cannot establish a capital-market evaluation of that enterprise. You can't get investors.
-                              </div>
-                          </div>
-                      </div>
-                  </div>
+                              	</div>
+		                        </div>
+		                      </div>
+		                  </div> -->
                   
                   <!-- Single comment-->
-                  <div class="d-flex">
+                  <!-- <div class="d-flex">
                       <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..."></div>
                       <div class="ms-3">
                           <div class="fw-bold">Commenter Name
@@ -449,7 +601,7 @@
                           </div>
                           When I look at the universe and all the ways the universe wants to kill us, I find it hard to reconcile that with statements of beneficence.
                       </div>
-                  </div>
+                  </div> -->
                   	  
              </div>
           </div> 
@@ -465,9 +617,18 @@
 
 <script>
 
-	function del(seq) {
-		location.href='/memo/del.do?seq=' + seq;
+	/* 댓글 함수들 */
+	function delComment(rcseq) {
+        document.getElementById("rcseqInput").value = rcseq; // rcseq 값을 입력 필드에 설정
+        $('#exampleModal').modal('show'); // 모달 창 표시
+    }
+
+
+	function del(recommendseq) {
+		location.href='/wodd/recommend/recommenddel.do?recommendseq=' + recommendseq;
 	}
+	
+	
 	
 	baguetteBox.run('.tz-gallery');
 	
@@ -475,7 +636,7 @@
 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 	
 	var options = { //지도를 생성할 때 필요한 기본 옵션
-		center: new kakao.maps.LatLng(37.49804838498247, 127.03198091216792), //지도의 중심좌표.
+		center: new kakao.maps.LatLng(${dto.lat}, ${dto.lng}), //지도의 중심좌표.
 		level: 3 //지도의 레벨(확대, 축소 정도)
 	};
 	
@@ -487,7 +648,7 @@
 
 	// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
 	var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
-	    markerPosition = new kakao.maps.LatLng(37.49804838498247, 127.03198091216792); // 마커가 표시될 위치입니다
+	    markerPosition = new kakao.maps.LatLng(${dto.lat}, ${dto.lng}); // 마커가 표시될 위치입니다
 	
 	// 마커를 생성합니다
 	var marker = new kakao.maps.Marker({
@@ -500,17 +661,17 @@
 	
 	// 지도를 재설정할 범위정보를 가지고 있을 LatLngBounds 객체를 생성합니다
 	var bounds = new kakao.maps.LatLngBounds(); 
-	bounds.extend(new kakao.maps.LatLng(37.49804838498247, 127.03198091216792));
+	bounds.extend(new kakao.maps.LatLng(${dto.lat}, ${dto.lng}));
 	
 	// 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 	var content = '<div class="customoverlay">' +
 	    '  <a href="https://map.kakao.com/link/map/11394059" target="_blank">' +
-	    '    <span class="title">역전식당4호점</span>' +
+	    '    <span class="title">${dto.title}</span>' +
 	    '  </a>' +
 	    '</div>';
 	
 	// 커스텀 오버레이가 표시될 위치입니다 
-	var position = new kakao.maps.LatLng(37.49804838498247, 127.03198091216792);  
+	var position = new kakao.maps.LatLng(${dto.lat}, ${dto.lng});  
 	
 	// 커스텀 오버레이를 생성합니다
 	var customOverlay = new kakao.maps.CustomOverlay({
@@ -526,6 +687,14 @@
 	    // 이때 지도의 중심좌표와 레벨이 변경될 수 있습니다
 	    map.setBounds(bounds);
 	}
+	
+	
+	
+	
+	
+
+	
+	
 	
 	
 	

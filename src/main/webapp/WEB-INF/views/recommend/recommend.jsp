@@ -40,7 +40,6 @@
 	  width: 194px;
 	  height: 43px;
 	  display: flex;
-	  position: absolute;
 	  align-items: flex-start;
 	  flex-shrink: 1;
 	  border-color: #cccccc;
@@ -49,14 +48,30 @@
 	  background-color: rgba(255, 255, 255, 1);
 	}
 	.frame-mappin {
-	  top: 7px;
-	  left: 32px;
+	  top: 8px;
+	  left: 30px;
 	  width: 26px;
 	  height: 28px;
 	  display: flex;
-	  position: absolute;
 	  align-items: flex-start;
 	  flex-shrink: 1;
+	  position: relative;
+	}
+	.frame-text15 {
+	  top: 9px;
+	  left: 36px;
+	  color: rgba(255, 95, 95, 1);
+	  height: auto;
+	  font-size: 17px;
+	  font-style: Medium;
+	  text-align: left;
+	  font-family: Inter;
+	  font-weight: 500;
+	  line-height: 24px;
+	  font-stretch: normal;
+	  text-decoration: none;
+	  position: relative;
+	  font-family: 'Pretendard-Regular';
 	}
 	.frame-pin-stroke {
 	  top: 0px;
@@ -79,21 +94,6 @@
 	  height: 9px;
 	  position: absolute;
 	}
-	.frame-text15 {
-	  top: 9px;
-	  left: 65px;
-	  color: rgba(255, 95, 95, 1);
-	  height: auto;
-	  position: absolute;
-	  font-size: 17px;
-	  font-style: Medium;
-	  text-align: left;
-	  font-family: Inter;
-	  font-weight: 500;
-	  line-height: 24px;
-	  font-stretch: normal;
-	  text-decoration: none;
-	}
 	span.material-symbols-outlined {
     margin-top: 1px;
     color: tomato;
@@ -105,7 +105,7 @@
 	
 	.frame1-propertycardbig1 {
     gap: 11px;
-    top: 100px;
+    /* top: 100px; */
     left: 180px;
     width: 320px;
     height: 400px;
@@ -120,13 +120,19 @@
     background-color: rgba(255, 255, 255, 1);
     font-family: 'Pretendard-Regular';
 }
+.frame1-propertycardbig1:hover {
+ transform: translateY(-3px);
+  box-shadow: 0px 10px 20px 2px rgba(0, 0, 0, 0.25); 
+  transition: 0.3s ease-out;
+  cursor: pointer;
+}
 .frame1-rectangle12 {
-  	/* width: 280px; */
+    width: 260px;
     height: 195px;
     border-radius: 5px;
     text-align: center;
     padding-left: 0px;
-    object-fit: fill;
+    object-fit: cover;
     margin-bottom: 20px;
 }
 }
@@ -170,13 +176,16 @@
   font-family: 'Pretendard-Regular';
 }
 .frame1-group {
-  width: 17px;
+  /* width: 17px; */
   height: 17.045473098754883px;
   display: flex;
   position: relative;
   align-items: flex-start;
   flex-shrink: 1;
   font-family: 'Pretendard-Regular';
+}
+.frame1-love {
+	right:16px;
 }
 .frame1-star {
   top: 0px;
@@ -219,11 +228,12 @@
   display: flex;
   align-items: flex-start;
   margin: 10px 0px;
+  margin-top: 18px;
 }
 .frame1-text23 {
   color: rgba(62, 73, 88, 1);
   height: auto;
-  font-size: 15px;
+  font-size: 16px;
   font-style: Light;
   text-align: left;
   font-family: Gilroy;
@@ -234,7 +244,7 @@
   font-family: 'Pretendard-Regular';
 }
 .frame1-frame10 {
-  gap: 11px;
+  gap: 5px;
   display: flex;
   align-items: center;
   margin: 10px 0px;
@@ -300,8 +310,23 @@
 }
 #recommend-star {
 	color: gold;
-    margin-right: 10px;
     font-size: 20px;
+    padding-right: 2px;
+}
+#recommend-like {
+	color: tomato;
+	font-size: 17px;
+	padding-left: 10px;
+	padding-right: 2px;
+	margin-top: 4px;
+}
+.recommend-quote {
+	color: #BBB !important;
+	font-size: 20px;
+}
+#recommend-map {
+	color: #1BC060;
+	font-size: 19px;
 }
 
 
@@ -318,6 +343,39 @@
 		clear: both;
 	}
 	
+/* 검색바, 목록보기 */
+#searchForm {
+	text-align: center;
+}
+.searchdiv {
+	text-align: center;
+	width: fit-content;
+    margin: 10px auto;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    font-family: 'Pretendard-Regular';
+}
+
+/* 페이징 */
+.page-link.active {
+	background-color: #1BC060 !important;
+	border-color: #dee2e6 !important;
+	font-family: 'Pretendard-Regular';
+	color: #fff !important;
+}
+.disabled>.page-link, .page-link.disabled {
+	background-color: #f5f5f5 !important;
+	font-family: 'Pretendard-Regular';
+}
+.page-link {
+	color: #444444 !important;
+}
+
+/* 버튼 */
+.rec-btn {
+	padding: 5px;
+}
+
 </style>
 <link
       rel="stylesheet"
@@ -327,63 +385,125 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" >
 </head>
 <body>
-	<!-- template.jsp > index.jsp -->
-	<%@ include file="/WEB-INF/views/include/header.jsp" %>
-	<section class="container">
-		<h1>맛집 추천<small> </small></h1>
+		<!-- template.jsp > index.jsp -->
+		<%@ include file="/WEB-INF/views/include/header.jsp" %>
+		<section class="container">
+			<h1>맛집 추천
+				<c:if test="${map.search == 'n'}">
+				<small>목록</small>
+				</c:if>
+				<c:if test="${map.search == 'y'}">
+				<small>검색</small>
+				</c:if>
+			</h1>
+			
+			<!-- 위치 -->
+			<div class="frame-group1222">
+	           <div class="frame-mappin">
+	             <span class="material-symbols-outlined">location_on</span>
+	           </div>
+	           <span class="frame-text15"><span><%= (String)session.getAttribute("location") %></span></span>
+	         </div>
+		</section>
 		
-		<!-- 위치 -->
-		<div class="frame-group1222">
-           <div class="frame-mappin">
-             <span class="material-symbols-outlined">location_on</span>
-           </div>
-           <span class="frame-text15"><span>강남구 역삼동</span></span>
-         </div>
-	</section>
+		<c:if test="${map.search == 'y'}">
+			<div style="text-align: center; font-family: 'Pretendard-Regular';">
+				'${map.word}'(으)로 검색한 결과 ${totalCount}건이 있습니다.
+			</div>
+		</c:if>
+		<c:if test="${list.size() == 0}">
+			<div>
+				게시물이 없습니다.
+			</div>
+		</c:if>
+		
+		
+		<main>
+		<c:forEach items="${list}" var="dto">
+		<div class="frame1-propertycardbig1" onclick="location.href='/wood/recommend/recommenddetail.do?recommendseq=${dto.recommendseq}&column=${map.column}&word=${map.word}&search=${map.search}&restaurantseq=${dto.restaurantseq}';">
+		        <img src="/wood/asset/rec_img/${dto.image}" alt="image" class="frame1-rectangle12"/>
+		        
+		        <div class="frame1-frame14">
+		        
+		          <!-- 제목, 댓글 -->
+		          <span class="frame1-text17">
+		            <span>${dto.title}</span>
+		            
+				  <c:if test="${dto.ccnt > 0}">
+				 	 <span class="comment-count">(${dto.ccnt})</span>
+				  </c:if>
+		
+		          </span>
+		          
+		          <!-- 별점, 좋아요 -->
+		          <div class="frame1-frame13">
+		            <div class="frame1-frame12">
+		              <div class="frame1-group">
+		                <span class="material-symbols-outlined" id="recommend-star">grade</span><span class="recommend-score">${dto.avgscore}</span>
+		              </div>
+		            </div>
+		              <div class="frame1-group frame1-love">
+		                <span class="material-symbols-outlined" id="recommend-like">favorite</span><span class="recommend-score">${dto.love}</span>
+		              </div>
+		            </div>
+		          </div>
+		          
+		          <!-- 한줄평 -->
+		          <div class="frame1-frame11">
+		            <span class="frame1-text23">
+		              <span class="material-symbols-outlined recommend-quote">format_quote</span><span> ${dto.content} </span><span class="material-symbols-outlined recommend-quote">format_quote</span>
+		            </span>
+		          </div>
+		          
+		          <!-- 주소 -->
+		          <div class="frame1-frame10">
+		              <span class="material-symbols-outlined" id="recommend-map">map</span><span>${dto.fulladdress}</span>
+		          </div>
+	    </div>
+		</c:forEach>
+		
+		
+		</main>
 	
-	<main>
+		<!-- 검색바 -->
+		<div class="searchdiv">
+		<form id="searchForm" action="/wood/recommend/recommend.do" method="GET">
+			<select name ="column">
+				<option value="title">제목</option>
+			</select>
+			<input type="text" name="word" class="long" required>
+			<input type="submit" value="검색하기" class="rec-btn">
+		</form>
+		</div>
+		
+		<!-- 페이징 -->
+		<ul class="pagination d-flex justify-content-center flex-wrap pagination-rounded-flat pagination-success" style="text-align: center; margin-bottom:10px; font-family: 'Pretendard-Regular';">${pagination}</ul>
+			
+		<div class="searchdiv">
+			<!-- 관리자만 글쓰기 가능 -->
+			<%-- <% if (session.getAttribute("lv").toString().equals("0")) { %>
+			<button type="button" class="add primary" onclick="location.href='/toy/board/add.do?mode=new';">글쓰기</button>
+			<% } %>	 --%>
+			<button type="button" class="list primary rec-btn" onclick="location.href='/wood/recommend/recommend.do';">목록보기</button>
+		</div>
+	
+<%-- 	<form method="POST" action="/recommend/recommenddetail.do">
+		<input type="hidden" name="recommendseq" id="recommendseq" value="${dto.recommendseq}">
+		<input type="hidden" name="lat" id="lat" value="${dto.lat}">
+		<input type="hidden" name="lng" id="lng" value="${dto.lng}">
+	</form> --%>
 	
 	
-	
-	<div class="frame1-propertycardbig1">
-            <img
-              src="/wood/asset/rec_img/육전식당4호점1.jpg"
-              alt="Rectangle121081"
-              class="frame1-rectangle12"
-            />
-            <div class="frame1-frame14">
-              <span class="frame1-text17">
-                <span>육전식당4호점</span>
-              </span>
-              <div class="frame1-frame13">
-                <div class="frame1-frame12">
-                  <div class="frame1-group">
-                    <span class="material-symbols-outlined" id="recommend-star">grade</span>
-                  </div>
-                  <span class="frame1-text19"><span>5</span></span>
-                </div>
-              </div>
-              <div class="frame1-frame11">
-                <span class="frame1-text23">
-                  <span>나의 인생 삼겹살</span>
-                </span>
-              </div>
-              <div class="frame1-frame10">
-                  <span>서울 강남구 역삼동 823-10</span>
-                </div>
-            </div>
-          </div>
-	
-	
-	</main>
-	
-	
-	
-	
-	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
+<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 	
 <script>
-
+		
+	//검색중일때만
+	<c:if test="${map.search == 'y'}">
+	$('select[name=column]').val('${map.column}');
+	$('select[name=word]').val('${map.word}');
+	</c:if>
+	
 </script>
 </body>
 </html>
