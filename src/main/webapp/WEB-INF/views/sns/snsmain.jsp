@@ -289,7 +289,7 @@
 	}
 	#add_useritem{
 		width:450px;
-		height: 200px;
+		height: 180px;
 		border: 3px solid rgb(219,219,219);
 		display:inline-block;
 		border-radius: 5px;
@@ -313,9 +313,11 @@
 		  position: relative;
 		  overflow:hidden;
 	}
-	
+	.u_imagebox{
+		background-color:none;
+	}
 	li{
-  list-style-type: none;
+  list-style-type: none;	
 }
 
 
@@ -364,6 +366,15 @@
 .next{
   right: 10px;
 }
+.col{
+	width:126px;
+	margin-top:-100px;
+	background-color:black;
+	height:130px;
+	padding:0 0 0 0;
+	margin-left: 12px;
+	margin-right: 12px;
+}
 </style>
 
 </head>
@@ -392,9 +403,22 @@
 								</div>
 								<div id="usercontent">
 									<div id="userid"  style="margin-bottom:15px;">
-										${dto.nickname}
+										dto.nickname
 									</div>
 									<textarea id="add_useritem" name="add_useritem"></textarea>
+									<div class="container">
+									  <div class="row">
+									    <div class="col">
+									      사진1
+									    </div>
+									    <div class="col">
+									      사진2
+									    </div>
+									    <div class="col">
+									      사진3
+									    </div>
+									  </div>
+									</div>
 								<button type="submit" class="add">등록하기</button>
 								</div>
 							</div>
@@ -485,7 +509,7 @@
      			</td>
      			<!-- 오른쪽  -->
      			<td style="width:400px;height:70px; border-bottom:3px solid black;" >
-     				<div class="imagebox box">
+     				<div class="u_imagebox box">
      					<img alt="" src="/wood/asset/img/logo.png" class="comment_userimage">
      				</div>
      				<div class="modal_usernick">
@@ -503,7 +527,7 @@
 	     			<div id="modal_scroll" style="vertical-align:top; height:500px; overflow-y:scroll;">
 	     				<!-- 댓글1  -->
 	     				<div class="modal_commentbox" >
-	     					<div class="imagebox box">
+	     					<div class="u_imagebox box">
 	     						<img alt="" src="/wood/asset/img/logo.png" class="comment_userimage">
 		     				</div>
 		     				<div class="modal_usernick">
@@ -535,24 +559,7 @@
 								아이스크림... 드릴까요?
 							</div>
 	     				</div>
-	     			<!--댓글2  -->
-	     				<div class="modal_commentbox" >
-	     					<div class="imagebox box">
-	     						<img alt="" src="/wood/asset/img/logo.png" class="comment_userimage">
-		     				</div>
-		     				<div class="modal_usernick">
-								<div class="top">
-									멋있는하이에나943
-								</div>
-								<div>
-									<button class="to_comment" value="멋있는하이에나943">답글 달기</button>
-								</div>
-							</div>
-							<div class="modal_comment top">
-								아이스크림... 드릴까요?
-							</div>
-	     				</div>
-	     			<!--댓글2  -->
+	     				<!--댓글2  -->
 	     				<div class="modal_commentbox" >
 	     					<span>
 	     						<img alt="" src="/wood/asset/img/logo.png" class="comment_userimage">
@@ -569,24 +576,7 @@
 								아이스크림... 드릴까요?
 							</div>
 	     				</div>
-	     			<!--댓글2  -->
-	     				<div class="modal_commentbox" >
-	     					<div class="imagebox box">
-	     						<img alt="" src="/wood/asset/img/logo.png" class="comment_userimage">
-		     				</div>
-		     				<div class="modal_usernick">
-								<div class="top">
-									멋있는하이에나943
-								</div>
-								<div>
-									<button class="to_comment" value="멋있는하이에나943">답글 달기</button>
-								</div>
-							</div>
-							<div class="modal_comment top">
-								아이스크림... 드릴까요?
-							</div>
-	     				</div>
-	     			<!--댓글2  -->
+	     				<!--댓글2  -->
 	     				<div class="modal_commentbox" >
 	     					<span>
 	     						<img alt="" src="/wood/asset/img/logo.png" class="comment_userimage">
@@ -603,24 +593,7 @@
 								아이스크림... 드릴까요?
 							</div>
 	     				</div>
-	     			<!--댓글2  -->
-	     				<div class="modal_commentbox" >
-	     					<div class="imagebox box">
-	     						<img alt="" src="/wood/asset/img/logo.png" class="comment_userimage">
-		     				</div>
-		     				<div class="modal_usernick">
-								<div class="top">
-									멋있는하이에나943
-								</div>
-								<div>
-									<button class="to_comment" value="멋있는하이에나943">답글 달기</button>
-								</div>
-							</div>
-							<div class="modal_comment top">
-								아이스크림... 드릴까요?
-							</div>
-	     				</div>
-	     			<!--댓글2  -->
+	     				<!--댓글2  -->
 	     				<div class="modal_commentbox" >
 	     					<span>
 	     						<img alt="" src="/wood/asset/img/logo.png" class="comment_userimage">
@@ -637,24 +610,7 @@
 								아이스크림... 드릴까요?
 							</div>
 	     				</div>
-	     			<!--댓글2  -->
-	     				<div class="modal_commentbox" >
-	     					<div class="imagebox box">
-	     						<img alt="" src="/wood/asset/img/logo.png" class="comment_userimage">
-		     				</div>
-		     				<div class="modal_usernick">
-								<div class="top">
-									멋있는하이에나943
-								</div>
-								<div>
-									<button class="to_comment" value="멋있는하이에나943">답글 달기</button>
-								</div>
-							</div>
-							<div class="modal_comment top">
-								아이스크림... 드릴까요?
-							</div>
-	     				</div>
-	     			<!--댓글2  -->
+	     				<!--댓글2  -->
 	     				<div class="modal_commentbox" >
 	     					<span>
 	     						<img alt="" src="/wood/asset/img/logo.png" class="comment_userimage">
@@ -671,11 +627,11 @@
 								아이스크림... 드릴까요?
 							</div>
 	     				</div>
-	     			<!--댓글2  -->
+	     				<!--댓글2  -->
 	     				<div class="modal_commentbox" >
-	     					<div class="imagebox box">
+	     					<span>
 	     						<img alt="" src="/wood/asset/img/logo.png" class="comment_userimage">
-		     				</div>
+		     				</span>
 		     				<div class="modal_usernick">
 								<div class="top">
 									멋있는하이에나943
@@ -688,11 +644,11 @@
 								아이스크림... 드릴까요?
 							</div>
 	     				</div>
-	     			<!--댓글2  -->
+	     				<!--댓글2  -->
 	     				<div class="modal_commentbox" >
-	     					<div class="imagebox box">
+	     					<span>
 	     						<img alt="" src="/wood/asset/img/logo.png" class="comment_userimage">
-		     				</div>
+		     				</span>
 		     				<div class="modal_usernick">
 								<div class="top">
 									멋있는하이에나943
@@ -705,11 +661,11 @@
 								아이스크림... 드릴까요?
 							</div>
 	     				</div>
-	     			<!--댓글2  -->
+	     				<!--댓글2  -->
 	     				<div class="modal_commentbox" >
-	     					<div class="imagebox box">
+	     					<span>
 	     						<img alt="" src="/wood/asset/img/logo.png" class="comment_userimage">
-		     				</div>
+		     				</span>
 		     				<div class="modal_usernick">
 								<div class="top">
 									멋있는하이에나943
@@ -722,11 +678,11 @@
 								아이스크림... 드릴까요?
 							</div>
 	     				</div>
-	     			<!--댓글2  -->
+	     				<!--댓글2  -->
 	     				<div class="modal_commentbox" >
-	     					<div class="imagebox box">
+	     					<span>
 	     						<img alt="" src="/wood/asset/img/logo.png" class="comment_userimage">
-		     				</div>
+		     				</span>
 		     				<div class="modal_usernick">
 								<div class="top">
 									멋있는하이에나943
@@ -739,11 +695,11 @@
 								아이스크림... 드릴까요?
 							</div>
 	     				</div>
-	     			<!--댓글2  -->
+	     				<!--댓글2  -->
 	     				<div class="modal_commentbox" >
-	     					<div class="imagebox box">
+	     					<span>
 	     						<img alt="" src="/wood/asset/img/logo.png" class="comment_userimage">
-		     				</div>
+		     				</span>
 		     				<div class="modal_usernick">
 								<div class="top">
 									멋있는하이에나943
@@ -756,11 +712,11 @@
 								아이스크림... 드릴까요?
 							</div>
 	     				</div>
-	     			<!--댓글2  -->
+	     				<!--댓글2  -->
 	     				<div class="modal_commentbox" >
-	     					<div class="imagebox box">
+	     					<span>
 	     						<img alt="" src="/wood/asset/img/logo.png" class="comment_userimage">
-		     				</div>
+		     				</span>
 		     				<div class="modal_usernick">
 								<div class="top">
 									멋있는하이에나943
