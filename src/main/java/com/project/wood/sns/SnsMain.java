@@ -39,7 +39,7 @@ public class SnsMain extends HttpServlet {
 		String ubuildingseq = dao.getuserbuildingseq(uid);
 		
 		String buildingseq = req.getParameter("buildingseq");
-		if(req.getParameter("buildlingseq")==null) {
+		if(req.getParameter("buildingseq")==null) {
 			buildingseq = ubuildingseq;
 		}
 		
@@ -50,9 +50,9 @@ public class SnsMain extends HttpServlet {
 		
 		MapDAO mdao = new MapDAO();
 		
-		HashMap<String, String> ubuildingInfo = new HashMap<String, String>();
+		HashMap<String, String> buildingInfo = new HashMap<String, String>();
 		
-		ubuildingInfo=mdao.getuBuildingInfo(ubuildingseq);
+		buildingInfo=mdao.getuBuildingInfo(buildingseq);
 		
 		List<BuildingDTO> blist = mdao.blist(); //장소 건물
 		req.setAttribute("blist", blist);
@@ -67,9 +67,8 @@ public class SnsMain extends HttpServlet {
 		req.setAttribute("commentlist", commentlist);
 		req.setAttribute("unickname", unickname);
 		req.setAttribute("profile", profile);
-		req.setAttribute("ubuildingseq", ubuildingseq);
-		req.setAttribute("ubuildingInfo", ubuildingInfo);
-		
+		req.setAttribute("buildingseq", buildingseq);
+		req.setAttribute("buildinginfo", buildingInfo);
 		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/sns/snsmain.jsp");

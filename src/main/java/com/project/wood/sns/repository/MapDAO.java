@@ -74,10 +74,10 @@ public class MapDAO {
 		return null;
 	}
 
-	public HashMap<String, String> getuBuildingInfo(String ubuildingseq) {
+	public HashMap<String, String> getuBuildingInfo(String buildingseq) {
 		try {
 			
-			String sql = "select * from snsbuilding where buildingseq ="+ubuildingseq;
+			String sql = "select * from snsbuilding where buildingseq ="+buildingseq;
 			
 			stat= conn.createStatement();
 			rs= stat.executeQuery(sql);
