@@ -119,7 +119,7 @@ public class CarpoolDAO {
 		try {
 			
 			String sql = "select tblCarpool.*, "
-					  + "to_char(departtime, 'YYYY/MM/DD(DY) HH24:MI:SS') as ttime, "
+					  + "to_char(departtime, 'YYYY/MM/DD(DY) HH24:MI') as ttime, "
 					  + "(select score from tblDriver where driverseq = tblCarpool.driverseq) as score, "
 					  + "(select count from tblDriver where driverseq = tblCarpool.driverseq) as count, "
 					  + "(select id from tblDriver where driverseq = tblCarpool.driverseq) as id, "

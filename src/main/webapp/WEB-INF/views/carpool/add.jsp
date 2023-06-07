@@ -219,12 +219,12 @@
             	
 	            <div class="form-group block-size">
 	                <label for="date">날짜</label>
-	                <input name="ttime" type="date" class="form-control" placeholder="날짜">
+	                <input name="date" type="date" id="dateField" class="form-control" placeholder="날짜">
 	            </div>
             
 	            <div class="form-group block-size">
 	                <label for="time">시간</label>
-	                <input name="ttime" type="time" class="form-control" placeholder="시간">
+	                <input name="time" type="time" id="timeField" class="form-control" placeholder="시간">
 	            </div> 
 	           
             </div>
@@ -282,7 +282,12 @@
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 <script>
 	
-
+	function combineDateTime() {
+	    var dateInput = document.getElementById("dateField").value;
+	    var timeInput = document.getElementById("timeField").value;
+	
+	    
+	}
 	
 </script>
 </body>

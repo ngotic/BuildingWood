@@ -276,7 +276,7 @@
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 <script>
 
-	/* var ttime = new Date("${dto.ttime}");
+	var ttime = new Date("${dto.ttime}");
 	
 	var year = ttime.getFullYear();
 	var month = ("0" + (ttime.getMonth() + 1)).slice(-2);
@@ -290,26 +290,7 @@
 	document.getElementById("timeField").value = hours + ":" + minutes + ":" + seconds;
 
 	
-	function combineDateTime() {
-	    var dateValue = document.getElementById("dateField").value;
-	    var timeValue = document.getElementById("timeField").value;
-
-	    var ttimeValue = dateValue + "T" + timeValue + ":00";
-
-	    document.getElementById("ttimeField").value = ttimeValue;
-
-	    // 확인을 위해 콘솔에 출력
-	    console.log(ttimeValue);
-	}
 	
-	
-	function combineDateTimeAndNavigate() {
-	    combineDateTime();
-
-	    location.href = '/wood/carpool/view.do?carpoolseq=${dto.carpoolseq}';
-
-	}
-	 */
 	 
 </script>
 </body>
