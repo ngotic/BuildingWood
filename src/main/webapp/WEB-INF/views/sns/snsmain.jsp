@@ -838,7 +838,6 @@
     	        str=str.replaceAll('class=\"','class=\"m');
     	        $("#modal_imagebox").html(str); 
     	        
-    	        let content = $("#to_modal_commentlist").html();
     	        
     	    	$('.mprev').on('click', function () {
     	    		if(Idx<=1){

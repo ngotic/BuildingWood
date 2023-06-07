@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class SnsDTO {
-	
+
 	private String snsboardseq;
 	private String id;
 	private String boardcategoryseq;
