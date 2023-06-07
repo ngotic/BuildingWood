@@ -165,6 +165,7 @@
 	
 	}
 	#cheader{
+		height:40px;
 		text-align:center;
 		position:relative;
 		color:black;
@@ -292,7 +293,7 @@
 	}
 	#addcontent{
 		width:90%;
-		height:400px;
+		height:410px;
 		background-color:white;
 		display:flex;
 		border-bottom: 3px solid rgb(219,219,219);
@@ -305,13 +306,6 @@
 		display:inline-block;
 		border-radius: 5px;
 		outline-color: rgb(219,219,219);
-	}
-	.add{
-		width:80px;
-		height:30px;
-		margin-top:10px;
-		float:right;
-		border:1px solid white;
 	}
 	.add:hover{
 		border:1px solid rgb(219,219,219);
@@ -331,7 +325,9 @@
   list-style-type: none;	
 }
 
-
+ 	label:hover{
+ 	cursor:pointer;
+ 	}
 .slides{
   position: absolute;
   left: 0;
@@ -430,6 +426,15 @@
 .mnext{
   right: 10px;
 }
+button.btnsnsadd{
+		display:inline-block;
+		width:80px;
+		margin-top:2px;
+		margin-bottom:2px;
+		float:right;
+		border:1px solid white;
+		padding:0 0 0 0 !important;
+	}
 </style>
 
 </head>
@@ -453,11 +458,11 @@
 							<div id="addcontent">
 								<div id="usericon" style="display:inline-block; width:50px; height:400px; margin-right:5px;">
 									<!-- 유저 이미지 넣기  -->
-									<img alt="" src="/wood/asset/sns/pic.png" style="width:50px;">
+									<img alt="" src="/wood/asset/sns/${profile}" style="width:50px;">
 								</div>
 								<div id="usercontent">
 									<div id="usernickname"  style="margin-bottom:15px;">
-										<input type="text" name = "id" value="owFSkN242" readonly>
+										<input type="text" name = "id" value="${unickname}" readonly>
 									</div>
 									<textarea id="add_useritem" name="add_useritem"></textarea>
 									<div class="container">
@@ -489,7 +494,7 @@
 									    </div>
 									  </div>
 									</div>
-								<button type="submit" class="add">등록하기</button>
+								<button type="submit" class="btnsnsadd">등록하기</button>
 								</div>
 							</div>
 						</form>
@@ -846,6 +851,8 @@
     	        str=str.replaceAll('left: -600px;','');
     	        str=str.replaceAll('left: -300px;','');
     	        str=str.replaceAll('calc(1350px);','calc(1800px);');
+    	        str=str.replaceAll('calc(900px);','calc(1200px);');
+    	        str=str.replaceAll('calc(450px);','calc(600px);');
     	        
     	        $("#modal_imagebox").html(str); 
     	        

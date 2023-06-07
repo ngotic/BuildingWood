@@ -22,7 +22,6 @@ public class SnsDAO {
 	}
 	
 	public List<SnsDTO> getSNSList() {
-		
 		try {
 
 			List<SnsDTO> list = new ArrayList<SnsDTO>();
@@ -159,4 +158,45 @@ public class SnsDAO {
 		}
 		return 0;
 		}
+
+	public String getusernickname(String uid) {
+		try {
+			String sql ="select * from tblmember where id =?";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1,uid);
+			rs = pstat.executeQuery();
+			String result="";
+					
+			if (rs.next()) {
+				
+				result =(rs.getString("nickname"));
+				
+			}
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+
+	public String getuserprofile(String uid) {
+		try {
+			String sql ="select * from tblmember where id =?";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1,uid);
+			rs = pstat.executeQuery();
+			String result="";
+					
+			if (rs.next()) {
+				
+				result =(rs.getString("profile"));
+				
+			}
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

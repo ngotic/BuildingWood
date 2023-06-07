@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" href="/wood/asset/css/clubBtn.css">
+<!-- <link rel="stylesheet" href="/wood/asset/css/clubBtn.css"> -->
 <style>
 	   .navbar-menu .nav-item:hover{
         border-bottom: 3px solid #7ED321;
@@ -58,7 +58,7 @@
 			<a class="navbar-toggler" id="toggleBtn"><i class="fa fa-bars"></i></a>
 			<div class="navbar-menu" id="menu">
 				<!-- <div class="nav-item dropdown"><a href = "#" class="nav-link">홈</a></div> -->
-                <div class="nav-item"><a href = "" class="nav-link" >SNS</a></div>
+                <div class="nav-item"><a href = "/wood/snsmain.do" class="nav-link" >SNS</a></div>
 				<div class="nav-item"><a href = "/wood/carpool/list.do" class="nav-link" >카풀</a></div>
 				<!-- <div class="nav-item"><a href = "" class="nav-link" >스터디/과외</a></div> -->
 				<div class="nav-item dropdown">

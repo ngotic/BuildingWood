@@ -24,14 +24,26 @@ public class SnsMain extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		HttpSession session =req.getSession();
+		
 		SnsDAO dao = new SnsDAO();
+		
+		
+		String uid=(session.getAttribute("id").toString());
+		System.out.println(uid);
+		
+		String unickname = dao.getusernickname(uid);
+		String profile = dao.getuserprofile(uid);
 		List<SnsDTO> list = dao.getSNSList();
 		List<SnsDTO> plist = dao.getPicList();
 		List<SnsDTO> commentlist = dao.getComment();
 		
+		
 		req.setAttribute("plist", plist);
 		req.setAttribute("list", list);
 		req.setAttribute("commentlist", commentlist);
+		req.setAttribute("unickname", unickname);
+		req.setAttribute("profile", profile);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/sns/snsmain.jsp");
 		dispatcher.forward(req, resp);
@@ -54,10 +66,9 @@ public class SnsMain extends HttpServlet {
 					
 					);
 			System.out.println(req.getRealPath("/asset/sns")); 
-			
 			HttpSession session =req.getSession();
+			String uid=(session.getAttribute("id").toString());
 			
-			String id = multi.getParameter("id");
 			String content = multi.getParameter("add_useritem");
 			
 			String pic = multi.getFilesystemName("addpic");
@@ -66,7 +77,7 @@ public class SnsMain extends HttpServlet {
 			
 			SnsDTO dto = new SnsDTO();
 			
-			dto.setId(id);
+			dto.setId(uid);
 			dto.setContent(content);
 			
 			ArrayList<String> piclist = new ArrayList<String>();
