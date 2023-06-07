@@ -449,7 +449,7 @@
 		<div class="wrap">
 			<div id="content">
 				<div id="cheader" >
-				<div class="box"> 강남구 삼성동 골든타워</div>
+				<div class="box" id="buildingname"> ${ubuildingInfo.name}</div>
 				<div class="box" style="position:absolute; right:0px;"><button id="addsnscontent">접기</button></div>
 				</div>
 				<div id="board">
@@ -573,25 +573,14 @@
 				</div>
 			</div>
 			<div id="map"></div>
-			<div id="main">
-				<table id="list">
-					<c:forEach items="${blist }" var="dto">
+		</div>
+		<div id="main">
+			<table id="dlist">
 					<tr>
-						<td class="item" style="display:flex; cursor:pointer;" data-lat="${dto.lat}" data-lng="${dto.lng}" data-category ="${dto.address}">
-						${dto.name }
-						</td>
-					</tr>
-					</c:forEach>
-					<tr>
-						<td id="all" >모두보기 <span class="badge">0</span> </td>
-					</tr>
-				</table>
-				<table id="dlist">
-					<tr>
-						<td class="item" style="display:flex; cursor:pointer;">
-							<select>
-							<c:forEach items="${dlist }" var="dto">
-								<option>${dto.dong}</option>
+						<td class="ditem" style="display:flex; cursor:pointer;">
+							<select id = "ddong">
+							<c:forEach items="${dlist}" var="dto">
+								<option data-ddong="${dto.dong}">${dto.dong}</option>
 							</c:forEach>	
 							</select>
 						</td>
@@ -601,9 +590,19 @@
 						<td id="all" >모두보기 <span class="badge">0</span> </td>
 					</tr>
 				</table>
-			</div>
-		</div>
-				
+				<table id="blist">
+					<c:forEach items="${blist }" var="dto">
+					<tr>
+						<td class="bitem" style="display:flex; cursor:pointer;" data-bdong="${dto.dong}" data-lat="${dto.lat}" data-lng="${dto.lng}" data-address ="${dto.address}" data-buildingseq="${dto.buildingseq}">
+						${dto.name }
+						</td>
+					</tr>
+					</c:forEach>
+					<tr>
+						<td id="all" >모두보기 <span class="badge">0</span> </td>
+					</tr>
+				</table>
+			</div>		
 	</section>
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 	
@@ -720,6 +719,9 @@
   </div>
 </div>
 
+
+
+
 <script type="	text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0c837c78add7b31e526a1b98c5a9910f"></script>	
 <script>
 	
@@ -752,7 +754,7 @@
 
 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 	var options = { //지도를 생성할 때 필요한 기본 옵션
-		center: new kakao.maps.LatLng(37.507676802251, 127.05556435590361), //지도의 중심좌표.
+		center: new kakao.maps.LatLng(${ubuildingInfo.lat}, ${ubuildingInfo.lng}), //지도의 중심좌표.
 		level: 3 //지도의 레벨(확대, 축소 정도)
 	};
 	
@@ -761,16 +763,15 @@
 	let m  = null;
 	
 	var content = '<div class="overlaybox">' +
-    '    <div class="boxtitle">삼성동 골든타워</div>' +
+    '    <div class="boxtitle">${ubuildingInfo.name}</div>' +
     '    <div class="first">' +
-    '        <div class="triangle text">1</div>' +
-    '        <div class="movietitle text">삼성동 골든타워</div>' +
+    '        <div class="movietitle text">${ubuildingInfo.name}</div>' +
     '    </div>' +
     '</div>';
 
 	
 	// 마커가 표시될 위치입니다 
-	var markerPosition  = new kakao.maps.LatLng(37.507676802251, 127.05556435590361); 
+	var markerPosition  = new kakao.maps.LatLng(${ubuildingInfo.lat}, ${ubuildingInfo.lng}); 
 
 	// 마커를 생성합니다
 	var marker = new kakao.maps.Marker({
@@ -796,7 +797,7 @@
 		    position: markerPosition,
 		    content: content,
 		    xAnchor: 0.3,
-		    yAnchor: 0.99
+		    yAnchor: 1.02
 		});
 	    
 	    marker.setMap(null);
@@ -809,12 +810,30 @@
 	});
 	
 	
-	const ms = [];
+	 const ms = [];
 	
-	$('#list .item').click(function(){
+	$('#blist .bitem').click(function(){
 		
 		//alert($(this).data('lat'));
 			
+		alert($(this).data('buildingseq'));
+		
+		 $.ajax({
+	            url:"/wood/snsmain.do", // HelloServlet.java로 접근
+	            type: "post", // GET 방식
+//	             data: "id=abc&pw=123",
+	            data:{buildingseq:$(this).data('buildingseq')}, // json 방식으로 서블릿에 보낼 데이터
+	            success:function(data){
+	            	location.href="/wood/snsmain.do";
+	                alert("success");
+	            },
+	            error:function(){
+	                alert("error");
+	            }
+	            
+	        });
+		
+		
 		if (m!=null){
 			m.setMap(null);
 		}
@@ -827,14 +846,18 @@
 		
 		
 		m = new kakao.maps.Marker({
-			position: p
+			position: p,
+			content:content,
+			xAnchor: 0.3,
+		    yAnchor: 0.99
+
 		});
 		
 		
 		m.setMap(map);
 		map.panTo(p);
 		
-		$('#list td').css('background-color','transparent');
+		$('#blist td').css('background-color','transparent');
 		$(this).css('background-color','gold');
 		
 	});
@@ -865,10 +888,9 @@
 		
 		</c:forEach>
 	});
+	 
 	
-	
-	
-	
+
 	
 	
 	
