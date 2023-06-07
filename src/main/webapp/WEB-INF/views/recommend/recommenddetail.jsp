@@ -375,6 +375,11 @@
 }
 
 
+/* 댓글 수정 */
+.edit-comment textarea {
+	width: 800px;
+}
+
 .customoverlay {position:relative;bottom:85px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;}
 .customoverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}
 .customoverlay a {display:block;text-decoration:none;color:#000;text-align:center;border-radius:6px;font-size:14px;font-weight:bold;overflow:hidden;background: #d95050;background: tomato url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
@@ -383,7 +388,7 @@
 
 </style>
 
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
    <!-- template.jsp > index.jsp -->
@@ -521,7 +526,8 @@
                             <c:if test="${not empty id && (id == cdto.id || lv == '0')}">
                             
                             	<!-- 수정 -->
-                                <span class="material-symbols-outlined rec-comment-edit" onclick="editComment(this);">edit</span>
+                                <span class="material-symbols-outlined rec-comment-edit" rcseq="${cdto.rcseq}">edit</span>
+
 
 								<!-- 삭제 -->
                                 <form method="POST" action="/wood/recommend/reccommentdel.do">
@@ -574,7 +580,10 @@
                 </div>
 
                 <div class="rec-content">${cdto.content}</div>
+                
             </c:forEach>
+            
+            
                           
                           <!-- Child comment 1-->
                           <!-- <div class="d-flex mt-4">
@@ -607,6 +616,14 @@
           </div> 
       </section><!-- mb-5 댓글 -->
       
+	<form id="editCommentForm" method="POST" action="/wood/recommend/reccommentedit.do">
+		<input type="hidden" name="rcseq" value="${cdto.rcseq}">
+        <input type="hidden" name="recommendseq" value="${dto.recommendseq}">
+        <input type="hidden" name="restaurantseq" value="${dto.restaurantseq}">
+        <input type="hidden" name="column" value="${column}">
+        <input type="hidden" name="word" value="${word}">
+        <input type="hidden" name="search" value="${search}">
+	</form>
 
       <br><br><br><br><br><br>
    
@@ -618,6 +635,7 @@
 <script>
 
 	/* 댓글 함수들 */
+	/* 댓글삭제 */
 	function delComment(rcseq) {
         document.getElementById("rcseqInput").value = rcseq; // rcseq 값을 입력 필드에 설정
         $('#exampleModal').modal('show'); // 모달 창 표시
@@ -628,7 +646,36 @@
 		location.href='/wodd/recommend/recommenddel.do?recommendseq=' + recommendseq;
 	}
 	
+	$(document).on('click', '.rec-comment-edit', function(event) {
+	    var rcseq = $(this).attr('rcseq');
+	    editComment(event, rcseq);
+	});
+
 	
+	/* 댓글 수정 */
+	function editComment(event, rcseq) {
+    // 기존에 열려있던 댓글창 닫기
+    $('.edit-comment').remove();
+
+    var contentElement = $(event.target).closest('.d-flex').siblings('.rec-content');
+    var content = contentElement.text();
+
+    var editCommentElement = $('<div class="edit-comment">' +
+        '<textarea rows="" cols="" spellcheck="false" oninput="resizeTextarea(this)">' + content + '</textarea>' +
+        '<input type="button" value="확인" onclick="editOkComment(' + rcseq + ');">' +
+        '<input type="button" value="취소" onclick="cancelComment();">' +
+        '</div>');
+
+    $(event.target).closest('.d-flex').parent().append(editCommentElement);
+    resizeTextarea(editCommentElement.find('textarea')[0]); // textarea의 높이 초기 조절
+}
+
+function resizeTextarea(textarea) {
+    textarea.style.height = 'auto'; // height 초기화
+    textarea.style.height = textarea.scrollHeight + 'px'; // 높이 조절
+}
+
+
 	
 	baguetteBox.run('.tz-gallery');
 	
