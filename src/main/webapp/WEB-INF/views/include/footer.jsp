@@ -5,11 +5,11 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> 
 
 	<script>
-	  /* HEADER EVENT*/
-	  /* 	window.onload = function() { scrollFunction()};
-		window.onscroll = function() { scrollFunction()}; */
+		/* HEADER EVENT*/
+		/* window.onload = function() { scrollFunction()};
+		window.onscroll = function() { scrollFunction()};
 
-	  /* function scrollFunction() {
+		function scrollFunction() {
 			var header = document.getElementById('header');
 			if(document.documentElement.scrollTop > 70) {
 				if(!header.classList.contains('navbar-fixed')) {
@@ -26,13 +26,12 @@
 					document.getElementsByTagName('body')[0].style.marginTop = '0';
 				}
 			}
-		}
-		 */
+		} */
 		function menuToggle() {
 			document.getElementById('menu').classList.toggle('show');
 		}
 		document.getElementById('toggleBtn').addEventListener('click', menuToggle);
-		
+
 		 $('#toggleBtn').click(function(){
 
 			if( $('#menu').hasClass('show'))
@@ -49,7 +48,7 @@
 				$('#menu').show();
 			} else
 				$('#menu').hide();
-		}); 
+		});
 
 	</script>
 </body>
