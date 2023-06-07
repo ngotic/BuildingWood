@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MapDAO {
@@ -72,5 +73,35 @@ public class MapDAO {
 		
 		return null;
 	}
+
+	public HashMap<String, String> getuBuildingInfo(String ubuildingseq) {
+		try {
+			
+			String sql = "select * from snsbuilding where buildingseq ="+ubuildingseq;
+			
+			stat= conn.createStatement();
+			rs= stat.executeQuery(sql);
+			
+			HashMap<String, String> buildinginfo = new HashMap<String, String>();
+			
+			while(rs.next()) {
+				buildinginfo.put("buildingseq",rs.getString("buildingseq"));
+				buildinginfo.put("lat",rs.getString("lat"));
+				buildinginfo.put("name",rs.getString("name"));
+				buildinginfo.put("lng",rs.getString("lng"));
+				buildinginfo.put("address",rs.getString("address"));
+				buildinginfo.put("dong",rs.getString("dong"));
+			}
+			return buildinginfo;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+
+	
 	
 }

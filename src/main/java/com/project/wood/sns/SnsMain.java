@@ -3,6 +3,7 @@ package com.project.wood.sns;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -35,14 +36,27 @@ public class SnsMain extends HttpServlet {
 		
 		String unickname = dao.getusernickname(uid);
 		String profile = dao.getuserprofile(uid);
-		List<SnsDTO> list = dao.getSNSList();
+		String ubuildingseq = dao.getuserbuildingseq(uid);
+		
+		String buildingseq = req.getParameter("buildingseq");
+		if(req.getParameter("buildlingseq")==null) {
+			buildingseq = ubuildingseq;
+		}
+		
+		System.out.println(buildingseq);
+		List<SnsDTO> list = dao.getSNSList(buildingseq);
 		List<SnsDTO> plist = dao.getPicList();
 		List<SnsDTO> commentlist = dao.getComment();
 		
 		MapDAO mdao = new MapDAO();
 		
+		HashMap<String, String> ubuildingInfo = new HashMap<String, String>();
+		
+		ubuildingInfo=mdao.getuBuildingInfo(ubuildingseq);
+		
 		List<BuildingDTO> blist = mdao.blist(); //장소 건물
 		req.setAttribute("blist", blist);
+		
 		
 		List<BuildingDTO> dlist = mdao.dlist(); //장소 동
 		req.setAttribute("dlist", dlist);
@@ -53,6 +67,8 @@ public class SnsMain extends HttpServlet {
 		req.setAttribute("commentlist", commentlist);
 		req.setAttribute("unickname", unickname);
 		req.setAttribute("profile", profile);
+		req.setAttribute("ubuildingseq", ubuildingseq);
+		req.setAttribute("ubuildingInfo", ubuildingInfo);
 		
 		
 		
@@ -110,10 +126,13 @@ public class SnsMain extends HttpServlet {
 				w.close();
 			}
 			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	
 	
+		
+		
 	}
 }

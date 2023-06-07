@@ -7,10 +7,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-
-
 public class SnsDAO {
 	private Connection conn;
 	private PreparedStatement pstat;
@@ -21,11 +17,11 @@ public class SnsDAO {
 		this.conn= new DBConnect().getConn();
 	}
 	
-	public List<SnsDTO> getSNSList() {
+	public List<SnsDTO> getSNSList(String buildingseq) {
 		try {
 
 			List<SnsDTO> list = new ArrayList<SnsDTO>();
-			String sql = "select * from snslist where buildingseq = 1 order by regdate desc";
+			String sql = String.format("select * from snslist where buildingseq = %s order by regdate desc",buildingseq);
 			stat = conn.createStatement();
 			rs = stat.executeQuery(sql);
 			while (rs.next()) {
@@ -199,4 +195,24 @@ public class SnsDAO {
 		}
 		return null;
 	}
-}
+
+	public String getuserbuildingseq(String uid) {
+		try {
+			String sql ="select buildingseq from tbladdress where id =?";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1,uid);
+			rs = pstat.executeQuery();
+			String result="";
+					
+			if (rs.next()) {
+				
+				result =(rs.getString("buildingseq"));
+				
+			}
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+}	
