@@ -5,9 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>빌딩숲</title>
 <%@ include file="/WEB-INF/views/include/asset.jsp" %>
 <style>
+
 	.carpool-view-card {
 	  width: 100%;
 	  display: flex;
@@ -24,6 +25,7 @@
 	  height: auto;
 	  display: flex;
 	  padding: 50px 16px 0;
+	  margin-bottom: 50px;
 	  box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.25) ;
 	  align-items: center;
 	  flex-shrink: 0;

@@ -22,7 +22,6 @@
         
 	<%@ include file="/WEB-INF/views/include/asset.jsp" %>
 	
-	
 <style>
 	
 	.form-control {font-size: 0.9rem}
@@ -283,12 +282,7 @@
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 <script>
 	
-	function combineDateTime() {
-	    var dateInput = document.getElementById("dateField").value;
-	    var timeInput = document.getElementById("timeField").value;
-	
-	    
-	}
+
 	
 </script>
 </body>

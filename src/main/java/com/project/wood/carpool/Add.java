@@ -35,7 +35,9 @@ public class Add extends HttpServlet {
 		HttpSession session = req.getSession();
 		
 		String content = req.getParameter("content");
-	    String ttime = req.getParameter("ttime");
+	    String date = req.getParameter("date");
+	    String time = req.getParameter("time");
+	    String ttime = String.format("%s %s:00", date, time);
 	    String departuresCity = req.getParameter("departurescity");
 	    String departures = req.getParameter("departures");
 	    String arrivalsCity = req.getParameter("arrivalscity");
@@ -43,31 +45,25 @@ public class Add extends HttpServlet {
 	    String fee = req.getParameter("fee");
 	    String recruit = req.getParameter("recruit");
 		
-	    
-	    CarpoolDTO dto = new CarpoolDTO();
-		dto.setContent(content);
-		dto.setTtime(ttime);
-		dto.setDeparturescity(departuresCity);
-		dto.setDepartures(departures);
-		dto.setArrivalscity(arrivalsCity);
-		dto.setArrivals(arrivals);
-		dto.setFee(fee);
-		dto.setRecruit(recruit);
+	   
 		
-		CarpoolDAO dao = new CarpoolDAO();
-		
-		
-		
-		
-		int result = dao.add(dto);
-		
-		if (result == 1) {
-			resp.sendRedirect("/wood/carpool/list.do");
-		} else {
-			PrintWriter writer = resp.getWriter();
-			writer.print("<script>alert('failed');history.back();</script>");
-			writer.close();
-		}	
+		  CarpoolDTO dto = new CarpoolDTO(); dto.setContent(content); //
+		  dto.setTtime(ttime); dto.setDeparturescity(departuresCity);
+		  dto.setDepartures(departures); dto.setArrivalscity(arrivalsCity);
+		  dto.setArrivals(arrivals); dto.setFee(fee); dto.setRecruit(recruit);
+		  
+		  CarpoolDAO dao = new CarpoolDAO();
+		  
+		  
+		  System.out.println(dto.getTtime());
+		  
+		  int result = dao.add(dto);
+		  
+		  if (result == 1) { resp.sendRedirect("/wood/carpool/list.do"); } else {
+		  PrintWriter writer = resp.getWriter();
+		  writer.print("<script>alert('failed');history.back();</script>");
+		  writer.close(); }
+		 
 	    
 	}
 
@@ -76,3 +72,4 @@ public class Add extends HttpServlet {
 
 
 
+	

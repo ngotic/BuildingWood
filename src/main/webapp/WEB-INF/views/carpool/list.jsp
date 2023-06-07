@@ -9,6 +9,7 @@
 <%@ include file="/WEB-INF/views/include/asset.jsp" %>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
+
 <!-- 검색 -->
 <style>
 
@@ -111,22 +112,41 @@
 </style>
 
 
-<!-- 글쓰기 -->
+<!-- 글쓰기, 운전자 등록 버튼 -->
 <style>
 
+	.mid-button-frame {
+		display: flex;
+		flex-direction: row-reverse;
+		margin-top: 10px;
+		margin-right: 15px;
+		margin-bottom: -15px;
+	}
+
+	.driver-button-frame {
+		/* width: 100px; */
+		height: 38px;
+		border: 1px solid #999;
+		border-radius: 12px;
+		background: none;
+		padding-left: 10px;
+	}
+	
+	.driver-add-button {
+		border: none;
+	}
+	
 	.add-button-frame {
 		width: 100px;
 		height: 38px;
 		border: 1px solid #999;
 		border-radius: 12px;
-		display: flex;
-		justify-content: center;
-		margin-left: 995px;
-		margin-bottom: -10px;
+		background: none;
+		margin-left: 10px;
+		padding-left: 8px;
 	}
 	
 	.add-button {
-		background: none;
 		border: none;
 	}
 
@@ -303,11 +323,18 @@
 		
 
 		
-		<!-- 글쓰기 버튼 -->
-		<div class="add-button-frame">
-			<button type="button" class="add-button"
-				onclick="location.href='/wood/carpool/add.do?mode=new';">글쓰기</button>
-		</div>	
+		<!-- 글쓰기, 운전자 등록 버튼 -->
+		
+		<div class="mid-button-frame">
+			
+			<!-- Add.java로 이동 -->	
+			<button type="button" class="add-button-frame"
+					onclick="location.href='/wood/carpool/add.do?mode=new';">글쓰기</button>
+			
+			<!-- 마이페이지 > 운전자 등록 페이지로 이동 -->					
+			<button type="button" class="driver-button-frame">운전자 등록하기</button>
+		</div>
+
 
 	
 
