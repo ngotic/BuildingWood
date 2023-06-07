@@ -20,7 +20,7 @@ public class UserDAO {
 		this.conn = DBUtil.open("localhost", "team", "java1234");
 
 	}
-	
+
 	public UserDTO login(UserDTO dto) {
 
 		try {

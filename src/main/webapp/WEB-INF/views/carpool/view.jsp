@@ -8,7 +8,6 @@
 <title>Insert title here</title>
 <%@ include file="/WEB-INF/views/include/asset.jsp" %>
 <style>
-
 	.carpool-view-card {
 	  width: 100%;
 	  display: flex;

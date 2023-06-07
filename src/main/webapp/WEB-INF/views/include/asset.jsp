@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <meta charset="UTF-8">
 
-
 <!-- <link rel="shortcut icon" href="/wood/asset/img/favicon.ico"> -->
 
 <script src="https://kit.fontawesome.com/d6f8323617.js" crossorigin="anonymous"></script>
