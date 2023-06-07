@@ -1,5 +1,5 @@
 
-lib/
+*.jar
 build/
 .classpath
 .project
