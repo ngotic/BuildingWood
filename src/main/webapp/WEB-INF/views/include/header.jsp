@@ -26,7 +26,7 @@
 <header class="header-area navbar-fade" id="header">
 		<nav id="navbar">
 			<div id="brand-logo">
-				<a class="navbar-brand" id="navbarBrand"><img width=60px src="asset/img/logo.png"></a>
+				<a class="navbar-brand" id="navbarBrand"><img width=60px src="/wood/asset/img/logo.png"></a>
 			</div>
 			<a class="navbar-toggler" id="toggleBtn"><i class="fa fa-bars"></i></a>
 			<div class="navbar-menu" id="menu">
