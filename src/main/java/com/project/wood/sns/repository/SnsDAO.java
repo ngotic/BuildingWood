@@ -105,4 +105,58 @@ public class SnsDAO {
 		
 		return null;
 	}
+
+	public int addsnsboard(SnsDTO dto) {
+		try {
+
+			String sql = "Insert into tblsnsboard (snsboardseq,id,boardcategoryseq,buildingseq,content,regdate,editdate) values (snsboardseq.nextVal,?,2,1,?,default,default)";
+
+			pstat = conn.prepareStatement(sql);
+
+			pstat.setString(1, dto.getId());
+			pstat.setString(2, dto.getContent());
+			
+			return pstat.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		
+		return 0;
+	}
+
+	public int addpic(ArrayList<String> piclist) {
+		try {
+			String sql = "select max(snsboardseq) as snsboardseq from tblsnsboard";
+
+			stat = conn.createStatement();
+			rs = stat.executeQuery(sql);
+			String snsboardseq="";
+			int count = 0;
+			
+			if (rs.next()) {
+				snsboardseq=rs.getString("snsboardseq");
+				
+			}
+			
+			String sql2 = "Insert into tblsnspic (snspicseq,snsboardseq,pic) values (snspicseq.nextVal,?,?)";
+			pstat = conn.prepareStatement(sql2);
+			if(piclist.size()==0) {
+				return 1;
+			}
+			else {
+				while(count<piclist.size()) {
+					pstat.setString(1, snsboardseq);
+					pstat.setString(2, piclist.get(count));
+					count++;
+					pstat.executeUpdate();
+				}
+			}
+			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+		}
 }

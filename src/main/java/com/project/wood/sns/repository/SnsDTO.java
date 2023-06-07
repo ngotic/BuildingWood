@@ -17,6 +17,8 @@ public class SnsDTO {
 	private String profile;
 	private String clike;
 	private String pic;
+	private String pic2;
+	private String pic3;
 	private String cpic;
 	
 	

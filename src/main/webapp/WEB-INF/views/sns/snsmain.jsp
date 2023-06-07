@@ -430,15 +430,6 @@
 .mnext{
   right: 10px;
 }
-.mcol{
-	width:126px;
-	margin-top:-100px;
-	background-color:black;
-	height:130px;
-	padding:0 0 0 0;
-	margin-left: 12px;
-	margin-right: 12px;
-}
 </style>
 
 </head>
@@ -458,28 +449,43 @@
 				<div id="board">
 					<!--로드 할 게시물들  -->
 					<div id="boardwrap" style="max-height:8500px;">
-						
-						<form action="" id="snsaddboard">
+						<form action="/wood/snsmain.do" id="snsaddboard" method="Post" enctype="multipart/form-data">
 							<div id="addcontent">
 								<div id="usericon" style="display:inline-block; width:50px; height:400px; margin-right:5px;">
 									<!-- 유저 이미지 넣기  -->
-									<img alt="" src="/wood/asset/img/logo.png" style="width:50px;">
+									<img alt="" src="/wood/asset/sns/pic.png" style="width:50px;">
 								</div>
 								<div id="usercontent">
-									<div id="userid"  style="margin-bottom:15px;">
-										dto.nickname
+									<div id="usernickname"  style="margin-bottom:15px;">
+										<input type="text" name = "id" value="owFSkN242" readonly>
 									</div>
 									<textarea id="add_useritem" name="add_useritem"></textarea>
 									<div class="container">
 									  <div class="row">
 									    <div class="col">
-									      사진1
+										    <label for="addpic" id="label_addpic" style="text-align:center; vertical-align:middle; width:126px; height:130px; overflow:hidden;">
+											    <span class="material-symbols-outlined" style="font-size:70px; margin-top:30px;">
+													add
+												</span>
+											</label>
+										    <input type="file" id="addpic" name="addpic" style="display:none;" onchange="f1();"/>
+									      
 									    </div>
 									    <div class="col">
-									      사진2
+									      	<label for="addpic2" id="label_addpic" style="text-align:center; vertical-align:middle; width:126px; height:130px; overflow:hidden;">
+											    <span class="material-symbols-outlined" style="font-size:70px; margin-top:30px;">
+													add
+												</span>
+											</label>
+										    <input type="file" id="addpic2" name="addpic2" style="display:none;" onchange="f1();"/>
 									    </div>
 									    <div class="col">
-									      사진3
+									      	<label for="addpic3" id="label_addpic" style="text-align:center; vertical-align:middle; width:126px; height:130px; overflow:hidden;">
+											    <span class="material-symbols-outlined" style="font-size:70px; margin-top:30px;">
+													add
+												</span>
+											</label>
+										    <input type="file" id="addpic3" name="addpic3" style="display:none;" onchange="f1();"/>
 									    </div>
 									  </div>
 									</div>
@@ -492,7 +498,7 @@
 						<div class="boardcontent" style="position:relative;">
 							<div id="usericon" style="display:inline-block; width:50px; height:400px; margin-right:5px;">
 								<!-- 유저 이미지 넣기  -->
-								<img alt="" src="/wood/asset/img/${dto.profile}" style="width:50px;">
+								<img alt="" src="/wood/asset/sns/${dto.profile}" style="width:50px;">
 							</div>
 							<div id="usercontent" style="position:relative;">
 								<div id="userid">
@@ -505,7 +511,7 @@
 								    <ul class="slides" style="width:calc(${dto.cpic} * 450px)"> 
 								   		<c:forEach items="${plist}" var="pic">
 							   			<c:if test="${dto.snsboardseq==pic.snsboardseq}">
-								     		<li><img alt="" src="/wood/asset/img/${pic.pic}" style="width:450px; height:300px; "></li>
+								     		<li><img alt="" src="/wood/asset/sns/${pic.pic}" style="width:450px; height:300px; "></li>
 								     	</c:if>
 								     	</c:forEach>
 								    </ul>  
@@ -523,7 +529,7 @@
 						       		<c:if test="${clist.snsboardseq==dto.snsboardseq}">
 					     				<div class="modal_commentbox" >
 					     					<div class="u_imagebox box">
-					     						<img alt="" src="/wood/asset/img/${clist.profile}" class="comment_userimage">
+					     						<img alt="" src="/wood/asset/sns/${clist.profile}" class="comment_userimage">
 						     				</div>
 						     				<div class="modal_usernick">
 												<div class="top">
@@ -593,7 +599,7 @@
      			<!-- 오른쪽  -->
      			<td style="width:400px;height:70px; border-bottom:3px solid black;" >
      				<div class="u_imagebox box" id="u_imagebox">
-     					<img alt="" src="/wood/asset/img/logo.png" class="comment_userimage">
+     					<img alt="" src="/wood/asset/sns/pic.png" class="comment_userimage">
      				</div>
      				<div id="modal_usernick"></div>
 					<div class="modal_comment" id="modal_content"></div>
@@ -825,7 +831,7 @@
             	const index= 1+$(event.relatedTarget).data('index');
             	const content=$(event.relatedTarget).data('content');
     	        const clike=$(event.relatedTarget).data('clike');
-    	        const profile="/wood/asset/img/"+$(event.relatedTarget).data('profile');
+    	        const profile="/wood/asset/sns/"+$(event.relatedTarget).data('profile');
     	        const nickname=$(event.relatedTarget).data('nickname');
     	        const cpic=$(event.relatedTarget).data('cpic');
     	        
@@ -836,6 +842,11 @@
     	        str=str.replaceAll('450px','600px');
     	        str=str.replaceAll('300px','600px');
     	        str=str.replaceAll('class=\"','class=\"m');
+    	        str=str.replaceAll('left: -900px;','');
+    	        str=str.replaceAll('left: -600px;','');
+    	        str=str.replaceAll('left: -300px;','');
+    	        str=str.replaceAll('calc(1350px);','calc(1800px);');
+    	        
     	        $("#modal_imagebox").html(str); 
     	        
     	        
@@ -864,8 +875,7 @@
             
             
         });
-	        
-	 
+    
 </script>
 
 
