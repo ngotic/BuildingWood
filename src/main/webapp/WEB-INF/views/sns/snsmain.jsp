@@ -376,11 +376,12 @@
 .col{
 	width:126px;
 	margin-top:-100px;
-	background-color:black;
+	/* background-color:black; */
 	height:130px;
 	padding:0 0 0 0;
 	margin-left: 12px;
 	margin-right: 12px;
+	border:3px solid gray;
 }
 
 .mslides{
@@ -426,15 +427,15 @@
 .mnext{
   right: 10px;
 }
-button.btnsnsadd{
-		display:inline-block;
+	.add{
 		width:80px;
-		margin-top:2px;
-		margin-bottom:2px;
+		height:30px;
+		margin-top:5px;
+		margin-bottom:5px;
 		float:right;
 		border:1px solid white;
 		padding:0 0 0 0 !important;
-	}
+		}
 </style>
 
 </head>
@@ -494,7 +495,7 @@ button.btnsnsadd{
 									    </div>
 									  </div>
 									</div>
-								<button type="submit" class="btnsnsadd">등록하기</button>
+								<button type="submit" class="add">등록하기</button>
 								</div>
 							</div>
 						</form>
@@ -572,6 +573,35 @@ button.btnsnsadd{
 				</div>
 			</div>
 			<div id="map"></div>
+			<div id="main">
+				<table id="list">
+					<c:forEach items="${blist }" var="dto">
+					<tr>
+						<td class="item" style="display:flex; cursor:pointer;" data-lat="${dto.lat}" data-lng="${dto.lng}" data-category ="${dto.address}">
+						${dto.name }
+						</td>
+					</tr>
+					</c:forEach>
+					<tr>
+						<td id="all" >모두보기 <span class="badge">0</span> </td>
+					</tr>
+				</table>
+				<table id="dlist">
+					<tr>
+						<td class="item" style="display:flex; cursor:pointer;">
+							<select>
+							<c:forEach items="${dlist }" var="dto">
+								<option>${dto.dong}</option>
+							</c:forEach>	
+							</select>
+						</td>
+					</tr>
+					
+					<tr>
+						<td id="all" >모두보기 <span class="badge">0</span> </td>
+					</tr>
+				</table>
+			</div>
 		</div>
 				
 	</section>
@@ -717,6 +747,8 @@ button.btnsnsadd{
 	});
 	
 	
+	
+	
 
 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 	var options = { //지도를 생성할 때 필요한 기본 옵션
@@ -725,6 +757,8 @@ button.btnsnsadd{
 	};
 	
 	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+	
+	let m  = null;
 	
 	var content = '<div class="overlaybox">' +
     '    <div class="boxtitle">삼성동 골든타워</div>' +
@@ -773,6 +807,70 @@ button.btnsnsadd{
 		marker.setMap(map);
 		$('.overlaybox').hide();
 	});
+	
+	
+	const ms = [];
+	
+	$('#list .item').click(function(){
+		
+		//alert($(this).data('lat'));
+			
+		if (m!=null){
+			m.setMap(null);
+		}
+		
+		ms.forEach(item=>{
+			
+			item.setMap(null);
+		});
+		let p = new kakao.maps.LatLng($(this).data('lat'),$(this).data('lng'));
+		
+		
+		m = new kakao.maps.Marker({
+			position: p
+		});
+		
+		
+		m.setMap(map);
+		map.panTo(p);
+		
+		$('#list td').css('background-color','transparent');
+		$(this).css('background-color','gold');
+		
+	});
+	
+	$(document).ready(function(){
+		
+		if (m!=null){
+			m.setMap(null);
+		}
+		
+		
+		<c:forEach items="${blist}" var="dto" varStatus="status">
+		
+		let p${status.count} = new kakao.maps.LatLng(${dto.lat},${dto.lng});
+		
+		let m${status.count} = new kakao.maps.Marker({
+			position: p${status.count}
+		});
+		
+		
+		m${status.count}.setMap(map);
+		
+		ms.push(m${status.count});
+		
+		
+		$('#list td').css('background-color','transparent');
+		$(this).css('background-color','gold');
+		
+		</c:forEach>
+	});
+	
+	
+	
+	
+	
+	
 	
 	
 	let currentIdx =0; //현재 슬라이드 index
@@ -827,7 +925,7 @@ button.btnsnsadd{
 	 
 	});
 	
-		
+	
 	    	
     	$(document).ready(function() {     
             $('#staticBackdrop').on('show.bs.modal', function(event) {       

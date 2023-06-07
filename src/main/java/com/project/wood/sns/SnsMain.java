@@ -15,6 +15,8 @@ import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.project.wood.sns.repository.BuildingDTO;
+import com.project.wood.sns.repository.MapDAO;
 import com.project.wood.sns.repository.SnsDAO;
 import com.project.wood.sns.repository.SnsDTO;
 
@@ -30,7 +32,6 @@ public class SnsMain extends HttpServlet {
 		
 		
 		String uid=(session.getAttribute("id").toString());
-		System.out.println(uid);
 		
 		String unickname = dao.getusernickname(uid);
 		String profile = dao.getuserprofile(uid);
@@ -38,12 +39,22 @@ public class SnsMain extends HttpServlet {
 		List<SnsDTO> plist = dao.getPicList();
 		List<SnsDTO> commentlist = dao.getComment();
 		
+		MapDAO mdao = new MapDAO();
+		
+		List<BuildingDTO> blist = mdao.blist(); //장소 건물
+		req.setAttribute("blist", blist);
+		
+		List<BuildingDTO> dlist = mdao.dlist(); //장소 동
+		req.setAttribute("dlist", dlist);
+		
 		
 		req.setAttribute("plist", plist);
 		req.setAttribute("list", list);
 		req.setAttribute("commentlist", commentlist);
 		req.setAttribute("unickname", unickname);
 		req.setAttribute("profile", profile);
+		
+		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/sns/snsmain.jsp");
 		dispatcher.forward(req, resp);
@@ -82,11 +93,8 @@ public class SnsMain extends HttpServlet {
 			
 			ArrayList<String> piclist = new ArrayList<String>();
 			piclist.add(pic);
-			System.out.println(piclist.toString());
 			piclist.add(pic2);
-			System.out.println(piclist.toString());
 			piclist.add(pic3);
-			System.out.println(piclist.toString());
 			
 			//dto.setId(session.getAttribute("id").toString());
 			
@@ -94,7 +102,7 @@ public class SnsMain extends HttpServlet {
 			int result = dao.addsnsboard(dto);
 			int result2 = dao.addpic(piclist);
 			
-			if(result==1&&result2==1) {
+			if(result!=0&&result2!=0) {
 				resp.sendRedirect("/wood/snsmain.do");
 			}else {
 				PrintWriter w = resp.getWriter();
