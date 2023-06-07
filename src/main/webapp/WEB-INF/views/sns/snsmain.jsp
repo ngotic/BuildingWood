@@ -436,6 +436,7 @@
 		border:1px solid white;
 		padding:0 0 0 0 !important;
 		}
+		
 </style>
 
 </head>
@@ -449,7 +450,15 @@
 		<div class="wrap">
 			<div id="content">
 				<div id="cheader" >
-				<div class="box" id="buildingname"> ${ubuildingInfo.name}</div>
+				<div class="box" id="buildingname">
+					<select id="blist" onchange="change();">
+						<c:forEach items="${blist }" var="dto">
+							<option class="bitem" style="display:flex; cursor:pointer;" data-bdong="${dto.dong}" data-lat="${dto.lat}" data-lng="${dto.lng}" data-address ="${dto.address}" data-buildingseq="${dto.buildingseq}">
+								${dto.name }
+							</option>
+						</c:forEach>
+					</select>
+				</div>
 				<div class="box" style="position:absolute; right:0px;"><button id="addsnscontent">접기</button></div>
 				</div>
 				<div id="board">
@@ -590,18 +599,6 @@
 						<td id="all" >모두보기 <span class="badge">0</span> </td>
 					</tr>
 				</table>
-				<table id="blist">
-					<c:forEach items="${blist }" var="dto">
-					<tr>
-						<td class="bitem" style="display:flex; cursor:pointer;" data-bdong="${dto.dong}" data-lat="${dto.lat}" data-lng="${dto.lng}" data-address ="${dto.address}" data-buildingseq="${dto.buildingseq}">
-						${dto.name }
-						</td>
-					</tr>
-					</c:forEach>
-					<tr>
-						<td id="all" >모두보기 <span class="badge">0</span> </td>
-					</tr>
-				</table>
 			</div>		
 	</section>
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
@@ -725,6 +722,8 @@
 <script type="	text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0c837c78add7b31e526a1b98c5a9910f"></script>	
 <script>
 	
+	
+	$('#blist').children().eq(0).attr("selected",true);
 	$("#addsnscontent").on("click",function(){
 		
 		if($('#addsnscontent').text()=='접기'){
@@ -754,7 +753,7 @@
 
 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 	var options = { //지도를 생성할 때 필요한 기본 옵션
-		center: new kakao.maps.LatLng(${ubuildingInfo.lat}, ${ubuildingInfo.lng}), //지도의 중심좌표.
+		center: new kakao.maps.LatLng(${buildinginfo.lat}, ${buildinginfo.lng}), //지도의 중심좌표.
 		level: 3 //지도의 레벨(확대, 축소 정도)
 	};
 	
@@ -763,15 +762,15 @@
 	let m  = null;
 	
 	var content = '<div class="overlaybox">' +
-    '    <div class="boxtitle">${ubuildingInfo.name}</div>' +
+    '    <div class="boxtitle">${buildinginfo.name}</div>' +
     '    <div class="first">' +
-    '        <div class="movietitle text">${ubuildingInfo.name}</div>' +
+    '        <div class="movietitle text">${buildinginfo.name}</div>' +
     '    </div>' +
     '</div>';
 
 	
 	// 마커가 표시될 위치입니다 
-	var markerPosition  = new kakao.maps.LatLng(${ubuildingInfo.lat}, ${ubuildingInfo.lng}); 
+	var markerPosition  = new kakao.maps.LatLng(${buildinginfo.lat}, ${buildinginfo.lng}); 
 
 	// 마커를 생성합니다
 	var marker = new kakao.maps.Marker({
@@ -812,19 +811,17 @@
 	
 	 const ms = [];
 	
-	$('#blist .bitem').click(function(){
+	function change(){
 		
 		//alert($(this).data('lat'));
-			
-		alert($(this).data('buildingseq'));
+		//alert($('#blist option:selected').data('buildingseq'));
 		
 		 $.ajax({
 	            url:"/wood/snsmain.do", // HelloServlet.java로 접근
-	            type: "post", // GET 방식
+	            type: "get", // GET 방식
 //	             data: "id=abc&pw=123",
-	            data:{buildingseq:$(this).data('buildingseq')}, // json 방식으로 서블릿에 보낼 데이터
+	            data:{buildingseq:$('#blist option:selected').data('buildingseq')},// json 방식으로 서블릿에 보낼 데이터
 	            success:function(data){
-	            	location.href="/wood/snsmain.do";
 	                alert("success");
 	            },
 	            error:function(){
@@ -842,7 +839,7 @@
 			
 			item.setMap(null);
 		});
-		let p = new kakao.maps.LatLng($(this).data('lat'),$(this).data('lng'));
+		let p = new kakao.maps.LatLng($('#blist option:selected').data('lat'),$('#blist option:selected').data('lng'));
 		
 		
 		m = new kakao.maps.Marker({
@@ -860,7 +857,7 @@
 		$('#blist td').css('background-color','transparent');
 		$(this).css('background-color','gold');
 		
-	});
+	};
 	
 	$(document).ready(function(){
 		
