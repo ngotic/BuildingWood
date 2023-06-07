@@ -24,6 +24,7 @@ import org.json.simple.JSONObject;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.project.wood.user.repository.BuildingInfoDAO;
 import com.project.wood.user.repository.UserDAO;
 import com.project.wood.user.repository.UserDTO;
 import com.test.my.DBUtil;
@@ -31,44 +32,15 @@ import com.test.my.DBUtil;
 /*<form id="form1" action="/wood/user/register.do" method="POST">*/
 @WebServlet("/user/register.do")
 public class Register extends HttpServlet {
-
-	private Connection conn;
-	private Statement stat;
-	private PreparedStatement pstat;
-	private ResultSet rs;
-
+	
 	private UserDAO dao = new UserDAO();
-
-	public Register() {
-		this.conn = DBUtil.open();
-	}
-
-	public List<Map<String, String>> getBuildingInfo() {
-
-		try {
-			String sql = "select buildingseq, '[' || name ||']' ||address as building from tblBuilding";
-			pstat = conn.prepareStatement(sql);
-			rs = pstat.executeQuery();
-			List<Map<String, String>> blist = new ArrayList<Map<String, String>>();
-			while (rs.next()) {
-				Map<String, String> bMap = new HashMap<String, String>();
-				bMap.put("buildingseq", rs.getString("buildingseq"));
-				bMap.put("building", rs.getString("building"));
-				blist.add(bMap);
-			}
-			return blist;
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+	private BuildingInfoDAO bdao = new BuildingInfoDAO();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// Register.java
 		// 건물 정보 다 넘겨줘야 함
-		List<Map<String, String>> blist = getBuildingInfo();
+		List<Map<String, String>> blist = bdao.getBuildingInfo();
 		req.setAttribute("buildinglist", blist);
 		/* System.out.println(blist); */
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/user/register.jsp");

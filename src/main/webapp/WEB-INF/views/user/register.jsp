@@ -188,17 +188,17 @@
                 		<label for="my_year">생년월일*</label>
                		 		<div class="input-group ms-1" style="display:flex; flex-direction: row" >
 		              
-	                        <input type="number"  min=1900 class="col-md-4" name="year" value="2000" id="year" maxlength="4" placeholder="년도" style="width:150px; border-radius:5px 0 0 5px; text-align:center; font-size:14px; outline:none;">
-	                        <label class="input-group-text" for="year">년</label>
+	                        <input type="number"  min=1900 class="col-md-4" name="year" value="2000" id="year" maxlength="4" placeholder="년도" style="width:150px; height:30px; border-radius:5px 0 0 5px; text-align:center; font-size:14px; outline:none;">
+	                        <label class="input-group-text" for="year" style="height: 30px;">년</label>
 		              
-		                    <select name="month" id="month" class="custom-select" style="width:120px; text-align:center; font-size:14px;">
+		                    <select name="month" id="month" class="custom-select" style="width:120px; height:30px; text-align:center; font-size:14px;">
 		                      	<c:forEach var="i" begin="1" end="12" step="1">
 								   <option value="${i}">${i}</option>
 								</c:forEach>
 		                    </select>
-		                    <label class="input-group-text" for="month">월</label>
+		                    <label class="input-group-text" for="month" style="height: 30px;">월</label>
 		                    
-		                    <select name="day" id="day" class="custom-select" style="width:120px;  text-align:center; font-size:14px;">
+		                    <select name="day" id="day" class="custom-select" style="width:120px;  height:30px; text-align:center; font-size:14px;">
 		                        <option value="1" selected="selected">1
 		                        </option>
 		                        <c:forEach var="i" begin="2" end="31" step="1">
@@ -206,7 +206,7 @@
 								</c:forEach>
 		                    </select>
 		                    
-		                    <label class="input-group-text" for="day">일</label>
+		                    <label class="input-group-text" for="day" style="height: 30px;">일</label>
 		                    
 		                </div>
 		            </div>

@@ -169,10 +169,28 @@ public class UserDAO {
 	}
 
 	public UserDTO existMember(String id) {
-		// TODO Auto-generated method stub
+		
+		String sql = "select * from tblMember where id =?";
+		
+		try {
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, id);
+			rs = pstat.executeQuery();
+			
+			if (rs.next()) {
+				UserDTO result = new UserDTO();
+				// 이정도만 넘기자 
+				result.setId(rs.getString("id"));
+				result.setNickname(rs.getString("nickname"));
+				result.setLv(rs.getString("lv"));
+				return result;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
+		
 	}
 
-
-	
 }

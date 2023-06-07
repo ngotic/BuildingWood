@@ -27,7 +27,7 @@ public class AuthFilter implements Filter{
 		HttpServletRequest req = (HttpServletRequest)request;
 		HttpSession session = req.getSession();
 		
-		System.out.println(req.getRequestURI());
+		// System.out.println(req.getRequestURI());
 		/*
 		if (session.getAttribute("id") == null ) {  
 			if (!req.getRequestURI().equals("/wood/index.do") && !req.getRequestURI().contains("login")) {

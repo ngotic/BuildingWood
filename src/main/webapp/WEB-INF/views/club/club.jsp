@@ -88,12 +88,56 @@
 	color: tomato;
 	}
 	
+.banner-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(https://cdn.pixabay.com/photo/2021/12/10/17/42/camp-6861087_1280.jpg);
+  background-size: cover;
+  background-position: center center;
+}
+
+
+.banner-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.banner-text {
+  font-size: 36px;
+  color: white;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.banner-button {
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  cursor: pointer;
+}
+	
 </style>
 </head>
 <body>
 
 	<!-- template.jsp > index.jsp -->
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
+	<div class="banner-container">
+  	<div class="banner-content">
+    	<h1 class="banner-text">메인 제목</h1>
+    	<button class="banner-button">버튼</button>
+  		</div>
+	</div>
+	
 	<section class="container">
 		<h1 class="text-center mt-3">동호회 게시판</h1>
 		

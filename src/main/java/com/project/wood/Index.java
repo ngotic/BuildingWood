@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,8 +22,20 @@ import javax.crypto.Cipher;
 @WebServlet("/index.do")
 public class Index extends HttpServlet {
 	
-	NaverLoginApi naverApi = new NaverLoginApi();
-	GoogleLoginApi googleApi = new GoogleLoginApi();
+	private NaverLoginApi naverApi;
+	private GoogleLoginApi googleApi;
+	
+	@Override
+	public void init() throws ServletException {
+		// TODO Auto-generated method stub
+		String clientSecret = ApiKeyHolder.getNaverLoginSecretKey(getServletContext().getRealPath("/"));
+		naverApi = NaverLoginApi.instance();
+		naverApi.setClientSecret(clientSecret);
+		
+		String clientSecretGoogle = ApiKeyHolder.getGoogleLoginSecretKey(getServletContext().getRealPath("/"));
+		googleApi = GoogleLoginApi.instance();
+		googleApi.setClientSecret(clientSecretGoogle);
+	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,7 +44,7 @@ public class Index extends HttpServlet {
 		//Index.java
 		req.setAttribute("naverUrl", naverApi.getNaverLoginUrl());
 		req.setAttribute("googleUrl", googleApi.getGoogleLoginUrl());
-		
+				
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/main.jsp");
 		dispatcher.forward(req, resp);
 
