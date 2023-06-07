@@ -62,11 +62,11 @@ body {
 
 /* HEADER */
 .header-area {
-    position: relative; /* 여기도 */
+    position: sticky; /* 여기도 */
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 3;
+    z-index: 1;
     background-color: white;
     border-bottom: 2px solid #eee;
 }
@@ -197,7 +197,9 @@ body {
 
 @media (max-width: 992px) {
     .header-area > #navbar > .navbar-menu {
-        height: 390px;
+        /* height: 390px; */
+        height:100vh;
+        
     }
     .header-area > #navbar .dropdown-menu.show .dropdown-item{
         color: #777;
