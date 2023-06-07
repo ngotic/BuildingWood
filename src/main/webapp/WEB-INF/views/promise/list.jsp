@@ -169,8 +169,8 @@
 <form method="POST" action="/wood/promise/add.do">
 	<!-- Modal -->
      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
-        <div class="modal-dialog modal-lg modal-dialog-centered ">
-          <div class="modal-content">
+        <div class="promise-modal-dialog modal-dialog modal-lg modal-dialog-centered ">
+          <div class="promise-modal-dialog modal-content">
             <div class="modal-header">
                   <h1 class="text-success text-center">
                       약속 등록
@@ -225,13 +225,7 @@
 	
 <section class="container">
 	
-	
 
-	<div class="board-name"> 
-		
-		<span>약속 게시판</span>
-	
-	</div>
 		
 		
 	<div class="upperside2">
