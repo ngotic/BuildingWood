@@ -58,7 +58,7 @@ public class PromiseDAO {
 		      
 		      try {
 		         
-		         String sql = "select promiseseq, title,  category, num, regdate, nickname, profile from tblPromise p inner join tblMember m on p.writer = m.id";
+		         String sql = "select promiseseq, title, id, category, num, regdate, nickname, profile from tblPromise p inner join tblMember m on p.writer = m.id";
 		         
 		         stat = conn.createStatement();
 		         rs = stat.executeQuery(sql);
@@ -74,6 +74,7 @@ public class PromiseDAO {
 		            dto.setCategory(rs.getString("category"));
 		            dto.setNum(rs.getString("num"));
 		            dto.setRegdate(rs.getString("regdate"));
+		            dto.setId(rs.getString("id"));
 		            dto.setNickname(rs.getString("nickname"));
 		            dto.setProfile(rs.getString("profile"));
 
@@ -97,7 +98,7 @@ public class PromiseDAO {
 		
 		try {
 			
-			String sql ="select promiseseq, title, category, content, num, regdate, nickname, profile from tblPromise p inner join tblMember m on p.writer = m.id where promiseseq = ?";
+			String sql ="select promiseseq, id, title, category, content, num, regdate, nickname, profile from tblPromise p inner join tblMember m on p.writer = m.id where promiseseq = ?";
 			
 			pstat = conn.prepareStatement(sql);
 
@@ -115,6 +116,7 @@ public class PromiseDAO {
 				dto.setCategory(rs.getString("category"));
 				dto.setContent(rs.getString("content"));
 				dto.setNum(rs.getString("num"));
+				dto.setId(rs.getString("id"));
 				dto.setRegdate(rs.getString("regdate"));
 				dto.setNickname(rs.getString("nickname"));
 				dto.setProfile(rs.getString("profile"));
@@ -194,13 +196,11 @@ public List<PromiseDTO> getTag() {
 	            ArrayList<String> tags = getTag(dto.getPromiseseq());
 	            dto.setTags(tags);
 	            
-	            System.out.println(dto.getTitle());
 	            
 	            list.add(dto);
 	            
 	         }
 	         
-	         System.out.println(list.size());
 	         
 	         return list;
 	         
@@ -214,7 +214,107 @@ public List<PromiseDTO> getTag() {
 
 
 
+public List<PromiseDTO> getTaglist(String tag) {
+	
+	
+	
+	try {
+		
+		String sql = String.format("select * from tblPromise p inner join tblPromisehash ph on ph.promiseseq = p.promiseseq inner join tblhashtag h on h.hashtagseq = ph.hashtagseq inner join tblMember m on m.id = p.writer where tag like '%%%s%%' order by p.promiseseq desc", tag);
+		
+		
+		stat = conn.createStatement();
+		rs = stat.executeQuery(sql);	
+         
+		List<PromiseDTO> list = new ArrayList<PromiseDTO>();
+         
+         while (rs.next()) {
+            
+            PromiseDTO dto = new PromiseDTO();
+            
+            dto.setPromiseseq(rs.getString("promiseseq"));
+            dto.setTitle(rs.getString("title"));
+            dto.setCategory(rs.getString("category"));
+            dto.setNum(rs.getString("num"));
+            dto.setRegdate(rs.getString("regdate"));
+            dto.setNickname(rs.getString("nickname"));
+            dto.setProfile(rs.getString("profile"));
 
+//            getTag((String)dto.getPromiseseq()); //arraylist 왜냐면 dto에서 tag배열이 arraylist니깐
+            
+            ArrayList<String> tags = getTag(dto.getPromiseseq());
+            dto.setTags(tags);
+            
+
+            
+            list.add(dto);
+            
+         }
+         
+        
+         return list;
+         
+         
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
+      
+      
+      return null;
+   }
+
+
+
+//public List<PromiseDTO> getTaglist(String tag) {
+//	
+//	
+//	
+//	try {
+//		
+//		String sql = "select * from tblPromise p inner join tblPromisehash ph on ph.promiseseq = p.promiseseq inner join tblhashtag h on h.hashtagseq = ph.hashtagseq inner join tblMember m on m.id = p.writer where tag='?' order by p.promiseseq desc";
+//		
+//		pstat = conn.prepareStatement(sql);
+//		
+//		pstat.setString(1, tag);
+//		
+//		rs = pstat.executeQuery();	
+//         
+//		List<PromiseDTO> list = new ArrayList<PromiseDTO>();
+//         
+//         while (rs.next()) {
+//            
+//            PromiseDTO dto = new PromiseDTO();
+//            
+//            dto.setPromiseseq(rs.getString("promiseseq"));
+//            dto.setTitle(rs.getString("title"));
+//            dto.setCategory(rs.getString("category"));
+//            dto.setNum(rs.getString("num"));
+//            dto.setRegdate(rs.getString("regdate"));
+//            dto.setNickname(rs.getString("nickname"));
+//            dto.setProfile(rs.getString("profile"));
+//
+////            getTag((String)dto.getPromiseseq()); //arraylist 왜냐면 dto에서 tag배열이 arraylist니깐
+//            
+//            ArrayList<String> tags = getTag(dto.getPromiseseq());
+//            dto.setTags(tags);
+//            
+//
+//            
+//            list.add(dto);
+//            
+//         }
+//         
+//        
+//         return list;
+//         
+//         
+//      } catch (Exception e) {
+//         e.printStackTrace();
+//      }
+//      
+//      
+//      return null;
+//   }
 	
 
 

@@ -28,8 +28,8 @@ public class List extends HttpServlet {
 
 		
 		HttpSession session = req.getSession();
-		session.setAttribute("id", "bwgOXg113");
-		
+
+	
 		
 		
 		//list.java
@@ -42,23 +42,35 @@ public class List extends HttpServlet {
 		java.util.List<PromiseDTO> tlist = dao.list();
 		
 		req.setAttribute("tlist", tlist);
-		System.out.println(tlist);
 		
 
-		java.util.List<PromiseDTO> list = dao.getTag();
-
-		req.setAttribute("list", list);
-		System.out.println(list);
+		String tag = req.getParameter("tag");
+		
+		//System.out.printf("tag: %s", tag);
 		
 		//req.setAttribute("dto", dto);
+		
+		
+		
+		if (tag == null) {
+			java.util.List<PromiseDTO> list = dao.getTag();
+			req.setAttribute("list", list);
+			
+		} else if (tag != null) {
+			java.util.List<PromiseDTO> list = dao.getTaglist(tag);
+			req.setAttribute("list", list);
+			
+		}
+		
+		
+		
+		
+		
 		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/promise/list.jsp");
 		dispatcher.forward(req, resp);
 	}
-	
-	
-	
 
 }
 

@@ -279,6 +279,18 @@
 	.application-box {
 		margin: 0 auto;
 	}
+	
+	
+	.accept-nickname-box {
+		width: 700px;
+		height: 300px;
+	}
+	
+	
+	.accept-nickname {
+			
+		
+	}
 
 		
 
@@ -305,31 +317,33 @@
             </div>
             <div class="pricing d-flex justify-content-between align-items-center">
                 <div class="left">
-                    <p class="ml-2">모집인원: ${dto.num }</p>
+                    <p class="ml-2">모집인원: ${dto.num}</p>
                 </div>
                 <span class="time">${dto.regdate}</span>
             </div>
             <div id="hashtag">
             
 			</div>
-			      <c:if test="${not empty id && (id == dto.id)}">
+			      <c:if test="${id == dto.id}">
 	                  <div id="promise-accept" class="promise-accept d-flex flex-row user-feed" style="float:right;">
-	                  	<button >수락취소</button>
-	                  	<button type="submit" style="float:right; margin-left:10px;">신청내역보기</button>
+	                  	<button type="submit" style="float:right; margin-left:10px;">숨기기</button>
+	                  	<button id="promise-accept-btn" type="submit" style="float:right; margin-left:10px;">신청내역보기</button>
 	                  </div>
                   </c:if> 
         </div>
 
     </div>
 		
- <div class="category mb-30">
+ <div  id="promise-acceptlist" class="category mb-30" style="display:none;">
 	<div class="job">
 		<div class="application-box">
 			<div class="application-word colors1">신청내역</div>
 		</div>
-		<c:forEach items="${acceptnickname}" var="nickname">
-			<div>${nickname}</div>
-		</c:forEach>
+		<div class="accept-nickname-box">
+			<c:forEach items="${acceptnickname}" var="nickname">
+				<div class="accept-nickname">${nickname}</div>
+			</c:forEach>
+		</div>
 	</div>
 </div> 	
 	
@@ -410,32 +424,26 @@
 <script>
 
 
-let temp = '';
-
-<c:forEach items="${dto.tag}" var="tag">
-
-	temp = `<button class="tag" onclick="location.href='/wood/promise/list.do?tag=${tag}';">${tag}</button>`;
-
-	$('#hashtag').append(temp);
-	
-</c:forEach>
-
-
-/* $('.tag').on('click',function(e) {
-	
-	location.href = '/wood/promise/list.do?tag=' + e.detail.data.value;
-	
-}); */
 
 /* $(function() {
 	
 	$('#promise-accept').click(function(){
 		
-		if ()
+		$('#promise-acceptlist').show();
 		
 	});
 	
 }); */
+
+$('#promise-accept-btn').on('click', function() {
+	
+	if($("#promise-acceptlist").css("display") == "none"){
+	     $("#promise-acceptlist").slideDown('slow');
+	} else {
+	    $("#promise-acceptlist").slideUp('slow');
+	}
+	
+});
 
 
 

@@ -120,7 +120,7 @@
         }
         
         .card {
-        	width: 300px;
+        	width: 340px;
         	height: 310px;
         	border: 1px solid transparent;
 		    padding: 30px 19px 25px 19px;
@@ -261,7 +261,7 @@
     <div class="list-container">
         <div class="row">
         
-			<c:forEach items="${list}" var="dto" varStatus="status">
+		<c:forEach items="${list}" var="dto" varStatus="status">	
             <div class="col-lg-4 col-md-6 col-sm-6">
                     
 	             <div class="category mb-30">
@@ -287,26 +287,28 @@
 	                    <div id="hashtag${status.count}">
 							
 						</div>
+						
 	           		 </div>
 	            </div>
             <input type="hidden" name="promiseseq" value="${dto.promiseseq}">
             
             <script>
 
-			
 			var temp = '';
 			
 			<c:forEach items="${dto.tags}" var="tag">
 			
-				temp = `<button class="tag" onclick="location.href='/wood/promise/list.do?tag=${tag}';">${tag}</button>`;
+				temp = `<button type="submit" class="tag" onclick="location.href='/wood/promise/list.do?tag=${tag}';">${tag}</button>`;
 			
 				$('#hashtag${status.count}').append(temp);
 				
 			</c:forEach> 
 			
 			</script>
+			
+			
 			</div>
-            </c:forEach>
+</c:forEach>
             
             </div>
             </div>
@@ -357,7 +359,11 @@
 $('input[name=hashtag]').tagify();
 
 
-    
+$(function() {
+	$('.tag').click(function() {
+		$('.tag').val()
+	})
+}); 
     
     
     

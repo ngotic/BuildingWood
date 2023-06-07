@@ -1,10 +1,10 @@
         .upperside2 > div {
-            float: left;
+            /* float: left; */
         }
 
 
         .upperside2 {
-            float: left;
+			
             display: flex;
             align-items: center;
         }
@@ -33,7 +33,7 @@
 /* ---------------------------------------------------- */
 
     .btn-search {
-
+		float: left; 
         width: 80px;
 
         color: #FF5B5B;

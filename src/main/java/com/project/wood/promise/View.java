@@ -23,7 +23,7 @@ public class View extends HttpServlet {
 
 		
 		HttpSession session = req.getSession();
-		session.setAttribute("id", "bwgOXg113");
+
 
 		
 		PromiseDAO dao = new PromiseDAO();
@@ -39,7 +39,6 @@ public class View extends HttpServlet {
 		ArrayList<String> tag = dao.getTag(promiseseq);
 		
 		dto.setTag(tag);
-		dto.setId((String)session.getAttribute("id"));
 		
 		
 		System.out.println(dto);
@@ -47,6 +46,9 @@ public class View extends HttpServlet {
 		req.setAttribute("list", list);
 		
 		req.setAttribute("dto", dto);
+		
+		
+		System.out.println(dto.getId());
 		
 		
 		
