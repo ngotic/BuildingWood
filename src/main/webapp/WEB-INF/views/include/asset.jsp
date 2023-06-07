@@ -3,7 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <meta charset="UTF-8">
 
-
+<!-- favicon 추가 -->
+<link rel="icon" href="/wood/asset/logo.png" type="image/x-icon">
+<link rel="shortcut icon" href="/wood/asset/logo.png" type="image/x-icon">
 <!-- <link rel="shortcut icon" href="/wood/asset/img/favicon.ico"> -->
 
 <script src="https://kit.fontawesome.com/d6f8323617.js" crossorigin="anonymous"></script>
@@ -14,5 +16,4 @@
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@100;300;400;500;900&display=swap" rel="stylesheet">
 <!-- user style -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" >
-   
 <link rel="stylesheet" href="/wood/asset/css/headerstyle.css">
