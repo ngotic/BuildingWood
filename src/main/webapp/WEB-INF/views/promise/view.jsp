@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -266,7 +267,18 @@
 	.promise-accept {
 	
 	}
-
+	
+	/* 신청 내역 */
+	
+	.application-word {
+		text-align: center;
+		padding: 5px;
+		border-bottom: 1px solid #ccc;
+	}
+	
+	.application-box {
+		margin: 0 auto;
+	}
 
 		
 
@@ -310,13 +322,16 @@
 
     </div>
 		
-<div class="category mb-30">
+ <div class="category mb-30">
 	<div class="job">
-		<c:foreach items="${rdto }" var="nickname">
-		<div>${rdto.acceptnickname}</div>
-		</c:foreach>
+		<div class="application-box">
+			<div class="application-word colors1">신청내역</div>
+		</div>
+		<c:forEach items="${acceptnickname}" var="nickname">
+			<div>${nickname}</div>
+		</c:forEach>
 	</div>
-</div>		
+</div> 	
 	
 	
 	
@@ -412,7 +427,7 @@ let temp = '';
 	
 }); */
 
-$(function() {
+/* $(function() {
 	
 	$('#promise-accept').click(function(){
 		
@@ -420,7 +435,7 @@ $(function() {
 		
 	});
 	
-});
+}); */
 
 
 

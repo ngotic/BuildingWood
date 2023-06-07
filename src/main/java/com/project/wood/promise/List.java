@@ -58,9 +58,6 @@ public class List extends HttpServlet {
 	}
 	
 	
-
-	
-
 	
 
 }

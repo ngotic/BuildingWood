@@ -23,6 +23,7 @@ public class View extends HttpServlet {
 
 		
 		HttpSession session = req.getSession();
+		session.setAttribute("id", "bwgOXg113");
 
 		
 		PromiseDAO dao = new PromiseDAO();
@@ -55,8 +56,9 @@ public class View extends HttpServlet {
 		
 		
 		 ArrayList<String> acceptnickname = dao.getAcceptnickname(promiseseq);
-		 rdto.setAcceptnickname(acceptnickname);
+//		 rdto.setAcceptnickname(acceptnickname);
 		 
+		 req.setAttribute("acceptnickname", acceptnickname);
 
 		
 		
