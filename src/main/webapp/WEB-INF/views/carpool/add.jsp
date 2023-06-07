@@ -283,9 +283,13 @@
 <script>
 	
 	function combineDateTime() {
+		
 	    var dateInput = document.getElementById("dateField").value;
 	    var timeInput = document.getElementById("timeField").value;
 	
+	    var datetime = dateInput + " " + timeInput + ":00";
+	    
+	    //datetime을 dto.ttime에 저장해서 서버로 insert하는 방법?
 	    
 	}
 	
