@@ -66,7 +66,7 @@
                         스터디/과외
                     </a>
                     <ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="">스터디게시판</a></li>
+						<li><a class="dropdown-item" href="/wood/study/list.do">스터디게시판</a></li>
 						<li><a class="dropdown-item" href="">과외게시판</a></li>
                     </ul>
                 </div>
