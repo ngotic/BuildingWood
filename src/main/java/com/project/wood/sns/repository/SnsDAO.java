@@ -75,4 +75,34 @@ public class SnsDAO {
 		
 		return null;
 	}
+
+	public List<SnsDTO> getComment() {
+		try {
+			List<SnsDTO> clist = new ArrayList<SnsDTO>();
+			String sql = "select * from snscommentlist";
+			stat = conn.createStatement();
+			rs = stat.executeQuery(sql);
+			
+			while (rs.next()) {
+				SnsDTO comment = new SnsDTO();
+				
+				comment.setSnscommentseq(rs.getString("snscommentseq"));
+				comment.setSnsboardseq(rs.getString("snsboardseq"));
+				comment.setId(rs.getString("id"));
+				comment.setContent(rs.getString("content"));
+				comment.setRegdate(rs.getString("writedate"));
+				comment.setEditdate(rs.getString("editdate"));
+				comment.setNickname(rs.getString("nickname"));
+				comment.setProfile(rs.getString("profile"));
+				clist.add(comment);
+				
+				
+			}
+			return clist;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 }

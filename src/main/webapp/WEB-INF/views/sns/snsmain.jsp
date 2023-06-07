@@ -489,7 +489,6 @@
 						</form>
 						
 						<c:forEach items="${list}" var="dto" varStatus="status">
-						  
 						<div class="boardcontent" style="position:relative;">
 							<div id="usericon" style="display:inline-block; width:50px; height:400px; margin-right:5px;">
 								<!-- 유저 이미지 넣기  -->
@@ -502,7 +501,6 @@
 								<div id="useritem">
 									${dto.content}
 								</div>
-								
 								<div class="imagebox" data-count="${dto.cpic}" id="send_modal">
 								    <ul class="slides" style="width:calc(${dto.cpic} * 450px)"> 
 								   		<c:forEach items="${plist}" var="pic">
@@ -519,8 +517,30 @@
 								      <span class="next">&rang;</span>
 								    </p>
 								  </div>
-						       
-							
+						       	
+						       	<div id="to_modal_commentlist" style="display:none;" >
+						       	<c:forEach items="${commentlist}" var="clist">
+						       		<c:if test="${clist.snsboardseq==dto.snsboardseq}">
+					     				<div class="modal_commentbox" >
+					     					<div class="u_imagebox box">
+					     						<img alt="" src="/wood/asset/img/${clist.profile}" class="comment_userimage">
+						     				</div>
+						     				<div class="modal_usernick">
+												<div class="top">
+													${clist.nickname}
+												</div>
+												<div>
+													<button class="to_comment" value="${clist.nickname}">답글 달기</button>
+												</div>
+											</div>
+											<div class="modal_comment top">
+												${clist.content}
+											</div>
+					     				</div>
+				     				</c:if>
+	     						</c:forEach>
+								</div>
+								
 								<div id="react">
 									<div id="like">
 										<span class="material-symbols-outlined">
@@ -539,15 +559,14 @@
 						</c:forEach>
 					</div>
 				</div>
-
 			</div>
 			<div id="map"></div>
 		</div>
-		
+				
 	</section>
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 	
-	
+		
 	
 	
 	
@@ -586,22 +605,24 @@
 	   			<td>
 	     			<div id="modal_scroll" style="vertical-align:top; height:500px; overflow-y:scroll;">
 	     				<!-- 댓글1  -->
-	     				<div class="modal_commentbox" >
-	     					<div class="u_imagebox box">
-	     						<img alt="" src="/wood/asset/img/logo.png" class="comment_userimage">
+	     				<c:forEach items="">
+		     				<div class="modal_commentbox" >
+		     					<div class="u_imagebox box">
+		     						<img alt="" src="/wood/asset/img/logo.png" class="comment_userimage">
+			     				</div>
+			     				<div class="modal_usernick">
+									<div class="top">
+										당당한이병건477
+									</div>
+									<div>
+										<button class="to_comment" value="당당한이병건477">답글 달기</button>
+									</div>
+								</div>
+								<div class="modal_comment top">
+									진짜요.. 8월엔 얼마나 더우려구...ㅠㅠㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ
+								</div>
 		     				</div>
-		     				<div class="modal_usernick">
-								<div class="top">
-									당당한이병건477
-								</div>
-								<div>
-									<button class="to_comment" value="당당한이병건477">답글 달기</button>
-								</div>
-							</div>
-							<div class="modal_comment top">
-								진짜요.. 8월엔 얼마나 더우려구...ㅠㅠㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ
-							</div>
-	     				</div>
+	     				</c:forEach>
 	     			<!--댓글2  -->
 	     				<div class="modal_commentbox" >
 	     					<span>
@@ -807,7 +828,7 @@
     	        const profile="/wood/asset/img/"+$(event.relatedTarget).data('profile');
     	        const nickname=$(event.relatedTarget).data('nickname');
     	        const cpic=$(event.relatedTarget).data('cpic');
-    	        console.log(index);
+    	        
     	        $("#modal_usernick").text(nickname);
     	        $("#u_imagebox").html("<img alt="+"\"\" src=\""+profile+"\"class=\"comment_userimage\">");
     	        $("#modal_content").text(content); 
@@ -817,8 +838,8 @@
     	        str=str.replaceAll('class=\"','class=\"m');
     	        $("#modal_imagebox").html(str); 
     	        
-    	    	console.log(snsboardseq);
-    	    	
+    	        let content = $("#to_modal_commentlist").html();
+    	        
     	    	$('.mprev').on('click', function () {
     	    		if(Idx<=1){
     	    			Idx=1;

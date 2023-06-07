@@ -18,20 +18,20 @@ public class SnsMain extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		
 		SnsDAO dao = new SnsDAO();
 		List<SnsDTO> list = dao.getSNSList();
-		
 		List<SnsDTO> plist = dao.getPicList();
+		List<SnsDTO> commentlist = dao.getComment();
 		
 		req.setAttribute("plist", plist);
 		req.setAttribute("list", list);
-		
+		req.setAttribute("commentlist", commentlist);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/sns/snsmain.jsp");
 		dispatcher.forward(req, resp);
 		
 
 	}
-
+	
 }

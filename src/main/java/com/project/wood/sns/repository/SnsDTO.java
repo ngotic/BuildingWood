@@ -20,4 +20,7 @@ public class SnsDTO {
 	private String cpic;
 	
 	
+	private String snscommentseq;
+	
+	
 }
