@@ -5,7 +5,8 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> 
 
 	<script>
-		/* HEADER EVENT*/
+		/* 
+		 HEADER EVENT
 		window.onload = function() { scrollFunction()};
 		window.onscroll = function() { scrollFunction()};
 
@@ -26,7 +27,7 @@
 					document.getElementsByTagName('body')[0].style.marginTop = '0';
 				}
 			}
-		}
+		} */
 		function menuToggle() {
 			document.getElementById('menu').classList.toggle('show');
 		}
