@@ -28,19 +28,24 @@ public class List extends HttpServlet {
 
 		HashSet<String> set = new HashSet<String>();
 		HashSet<String> money = new HashSet<String>();
+
+		if(list != null) {
+			
 		
-		for(int i=0; i<list.size(); i++) {
-		
-			set.add(list.get(i).getPlace());
-			money.add(list.get(i).getPrice());
+			for(int i=0; i<list.size(); i++) {
+			
+				set.add(list.get(i).getPlace());
+				money.add(list.get(i).getPrice());
+			}
+			req.setAttribute("list", list);
+			req.setAttribute("set", set);
+			req.setAttribute("money", money);
+
+			java.util.List<TeachDTO> alist = dao.apply(id);
+			
+			req.setAttribute("alist", alist);
 		}
 		
-		java.util.List<TeachDTO> alist = dao.apply(id);
-
-		req.setAttribute("alist", alist);
-		req.setAttribute("list", list);
-		req.setAttribute("set", set);
-		req.setAttribute("money", money);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/teach/list.jsp");
 		dispatcher.forward(req, resp);
