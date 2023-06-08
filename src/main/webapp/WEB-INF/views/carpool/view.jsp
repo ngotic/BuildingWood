@@ -24,8 +24,7 @@
 	  width: 656px;
 	  height: auto;
 	  display: flex;
-	  padding: 50px 16px 0;
-	  margin-bottom: 50px;
+	  /* padding: 50px 16px 0; */
 	  box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.25) ;
 	  align-items: center;
 	  flex-shrink: 0;
@@ -41,17 +40,60 @@
 	  gap: 24px;
 	  width: 526px;
 	  height: 704px;
-	  display: flex;
+	 /*  display: flex; */
 	  position: relative;
 	  align-items: center;
 	  flex-shrink: 0;
 	}
 	
+	.card-header {
+		display: flex; 
+		align-items: center;
+	}
+	
+	.user-info {
+		padding-left: 4px;
+	}
+	
+	.profile {
+	  width: 48px;
+	  height: 48px;
+	  border-radius: 50%;
+	}
+	
+	.nickname {
+	
+	}
+	
+	.gender {
+	
+	}
+	
+	.rating {
+		display: flex;
+  		align-items: center;
+	}
+	
+	.rating-star {
+		width: 18px;
+		height: 18px;
+		margin-right: 5px;
+	}
+	
+	.rating-score {
+		font-size: 0.9rem;
+	}
+	
+/* 	.top-frame {
+	  display: flex;
+	  align-items: center;
+	}
+	
 	.profile-frame {
 	  top: 12px;
 	  left: 193px;
-	  width: 140px;
-	  height: 140px;
+	  width: 80px;
+	  height: 80px;
 	  display: flex;
 	  position: absolute;
 	  align-items: flex-start;
@@ -63,8 +105,8 @@
 	.profile {
 	  top: 0px;
 	  left: 0px;
-	  width: 140px;
-	  height: 140px;
+	  width: 80px;
+	  height: 80px;
 	  position: absolute;
 	  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.25);
 	  border-radius: 50%;
@@ -106,15 +148,10 @@
 	  width: 526px;
 	  height: auto;
 	  position: absolute;
-	  font-size: 15px;
+	  font-size: 20px;
 	  align-self: stretch;
 	  font-style: Medium;
 	  text-align: center;
-	  /* font-family: Roboto; */
-	  font-weight: 500;
-	  line-height: 32px;
-	  font-stretch: normal;
-	  text-decoration: none;
 	}
 	
 	.rating {
@@ -132,10 +169,12 @@
 	  width: 30px;
 	  height: 30px;
 	  margin-right: 3px;
-	}
+	} */
+	
+	
 	
 	.carpool-info-frame {
-	  top: 330px;
+	  /* top: 330px; */
 	  left: 115px;
 	  width: 295px;
 	  height: 212.71192932128906px;
@@ -170,7 +209,7 @@
 	  flex-direction: column;
 	}
 	
-	.start-frame {
+	.departures-frame {
 	  gap: 8px;
 	  display: flex;
 	  align-self: stretch;
@@ -178,7 +217,7 @@
 	  flex-direction: column;
 	}
 	
-	.start {
+	.departures {
 	  color: var(--dl-color-grays-gray950);
 	  height: auto;
 	  font-size: 20px;
@@ -205,7 +244,7 @@
 	  height: 13px;
 	}
 	
-	.end-frame {
+	.arrivals-frame {
 	  gap: 8px;
 	  display: flex;
 	  align-self: stretch;
@@ -213,7 +252,7 @@
 	  flex-direction: column;
 	}
 	
-	.end {
+	.arrivals {
 	  color: var(--dl-color-grays-gray950);
 	  height: auto;
 	  font-size: 20px;
@@ -415,8 +454,8 @@
 	}
 	
 	.back-frame {
-	  top: 0px;
-	  left: 0px;
+	  left: 240px;
+      top: 150px;
 	  width: 50px;
 	  height: 50px;
 	  display: flex;
@@ -459,9 +498,36 @@
 		width: 20px;
 		height: 20px;
 	}
-	
 
-</style>
+</style>	
+	
+	
+<!-- 모집 종료 시 --> 
+<style>	
+
+	.end {
+		position: absolute;
+		width: 656px;
+		height: 766px;
+		background: rgba(0,0,0,0.70);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 0.25rem;
+	}
+	
+	.end-frame {
+		color: white;
+		border: 1px solid white;
+		border-radius: 90px;
+		padding: 10px;
+	}
+	
+	.end-frame span {color: white;}
+	
+</style>	
+
+
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
@@ -469,11 +535,50 @@
 	<section class="container">
 		
 	<div class="carpool-view-card">
+	
       <div class="carpool-view-frame">
       
+		<button class="back-frame" onclick="location.href='/wood/carpool/list.do';">
+	 			<div class="back-box">
+	              <span class="back">
+	              	<img class="back-icon" alt="뒤로가기" src="/wood/asset/img/back-icon.png">
+	              </span>
+	            </div>
+	    </button>
+      
+          <div class="card-header">
+	              <img
+	              src="https://www.studiopeople.kr/common/img/default_profile.png"
+	              alt="프로필"
+	              class="profile"
+	              />
+	              <div class="user-info" style="margin-left: 10px;">
+	              	<div>
+		              <span class="nickname">${dto.nickname}</span>
+		              <span class="gender">
+		              		<c:if test = "${dto.gender eq 'M'}">
+		              			(남)
+		              		</c:if>
+		              		<c:if test = "${dto.gender eq 'F'}">
+		              			(여)
+		              		</c:if>
+		              </span>
+		            </div>
+		            <div class="rating">
+		              <img
+			            src="/wood/asset/img/star.png"
+			            alt="RatingStar"
+			            class="rating-star"
+			          />
+		              <span class="rating-score">${dto.score} (${dto.count})</span>
+		            </div>
+	              </div>
+	       </div>
+	       
         <div class="info-frame">
         
-          <div class="profile-frame">
+        
+          <%-- <div class="profile-frame">
             <img
               src="https://www.studiopeople.kr/common/img/default_profile.png"
               alt="프로필사진"
@@ -509,15 +614,15 @@
             />
             <span>${dto.score}</span>
             <span> (${dto.count})</span>
-          </div>
+          </div> --%>
           
           <!-- 출발지, 도착지, 날짜시간, 가격 -->
           <div class="carpool-info-frame"> 
             <div class="carpool-info-box">
               <div class="carpool-info">
               
-                <div class="start-frame">
-                  <span class="start">
+                <div class="departures-frame">
+                  <span class="departures">
                   	<span style="color: #2db400">${dto.departurescity}</span>
                     <span> ${dto.departures}</span>
                   </span>
@@ -531,8 +636,8 @@
                   />
                 </div>
                 
-                <div class="end-frame">
-                  <span class="end">
+                <div class="arrivals-frame">
+                  <span class="arrivals">
                     <span style="color: #2db400">${dto.arrivalscity}</span>
                     <span> ${dto.arrivals}</span>
                   </span>
@@ -549,9 +654,7 @@
                     <span style="color: rgba(45, 180, 0, 1);">${dto.fee}원</span>
                   </span>
                 </div>
-              </div>
-              
-              
+              </div> 
             </div>
           </div>
           
@@ -561,45 +664,49 @@
           </div>
     
           
+          <c:if test="${(id == dto.id)}">
           <button class="edit-frame" onclick="location.href='/wood/carpool/edit.do?carpoolseq=${dto.carpoolseq}';">
  			<div class="edit-box">
               <span class="edit">
-              	<span>수정</span>
+              	<span>수정하기</span>
               </span>
             </div>
           </button>
+          </c:if>
           
-          <button class="apply-frame" onclick="apply();">  
-            <div class="apply-box">
-              <span class="apply">
-                <span style="color: white;">신청</span>
-              </span>
-            </div>
-          </button>
+          <c:if test="${(id != dto.id)}">
+          <!-- <form method="POST" action="/wood/carpool/apply.do"> -->
+	          <button class="apply-frame" onclick="apply();">  
+	            <div class="apply-box">
+	            	<span class="apply" style="color: white;">신청하기</span>
+	            	<%-- <c:choose>
+	              		<c:when test="null"><span class="apply" style="color: white;">신청하기</span></c:when>
+	              		<c:when test="${adto.applystatus eq '신청 중'}"> <span style="color: white;">신청 중</span> </c:when>
+                    	<c:when test="${adto.applystatus eq '신청 완료'}"> <span style="color: white;">신청 완료</span> </c:when>
+	              	</c:choose> --%>
+	            </div>
+	          </button>
+          </c:if>
           
-          <!-- <button class="del-frame" onclick="location.href='/wood/carpool/del.do';"> -->
+ 
+          
+          <c:if test="${(id == dto.id)}">
           <button class="del-frame" onclick="del();">
  			<div class="del-box">
               <span class="del">
-              	<span>삭제</span>
+              	<span>삭제하기</span>
               </span>
             </div>
           </button>
+          </c:if>
           
-          <button class="back-frame" onclick="location.href='/wood/carpool/list.do';">
- 			<div class="back-box">
-              <span class="back">
-              	<img class="back-icon" alt="뒤로가기" src="/wood/asset/img/back-icon.png">
-              </span>
-            </div>
-          </button>
         
         
         <!-- Add the library (only one file) -->
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<script>
 		    function apply() {
-		      new Swal({
+			  new Swal({
 		        title: "참여하기",
 		        text: "신청",
 		        icon: "success",
@@ -615,10 +722,23 @@
 				        text: "신청이 완료되었습니다.",
 				        icon: "success",
 				        confirmButtonColor: '#2db400'
-				      })
+				      });
 		            .then(function(){
-		            	location.href='/wood/carpool/view.do';
-		            	/* 신청 완료 시 신청 버튼이 신청중으로 바뀌어야함 */
+		            	
+		            	/* 신청 완료 시 신청하기 버튼이 신청중으로 바뀜 */
+		            	
+		            	var applyButton = document.querySelector('.apply');
+
+				        // 버튼을 "신청 중"으로 변경
+				        applyButton.textContent = '신청 중';
+				        applyButton.color = '#2db400';
+				        applyButton.backgroundcolor = '#999999';
+				        applyButton.parentElement.classList.add('loading');
+				        applyButton.parentElement.disabled = true;
+				        
+				        
+				        
+				        
 		            });
 		        } else if (result.dismiss == "cancel"){
 		            new Swal({
@@ -663,14 +783,40 @@
 				        text: "게시글 삭제가 취소되었습니다.",
 				        icon: "error",
 				        confirmButtonColor: '#2db400'
-				      });
+				    });
 		        }
 		      });
 		    }
 		</script>
           
-        </div>
       </div>
+      <c:if test="${dto.recruitstatus eq '모집 종료'}">
+	       <div class="end">
+	          	<div class="end-frame">
+	          		<span>모집 종료</span>
+	          	</div>
+		   </div>
+	  </c:if>
+      </div>
+      
+      
+	<c:if test="${id eq dto.id && dto.recruitstatus ne '모집 종료'}">
+    	<h4>신청승인하는거</h4>
+    	<span>닉네임 성별 
+    	
+    	<button>승인</button>
+    	
+    	<button>거절</button>
+    	</span>
+    	
+    	<span>테스트닉네임 성별</span>
+    	
+    	<c:forEach items="${applylist}" var="dto">
+    		<span>${dto.nickname} ${dto.gender}</span>
+    	</c:forEach>
+    	
+    </c:if>
+    
     </div>
 		
 	</section>

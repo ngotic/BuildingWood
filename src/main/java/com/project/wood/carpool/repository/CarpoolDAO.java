@@ -27,19 +27,19 @@ public class CarpoolDAO {
 		
 		try {
 			
-			String sql = "insert into tblCarpool (carpoolseq, boardcategoryseq, driverseq, content, regdate, departtime, departurescity, departures, arrivalscity, arrivals, fee, status, recruit) values (carpoolseq.nextval, default, 1, ?, default, ?, ?, ?, ?, ?, ?, default, ?)";	
+			String sql = "insert into tblCarpool (carpoolseq, boardcategoryseq, driverseq, content, regdate, departtime, departurescity, departures, arrivalscity, arrivals, fee, recruitstatus, recruit) values (carpoolseq.nextval, default, ?, ?, default, ?, ?, ?, ?, ?, ?, default, ?)";	
 			
 			pstat = conn.prepareStatement(sql);
 			
-			//pstat.setString(1, dto.getDriverseq());
-			pstat.setString(1, dto.getContent());
-			pstat.setString(2, dto.getTtime());
-			pstat.setString(3, dto.getDeparturescity());
-			pstat.setString(4, dto.getDepartures());
-			pstat.setString(5, dto.getArrivalscity());
-			pstat.setString(6, dto.getArrivals());
-			pstat.setString(7, dto.getFee());
-			pstat.setString(8, dto.getRecruit());
+			pstat.setString(1, dto.getDriverseq());
+			pstat.setString(2, dto.getContent());
+			pstat.setString(3, dto.getTtime());
+			pstat.setString(4, dto.getDeparturescity());
+			pstat.setString(5, dto.getDepartures());
+			pstat.setString(6, dto.getArrivalscity());
+			pstat.setString(7, dto.getArrivals());
+			pstat.setString(8, dto.getFee());
+			pstat.setString(9, dto.getRecruit());
 			
 			return pstat.executeUpdate();
 			
@@ -86,13 +86,14 @@ public class CarpoolDAO {
 				dto.setArrivalscity(rs.getString("arrivalscity"));
 				dto.setArrivals(rs.getString("arrivals"));
 				dto.setFee(rs.getString("fee"));
-				dto.setStatus(rs.getString("status"));
+				dto.setRecruitstatus(rs.getString("recruitstatus"));
 				dto.setRecruit(rs.getString("recruit"));
 				
 				
 				dto.setId(rs.getString("id"));
 				dto.setScore(rs.getDouble("score"));
 				dto.setCount(rs.getString("count"));
+
 				
 				dto.setNickname(rs.getString("nickname"));
 				dto.setGender(rs.getString("gender"));
@@ -125,6 +126,7 @@ public class CarpoolDAO {
 					  + "(select id from tblDriver where driverseq = tblCarpool.driverseq) as id, "
 					  + "(select (select gender from tblMember where id = tblDriver.id) from tblDriver where driverseq = tblCarpool.driverseq) as gender, "
 					  + "(select (select nickname from tblMember where id = tblDriver.id) from tblDriver where driverseq = tblCarpool.driverseq) as nickname "
+					  /*+ "(select applystatus from tblCarpoolApply where carpoolseq = tblCapool.carpoolseq) as applystatus "*/
 					  + "from tblCarpool where carpoolseq = ?";
 			
 			pstat = conn.prepareStatement(sql);
@@ -145,7 +147,7 @@ public class CarpoolDAO {
 				dto.setArrivalscity(rs.getString("arrivalscity"));
 				dto.setArrivals(rs.getString("arrivals"));
 				dto.setFee(rs.getString("fee"));
-				dto.setStatus(rs.getString("status"));
+				dto.setRecruitstatus(rs.getString("recruitstatus"));
 				dto.setRecruit(rs.getString("recruit"));
 				dto.setContent(rs.getString("content"));
 				
@@ -153,6 +155,7 @@ public class CarpoolDAO {
 				dto.setScore(rs.getDouble("score"));
 				dto.setCount(rs.getString("count"));
 				
+	
 				dto.setNickname(rs.getString("nickname"));
 				dto.setGender(rs.getString("gender"));
 				
@@ -223,6 +226,30 @@ public class CarpoolDAO {
 		
 	}
 
+
+
+	public int carpoolApply(CarpoolApplyDTO adto) {
+	
+		try {
+			
+			String sql = "insert into tblCarpoolApply (carpoolapplyseq, carpoolseq, id, applystatus) values (carpoolapplyseq.nextval, ?, ?, '신청 중'";
+			
+			pstat = conn.prepareStatement(sql);
+			
+			pstat.setString(1, adto.getCarpoolseq());
+			pstat.setString(2, adto.getId());
+			
+			return pstat.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
+	
+	
 	
 
 	

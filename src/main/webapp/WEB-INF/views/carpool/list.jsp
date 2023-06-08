@@ -124,12 +124,11 @@
 	}
 
 	.driver-button-frame {
-		/* width: 100px; */
+		width: 100px;
 		height: 38px;
 		border: 1px solid #999;
 		border-radius: 12px;
 		background: none;
-		padding-left: 10px;
 	}
 	
 	.driver-add-button {
@@ -143,7 +142,6 @@
 		border-radius: 12px;
 		background: none;
 		margin-left: 10px;
-		padding-left: 8px;
 	}
 	
 	.add-button {
@@ -405,6 +403,16 @@
 		              	<span class="price">${dto.fee}원</span>
 		            </div>
 	            </div>
+	           
+	           <c:if test="${dto.recruitstatus eq '모집 종료'}">
+	           <div class="end">
+	          		<div class="end-frame">
+	          			<span>모집 종료</span>
+	          		</div>
+		       </div>
+		       </c:if>
+	           
+	           
 	          </div>
 	        </div>
 	     
@@ -415,7 +423,6 @@
 	          		<div class="end-frame">
 	          			<span>모집 종료</span>
 	          		</div>
-		          </div>
 		      </div> -->
 		      
 	        

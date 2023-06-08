@@ -47,10 +47,16 @@ public class Add extends HttpServlet {
 		
 	   
 		
-		  CarpoolDTO dto = new CarpoolDTO(); dto.setContent(content); //
-		  dto.setTtime(ttime); dto.setDeparturescity(departuresCity);
-		  dto.setDepartures(departures); dto.setArrivalscity(arrivalsCity);
-		  dto.setArrivals(arrivals); dto.setFee(fee); dto.setRecruit(recruit);
+		  CarpoolDTO dto = new CarpoolDTO(); 
+		  
+		  dto.setContent(content);
+		  dto.setTtime(ttime); 
+		  dto.setDeparturescity(departuresCity);
+		  dto.setDepartures(departures); 
+		  dto.setArrivalscity(arrivalsCity);
+		  dto.setArrivals(arrivals); 
+		  dto.setFee(fee); 
+		  dto.setRecruit(recruit);
 		  
 		  CarpoolDAO dao = new CarpoolDAO();
 		  

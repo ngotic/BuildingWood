@@ -21,15 +21,18 @@ public class CarpoolDTO {
 	private String arrivals;
 	
 	private String fee;
-	private String status;
+	private String recruitstatus;
 	private String recruit;
 	
 	
 	//tblDriver
 	private String id;
 	private double score;		//평점(0.0 ~ 5.0)
-	private String count;			//후기 수
+	private String count;		//후기 수
 	
+	
+	//tblCarpoolApply
+	private String applystatus;	//신청 상태
 	
 	//tblMember
 	private String nickname;	//닉네임

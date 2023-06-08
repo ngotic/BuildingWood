@@ -23,7 +23,7 @@ select
     departures as "출발지",
     arrivals as "도착지",
     fee as "비용",
-    status as "상태",
+    recruitstatus as "상태",
     recruit as "인원"
 from tblCarpool c
 join tblDriver d on c.driverseq = d.driverseq;
@@ -41,7 +41,7 @@ CREATE TABLE tblCarpool (
    arrivalscity varchar2(10)  NOT NULL,
    arrivals   varchar2(100)      NOT NULL,
    fee   number   DEFAULT 0   NOT NULL,
-   status   varchar2(20)  DEFAULT '모집 중'   NOT NULL,    -- 모집 중 OR 모집 완료(종료)
+   recruitstatus   varchar2(20)  DEFAULT '모집 중'   NOT NULL,    -- 모집 중 OR 모집 완료(종료)
    recruit   number      NOT NULL,
    constraint tblCarpool_pk1 primary key(carpoolseq),
    constraint tblCarpool_fk1 foreign key(boardcategoryseq) references tblBoardCategory(boardcategoryseq),
@@ -61,8 +61,12 @@ insert into tblCarpool values (carpoolseq.nextval, default, 7, '내용7', defaul
 insert into tblCarpool values (carpoolseq.nextval, default, 8, '내용8', default, to_date('2023-06-06 16:30:00', 'YYYY-MM-DD HH24:MI:SS'), '서울', '출발지8', '서울', '집', 10000, default, 2);
 insert into tblCarpool values (carpoolseq.nextval, default, 9, '내용9', default, to_date('2023-06-06 16:30:00', 'YYYY-MM-DD HH24:MI:SS'), '서울', '출발지9', '충북', '집', 8500, default, 4);
 insert into tblCarpool values (carpoolseq.nextval, default, 10, '내용10', default, to_date('2023-06-14 12:30:00', 'YYYY-MM-DD HH24:MI:SS'), '서울', '출발지10', '대전', '집', 7000, default, 2);
-insert into tblCarpool values (carpoolseq.nextval, default, 1, '내용11', default, to_date('12:30:00', 'HH24:MI:SS'), '서울', '테스트', '서울', '테스트', 7000, default, 1);
+insert into tblCarpool values (carpoolseq.nextval, default, 1, '내용1', default, to_date('2023-06-10 16:33:00', 'YYYY-MM-DD HH24:MI:SS'), '서울', '출발지1', '서울', '집', 4000, default, 4);
 
+
+update tblCarpool set recruitstatus = '모집 종료' where carpoolseq = 1;
+update tblCarpool set recruitstatus = '모집 종료' where carpoolseq = 4;
+update tblCarpool set recruitstatus = '모집 종료' where carpoolseq = 8;
 
 
 commit;
