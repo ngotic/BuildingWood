@@ -132,8 +132,7 @@ public class SnsDAO {
 			
 			if (rs.next()) {
 				snsboardseq=rs.getString("snsboardseq");
-				
-			}
+			};
 			
 			String sql2 = "Insert into tblsnspic (snspicseq,snsboardseq,pic) values (snspicseq.nextVal,?,?)";
 			pstat = conn.prepareStatement(sql2);

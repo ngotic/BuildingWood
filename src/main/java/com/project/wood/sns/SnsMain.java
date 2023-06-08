@@ -38,12 +38,15 @@ public class SnsMain extends HttpServlet {
 		String profile = dao.getuserprofile(uid);
 		String ubuildingseq = dao.getuserbuildingseq(uid);
 		
-		String buildingseq = req.getParameter("buildingseq");
+		String buildingseq = req.getParameter("buildingseq");  
 		if(req.getParameter("buildingseq")==null) {
 			buildingseq = ubuildingseq;
 		}
 		
+		System.out.println(ubuildingseq);
 		System.out.println(buildingseq);
+		
+		
 		List<SnsDTO> list = dao.getSNSList(buildingseq);
 		List<SnsDTO> plist = dao.getPicList();
 		List<SnsDTO> commentlist = dao.getComment();
@@ -68,11 +71,15 @@ public class SnsMain extends HttpServlet {
 		req.setAttribute("unickname", unickname);
 		req.setAttribute("profile", profile);
 		req.setAttribute("buildingseq", buildingseq);
+		req.setAttribute("ubuildingseq", ubuildingseq);
 		req.setAttribute("buildinginfo", buildingInfo);
+		int selected = Integer.parseInt(buildingseq)-1;
+		req.setAttribute("selected", selected);
 		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/sns/snsmain.jsp");
 		dispatcher.forward(req, resp);
+		
 		
 
 	}
