@@ -1,0 +1,253 @@
+@charset "EUC-KR";
+
+	*{
+		  -webkit-user-select:none;
+		  -moz-user-select:none;
+		  -ms-user-select:none;
+		  user-select:none ;
+			color:black;		
+			font-size: 16px;
+	}
+	.header-area {
+	    position: fixed; /* 여기도 */
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    z-index: 3;
+	    background-color: white;
+	    border-bottom: 2px solid #eee;
+	}
+	/*컨테이너 오버라이딩  */
+	.container {
+	    font-size: 14px; 
+	    max-width: 1300px;
+	    margin-top: 100px;    
+	    font-family: var(--main-content-font-family);
+	    
+	    
+	} 
+	.wrap{
+		display:flex;
+		margin-top: 110px;
+	}
+
+	#content{
+		  width:55%;
+		  height:864px;
+		  margin-right:50px;
+		  overflow:hidden;
+	}
+	#content:last-child{
+		margin-right:0px;
+	}
+	#map{
+	width:52%;
+	height:864px;
+	
+	}
+	#cheader{
+		height:40px;
+		text-align:center;
+		position:relative;
+		color:black;
+		margin:10px;
+		border-bottom:3px solid #008D62;
+		font-size:20px;
+	}
+	#board{
+		overflow-y:scroll;
+		height:830px;
+	}
+
+	.boardcontent{
+		width:90%;
+		height:460px;
+		display:flex;
+		border-bottom: 3px solid rgb(219,219,219);
+		margin: 15px auto;
+		border: 5px solid transparent;
+	    border-radius: 20px;
+	    background-image: linear-gradient(312deg, #49aea8, #8cc9c4, #c7e4e1, #ffffff), linear-gradient(to right, white, #65D8A7);
+	    background-origin: border-box;
+	    background-clip: content-box, border-box;
+	}
+	
+	
+	#usercontent{
+		width:450px;
+		height:450px;
+		position:realtive;
+	}
+	#useritem{
+		height:40px;
+		overflow:hidden;
+		margin: 10px auto;
+	}
+
+	
+	#modal_imagebox {
+		position:relative;
+		width:600px;
+		height:600px;
+		text-align:center;
+		vertical-align:center;
+		align-items: center;
+		background-size:contain;
+		overflow:hidden;
+	}
+	#react{
+		margin-top:10px;
+		position:absolute;
+		bottom:0px;
+		
+	}
+	#comment , .like{
+		display:inline-block;
+		margin-right: 40px;
+		margin-left:20px;
+		color:tomato;
+	}
+	#comment:hover , .like:hover{
+		cursor:pointer;
+		color:black;
+		
+	}
+	#board::-webkit-scrollbar {
+    	display: none; /* 크롬, 사파리, 오페라, 엣지 */
+	}
+	img{
+		margin:auto;
+		display:block;
+		object-fit: cover;
+	}
+		.to_comment{
+		position:absolute;
+		bottom:5px;
+	}
+	.top{
+		position:absolute;
+		top:0px;
+	}
+	.box{
+		display:inline-block;
+	}
+	.snshash{
+		vertical-align: center;
+		width:273px;
+		height:18px;
+		overflow:hidden;
+	}
+	input{
+		background-color:transparent;
+	}
+	#addcontent{
+		width:90%;
+		height:410px;
+		background-color:white;
+		display:flex;
+		border-bottom: 3px solid rgb(219,219,219);
+		margin: 15px auto;
+		border: 5px solid transparent;
+	    border-radius: 20px;
+	    background-image: linear-gradient(312deg, #49aea8, #8cc9c4, #c7e4e1, #ffffff), linear-gradient(to right, #B6DDC6, #65D8A7);
+	    background-origin: border-box;
+	    background-clip: content-box, border-box;
+	}
+	#add_useritem{
+		width:450px;
+		height: 180px;
+		border: 3px solid rgb(219,219,219);
+		display:inline-block;
+		border-radius: 5px;
+		outline-color: rgb(219,219,219);
+	}
+	.add:hover{
+		border:1px solid rgb(219,219,219);
+		background-color:rgb(219,219,219);
+		color:white;
+	}
+	.imagebox{
+		 width: 450px;
+		  height: 300px;
+		  position: relative;
+		  overflow:hidden;
+	}
+	.u_imagebox{
+		background-color:none;
+	}
+	li{
+  list-style-type: none;	
+}
+
+ 	label:hover{
+ 	cursor:pointer;
+ 	}
+.slides{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2500px; /* 슬라이드할 사진과 마진 총 넓이 */
+  transition: left 0.3s ; 
+  /*ease-out: 처음에는 느렸다가 점점 빨라짐*/
+}
+
+/* 첫 번째 슬라이드 가운데에 정렬하기위해
+첫번째 슬라이드만 margin-left조정 */
+/* 슬라이드들 옆으로 정렬 */
+.slides li:not(:last-child){
+  float: left;
+}
+
+.slides li{
+  float: left;
+}
+
+.controller span{
+  position:absolute;
+  background-color: transparent;
+  color: black;
+  text-align: center;
+  border-radius: 50%;
+  padding: 10px 20px;
+  top: 50%;
+  font-size: 1.3em;
+  cursor: pointer;
+}
+
+/* 이전, 다음 화살표에 마우스 커서가 올라가 있을때 */
+.controller span:hover{
+  background-color: rgba(128, 128, 128, 0.11);
+}
+
+.prev{
+  left: 10px;
+}
+
+
+.next{
+  right: 10px;
+}
+.col{
+	width:126px;
+	margin-top:-100px;
+	/* background-color:black; */
+	height:130px;
+	padding:0 0 0 0;
+	margin-left: 12px;
+	margin-right: 12px;
+	border:3px solid gray;
+}
+	
+.material-symbols-rounded {
+color:red;
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+
+img{
+	border-radius:15px;
+	object-fit:scale-down;
+}
