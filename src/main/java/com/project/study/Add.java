@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.project.study.repository.StudyDAO;
+import com.project.study.repository.StudyDTO;
+
 @WebServlet("/study/add.do")
 public class Add extends HttpServlet {
 
@@ -32,7 +35,7 @@ public class Add extends HttpServlet {
 		StudyDTO dto = new StudyDTO();
 		
 		
-		
+		/* String jessionid = */
 		String name = req.getParameter("name");
 		String recruit = req.getParameter("recruit");
 		String intro = req.getParameter("intro");

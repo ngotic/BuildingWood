@@ -52,8 +52,8 @@
             <input type="text" class="form-control" id="exampleFormControlInput1" name="name" placeholder="스터디명을 작성해주세요.">
           </div>
         <div class="form-group">
-            <label for="exampleFormControlInput1" class="ptag">정원수</label>
-            <input type="number" class="form-control" id="exampleFormControlInput1" name="recruit" placeholder="정원수룰 적어주세요.">
+            <label for="exampleFormControlInput1" class="ptag">모집인원</label>
+            <input type="number" class="form-control" id="exampleFormControlInput1" name="recruit" placeholder="모집인원수를 적어주세요.">
           </div>
         
          

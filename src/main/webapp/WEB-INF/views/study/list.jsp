@@ -110,7 +110,12 @@
 	    padding-top: 50px;
 	    
 	    }
-
+	.content-card-body {
+	text-align: center;
+}
+	.content-card-body:nth-child(2){
+	text-align: left;
+}
 </style>
 </head>
 <body>
@@ -122,20 +127,19 @@
 
 	<div style=" display: flex;  justify-content: center;align-items: center;  min-height: 100vh; margin-top: 30px;">
 		<div class = "study-content-black">
-			<div class = "menu">
+			<div class = "menu" style="display: inline-flex; justify-content: center;">
 				
 				
 				  <select class="button"  name="ck">
+				  	
 				    <option value="name" selected="selected">스터디명</option>
 				    <option  value="content">모집 내용</option>
-				    <option  value ="tag">태그</option>
+			
 				  </select>
 				
 					<input class = "textbox" type="text" name = "name" placeholder ="검색어를 입력하세요." style = "align-self: right; align-content: left; padding: 10px;"  >
 					<input class ="button" type ="submit" value ="검색" style = "align-content: left;">
-					<a href ="./board.do">
-					<input class ="button" type ="button" value ="글작성"style="margin-left: 30px;" >
-					</a >
+				
 					<a href ="./add.do">
 				<input class ="button" type ="button" max ="30" value ="스터디 등록"style="margin-left: 30px;" >
 				</a >
@@ -173,24 +177,159 @@
     </tr>
   </tbody>
 </table>
+		<div class="modal" tabindex="-1">
 		
-	<c:forEach items="${list}" var="dto">
+		<div class = "menu" style="display: flex;
+    text-align: center;
+    flex-direction: column-reverse;
+    align-items: stretch;
+    border-bottom: 0px;">
+		
+
+
+	  <div class="" >  			
+		<div class="mb-3">
+		<div style="    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;">
+			<div><input type="image"  class="profile" src="/wood/asset/img/img.jpg" >작성자이름</div>
+		  <div class="content-margin "> <span >${odto.status}</span></div>	
+		  
+		  </div>
+		  <div class="mb-3">
+		  <span style="font-size: 35px;">${odto.name}</span>
+		  </div>
+		  
+		  <div style="    display: block;
+    font-size: 23px;
+    margin-top: 16px;">
+		  <label for="exampleFormControlTextarea1" class="form-content" placeholder="내용">${odto.intro }</label>
+		  
+		</div>
+		<div style="margin-top: 14px;">
+		  <span class="content-margin" >
+		   모집 종료 기간 : ${odto.period}</sapn>
+		  </div>
+		<div style="margin-top: 14px;">  
+			<span class="content-margin" >시작 날짜 : ${odto.startdate}
+			종료 날짜 : ${odto.enddate }</span>
+			<p style="margin-top: 14px;">모집인원 : ${odto.recruit }</p>
+			<p >${odto.onoff }</p>
+			<p>주소 : ${odto.address}</p>
+		  </div>
+		
+		</div>
+		
+		
+	  </div>
+
 	
- 	<a type="button" href="view.do?openstudyseq=${dto.openstudyseq}&addlist=off" class="card col-2 content-card shadow p-3 mb-5 bg-body rounded">
+		
+		</div>
+		
+		
+		
+		
+		</div>
+	<c:forEach items="${list}" var="dto">
+	<div style="border: 5px solid #d2ddf2;
+    z-index: 0;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+    align-items: stretch;
+    margin: 8px;" >
+ 	<a type="button" style= "width: 100%;
+    margin: 0px;"
+    href="view.do?openstudyseq=${dto.openstudyseq}&addlist=off" class="card col-2 content-card shadow p-3 mb-5 bg-body rounded">
  	
 		<div >	
-		  <img src="/wood/asset/img/img.jpg" class="card-img-top" alt="...">
+			<span value ="모집중" style="z-index: 1 color: black; background:#d2ddf2; border: 2px solid #d2ddf2; border-radius: 11px; position: absolute;margin-left: 12px;
+    margin-top: 6px;" >${dto.status}</span>
+		  <img src="/wood/asset/img/img.jpg" style="margin-top: -7px;"class="card-img-top" alt="...">
 		  <div class="content-card-body">
 		  <div style="display: none" name="addlist" vlaues= "off"></div>
 		    <span class="card-title title nametxt"  name="name">${dto.name}   </span>
-		    <p style="text-align: right; font-size: 15px;" name="recruit">${dto.recruit}</p>
+		    
 		 
-		    <p class="card-text introtxt" name="intro">${dto.intro}</p>
-		    	<div style="display: none" name="openstudyseq">${dto.openstudyseq}</div>
-		   	<span>태그</span>
+		    <p class="card-text introtxt" name="intro" style="height: 50px; text-align: left;">${dto.intro}</p>
+		    	<div style="display: none; " name="openstudyseq" >${dto.openstudyseq}</div>
+		   	
 		  </div>
 		</div>
+		    
+		    	
 	</a>
+		<button style ="    z-index: 10;
+    margin-top: -34px;
+    margin-bottom: 10px;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="myModals">가입하기</button>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+  
+			
+			<div class = "modal-body menu" style="display: flex;
+    text-align: center;
+    flex-direction: column-reverse;
+    align-items: stretch;
+    border-bottom: 0px;">
+		
+
+
+	  <div class="" >  			
+		<div class="mb-3">
+		<div style="    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;">
+			<div><input type="image"  class="profile" src="/wood/asset/img/img.jpg" >작성자이름</div>
+		  <div class="content-margin "> <span >${odto.status}</span></div>	
+		  
+		  </div>
+		  <div class="mb-3">
+		  <span style="font-size: 35px;">${odto.name}</span>
+		  </div>
+		  
+		  <div style="    display: block;
+    font-size: 23px;
+    margin-top: 16px;">
+		  <label for="exampleFormControlTextarea1" class="form-content" placeholder="내용">${odto.intro }</label>
+		  
+		</div>
+		<div style="margin-top: 14px;">
+		  <span class="content-margin" >
+		   모집 종료 기간 : ${odto.period}</sapn>
+		  </div>
+		<div style="margin-top: 14px;">  
+			<span class="content-margin" >시작 날짜 : ${odto.startdate}
+			종료 날짜 : ${odto.enddate }</span>
+			<p style="margin-top: 14px;">모집인원 : ${odto.recruit }</p>
+			<p >${odto.onoff }</p>
+			<p>주소 : ${odto.address}</p>
+		  </div>
+		
+		</div>
+		
+		
+	  </div>
+
+	
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 	</c:forEach>
 			
@@ -241,7 +380,12 @@
 </script>
 <!-- JavaScript Bundle with Popper -->
 
+	const myModal = document.getElementById('myModals')
+	const myInput = document.getElementById('myInputs')
 	
+	myModal.addEventListener('shown.bs.modal', () => {
+	  myInput.focus()
+	})
  
 </body>
 </html>

@@ -1,4 +1,4 @@
-package com.project.study;
+package com.project.study.repository;
 
 import lombok.Data;
 
@@ -13,5 +13,9 @@ public class StudyListDTO {
 	private String content;
 	private String title;
 	private String rownum;
+	private String maxrownum;
+	private String modifydate;
+	
+	
 	
 }

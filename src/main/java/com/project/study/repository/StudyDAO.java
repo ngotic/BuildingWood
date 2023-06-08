@@ -1,9 +1,10 @@
-package com.project.study;
+package com.project.study.repository;
 
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -59,14 +60,14 @@ public class StudyDAO {
 		
 		try {
 			
-			String sql = "select name, intro, recruit,openstudyseq from tblOpenStudy  order by openstudyseq DESC";
+			String sql = "select * from tblOpenStudy  order by openstudyseq DESC";
 			
 			pstat = conn.prepareStatement(sql);
 			rs = pstat.executeQuery();
 			
 			while(rs.next()){
 				  StudyDTO dto = new StudyDTO();
-
+				  dto.setStatus(rs.getString("status"));
                   dto.setName(rs.getString("name"));
                   dto.setOpenstudyseq(rs.getString("openstudyseq"));
                   dto.setRecruit(rs.getString("recruit"));
@@ -151,15 +152,23 @@ public class StudyDAO {
 		
 		return null;	}
 
-	public int Setboard() {
+	public int Setboard(StudyDTO dto) {
 
 		try {
 			
-		String sql = "insert into from tblStudy values (studyseq.nextVAL,openstudyseq,boardcategoryseq,sysdate,?,?)";
+		String sql = "insert into tblstudy values (studyseq.nextVAl , ? , (select boardcategoryseq from tblBoardCategory where board = '스터디') ,sysdate,sysdate, ?, ?)";
 		
 		pstat = conn.prepareStatement(sql);
-		rs = pstat.executeQuery();
+
 		
+		 pstat.setString(1, dto.getOpenstudyseq());
+		 pstat.setString(2, dto.getTitle());
+		 pstat.setString(3, dto.getContent());
+		System.out.println("oseq="+dto.getOpenstudyseq());
+		System.out.println("title="+dto.getTitle());
+		System.out.println("contetnt= "+dto.getContent());
+		
+		 return pstat.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -208,6 +217,148 @@ public class StudyDAO {
 		
 		return list;	
 	}
+
+	public int getCount(String openstudyseq) {
+		int maxronum = 0;
+		String sql = "select count(rownum) maxronum from (select * from tblStudy st  WHERE openstudyseq = ?  order by studyseq DESC) st";
+		StudyListDTO dto = new StudyListDTO();
+		try {
+			stat = conn.prepareStatement(sql);
+			
+			pstat.setString(1, openstudyseq);
+			
+			
+			
+			return maxronum;
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			
+		}
+	
+		return 0;
+	}
+
+	public StudyListDTO board(String studyseq) {
+		
+		String sql = "select * from tblstudy where studyseq = "+studyseq;
+	
+		try {
+			
+			
+			pstat = conn.prepareStatement(sql);
+			System.out.println("studyseq = "+studyseq);
+			rs = pstat.executeQuery();
+			StudyListDTO dto = new StudyListDTO();
+			if(rs.next()) {
+				
+			dto.setTitle(rs.getString("title"));
+			System.out.println("dto = " + dto);
+			dto.setContent(rs.getString("content"));
+			
+			}
+			return dto;
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		
+		return null;
+	}
+
+
+
+	public int ListComment(StudyListDTO dto) {
+		
+		
+		
+		String sql = "insert into tblStudyComment values (studycommentseq.nextVAL,?,?,sysdate,sysdate)";
+		
+		try {
+		pstat = conn.prepareStatement(sql);		
+		pstat.setString(1, dto.getStudyseq());
+		pstat.setString(2, dto.getContent());
+		
+		
+		
+	    return pstat.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return 0;
+	}
+
+	public ArrayList<StudyListDTO> ListCommentselect(StudyListDTO dto) {
+		ArrayList<StudyListDTO> list = new ArrayList<StudyListDTO>();
+		String sql = "select * from tblStudyComment  WHERE studyseq = ?  ";
+
+		try {
+			
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1,dto.getStudyseq());
+			rs = pstat.executeQuery();
+			
+			
+			while(rs.next()){
+			dto = new StudyListDTO();
+			
+		
+			dto.setContent(rs.getString("content"));
+			dto.setModifydate(rs.getString("modifydate"));
+			
+			list.add(dto);
+			
+			}
+			System.out.println(list);
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		
+		return list;
+	}
+
+	public StudyDTO odtocontent(String parameter) {
+		String sql = "select * from tblopenstudy  WHERE openstudyseq = "+parameter;
+		StudyDTO dto = new StudyDTO();
+		try {
+			
+			pstat = conn.prepareStatement(sql);
+	
+			rs = pstat.executeQuery();
+			if (rs.next()) {
+				
+		
+			dto.setName(rs.getString("name"));
+			dto.setStatus(rs.getString("status"));
+			dto.setRecruit(rs.getString("recruit"));
+			dto.setIntro(rs.getString("intro"));
+			dto.setPeriod(rs.getString("period"));
+			dto.setStartdate(rs.getString("startdate"));
+			dto.setEnddate(rs.getString("enddate"));
+			dto.setOnoff(rs.getString("onoff"));
+			dto.setAddress(rs.getString("address"));
+			}
+			return dto;
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		
+		
+		return null;
+	}
+
+
+	
 
 
 	

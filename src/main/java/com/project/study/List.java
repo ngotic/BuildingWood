@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.project.study.repository.StudyDAO;
+import com.project.study.repository.StudyDTO;
+
 @WebServlet("/study/list.do")
 public class List extends HttpServlet {
 
@@ -27,9 +30,18 @@ public class List extends HttpServlet {
 		req.setAttribute("list", list);
 		req.setAttribute("openstudyseq", dto.getOpenstudyseq());
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/study/list.jsp");
 		
+		
+		if(list != null ) {
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/study/list.jsp");
 		dispatcher.forward(req, resp);
+		}else {
+		
+		PrintWriter writer = resp.getWriter();
+		writer.print("<script>alert('failed');history.back(); </script>");
+		writer.close();
+		
+		}
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package com.project.study;
+package com.project.study.repository;
 
 import lombok.Data;
 
@@ -30,5 +30,7 @@ public class StudyDTO {
 	
 	private String title;
 	private String content;
+	
+	private String rownum;
 	
 }
