@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <title>SNS 게시판</title>
 <%@ include file="/WEB-INF/views/include/asset.jsp" %>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <style data-tag="reset-style-sheet">
  html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
@@ -211,13 +212,13 @@
 		bottom:0px;
 		
 	}
-	#comment , #like{
+	#comment , .like{
 		display:inline-block;
 		margin-right: 40px;
 		margin-left:20px;
 		color:tomato;
 	}
-	#comment:hover , #like:hover{
+	#comment:hover , .like:hover{
 		cursor:pointer;
 		color:black;
 		
@@ -438,7 +439,16 @@
 		}
 		
 </style>
-
+<style>
+.material-symbols-rounded {
+color:red;
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+</style>
 </head>
 <body>
 
@@ -452,10 +462,24 @@
 		<div class="wrap">
 			<div id="content">
 				<div id="cheader" >
+					<div class="box" id="dlist">
+						<div class="ditem" style="display:flex; cursor:pointer;">
+							<select id = "ddong" onchange="dongchange();">
+								<c:forEach items="${dlist}" var="dto">
+									<c:if test="${dto.dong == udong}">
+										<option value="${dto.dong}" data-ddong="${dto.dong}" selected>${dto.dong}</option>
+									</c:if>
+									<c:if test="${dto.dong != udong}">
+										<option value="${dto.dong}" data-ddong="${dto.dong}">${dto.dong}</option>
+									</c:if>
+								</c:forEach>	
+							</select>
+						</div>
+					</div>
 				<div class="box" id="buildingname">
 					<select id="blist" onchange="change();">
 						<c:forEach items="${blist }" var="dto">
-							<option class="bitem" style="display:flex; cursor:pointer;" data-bdong="${dto.dong}" data-lat="${dto.lat}" data-lng="${dto.lng}" data-address ="${dto.address}" data-buildingseq="${dto.buildingseq}">
+							<option class="bitem" style="display:flex; cursor:pointer;" value = "${dto.dong}" data-bdong="${dto.dong}" data-lat="${dto.lat}" data-lng="${dto.lng}" data-address ="${dto.address}" data-buildingseq="${dto.buildingseq}">
 								${dto.name }
 							</option>
 						</c:forEach>
@@ -566,11 +590,10 @@
 								</div>
 								
 								<div id="react">
-									<div id="like">
+									<div class="like" data-index="${status.count}">
 										<span class="material-symbols-outlined">
 											favorite
 										</span>
-										${dto.clike }
 									</div>
 									<div id="comment">
 										 <button class="material-symbols-outlined" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" data-snsboardseq="${dto.snsboardseq}" data-content="${dto.content}" data-clike="${dto.clike }" data-profile="${dto.profile}" data-nickname="${dto.nickname}" data-cpic="${dto.cpic}" data-index="${status.index}">
@@ -586,23 +609,6 @@
 			</div>
 			<div id="map"></div>
 		</div>
-		<div id="main">
-			<table id="dlist">
-					<tr>
-						<td class="ditem" style="display:flex; cursor:pointer;">
-							<select id = "ddong">
-							<c:forEach items="${dlist}" var="dto">
-								<option data-ddong="${dto.dong}">${dto.dong}</option>
-							</c:forEach>	
-							</select>
-						</td>
-					</tr>
-					
-					<tr>
-						<td id="all" >모두보기 <span class="badge">0</span> </td>
-					</tr>
-				</table>
-			</div>		
 	</section>
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 	
@@ -652,10 +658,12 @@
      		<tr>
      			<td style="height:50px;">
      				<div id="modal_react">
+     					<div id="like">
      					<!-- 모달 react  -->
+     					</div>
 					</div>
      			</td>
-     		</tr>
+     		</tr>	
      		<tr>
      			<td style="border-bottom:3px solid black;">
      				<form method="Post">
@@ -688,7 +696,6 @@
 
 	
 	$('#blist').children().eq(${selected}).attr("selected",true);
-
 	
 	$("#addsnscontent").on("click",function(){
 		
@@ -768,6 +775,9 @@
 	
 	
 	 const ms = [];
+	function dongchange(){
+		alert($('#ddong option:selected').data("ddong"));
+	}
 	
 	function change(){
 		
@@ -843,9 +853,23 @@
 		
 		</c:forEach>
 	});
+	
+	
+	var index= $('.like').data('index');
+	let heart = 0;
+	//좋아요 늘리기
+	 $(".like").on('click',function(){
+		var index= $(this).data('index');
+		if(heart == 0){
+			$('#boardwrap').children().eq(index).find('.like').html($('#boardwrap').children().eq(index).find('.like').html().replaceAll("outlined","rounded"));
+		 	heart=1;
+		}else{
+			$('#boardwrap').children().eq(index).find('.like').html($('#boardwrap').children().eq(index).find('.like').html().replaceAll("rounded","outlined"));
+			heart=0;
+		}
+	 });
+	
 	 
-	
-	
 	//슬라이드 이벤트
 	let currentIdx = [];
 	let picscount = [];
@@ -902,7 +926,7 @@
     	        
     	        let str= $("#boardwrap").children().eq(index).find("#send_modal").html().substring();
     	        let commented = $("#boardwrap").children().eq(index).find("#to_modal_commentlist").html().substring();
-    	        let like = $("#boardwrap").children().eq(index).find("#like").html().substring();
+    	        let like = $("#boardwrap").children().eq(index).find(".like").html().substring();
     	        
     	        if(${ubuildingseq!=buildingseq}){
     	        	str= $("#boardwrap").children().eq(index-1).find("#send_modal").html().substring();
@@ -920,7 +944,7 @@
     	        str=str.replaceAll('calc(450px);','calc(600px);');
     	        
     	        commented= commented.replaceAll('style=\"display:none;\"','');
-    	        like = like.replaceAll('class=\"material-symbols-outlined\"','class=\"material-symbols-outlined\" style=\"font-size:40px; margin-left:15px;\"')
+    	        like = like.replaceAll('ed\"','ed\" style=\"font-size:40px; margin-left:15px;\"')
     	        $('#modal_scroll').html(commented);
     	        
     	        $("#modal_imagebox").html(str); 
@@ -952,6 +976,18 @@
     	    		$("#w_modal_comment").focus();
     	    	});
 
+    	    	
+    	    	//좋아요 늘리기
+    	    	 $(".like").on('click',function(){
+    	    		if(heart == 0){
+    	    			$('#boardwrap').children().eq(index).find('.like').html($('#boardwrap').children().eq(index).find('.like').html().replaceAll("outlined","rounded"));
+    	    		 	heart=1;
+    	    		}else{
+    	    			$('#boardwrap').children().eq(index).find('.like').html($('#boardwrap').children().eq(index).find('.like').html().replaceAll("rounded","outlined"));
+    	    			heart=0;
+    	    		}
+    	    	 });
+    	    	
     	    	
             });
             

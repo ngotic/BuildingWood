@@ -214,4 +214,24 @@ public class SnsDAO {
 		}
 		return null;
 	}
+
+	public String getuserdong(String buildingseq) {
+		try {
+			String sql ="select dong from snsbuilding where buildingseq = ?";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1,buildingseq);
+			rs = pstat.executeQuery();
+			String result="";
+					
+			if (rs.next()) {
+				
+				result =(rs.getString("dong"));
+				
+			}
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }	
