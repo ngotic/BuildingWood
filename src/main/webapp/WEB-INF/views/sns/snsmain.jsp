@@ -441,6 +441,8 @@
 
 </head>
 <body>
+
+	
 	<!-- template.jsp > index.jsp -->
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
 	<section class="container">
@@ -464,6 +466,7 @@
 				<div id="board">
 					<!--로드 할 게시물들  -->
 					<div id="boardwrap" style="max-height:8500px;">
+						<c:if test="${ubuildingseq==buildingseq}">
 						<form action="/wood/snsmain.do" id="snsaddboard" method="Post" enctype="multipart/form-data">
 							<div id="addcontent">
 								<div id="usericon" style="display:inline-block; width:50px; height:400px; margin-right:5px;">
@@ -508,9 +511,9 @@
 								</div>
 							</div>
 						</form>
-						
+						</c:if>
 						<c:forEach items="${list}" var="dto" varStatus="status">
-						<div class="boardcontent" style="position:relative;">
+						<div class="boardcontent" id="boardcontent${status.count}" style="position:relative;">
 							<div id="usericon" style="display:inline-block; width:50px; height:400px; margin-right:5px;">
 								<!-- 유저 이미지 넣기  -->
 								<img alt="" src="/wood/asset/sns/${dto.profile}" style="width:50px;">
@@ -523,7 +526,7 @@
 									${dto.content}
 								</div>
 								<div class="imagebox" data-count="${dto.cpic}" id="send_modal">
-								    <ul class="slides" style="width:calc(${dto.cpic} * 450px)"> 
+								    <ul class="slides" id="slide${status.count}" style="width:calc(${dto.cpic} * 450px)"> 
 								   		<c:forEach items="${plist}" var="pic">
 							   			<c:if test="${dto.snsboardseq==pic.snsboardseq}">
 								     		<li><img alt="" src="/wood/asset/sns/${pic.pic}" style="width:450px; height:300px; "></li>
@@ -534,32 +537,32 @@
 								      
 								      <!-- &lang: 왼쪽 방향 화살표
 								      &rang: 오른쪽 방향 화살표 -->
-								      <span class="prev">&lang;</span>  
-								      <span class="next">&rang;</span>
+								      <span class="prev" data-num="${status.count}">&lang;</span>  
+								      <span class="next" data-num="${status.count}">&rang;</span>
 								    </p>
 								  </div>
 						       	
-						       	<div id="to_modal_commentlist" style="display:none;" >
-						       	<c:forEach items="${commentlist}" var="clist">
-						       		<c:if test="${clist.snsboardseq==dto.snsboardseq}">
-					     				<div class="modal_commentbox" >
-					     					<div class="u_imagebox box">
-					     						<img alt="" src="/wood/asset/sns/${clist.profile}" class="comment_userimage">
+						       	<div id="to_modal_commentlist" style="display:none;">
+							       	<c:forEach items="${commentlist}" var="clist">
+							       		<c:if test="${clist.snsboardseq==dto.snsboardseq}">
+						     				<div class="modal_commentbox" >
+						     					<div class="u_imagebox box">
+						     						<img alt="" src="/wood/asset/sns/${clist.profile}" class="comment_userimage">
+							     				</div>
+							     				<div class="modal_usernick">
+													<div class="box top">
+														${clist.nickname}
+													</div>
+													<div>
+														<button class="to_comment" value="${clist.nickname}">답글 달기</button>
+													</div>
+												</div>
+												<div class="modal_comment top">
+													${clist.content}
+												</div>
 						     				</div>
-						     				<div class="modal_usernick">
-												<div class="top">
-													${clist.nickname}
-												</div>
-												<div>
-													<button class="to_comment" value="${clist.nickname}">답글 달기</button>
-												</div>
-											</div>
-											<div class="modal_comment top">
-												${clist.content}
-											</div>
-					     				</div>
-				     				</c:if>
-	     						</c:forEach>
+					     				</c:if>
+		     						</c:forEach>
 								</div>
 								
 								<div id="react">
@@ -628,7 +631,7 @@
      				<div class="modal_imagebox" id="modal_imagebox"></div>
      			</td>
      			<!-- 오른쪽  -->
-     			<td style="width:400px;height:70px; border-bottom:3px solid black;" >
+     			<td style="width:550px;height:50px; border-bottom:3px solid black;" >
      				<div class="u_imagebox box" id="u_imagebox">
      					<img alt="" src="/wood/asset/sns/pic.png" class="comment_userimage">
      				</div>
@@ -641,57 +644,15 @@
      			<!-- 댓글  -->
 	   			<td>
 	     			<div id="modal_scroll" style="vertical-align:top; height:500px; overflow-y:scroll;">
-	     				<!-- 댓글1  -->
-	     				<c:forEach items="">
-		     				<div class="modal_commentbox" >
-		     					<div class="u_imagebox box">
-		     						<img alt="" src="/wood/asset/img/logo.png" class="comment_userimage">
-			     				</div>
-			     				<div class="modal_usernick">
-									<div class="top">
-										당당한이병건477
-									</div>
-									<div>
-										<button class="to_comment" value="당당한이병건477">답글 달기</button>
-									</div>
-								</div>
-								<div class="modal_comment top">
-									진짜요.. 8월엔 얼마나 더우려구...ㅠㅠㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ
-								</div>
-		     				</div>
-	     				</c:forEach>
-	     			<!--댓글2  -->
-	     				<div class="modal_commentbox" >
-	     					<span>
-	     						<img alt="" src="/wood/asset/img/logo.png" class="comment_userimage">
-		     				</span>
-		     				<div class="modal_usernick">
-								<div class="top">
-									멋있는하이에나943
-								</div>
-								<div>
-									<button class="to_comment" value="멋있는하이에나943">답글 달기</button>
-								</div>
-							</div>
-							<div class="modal_comment top">
-								아이스크림... 드릴까요?
-							</div>
-	     				</div>
+	     				<!-- 댓글  -->
+	     				
 	     			</div>
 	   			</td>
      		</tr>
      		<tr>
      			<td style="height:50px;">
      				<div id="modal_react">
-     					<span class="material-symbols-outlined" id="like">
-							favorite
-						</span>
-						<span class="material-symbols-outlined" id="comment">
-							chat_bubble
-						</span>
-						<div style="font-size:12px; margin-left: 10px; margin-top:5px;">
-							좋아요0개
-						</div>
+     					<!-- 모달 react  -->
 					</div>
      			</td>
      		</tr>
@@ -721,9 +682,14 @@
 
 <script type="	text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0c837c78add7b31e526a1b98c5a9910f"></script>	
 <script>
+
+
+
+
 	
+	$('#blist').children().eq(${selected}).attr("selected",true);
+
 	
-	$('#blist').children().eq(0).attr("selected",true);
 	$("#addsnscontent").on("click",function(){
 		
 		if($('#addsnscontent').text()=='접기'){
@@ -740,14 +706,6 @@
 			
 		}
 	});
-	
-	
-	$(".to_comment").on("click",function(){
-		$("#w_modal_comment").val('@'+this.value+" ");
-		$("#w_modal_comment").focus();
-	});
-	
-	
 	
 	
 
@@ -817,12 +775,12 @@
 		//alert($('#blist option:selected').data('buildingseq'));
 		
 		 $.ajax({
-	            url:"/wood/snsmain.do", // HelloServlet.java로 접근
+	            url:"/wood/snsmain.do",
 	            type: "get", // GET 방식
 //	             data: "id=abc&pw=123",
 	            data:{buildingseq:$('#blist option:selected').data('buildingseq')},// json 방식으로 서블릿에 보낼 데이터
 	            success:function(data){
-	                alert("success");
+	            	location.href='/wood/snsmain.do?buildingseq='+$('#blist option:selected').data('buildingseq');
 	            },
 	            error:function(){
 	                alert("error");
@@ -887,61 +845,42 @@
 	});
 	 
 	
-
 	
-	
-	
-	
-	let currentIdx =0; //현재 슬라이드 index
-	let slideCount =0; // 슬라이드 개수
-	const prev = document.querySelector('.prev'); //이전 버튼
-	const next = document.querySelector('.next'); //다음 버튼
-	
-	
-	$('.prev').on('mousedown', function () {
-		if(slideCount!=$(this).parent().parent().data("count")-1){
-			slideCount=$(this).parent().parent().data("count")-1;
-			currentIdx=0;
-			
-			$('.slides').css("left",0);
-		}
-	});
+	//슬라이드 이벤트
+	let currentIdx = [];
+	let picscount = [];
+	var user = 0;
+	var contentlength=$("#boardwrap").children().length;
+	if(${ubuildingseq==buildingseq}){
+		user=1;
+	}
+	for (i= user; i < contentlength; i++) {
+		currentIdx.push(1);
+		picscount.push($(`#slide${i}`).parent().data("count"));
+	}
 
 	$('.prev').on('click', function () {
-		if(currentIdx<=0){
-			currentIdx=0;
-		}
-		else if(slideCount<currentIdx){
-			currentIdx=0;
+		picscount[parseInt(parseInt($(this).data('num'))) - 1] = $(this).parent().parent().data("count");
+		
+		if(currentIdx[parseInt($(this).data('num')) - 1]==1){
+			currentIdx[parseInt($(this).data('num')) - 1]=1;
 		}
 		else{
 		  $(this).parent().parent().children().css("left",$(this).parent().parent().children().position().left + 450);
-		  currentIdx--;
-		}
-	});
-	
-
-	$('.next').on('mousedown', function () {
-		if(slideCount!=$(this).parent().parent().data("count")-1){
-			slideCount=$(this).parent().parent().data("count")-1;
-			currentIdx=0;
-			$('.slides').css("left",0);
+		  currentIdx[parseInt($(this).data('num')) - 1]--;
 		}
 	});
 	
 	$('.next').on('click', function () {
+		picscount[parseInt($(this).data('num')) - 1] = $(this).parent().parent().data("count");
 		
-		if(currentIdx==slideCount){
-			currentIdx=slideCount;
-		}
-		else if(slideCount<currentIdx){
-			currentIdx=0;
+		if(currentIdx[parseInt($(this).data('num')) - 1]>=picscount[parseInt($(this).data('num')) - 1]){
+			currentIdx[parseInt($(this).data('num')) - 1]==picscount[parseInt($(this).data('num')) - 1];
 		}
 		else{
 		  $(this).parent().parent().children().css("left",$(this).parent().parent().children().position().left - 450);
-		  currentIdx++;
+		  currentIdx[parseInt($(this).data('num')) - 1]++;
 		}
-	 
 	});
 	
 	
@@ -959,8 +898,17 @@
     	        
     	        $("#modal_usernick").text(nickname);
     	        $("#u_imagebox").html("<img alt="+"\"\" src=\""+profile+"\"class=\"comment_userimage\">");
-    	        $("#modal_content").text(content); 
+    	        $("#modal_content").text(content);
+    	        
     	        let str= $("#boardwrap").children().eq(index).find("#send_modal").html().substring();
+    	        let commented = $("#boardwrap").children().eq(index).find("#to_modal_commentlist").html().substring();
+    	        let like = $("#boardwrap").children().eq(index).find("#like").html().substring();
+    	        
+    	        if(${ubuildingseq!=buildingseq}){
+    	        	str= $("#boardwrap").children().eq(index-1).find("#send_modal").html().substring();
+    	        	commented = $("#boardwrap").children().eq(index-1).find("#to_modal_commentlist").html().substring();
+    	        	like = $("#boardwrap").children().eq(index-1).find("#send_modal").html().substring();
+    	        }
     	        str=str.replaceAll('450px','600px');
     	        str=str.replaceAll('300px','600px');
     	        str=str.replaceAll('class=\"','class=\"m');
@@ -971,8 +919,12 @@
     	        str=str.replaceAll('calc(900px);','calc(1200px);');
     	        str=str.replaceAll('calc(450px);','calc(600px);');
     	        
-    	        $("#modal_imagebox").html(str); 
+    	        commented= commented.replaceAll('style=\"display:none;\"','');
+    	        like = like.replaceAll('class=\"material-symbols-outlined\"','class=\"material-symbols-outlined\" style=\"font-size:40px; margin-left:15px;\"')
+    	        $('#modal_scroll').html(commented);
     	        
+    	        $("#modal_imagebox").html(str); 
+    	        $("#modal_react").html(like);
     	        
     	    	$('.mprev').on('click', function () {
     	    		if(Idx<=1){
@@ -994,6 +946,12 @@
     	    		}
     	    	 
     	    	});
+    	    	
+    	    	$(".to_comment").on("click",function(){
+    	    		$("#w_modal_comment").val('@'+this.value+" ");
+    	    		$("#w_modal_comment").focus();
+    	    	});
+
     	    	
             });
             
