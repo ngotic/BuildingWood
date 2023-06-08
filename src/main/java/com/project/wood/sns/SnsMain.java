@@ -89,8 +89,7 @@ public class SnsMain extends HttpServlet {
 		String uid=(session.getAttribute("id").toString());
 		String type = req.getParameter("type");
 		System.out.println(type);
-		
-		if(type.equals("1")) {
+		if("1".equals(type)) {
 			String snsboardseq=req.getParameter("snsboardseq");
 			String comment = req.getParameter("comment");
 			CommentDTO cdto = new CommentDTO();
@@ -114,7 +113,7 @@ public class SnsMain extends HttpServlet {
 			}
 			
 		}
-		else {
+		else{
 			try {
 				
 				MultipartRequest multi = new MultipartRequest(

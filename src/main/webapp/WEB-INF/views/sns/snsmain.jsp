@@ -22,6 +22,7 @@
 .first .movietitle {position:absolute;width:100%;bottom:0;background:rgba(0,0,0,0.4);padding:7px 15px;font-size:14px;}
 </style>
 <style>
+
 .material-symbols-outlined {
   font-variation-settings:
   'FILL' 0,
@@ -784,15 +785,22 @@ img{
 	let heart = 0;
 	//좋아요 늘리기
 	 $(".like").on('click',function(){
-		var index= $(this).data('index');
-		if(heart == 0){
-			$('#boardwrap').children().eq(index).find('.like').html($('#boardwrap').children().eq(index).find('.like').html().replaceAll("outlined","rounded"));
-		 	heart=1;
-		}else{
-			$('#boardwrap').children().eq(index).find('.like').html($('#boardwrap').children().eq(index).find('.like').html().replaceAll("rounded","outlined"));
-			heart=0;
-		}
-	 });
+    			if(heart == 0){
+		    			if(${ubuildingseq!=buildingseq}){
+		    				$('#boardwrap').children().eq(index-1).find('.like').html($('#boardwrap').children().eq(index-1).find('.like').html().replaceAll("outlined","rounded"));
+		    			}else{
+		    				$('#boardwrap').children().eq(index).find('.like').html($('#boardwrap').children().eq(index).find('.like').html().replaceAll("outlined","rounded"));
+		    			}
+		    		 	heart=1;
+	    		}else{
+	    			if(${ubuildingseq!=buildingseq}){
+	    				$('#boardwrap').children().eq(index-1).find('.like').html($('#boardwrap').children().eq(index-1).find('.like').html().replaceAll("outlined","rounded"));
+	    			}else{
+	    				$('#boardwrap').children().eq(index).find('.like').html($('#boardwrap').children().eq(index).find('.like').html().replaceAll("rounded","outlined"));
+	    			}
+	    			heart=0;
+	    		}
+	    	 });
 	
 	 
 	//슬라이드 이벤트
@@ -900,18 +908,6 @@ img{
     	    		$("#w_modal_comment").val('@'+this.value+" ");
     	    		$("#w_modal_comment").focus();
     	    	});
-
-    	    	
-    	    	//좋아요 늘리기
-    	    	 $(".like").on('click',function(){
-    	    		if(heart == 0){
-    	    			$('#boardwrap').children().eq(index).find('.like').html($('#boardwrap').children().eq(index).find('.like').html().replaceAll("outlined","rounded"));
-    	    		 	heart=1;
-    	    		}else{
-    	    			$('#boardwrap').children().eq(index).find('.like').html($('#boardwrap').children().eq(index).find('.like').html().replaceAll("rounded","outlined"));
-    	    			heart=0;
-    	    		}
-    	    	 });
     	    	
     	    	 $('#btnadd').on("click",function addcomment(){
     	     		$.ajax({
@@ -923,20 +919,15 @@ img{
     	  	            	comment:$('#w_modal_comment').val()},// json 방식으로 서블릿에 보낼 데이터
     	  	            success:function(data){
     	 	                alert("success");
+    	 	                
+    	 	                location.replace();
     	  	            },
     	  	            error:function(){
     	  	                alert("error");
     	  	            }
-    	  	            
     	  	        });
-    	     		
     	     	});
-    	    	
-    	    	
-    	    	
             });
-            
-            
         });
     	
     	
