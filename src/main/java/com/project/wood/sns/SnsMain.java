@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.project.wood.sns.repository.BuildingDTO;
+import com.project.wood.sns.repository.CommentDTO;
 import com.project.wood.sns.repository.MapDAO;
 import com.project.wood.sns.repository.SnsDAO;
 import com.project.wood.sns.repository.SnsDTO;
@@ -84,57 +85,84 @@ public class SnsMain extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
 		SnsDAO dao = new SnsDAO();
-		try {
+		HttpSession session =req.getSession();
+		String uid=(session.getAttribute("id").toString());
+		String type = req.getParameter("type");
+		System.out.println(type);
+		
+		if(type.equals("1")) {
+			String snsboardseq=req.getParameter("snsboardseq");
+			String comment = req.getParameter("comment");
+			CommentDTO cdto = new CommentDTO();
+			cdto.setId(uid);
+			cdto.setContent(comment);
+			cdto.setSnsboardseq(type);
+			cdto.setSnsboardseq(snsboardseq);
 			
-			MultipartRequest multi = new MultipartRequest(
-					
-									req,
-									req.getRealPath("/asset/sns"),
-									1024*1024*10,
-									"UTF-8",
-									new DefaultFileRenamePolicy()
-					
-					);
-			System.out.println(req.getRealPath("/asset/sns")); 
-			HttpSession session =req.getSession();
-			String uid=(session.getAttribute("id").toString());
-			
-			String content = multi.getParameter("add_useritem");
-			
-			String pic = multi.getFilesystemName("addpic");
-			String pic2 = multi.getFilesystemName("addpic2");
-			String pic3 = multi.getFilesystemName("addpic3");	
-			
-			SnsDTO dto = new SnsDTO();
-			
-			dto.setId(uid);
-			dto.setContent(content);
-			
-			ArrayList<String> piclist = new ArrayList<String>();
-			piclist.add(pic);
-			piclist.add(pic2);
-			piclist.add(pic3);
-			
-			//dto.setId(session.getAttribute("id").toString());
+			System.out.println(cdto.toString());
 			
 			
-			int result = dao.addsnsboard(dto);
-			int result2 = dao.addpic(piclist);
 			
-			if(result!=0&&result2!=0) {
-				resp.sendRedirect("/wood/snsmain.do");
+			int commentresult = dao.addcomment(cdto);
+			
+			if(commentresult==1) {
+				System.out.println("성공");
 			}else {
 				PrintWriter w = resp.getWriter();
 				w.print("<script>alert('failed');history.back();</script>");
 				w.close();
 			}
 			
-			
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
-	
-	
+		else {
+			try {
+				
+				MultipartRequest multi = new MultipartRequest(
+						
+										req,
+										req.getRealPath("/asset/sns"),
+										1024*1024*10,
+										"UTF-8",
+										new DefaultFileRenamePolicy()
+						
+						);
+				
+				String content = multi.getParameter("add_useritem");
+				
+				String pic = multi.getFilesystemName("addpic");
+				String pic2 = multi.getFilesystemName("addpic2");
+				String pic3 = multi.getFilesystemName("addpic3");	
+				
+				SnsDTO dto = new SnsDTO();
+				
+				dto.setId(uid);
+				dto.setContent(content);
+				
+				ArrayList<String> piclist = new ArrayList<String>();
+				piclist.add(pic);
+				piclist.add(pic2);
+				piclist.add(pic3);
+				
+				//dto.setId(session.getAttribute("id").toString());
+				
+				
+				int result = dao.addsnsboard(dto);
+				int result2 = dao.addpic(piclist);
+				
+				if(result!=0&&result2!=0) {
+					resp.sendRedirect("/wood/snsmain.do");
+				}else {
+					PrintWriter w = resp.getWriter();
+					w.print("<script>alert('failed');history.back();</script>");
+					w.close();
+				}
+				
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
 		
 		
 	}

@@ -234,4 +234,33 @@ public class SnsDAO {
 		}
 		return null;
 	}
+
+	
+	//댓글 등록
+	public int addcomment(CommentDTO cdto) {
+
+		try {
+			
+			String sql = "insert into tblsnscomment (snscommentseq, snsboardseq,id,content,writedate,editdate) values(snscommentseq.nextVal, ?, ?, ?, default,default)";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, cdto.getSnsboardseq());
+			pstat.setString(2,cdto.getId());
+			pstat.setString(3, cdto.getContent());
+			
+			return pstat.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		
+		}
+		return 0;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 }	
