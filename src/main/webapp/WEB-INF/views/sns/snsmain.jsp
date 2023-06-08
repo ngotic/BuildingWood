@@ -31,87 +31,6 @@
 }
 </style>
 <style data-tag="default-style-sheet">
-      html {
-        font-family: Inter;
-        font-size: 16px;
-      }
-
-      body {
-        font-weight: 400;
-        font-style:normal;
-        text-decoration: none;
-        text-transform: none;
-        letter-spacing: normal;
-        line-height: 1.15;
-        color: var(--dl-color-gray-black);
-        background-color: var(--dl-color-gray-white);
-
-      }
-     .frame-group1222 {
-	  top: 300px;
-	  right: 300px;
-	  width: 194px;
-	  height: 43px;
-	  display: flex;
-	  position: absolute;
-	  align-items: flex-start;
-	  flex-shrink: 1;
-	  border-color: #cccccc;
-	  border-width: 0.5px;
-	  border-radius: 30px;
-	  background-color: rgba(255, 255, 255, 1);
-	}
-	.frame-group1222:hover{
-		cursor:pointer;
-		background-color:green;
-	}
-	
-	.frame-mappin {
-	  top: 7px;
-	  left: 32px;
-	  width: 26px;
-	  height: 28px;
-	  display: flex;
-	  position: absolute;
-	  align-items: flex-start;
-	  flex-shrink: 1;
-	}
-	.frame-pin-stroke {
-	  top: 0px;
-	  left: 0px;
-	  width: 26px;
-	  height: 28px;
-	  position: absolute;
-	}
-	.frame-pin {
-	  top: 1.7142906188964844px;
-	  left: 1.857421875px;
-	  width: 22px;
-	  height: 25px;
-	  position: absolute;
-	}
-	.frame-circle {
-	  top: 7.428572654724121px;
-	  left: 8.047615051269531px;
-	  width: 10px;
-	  height: 9px;
-	  position: absolute;
-	}
-	.frame-text15 {
-	  top: 9px;
-	  left: 65px;
-	  color: rgba(255, 95, 95, 1);
-	  height: auto;
-	  position: absolute;
-	  font-size: 17px;
-	  font-style: Medium;
-	  text-align: left;
-	  font-family: Inter;
-	  font-weight: 500;
-	  line-height: 24px;
-	  font-stretch: normal;
-	  text-decoration: none;
-	}
 	span.material-symbols-outlined {
     margin-top: 1px;
     color: tomato;
@@ -193,6 +112,7 @@
 		position:realtive;
 	}
 	#useritem{
+		overflow:hidden;
 		margin: 10px auto;
 	}
 
@@ -448,6 +368,11 @@ color:red;
   'GRAD' 0,
   'opsz' 48
 }
+
+img{
+	object-fit:cover;
+}
+
 </style>
 </head>
 <body>
@@ -666,9 +591,9 @@ color:red;
      		</tr>	
      		<tr>
      			<td style="border-bottom:3px solid black;">
-     				<form method="Post">
+     				<form>
      					<input name="w_modal_comment" id="w_modal_comment" type="text" value="text" style="font-size:12px;">
-     					<div style="float:right; margin-top:5px;"><button type="submit" style="font-size:12px;">게시하기</button></div>
+     					<div style="float:right; margin-top:5px;"><button id="btnadd" type="button" style="font-size:12px;">게시하기</button></div>
      				</form>
      			</td>
      		</tr>
@@ -931,7 +856,7 @@ color:red;
     	        if(${ubuildingseq!=buildingseq}){
     	        	str= $("#boardwrap").children().eq(index-1).find("#send_modal").html().substring();
     	        	commented = $("#boardwrap").children().eq(index-1).find("#to_modal_commentlist").html().substring();
-    	        	like = $("#boardwrap").children().eq(index-1).find("#send_modal").html().substring();
+    	        	like = $("#boardwrap").children().eq(index-1).find(".like").html().substring();
     	        }
     	        str=str.replaceAll('450px','600px');
     	        str=str.replaceAll('300px','600px');
@@ -988,11 +913,35 @@ color:red;
     	    		}
     	    	 });
     	    	
+    	    	 $('#btnadd').on("click",function addcomment(){
+    	     		$.ajax({
+    	  	            url:"/wood/snsmain.do",
+    	  	            type: "post", // post 방식
+    	  	            data:{
+    	  	            	type:"1",
+    	  	            	snsboardseq:snsboardseq, 
+    	  	            	comment:$('#w_modal_comment').val()},// json 방식으로 서블릿에 보낼 데이터
+    	  	            success:function(data){
+    	 	                alert("success");
+    	  	            },
+    	  	            error:function(){
+    	  	                alert("error");
+    	  	            }
+    	  	            
+    	  	        });
+    	     		
+    	     	});
+    	    	
+    	    	
     	    	
             });
             
             
         });
+    	
+    	
+    	
+    	
     
 </script>
 
