@@ -321,7 +321,7 @@
 	margin-top: 4px;
 }
 .recommend-quote {
-	color: #BBB !important;
+	color: tomato !important;
 	font-size: 20px;
 }
 #recommend-map {
@@ -371,10 +371,24 @@
 	color: #444444 !important;
 }
 
-/* 버튼 */
-.rec-btn {
-	padding: 5px;
-}
+	/* 버튼 */
+	.rec-btn {
+		padding: 5px;
+	}
+
+	input, textarea, button, select {
+		border: hidden !important;
+	}
+	
+	 .searchdiv .btn {
+    	padding-left: 33px;
+   	}
+	
+	#ori-icon2 {
+	font-size: 20px;
+    margin-top: 3px;
+   
+   }
 
 </style>
 <link
@@ -442,9 +456,9 @@
 		                <span class="material-symbols-outlined" id="recommend-star">grade</span><span class="recommend-score">${dto.avgscore}</span>
 		              </div>
 		            </div>
-		              <div class="frame1-group frame1-love">
+		              <%-- <div class="frame1-group frame1-love">
 		                <span class="material-symbols-outlined" id="recommend-like">favorite</span><span class="recommend-score">${dto.love}</span>
-		              </div>
+		              </div> --%>
 		            </div>
 		          </div>
 		          
@@ -484,7 +498,7 @@
 			<%-- <% if (session.getAttribute("lv").toString().equals("0")) { %>
 			<button type="button" class="add primary" onclick="location.href='/toy/board/add.do?mode=new';">글쓰기</button>
 			<% } %>	 --%>
-			<button type="button" class="list primary rec-btn" onclick="location.href='/wood/recommend/recommend.do';">목록보기</button>
+    	     <button type="button" class="btn btn-outline-secondary btn-sm" onclick="location.href='/wood/recommend/recommend.do';"><span class="material-symbols-outlined" id="ori-icon2">format_list_bulleted</span>목록보기</button>
 		</div>
 	
 <%-- 	<form method="POST" action="/recommend/recommenddetail.do">

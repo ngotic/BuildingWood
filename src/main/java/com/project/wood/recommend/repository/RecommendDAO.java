@@ -371,7 +371,7 @@ public class RecommendDAO {
 		return 0;
 	}
 
-	public int delComment(String rcseq) {
+	public int delRecComment(String rcseq) {
 
 		try {
 
@@ -379,6 +379,25 @@ public class RecommendDAO {
 
 			pstat = conn.prepareStatement(sql);
 			pstat.setString(1, rcseq);
+
+			return pstat.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
+	public int editRecComment(String rcseq, String content) {
+
+		try {
+
+			String sql = "update tblRestaurantcomment set content = ? where rcseq = ?";
+
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, content);
+			pstat.setString(2, rcseq);
 
 			return pstat.executeUpdate();
 

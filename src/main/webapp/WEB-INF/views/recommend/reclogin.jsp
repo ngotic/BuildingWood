@@ -44,11 +44,12 @@
 			<input type="hidden" name="pw" value="YHSDBJ919">
 			<input type="submit" value="모현손(역삼동)">
 		</form>
-		<form method="POST" action='/toy/user/login.do'>
-			<input type="hidden" name="id" value="test">
-			<input type="hidden" name="pw" value="1111">
-			<input type="submit" value="테스트(test)">
+		<form method="POST" action='/wood/recommend/reclogin.do'>
+			<input type="hidden" name="id" value="OaKoFc263">
+			<input type="hidden" name="pw" value="FkdPjo374">
+			<input type="submit" value="진분래(역삼동)">
 		</form>
+		
 		
 	</main>
 	</section>
