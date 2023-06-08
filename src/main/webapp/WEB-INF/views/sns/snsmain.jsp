@@ -7,29 +7,18 @@
 <%@ include file="/WEB-INF/views/include/asset.jsp" %>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-<style data-tag="reset-style-sheet">
- html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
-</style>
-<!-- 마커 스타일  -->
-<style>
-.overlaybox {position:relative;width:360px;height:350px;background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/box_movie.png') no-repeat;padding:15px 10px;}
-.overlaybox div, ul {overflow:hidden;margin:0;padding:0;}
-.overlaybox li {list-style: none;}
-.overlaybox .boxtitle {color:#fff;font-size:16px;font-weight:bold;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png') no-repeat right 120px center;margin-bottom:8px;}
-.overlaybox .first {position:relative;width:247px;height:250px;background: url('/wood/asset/img/포스코타워 역삼.png') no-repeat;margin-bottom:8px;background-size: cover;}
-.first .text {color:#fff;font-weight:bold;}
-.first .triangle {position:absolute;width:48px;height:48px;top:0;left:0;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/triangle.png') no-repeat; padding:6px;font-size:18px;}
-.first .movietitle {position:absolute;width:100%;bottom:0;background:rgba(0,0,0,0.4);padding:7px 15px;font-size:14px;}
-</style>
-<style>
 
-.material-symbols-outlined {
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 48
-}
+<style data-tag="reset-style-sheet">
+ html {  line-height: 1.15;}body {  margin: 0;}
+ * {  box-sizing: border-box;  border-width: 0; border-style: solid;}
+ p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption 
+ {  margin: 0;  padding: 0;}button {  background-color: transparent;}
+ button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}
+ button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] 
+ {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner 
+ {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus 
+ {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}
+ html { scroll-behavior: smooth  }
 </style>
 <style data-tag="default-style-sheet">
 	span.material-symbols-outlined {
@@ -40,345 +29,13 @@
 	color: tomato;
 	}
 </style>	
+<link href="asset/snscss/snsboxSizing.css" rel="stylesheet" type="text/css">
+<link href="asset/snscss/snsMarker.css" rel="stylesheet" type="text/css">
+<link href="asset/snscss/snsModal.css" rel="stylesheet" type="text/css">
+<link href="asset/snscss/SnsMainContent.css" rel="stylesheet" type="text/css">
 
-<style>
-	*{
-		  -webkit-user-select:none;
-		  -moz-user-select:none;
-		  -ms-user-select:none;
-		  user-select:none 
-	}
-	.header-area {
-	    position: fixed; /* 여기도 */
-	    top: 0;
-	    left: 0;
-	    width: 100%;
-	    z-index: 3;
-	    background-color: white;
-	    border-bottom: 2px solid #eee;
-	}
-	/*컨테이너 오버라이딩  */
-	.container {
-	    font-size: 14px; 
-	    max-width: 1300px;
-	    margin-top: 100px;    
-	    font-family: var(--main-content-font-family);
-	    
-	    
-	} 
-	.wrap{
-		display:flex;
-		margin-top: 110px;
-	}
-
-	#content{
-		  width:45%;
-		  height:864px;
-		  margin-right:50px;
-		  overflow:hidden;
-	}
-	#content:last-child{
-		margin-right:0px;
-	}
-	#map{
-	width:52%;
-	height:864px;
-	
-	}
-	#cheader{
-		height:40px;
-		text-align:center;
-		position:relative;
-		color:black;
-		margin:10px;
-		border-bottom:3px solid #008D62;
-		font-size:20px;
-	}
-	#board{
-		overflow-y:scroll;
-		height:830px;
-	}
-
-	.boardcontent{
-		width:90%;
-		height:400px;
-		background-color:white;
-		display:flex;
-		border-bottom: 3px solid rgb(219,219,219);
-		margin: 15px auto;
-	}
-	#usercontent{
-		width:450px;
-		height:390px;
-		position:realtive;
-	}
-	#useritem{
-		overflow:hidden;
-		margin: 10px auto;
-	}
-
-	
-	#modal_imagebox {
-		position:relative;
-		width:600px;
-		height:600px;
-		text-align:center;
-		vertical-align:center;
-		align-items: center;
-		background-size:contain;
-		overflow:hidden;
-	}
-	#react{
-		position:absolute;
-		bottom:0px;
-		
-	}
-	#comment , .like{
-		display:inline-block;
-		margin-right: 40px;
-		margin-left:20px;
-		color:tomato;
-	}
-	#comment:hover , .like:hover{
-		cursor:pointer;
-		color:black;
-		
-	}
-	#board::-webkit-scrollbar {
-    	display: none; /* 크롬, 사파리, 오페라, 엣지 */
-	}
-	img{
-		margin:auto;
-		display:block;
-		object-fit: cover;
-	}
-	.modal_usernick{
-		display:inline-block;
-		width:110px;
-		font-size:12px;
-		font-weight: bold;
-	}
-	#modal_usernick{
-		display:inline-block;
-		width:110px;
-		font-size:12px;
-		font-weight: bold;
-	}
-	.modal_commentbox{
-		width:460px;
-		height:40px;
-		margin-top:5px;
-		position:relative;
-		
-	}
-	.modal_comment{
-		width:300px;
-		height:40px;
-		display:inline-block;
-		font-size:12px;
-	}
-	.comment_userimage{width:35px; display:inline-block;align-items: center;}
-	#modal_react{
-		margin:7px 0;
-		height:65px;
-		padding-bottom:2px ;
-		border-bottom:3px solid black;
-	}
-	
-	
-	#w_modal_comment{
-		float:left;
-		vertical-align:top;
-		align-content:top;
-		width:300px;
-		height:35px;
-	}
-	#modal_scroll::-webkit-scrollbar {
-    	display: none; /* 크롬, 사파리, 오페라, 엣지 */
-	}
-	.to_comment{
-		position:absolute;
-		bottom:5px;
-	}
-	.top{
-		position:absolute;
-		top:0px;
-	}
-	.box{
-		display:inline-block;
-	}
-	.snshash{
-		vertical-align: center;
-		width:273px;
-		height:18px;
-		overflow:hidden;
-	}
-	#addcontent{
-		width:90%;
-		height:410px;
-		background-color:white;
-		display:flex;
-		border-bottom: 3px solid rgb(219,219,219);
-		margin: 15px auto;
-	}
-	#add_useritem{
-		width:450px;
-		height: 180px;
-		border: 3px solid rgb(219,219,219);
-		display:inline-block;
-		border-radius: 5px;
-		outline-color: rgb(219,219,219);
-	}
-	.add:hover{
-		border:1px solid rgb(219,219,219);
-		background-color:rgb(219,219,219);
-		color:white;
-	}
-	.imagebox{
-		 width: 450px;
-		  height: 300px;
-		  position: relative;
-		  overflow:hidden;
-	}
-	.u_imagebox{
-		background-color:none;
-	}
-	li{
-  list-style-type: none;	
-}
-
- 	label:hover{
- 	cursor:pointer;
- 	}
-.slides{
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 2500px; /* 슬라이드할 사진과 마진 총 넓이 */
-  transition: left 0.3s ; 
-  /*ease-out: 처음에는 느렸다가 점점 빨라짐*/
-}
-
-/* 첫 번째 슬라이드 가운데에 정렬하기위해
-첫번째 슬라이드만 margin-left조정 */
-/* 슬라이드들 옆으로 정렬 */
-.slides li:not(:last-child){
-  float: left;
-}
-
-.slides li{
-  float: left;
-}
-
-.controller span{
-  position:absolute;
-  background-color: transparent;
-  color: black;
-  text-align: center;
-  border-radius: 50%;
-  padding: 10px 20px;
-  top: 50%;
-  font-size: 1.3em;
-  cursor: pointer;
-}
-
-/* 이전, 다음 화살표에 마우스 커서가 올라가 있을때 */
-.controller span:hover{
-  background-color: rgba(128, 128, 128, 0.11);
-}
-
-.prev{
-  left: 10px;
-}
-
-
-.next{
-  right: 10px;
-}
-.col{
-	width:126px;
-	margin-top:-100px;
-	/* background-color:black; */
-	height:130px;
-	padding:0 0 0 0;
-	margin-left: 12px;
-	margin-right: 12px;
-	border:3px solid gray;
-}
-
-.mslides{
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 2500px; /* 슬라이드할 사진과 마진 총 넓이 */
-  transition: left 0.3s ; 
-  /*ease-out: 처음에는 느렸다가 점점 빨라짐*/
-}
-
-
-.mslides li:not(:last-child){
-  float: left;
-}
-
-.mslides li{
-  float: left;
-}
-
-.mcontroller span{
-  position:absolute;
-  background-color: transparent;
-  color: black;
-  text-align: center;
-  border-radius: 50%;
-  padding: 10px 20px;
-  top: 50%;
-  font-size: 1.3em;
-  cursor: pointer;
-}
-
-/* 이전, 다음 화살표에 마우스 커서가 올라가 있을때 */
-.mcontroller span:hover{
-  background-color: rgba(128, 128, 128, 0.11);
-}
-
-.mprev{
-  left: 10px;
-}
-
-
-.mnext{
-  right: 10px;
-}
-	.add{
-		width:80px;
-		height:30px;
-		margin-top:5px;
-		margin-bottom:5px;
-		float:right;
-		border:1px solid white;
-		padding:0 0 0 0 !important;
-		}
-		
-</style>
-<style>
-.material-symbols-rounded {
-color:red;
-  font-variation-settings:
-  'FILL' 1,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 48
-}
-
-img{
-	object-fit:cover;
-}
-
-</style>
 </head>
 <body>
-
-	
 	<!-- template.jsp > index.jsp -->
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
 	<section class="container">
@@ -479,7 +136,7 @@ img{
 								    <ul class="slides" id="slide${status.count}" style="width:calc(${dto.cpic} * 450px)"> 
 								   		<c:forEach items="${plist}" var="pic">
 							   			<c:if test="${dto.snsboardseq==pic.snsboardseq}">
-								     		<li><img alt="" src="/wood/asset/sns/${pic.pic}" style="width:450px; height:300px; "></li>
+								     		<li><img alt="" src="/wood/asset/sns/${pic.pic}" style="width:450px;height:300px; "></li>
 								     	</c:if>
 								     	</c:forEach>
 								    </ul>  
@@ -781,39 +438,25 @@ img{
 	});
 	
 	
-	var index= $('.like').data('index');
-	let heart = 0;
 	//좋아요 늘리기
-	 $(".like").on('click',function(){
-    			if(heart == 0){
-		    			if(${ubuildingseq!=buildingseq}){
-		    				$('#boardwrap').children().eq(index-1).find('.like').html($('#boardwrap').children().eq(index-1).find('.like').html().replaceAll("outlined","rounded"));
-		    			}else{
-		    				$('#boardwrap').children().eq(index).find('.like').html($('#boardwrap').children().eq(index).find('.like').html().replaceAll("outlined","rounded"));
-		    			}
-		    		 	heart=1;
-	    		}else{
-	    			if(${ubuildingseq!=buildingseq}){
-	    				$('#boardwrap').children().eq(index-1).find('.like').html($('#boardwrap').children().eq(index-1).find('.like').html().replaceAll("outlined","rounded"));
-	    			}else{
-	    				$('#boardwrap').children().eq(index).find('.like').html($('#boardwrap').children().eq(index).find('.like').html().replaceAll("rounded","outlined"));
-	    			}
-	    			heart=0;
-	    		}
-	    	 });
-	
+		
 	 
 	//슬라이드 이벤트
 	let currentIdx = [];
 	let picscount = [];
+	let heart = [];
+	
+	
 	var user = 0;
 	var contentlength=$("#boardwrap").children().length;
 	if(${ubuildingseq==buildingseq}){
 		user=1;
+		heart.push(0);
 	}
 	for (i= user; i < contentlength; i++) {
 		currentIdx.push(1);
 		picscount.push($(`#slide${i}`).parent().data("count"));
+		heart.push(0);
 	}
 
 	$('.prev').on('click', function () {
@@ -839,6 +482,40 @@ img{
 		  currentIdx[parseInt($(this).data('num')) - 1]++;
 		}
 	});
+	
+	//좋아요 처리 
+	 $(".like").on('click',function(){
+		 var index = parseInt($(this).data('index')-1);
+		 
+		 if(user==1){
+			 var tofill = $('#boardwrap').children().eq(index+1).find('.like').html();
+			 var toblank = $('#boardwrap').children().eq(index+1).find('.like').html();
+			 tofill=tofill.replaceAll("outlined","rounded");
+			 toblank=toblank.replaceAll("rounded","outlined");
+			 if(heart[index]==0){
+				 $('#boardwrap').children().eq(index+1).find('.like').html(tofill);
+	   				heart[index]=1;
+			 }else{
+				 $('#boardwrap').children().eq(index+1).find('.like').html(toblank);
+	 				heart[index]=0;
+			 }
+		 }
+		 else{
+			 var tofill = $('#boardwrap').children().eq(index).find('.like').html();
+			 var toblank = $('#boardwrap').children().eq(index).find('.like').html();
+			 tofill=tofill.replaceAll("outlined","rounded");
+			 toblank=toblank.replaceAll("rounded","outlined");
+			 if(heart[index]==0){
+				 $('#boardwrap').children().eq(index).find('.like').html(tofill);
+					heart[index]=1;
+			 }else{
+				 $('#boardwrap').children().eq(index).find('.like').html(toblank);
+					heart[index]=0;
+			 }
+		 }
+ 	 });
+	
+	
 	
 	
 	    	
