@@ -167,13 +167,75 @@ public class ClubDAO {
 					e.printStackTrace();
 			}
 			return null;
-		}
+	}
 	
 
+		public List<ClubBoardDTO> boardlist(String id, String word, String type) { // 지역별
+			
+			try {
+					String sql="";
+					if( type.equals("title") ) {
+						sql = "select hc.*, c.*,  b.buildingseq, b.name as buildingname, (select nickname from tblMember where id=c.id) as nickname from tblHobbyClub hc inner join tblclub c on hc.clubseq = c.clubseq inner join tbladdress a on c.id = a.id inner join tblbuilding b on b.buildingseq = a.buildingseq and c.name LIKE '%'||?||'%' and b.buildingseq = (select buildingseq from tblAddress where id = ?)";
+						pstat = conn.prepareStatement(sql);
+						pstat.setString(1, word);
+						pstat.setString(2, id);
+						
+					} else if(type.equals("content")) {
+						sql = "select hc.*,c.*,  b.buildingseq, b.name as buildingname, (select nickname from tblMember where id=c.id) as nickname "
+								+ "from tblHobbyClub hc \r\n"
+								+ "    inner join tblclub c on hc.clubseq = c.clubseq \r\n"
+								+ "        inner join tbladdress a on c.id = a.id \r\n"
+								+ "            inner join tblbuilding b on b.buildingseq = a.buildingseq and b.buildingseq = (select buildingseq from tblAddress where id = ?) where hc.content LIKE '%'||?||'%'";
+						pstat = conn.prepareStatement(sql);
+						pstat.setString(1, id);
+						pstat.setString(2, word);
+					}
+					
+					
+					
+					rs = pstat.executeQuery();
+					
+					List<ClubBoardDTO> list = new ArrayList<ClubBoardDTO>();
+					
+					while (rs.next()) {
+						
+						ClubBoardDTO dto = new ClubBoardDTO();
+						
+						dto.setHobbyclubseq(rs.getString("hobbyclubseq"));
+						dto.setClubseq(rs.getString("clubseq"));
+						dto.setRecruits(rs.getString("recruits"));
+						dto.setRegdate(rs.getString("hobbyclubseq"));
+						dto.setEditdate(rs.getString("editdate"));
+						dto.setOpenregdate(rs.getString("openregdate").substring(0, 10));
+						dto.setCloseregdate(rs.getString("closeregdate").substring(0, 10));
+						dto.setContent(rs.getString("content"));
+						dto.setId(rs.getString("id"));
+						dto.setName(rs.getString("name"));
+						
+						dto.setBuildingname(rs.getString("buildingname"));
+						dto.setOpendate(rs.getString("opendate"));
+						list.add(dto);
+					}
+					
+					
+					return list;
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+			}
+			return null;
+		}	
+		
+		
 	// 해당 사용자의 건물별 동호회를 출력한다. 
-	public List<ClubBoardDTO> boardlist(String id, String word, String type) { // 지역별
+	public List<ClubBoardDTO> boardlist(String id, String word, String type, String n) { // 지역별
 		
 		try {
+				System.out.println(n);
+				int begin = Integer.parseInt(n);
+				int end   = begin+4;
+				
+				System.out.println(begin +", "+ end);
 				String sql="";
 				if( type.equals("title") ) {
 //					sql = "select hc.*,c.*,  b.buildingseq, b.name as buildingname, (select nickname from tblMember where id=c.id) as nickname "
@@ -183,28 +245,51 @@ public class ClubDAO {
 //						+ "            inner join tblbuilding b on b.buildingseq = a.buildingseq and b.buildingseq = (select buildingseq from tblAddress where id = ?) where c.name LIKE '%'||?||'%'";
 
 					
-					sql = "select hc.*, c.*,  b.buildingseq, b.name as buildingname, (select nickname from tblMember where id=c.id) as nickname from tblHobbyClub hc inner join tblclub c on hc.clubseq = c.clubseq inner join tbladdress a on c.id = a.id inner join tblbuilding b on b.buildingseq = a.buildingseq and c.name LIKE '%'||?||'%' and b.buildingseq = (select buildingseq from tblAddress where id = ?)";
+					//sql = "select hc.*, c.*,  b.buildingseq, b.name as buildingname, (select nickname from tblMember where id=c.id) as nickname from tblHobbyClub hc inner join tblclub c on hc.clubseq = c.clubseq inner join tbladdress a on c.id = a.id inner join tblbuilding b on b.buildingseq = a.buildingseq and c.name LIKE '%'||?||'%' and b.buildingseq = (select buildingseq from tblAddress where id = ?)";
+					
+					sql = "select * from ( select  cb.*, rownum as rnum from \r\n"
+							+ "( select hc.hobbyclubseq, hc.clubseq, hc.recruits, hc.regdate, hc.openregdate, hc.closeregdate, hc.content, c.id, c.name, b.buildingseq, b.name as buildingname, (select nickname from tblMember m where m.id=c.id) as nickname \r\n"
+							+ "from tblHobbyClub hc \r\n"
+							+ "inner join tblclub c on hc.clubseq = c.clubseq \r\n"
+							+ "inner join tbladdress a on c.id = a.id \r\n"
+							+ "inner join tblbuilding b on b.buildingseq = a.buildingseq ) cb ) where name LIKE '%'|| ? || '%' and rnum between ? and ?";
+					
 					pstat = conn.prepareStatement(sql);
 					pstat.setString(1, word);
-					pstat.setString(2, id);
+					pstat.setInt(2, begin);
+					pstat.setInt(3, end);
 					
 				} else if(type.equals("content")) {
-					sql = "select hc.*,c.*,  b.buildingseq, b.name as buildingname, (select nickname from tblMember where id=c.id) as nickname "
+					/*
+					 * sql =
+					 * "select hc.*,c.*,  b.buildingseq, b.name as buildingname, (select nickname from tblMember where id=c.id) as nickname "
+					 * + "from tblHobbyClub hc \r\n" +
+					 * "    inner join tblclub c on hc.clubseq = c.clubseq \r\n" +
+					 * "        inner join tbladdress a on c.id = a.id \r\n" +
+					 * "            inner join tblbuilding b on b.buildingseq = a.buildingseq and b.buildingseq = (select buildingseq from tblAddress where id = ?) where hc.content LIKE '%'||?||'%'"
+					 * ;
+					 */
+					
+					sql = "select * from ( select  cb.*, rownum as rnum from \r\n"
+							+ "( select hc.hobbyclubseq, hc.clubseq, hc.recruits, hc.regdate, hc.openregdate, hc.closeregdate, hc.content, c.id, c.name, b.buildingseq, b.name as buildingname, (select nickname from tblMember m where m.id=c.id) as nickname \r\n"
 							+ "from tblHobbyClub hc \r\n"
-							+ "    inner join tblclub c on hc.clubseq = c.clubseq \r\n"
-							+ "        inner join tbladdress a on c.id = a.id \r\n"
-							+ "            inner join tblbuilding b on b.buildingseq = a.buildingseq and b.buildingseq = (select buildingseq from tblAddress where id = ?) where hc.content LIKE '%'||?||'%'";
+							+ "inner join tblclub c on hc.clubseq = c.clubseq \r\n"
+							+ "inner join tbladdress a on c.id = a.id \r\n"
+							+ "inner join tblbuilding b on b.buildingseq = a.buildingseq ) cb ) where content LIKE '%'|| ? || '%' and rnum between ? and ?";
+					
+					
+					
 					pstat = conn.prepareStatement(sql);
-					pstat.setString(1, id);
-					pstat.setString(2, word);
+					/* pstat.setString(1, id); */
+					pstat.setString(1, word);
+					pstat.setInt(2, begin);
+					pstat.setInt(3, end);
 				}
-				
 				
 				
 				rs = pstat.executeQuery();
 				
 				List<ClubBoardDTO> list = new ArrayList<ClubBoardDTO>();
-				
 				while (rs.next()) {
 					
 					ClubBoardDTO dto = new ClubBoardDTO();
@@ -212,18 +297,15 @@ public class ClubDAO {
 					dto.setHobbyclubseq(rs.getString("hobbyclubseq"));
 					dto.setClubseq(rs.getString("clubseq"));
 					dto.setRecruits(rs.getString("recruits"));
-					dto.setRegdate(rs.getString("hobbyclubseq"));
-					dto.setEditdate(rs.getString("editdate"));
+					dto.setRegdate(rs.getString("regdate"));
 					dto.setOpenregdate(rs.getString("openregdate").substring(0, 10));
 					dto.setCloseregdate(rs.getString("closeregdate").substring(0, 10));
 					dto.setContent(rs.getString("content"));
 					dto.setId(rs.getString("id"));
-					dto.setName(rs.getString("name"));
-					
+					dto.setName(rs.getString("name"));					
 					dto.setBuildingname(rs.getString("buildingname"));
-					dto.setOpendate(rs.getString("opendate"));
-					// dto.setAmount(rs.getString("amount"));
-					// dto.setNickname(rs.getString("nickname"));
+					//dto.setOpendate(rs.getString("opendate"));
+
 					list.add(dto);
 				}
 				

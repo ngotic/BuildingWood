@@ -165,78 +165,72 @@
 				</div>
 			</div>
 			</c:if>
-			<c:forEach items="${cblist}" var="cbdto">
-				<div class="col-md-3 col-sm-6 mb-3 mb-sm-0 mt-2">
-					<div class="card mb-6" >
-					  <div class="card-body">
-					    <h5 class="card-title">${cbdto.name} 
-					    	<c:if test="${cbdto.openregdate != cbdto.closeregdate}">
-					    		<span class="badge bg-success" style="float:right;">모집중</span>
-					    	</c:if>
-					    	<c:if test="${cbdto.openregdate == cbdto.closeregdate}">
-					    		<span class="badge bg-danger" style="float:right;">모집마감</span>
-					    	</c:if>
-					    </h5>
-					    <h6 class="card-subtitle mb-2 text-body-secondary mt-1">${cbdto.buildingname}</h6>
-					    <p class="card-text">${cbdto.content}</p>
-					    <hr>
-					    	<div class="text-center">
-					    		<div><span>모집시작 : ${cbdto.openregdate}  </span></div>
-					    		<div><span>모집마감 : ${cbdto.closeregdate} </span></div>
-					    		<div><span>모집인원 : ${cbdto.recruits}     </span></div>
-					    	</div>
-					    	<hr>
-					    	<div class="d-flex justify-content-evenly mt-3">
-					    		<button class="detail bluecolor" onclick="location.href='/wood/club/detail.do?hseq=${cbdto.hobbyclubseq}'">상세</button>
-					    		<c:if test="${cbdto.openregdate != cbdto.closeregdate}">
-						    		<button class="edit greencolor" onclick="salert('${cbdto.clubseq}',
-						    		'${cbdto.name}', '${id}', '${cbdto.hobbyclubseq}');">신청</button>
-					    		</c:if>
-					    	</div>
-					  </div>
-					</div>
-				 </div>
-				 
-			 </c:forEach>
 		</div>
-		
+		<!-- <button id="testBtn">더보기</button> -->
 	</section>
 	
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+let n = 0;
 
+//loadClubList();
 
-$('#keyword').keydown(function(){
+$('#holder').html('');
+
+// loadClubList();
+/* $('#testBtn').click(function(){
 	
-	console.log($('#keyword').val());
-	var pattern = /^[가-힣a-zA-Z0-9]{1,}$/;
+	event.preventDefault();
+})
+ */
+ 
+let ch = true;
+let ch2 = true;
+
+$(window).scroll(()=>{
 	
-	if($('#keyword').val() != '') {
-		if (!pattern.test($('#keyword').val())){
-			return
-		};
+	if( window.innerHeight + window.scrollY >= document.body.offsetHeight ){
+		if (ch) {
+			loadClubList();
+			ch = false;
+		} // 응답이 올 때 까지 기다린다. 
 	}
+});
+function loadClubList(){
 	
 	$.ajax({
 		type:'POST',
 		url: '/wood/club/club.do',
 		data : {
+			n: n,
 			type : $('#type').val(),
 			keyword : $('#keyword').val().trim()
 		},
 		dataType: 'json',
 		success: (result)=> {
-			$('#holder').html('');
+			
+			ch = true;
 			let id ='${id}';
 			$(result).each((index, item)=>{
 				console.log(item.hobbyseq);
-				$('#holder').append(
-					`
-					<div class="col-md-3 col-sm-6 mb-3 mb-sm-0 mt-2">
+				
+					let template = 
+					`<div class="col-md-3 col-sm-6 mb-3 mb-sm-0 mt-2">
 						<div class="card mb-6" >
 						  <div class="card-body">
-						    <h5 class="card-title">\${item.name}</h5>
+						    <h5 class="card-title">\${item.name}
+						    `;
+						    
+						    if( item.openregdate==item.closeregdate ){
+						    	template += `<span class="badge bg-danger" style="float:right;">모집마감</span>`
+						    } else {
+						    	template += `<span class="badge bg-success" style="float:right;">모집중</span>`
+						    }
+						    
+						    
+					 template += `
+						    </h5>
 						    <h6 class="card-subtitle mb-2 text-body-secondary mt-1"> \${item.buildingname}</h6>
 						    
 						    <p class="card-text">\${item.content}</p>
@@ -255,23 +249,175 @@ $('#keyword').keydown(function(){
 						  </div>
 						</div>
 					 </div>
-					`
-				);
+					`;
+					 $('#holder').append(template);
+			});
+			
+			if(result.length == 0) {
+				// alert(' 더 이상 게시물이 없습니다.');
+			} else {
+				// console.log('호출');
+				n += 4;	
+			}
+			
+		},
+		error: (a, b, c) => console.log(a, b, c)
+	});  
+	event.preventDefault();
+	
+}
+
+
+function loadClubList(){
+	
+	$.ajax({
+		type:'POST',
+		url: '/wood/club/club.do',
+		data : {
+			n: n,
+			type : $('#type').val(),
+			keyword : $('#keyword').val().trim()
+		},
+		dataType: 'json',
+		success: (result)=> {
+			
+			ch = true;
+			let id ='${id}';
+			$(result).each((index, item)=>{
+				console.log(item.hobbyseq);
+				
+					let template = 
+					`<div class="col-md-3 col-sm-6 mb-3 mb-sm-0 mt-2">
+						<div class="card mb-6" >
+						  <div class="card-body">
+						    <h5 class="card-title">\${item.name}
+						    `;
+						    
+						    if( item.openregdate==item.closeregdate ){
+						    	template += `<span class="badge bg-danger" style="float:right;">모집마감</span>`
+						    } else {
+						    	template += `<span class="badge bg-success" style="float:right;">모집중</span>`
+						    }
+						    
+						    
+					 template += `
+						    </h5>
+						    <h6 class="card-subtitle mb-2 text-body-secondary mt-1"> \${item.buildingname}</h6>
+						    
+						    <p class="card-text">\${item.content}</p>
+						    <hr>
+						    	<div class="text-center">
+						    		<div><span>모집시작 : \${item.openregdate}  </span></div>
+						    		<div><span>모집마감 : \${item.closeregdate}  </span></div>
+						    		<div><span>모집인원 : \${item.recruits}  </span></div>
+						    	</div>
+						    <hr>
+							<div class="d-flex justify-content-evenly mt-3">
+				    			<button class="detail bluecolor" onclick="location.href='/wood/club/detail.do?hseq=\${item.hobbyclubseq}'">상세</button>
+				    			<button class="edit greencolor" onclick="salert('\${item.clubseq}',
+				    			'\${item.name}', '\${id}', '\${item.hobbyclubseq}');">신청</button>
+				    		</div>
+						  </div>
+						</div>
+					 </div>
+					`;
+					 $('#holder').append(template);
+			});
+			
+			if(result.length == 0) {
+				// alert(' 더 이상 게시물이 없습니다.');
+			} else {
+				// console.log('호출');
+				n += 4;	
+			}
+			
+		},
+		error: (a, b, c) => console.log(a, b, c)
+	});  
+	event.preventDefault();
+	
+}
+
+
+$('#keyword').keydown(function(){
+	
+	console.log($('#keyword').val());
+	var pattern = /^[가-힣a-zA-Z0-9]{1,}$/;
+	
+	if($('#keyword').val() != '') {
+		if (!pattern.test($('#keyword').val())){
+			return
+		};
+	}
+	loadKeyboard();
+	
+});
+
+function loadKeyboard(){
+
+	$.ajax({
+		type:'POST',
+		url: '/wood/club/clubkeyboard.do',
+		data : {
+			type : $('#type').val(),
+			keyword : $('#keyword').val().trim()
+		},
+		dataType: 'json',
+		success: (result)=> {
+			ch2 = true;
+			$('#holder').html('');
+			let id ='${id}';
+			$(result).each((index, item)=>{
+				console.log(item.hobbyseq);
+				
+				let template = 
+					`<div class="col-md-3 col-sm-6 mb-3 mb-sm-0 mt-2">
+						<div class="card mb-6" >
+						  <div class="card-body">
+						    <h5 class="card-title">\${item.name}
+						    `;
+						    
+						    if( item.openregdate==item.closeregdate ){
+						    	template += `<span class="badge bg-danger" style="float:right;">모집마감</span>`
+						    } else {
+						    	template += `<span class="badge bg-success" style="float:right;">모집중</span>`
+						    }
+					 template += `
+						    </h5>
+						    <h6 class="card-subtitle mb-2 text-body-secondary mt-1"> \${item.buildingname}</h6>
+						    
+						    <p class="card-text">\${item.content}</p>
+						    <hr>
+						    	<div class="text-center">
+						    		<div><span>모집시작 : \${item.openregdate}  </span></div>
+						    		<div><span>모집마감 : \${item.closeregdate}  </span></div>
+						    		<div><span>모집인원 : \${item.recruits}  </span></div>
+						    	</div>
+						    <hr>
+							<div class="d-flex justify-content-evenly mt-3">
+				    			<button class="detail bluecolor" onclick="location.href='/wood/club/detail.do?hseq=\${item.hobbyclubseq}'">상세</button>
+				    			<button class="edit greencolor" onclick="salert('\${item.clubseq}',
+				    			'\${item.name}', '\${id}', '\${item.hobbyclubseq}');">신청</button>
+				    		</div>
+						  </div>
+						</div>
+					 </div>
+					`;
+					 $('#holder').append(template);
 			});
 			
 		},
 		error: (a, b, c) => console.log(a, b, c)
 	});  
-});
+}
 
 
-
+// 처음엔 4개만 다음엔 4개 추가 
 /* $(window).scroll(()=>{
 	
 	if( window.innerHeight + window.scrollY >= document.body.offsetHeight ){
-		
-		
-	 	$.ajax({
+	 	
+	 $.ajax({
 			type:'POST',
 			url: '/ajax/ex14data.do',
 			data : {
@@ -296,21 +442,17 @@ $('#keyword').keydown(function(){
 				n += 10; // 어느 순간은 데이터가 없다. > 결국에 0이 나온다.
 				console.log(result.length);
 				
-	
 				if(result.length == 0) {
 					alert(' 더 이상 게시물이 없습니다.');
 					$('#btn').attr('disabled', true); 
-					
 				}
 				
 			},
 			error: (a, b, c) => console.log(a, b, c)
 		});  
-		
-		
 	}
-}); */
-
+}); 
+ */
 
 
 
