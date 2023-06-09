@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@ include file="/WEB-INF/views/include/asset.jsp" %>
 
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
@@ -17,6 +16,7 @@
 />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" >
 
+<%@ include file="/WEB-INF/views/include/asset.jsp" %>
 <style data-tag="reset-style-sheet">
       html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
     </style>
@@ -43,7 +43,9 @@
       line-height: 1.15;
       color: var(--dl-color-gray-black);
       background-color: var(--dl-color-gray-white);
-
+    }
+    .header-area {
+    	z-index: 2;
     }
    .frame-group1222 {
 	  top: 162px;
@@ -115,6 +117,7 @@
    }
    #container-loc {
    height: 130px;
+   max-width: auto;
    }
 
    #content {
@@ -441,6 +444,7 @@
 </head>
 <body>
    <!-- template.jsp > index.jsp -->
+   
    <%@ include file="/WEB-INF/views/include/header.jsp" %>
    <section class="container" id="container-loc">
       <h1>맛집 추천 <small>상세보기</small></h1>
@@ -454,10 +458,10 @@
    </section>
          
          
+         
     <div id="main">
       <div id="map">지도</div>
       <table id="list">
-       
       
       <!-- 지도 -->
       	 <tr>
@@ -557,7 +561,7 @@
 						</fieldset>
 					 </div>
                   
-	                <textarea class="form-control" name="comment" rows="2" placeholder="가게 평가를 남겨주세요!" required></textarea>
+	                <textarea class="form-control" name="comment" rows="2" placeholder="가게 평가를 남겨주세요!" spellcheck="false" required></textarea>
 	                <input type="submit" value="등록" name="comment" id="btn btn-add" class="btn-add1" style="margin:0 0 5px 10px; width:70px">
                   	
                   	<input type="hidden" name="recommendseq" value="${dto.recommendseq}">
@@ -710,7 +714,7 @@
     }
 
 	function del(recommendseq) {
-		location.href='/wodd/recommend/recommenddel.do?recommendseq=' + recommendseq;
+		location.href='/wood/recommend/recommenddel.do?recommendseq=' + recommendseq;
 	}
 	
 	

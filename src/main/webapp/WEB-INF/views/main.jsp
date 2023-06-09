@@ -170,14 +170,12 @@
 	overflow: hidden;
 }
 
-@
-keyframes blink { 50% {
+@keyframes blink { 50% {
 	border-color: transparent;
 }
 
 }
-@
-keyframes typing1 {from { width:0;
+@keyframes typing1 {from { width:0;
 	
 }
 
@@ -186,8 +184,7 @@ to {
 }
 
 }
-@
-keyframes typing2 {from { width:100px;
+@keyframes typing2 {from { width:100px;
 	
 }
 
@@ -204,8 +201,7 @@ to {
 	white-space: nowrap;
 }
 
-@
-keyframes appear {from { opacity:0.1;
+@keyframes appear {from { opacity:0.1;
 	
 }
 

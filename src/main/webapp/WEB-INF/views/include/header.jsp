@@ -79,12 +79,12 @@
                     <ul class="dropdown-menu" >
                         <li><a class="dropdown-item" href="">약속게시판</a></li>
 						<li><a class="dropdown-item" href="/wood/club/club.do">동호회게시판</a></li>
-						<li><a class="dropdown-item" href="">맛집게시판</a></li>
+						<li><a class="dropdown-item" href="/wood/recommend/recommend.do">맛집게시판</a></li>
 						        
                     </ul>
                 </div>
 
-				<div class="nav-item"><a href = "" class="nav-link" >고객지원</a></div> 
+				<div class="nav-item"><a href = "/wood/suggest/suggest.do" class="nav-link" >고객지원</a></div> 
 				<!-- <div class="nav-item dropdown">
                     <a href = "" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="true">
                         고객지원

@@ -56,7 +56,7 @@ public class RecommendDAO {
 
 		try {
 
-			String sql = "select substr(address, 4, 7) as loc from tblBuilding where buildingseq = (select buildingseq from tblAddress where memberid = ?)";
+			String sql = "select substr(address, 4, 7) as loc from tblBuilding where buildingseq = (select buildingseq from tblAddress where id = ?)";
 
 			pstat = conn.prepareStatement(sql);
 
@@ -110,7 +110,7 @@ public class RecommendDAO {
 
 				dto.setRecommendseq(rs.getString("recommendseq"));
 				dto.setRestaurantseq(rs.getString("restaurantseq"));
-				dto.setBoardseq(rs.getString("boardseq"));
+				dto.setBoardseq(rs.getString("boardcategoryseq"));
 				dto.setTitle(rs.getString("title"));
 				dto.setRegdate(rs.getString("regdate"));
 				dto.setEditdate(rs.getString("editdate"));
@@ -187,7 +187,7 @@ public class RecommendDAO {
 					
 				dto.setRecommendseq(rs.getString("recommendseq"));
 				dto.setRestaurantseq(rs.getString("restaurantseq"));
-				dto.setBoardseq(rs.getString("boardseq"));
+				dto.setBoardseq(rs.getString("boardcategoryseq"));
 				dto.setTitle(rs.getString("title"));
 				dto.setRegdate(rs.getString("regdate"));
 				dto.setEditdate(rs.getString("editdate"));

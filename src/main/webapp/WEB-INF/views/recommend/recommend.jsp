@@ -354,12 +354,13 @@
     border: 1px solid #aaa;
     border-radius: 5px;
     font-family: 'Pretendard-Regular';
+    margin-bottom: 20px;
 }
 
 /* 페이징 */
 .page-link.active {
 	background-color: #1BC060 !important;
-	border-color: #dee2e6 !important;
+	border-color: #1BC060 !important;
 	font-family: 'Pretendard-Regular';
 	color: #fff !important;
 }
@@ -374,6 +375,9 @@
 	/* 버튼 */
 	.rec-btn {
 		padding: 5px;
+		border-radius: 0 4px 4px 0;
+	    height: 38px;
+		
 	}
 
 	input, textarea, button, select {
@@ -389,6 +393,11 @@
     margin-top: 3px;
    
    }
+   
+   #container-loc {
+   height: 130px;
+   width: 980px;
+   }
 
 </style>
 <link
@@ -401,7 +410,7 @@
 <body>
 		<!-- template.jsp > index.jsp -->
 		<%@ include file="/WEB-INF/views/include/header.jsp" %>
-		<section class="container">
+		<section class="container" id="container-loc">
 			<h1>맛집 추천
 				<c:if test="${map.search == 'n'}">
 				<small>목록</small>
@@ -491,7 +500,7 @@
 		</div>
 		
 		<!-- 페이징 -->
-		<ul class="pagination d-flex justify-content-center flex-wrap pagination-rounded-flat pagination-success" style="text-align: center; margin-bottom:10px; font-family: 'Pretendard-Regular';">${pagination}</ul>
+		<ul class="pagination d-flex justify-content-center flex-wrap pagination-rounded-flat pagination-success" style="text-align: center; margin-bottom:20px; font-family: 'Pretendard-Regular';">${pagination}</ul>
 			
 		<div class="searchdiv">
 			<!-- 관리자만 글쓰기 가능 -->
