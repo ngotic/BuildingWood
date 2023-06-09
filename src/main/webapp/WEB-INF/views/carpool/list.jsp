@@ -388,7 +388,6 @@
 	          		<div class="end-frame">
 	          			<span>모집 종료</span>
 	          		</div>
-		          </div>
 		      </div> -->
 		      
 	        

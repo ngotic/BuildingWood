@@ -41,14 +41,16 @@ public class View extends HttpServlet {
 		dto.setTag(tag);
 		
 		
-		System.out.println(dto);
+
 		
 		req.setAttribute("list", list);
 		
 		req.setAttribute("dto", dto);
 		
+		req.setAttribute("promiseseq", promiseseq);
 		
-		System.out.println(dto.getId());
+		
+
 		
 		
 		
@@ -57,10 +59,22 @@ public class View extends HttpServlet {
 		req.setAttribute("rlist", rlist);
 		
 		
-		 ArrayList<String> acceptnickname = dao.getAcceptnickname(promiseseq);
+		 ArrayList<ReplyDTO> acceptnickname = dao.getAcceptnickname(promiseseq);
 //		 rdto.setAcceptnickname(acceptnickname);
+		 System.out.println(acceptnickname);
 		 
 		 req.setAttribute("acceptnickname", acceptnickname);
+
+		 
+		 String nickname = req.getParameter("nickname");
+		 
+		 
+		 
+		 int adminnum = dao.adminnum(promiseseq);
+		 req.setAttribute("adminnum", adminnum);
+		 
+		 
+		 
 
 		
 		
@@ -79,7 +93,7 @@ public class View extends HttpServlet {
 		
 		java.util.List<PromiseDTO> list = dao.list();
 		
-		req.setAttribute("list", list);
+		req.setAttribute("list", list);	
 	
 		
 		

@@ -21,7 +21,7 @@ public class PromiseDAO {
 	
 	
 	public PromiseDAO() {
-		this.conn = DBUtil.open("localhost","team", "java1234");
+		this.conn = DBUtil.open("13.124.238.159","team", "java1234");
 	}
 
 
@@ -33,7 +33,7 @@ public class PromiseDAO {
 			
 
 
-			String sql = "insert into tblPromise values (promiseseq.nextVal, ?, 6, ?, ?, ?,? , default, default)";
+			String sql = "insert into tblPromise values (promiseseq.nextVal, ?, 26, ?, ?, ?,? , default, default)";
 
 			pstat = conn.prepareStatement(sql);
 
@@ -172,7 +172,7 @@ public List<PromiseDTO> getTag() {
 		
 		try {
 			
-			String sql = "select * from tblPromise p inner join tblMember m on m.id = p.writer order by promiseseq desc";
+			String sql = "select * from tblPromise p inner join tblMember m on m.id = p.writer where regdate between (sysdate-7) and sysdate order by promiseseq desc";
 			
 	         stat = conn.createStatement();
 	         rs = stat.executeQuery(sql);
@@ -191,6 +191,10 @@ public List<PromiseDTO> getTag() {
 	            dto.setNickname(rs.getString("nickname"));
 	            dto.setProfile(rs.getString("profile"));
 
+	            int adminnum = 0;
+	            adminnum = adminnum(dto.getPromiseseq());
+	            dto.setAdminnum(adminnum);
+	            
 //	            getTag((String)dto.getPromiseseq()); //arraylist 왜냐면 dto에서 tag배열이 arraylist니깐
 	            
 	            ArrayList<String> tags = getTag(dto.getPromiseseq());
@@ -239,6 +243,10 @@ public List<PromiseDTO> getTaglist(String tag) {
             dto.setRegdate(rs.getString("regdate"));
             dto.setNickname(rs.getString("nickname"));
             dto.setProfile(rs.getString("profile"));
+            
+            int adminnum = 0;
+            adminnum = adminnum(dto.getPromiseseq());
+            dto.setAdminnum(adminnum);
 
 //            getTag((String)dto.getPromiseseq()); //arraylist 왜냐면 dto에서 tag배열이 arraylist니깐
             
@@ -265,57 +273,7 @@ public List<PromiseDTO> getTaglist(String tag) {
 
 
 
-//public List<PromiseDTO> getTaglist(String tag) {
-//	
-//	
-//	
-//	try {
-//		
-//		String sql = "select * from tblPromise p inner join tblPromisehash ph on ph.promiseseq = p.promiseseq inner join tblhashtag h on h.hashtagseq = ph.hashtagseq inner join tblMember m on m.id = p.writer where tag='?' order by p.promiseseq desc";
-//		
-//		pstat = conn.prepareStatement(sql);
-//		
-//		pstat.setString(1, tag);
-//		
-//		rs = pstat.executeQuery();	
-//         
-//		List<PromiseDTO> list = new ArrayList<PromiseDTO>();
-//         
-//         while (rs.next()) {
-//            
-//            PromiseDTO dto = new PromiseDTO();
-//            
-//            dto.setPromiseseq(rs.getString("promiseseq"));
-//            dto.setTitle(rs.getString("title"));
-//            dto.setCategory(rs.getString("category"));
-//            dto.setNum(rs.getString("num"));
-//            dto.setRegdate(rs.getString("regdate"));
-//            dto.setNickname(rs.getString("nickname"));
-//            dto.setProfile(rs.getString("profile"));
-//
-////            getTag((String)dto.getPromiseseq()); //arraylist 왜냐면 dto에서 tag배열이 arraylist니깐
-//            
-//            ArrayList<String> tags = getTag(dto.getPromiseseq());
-//            dto.setTags(tags);
-//            
-//
-//            
-//            list.add(dto);
-//            
-//         }
-//         
-//        
-//         return list;
-//         
-//         
-//      } catch (Exception e) {
-//         e.printStackTrace();
-//      }
-//      
-//      
-//      return null;
-//   }
-	
+
 
 
 	public boolean checkHashTag(String tag) {
@@ -441,7 +399,7 @@ public List<PromiseDTO> getTaglist(String tag) {
 	public void addPromiseHash(HashMap<String, String> map) {
 		try {
 
-			String sql = "insert into tblPromisehash values (promisehashseq.nextVal, ?, ?, 6)";
+			String sql = "insert into tblPromisehash values (promisehashseq.nextVal, ?, ?, 26)";
 
 			pstat = conn.prepareStatement(sql);
 
@@ -588,28 +546,198 @@ public ArrayList<String> getApplication(String promiseseq) {
 
 
 
-public ArrayList<String> getAcceptnickname(String promiseseq) {
+public ArrayList<ReplyDTO> getAcceptnickname(String promiseseq) {
+	
+	
 	try {
 		
-		String sql = "select distinct(nickname) from tblPromisereply pr inner join tblMember m on m.id = pr.id where promiseseq = ?";
+		String sql = "select distinct(nickname),accept from tblPromisereply pr inner join tblMember m on m.id = pr.id where promiseseq = ?";
 		
 		pstat = conn.prepareStatement(sql);
 		pstat.setString(1, promiseseq);
 		
 		rs = pstat.executeQuery();
 		
-		ArrayList<String> acceptnickname = new ArrayList<String>();
+
+		ArrayList<ReplyDTO> acceptnickname = new ArrayList<ReplyDTO>();
 		
 		while (rs.next()) {
-			acceptnickname.add(rs.getString("nickname"));
+			
+			ReplyDTO rdto = new ReplyDTO();
+			
+			rdto.setChecknickname(rs.getString("nickname"));
+			rdto.setCheckstate(rs.getString("accept"));
+			
+			acceptnickname.add(rdto);
+		
+			
 		}
 		
 		return acceptnickname;
+		
+
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	
+	
+	
+	return null;
+}
+
+
+
+
+
+public int edit(String nickname, String promiseseq) {
+	
+	try {
+
+		String sql = "update (select pr.*,m.nickname from tblPromisereply pr inner join tblMember m on m.id = pr.id) set accept = 'T' where promiseseq=? and nickname=?";
+
+		pstat = conn.prepareStatement(sql);
+		
+		System.out.println(sql);
+
+		pstat.setString(1, promiseseq);
+		pstat.setString(2, nickname);
+
+
+		return pstat.executeUpdate();
+		
+
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	
+
+	return 0;
+}
+
+
+
+
+
+public int adminnum(String promiseseq) {
+
+	try {
+		
+		String sql = "select count(*) as adminnum from (select distinct(nickname), accept from  tblPromisereply pr inner join tblMember m on m.id = pr.id  where promiseseq=?) where accept='T'";
+		
+		pstat = conn.prepareStatement(sql);
+		pstat.setString(1, promiseseq);
+		
+		rs2 = pstat.executeQuery();
+		
+		while (rs2.next()) {
+			
+			int adminnum = 0;
+			adminnum = rs2.getInt("adminnum");
+			
+			return adminnum;
+			
+		}
+		
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	
+	
+	return 0;
+}
+
+
+
+
+
+public String checknickname(String nickname, String promiseseq) {
+	
+	try {
+		
+		String sql = "select distinct(nickname) from tblPromisereply pr inner join tblMember m on m.id = pr.id where promiseseq=? and nickname=? and accept='T'";
+		
+		pstat = conn.prepareStatement(sql);
+		pstat.setString(1, promiseseq);
+		pstat.setString(2, nickname);
+		
+		rs = pstat.executeQuery();
+		
+		while (rs.next()) {
+			
+			
+			
+		}		
+		
 		
 		
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
+	
+
+	
+	return null;
+}
+
+
+
+
+
+public List<PromiseDTO> getTag(int n) {
+	
+	
+	try {
+		
+		String sql = "select * from tblPromise p inner join tblMember m on m.id = p.writer where regdate between (sysdate-7-?) and sysdate-? order by promiseseq desc";
+		
+		
+		pstat = conn.prepareStatement(sql);
+		
+		pstat.setInt(1, n);
+		pstat.setInt(2, n);
+		
+		rs = pstat.executeQuery();
+		
+         
+         List<PromiseDTO> list = new ArrayList<PromiseDTO>();
+         
+         while (rs.next()) {
+            
+            PromiseDTO dto = new PromiseDTO();
+            
+            dto.setPromiseseq(rs.getString("promiseseq"));
+            dto.setTitle(rs.getString("title"));
+            dto.setCategory(rs.getString("category"));
+            dto.setNum(rs.getString("num"));
+            dto.setRegdate(rs.getString("regdate"));
+            dto.setNickname(rs.getString("nickname"));
+            dto.setProfile(rs.getString("profile"));
+
+            int adminnum = 0;
+            adminnum = adminnum(dto.getPromiseseq());
+            dto.setAdminnum(adminnum);
+            
+//            getTag((String)dto.getPromiseseq()); //arraylist 왜냐면 dto에서 tag배열이 arraylist니깐
+            
+            ArrayList<String> tags = getTag(dto.getPromiseseq());
+            dto.setTags(tags);
+            
+            
+            list.add(dto);
+            
+         }
+         
+         
+         return list;
+         
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
+	
+	
+	
+	
+	
 	
 	
 	

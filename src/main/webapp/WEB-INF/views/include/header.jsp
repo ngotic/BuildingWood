@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- <link rel="stylesheet" href="/wood/asset/css/clubBtn.css"> -->
+
 <style>
 	   .navbar-menu .nav-item:hover{
         border-bottom: 3px solid #7ED321;
@@ -53,7 +54,7 @@
 <header class="header-area navbar-fade" id="header">
 		<nav id="navbar">
 			<div id="brand-logo">
-				<a class="navbar-brand" id="navbarBrand" href="/wood/indexhome.do"><img width=60px src="/wood/asset/img/logo.png"></a>
+				<a class="navbar-brand" id="navbarBrand"><img width=60px src="/wood/asset/img/logo.png"></a>
 			</div>
 			<a class="navbar-toggler" id="toggleBtn"><i class="fa fa-bars"></i></a>
 			<div class="navbar-menu" id="menu">
@@ -113,18 +114,13 @@
                     <c:if test="${not empty id}">
                      <ul class="dropdown-menu" >
                         <li><a class="dropdown-item" href="/wood/user/logout.do">로그아웃</a></li>
-                        <c:if test="${lv > 0}">
-							<li><a class="dropdown-item" href="/wood/mypage/mypage.do">마이페이지</a></li>
-						</c:if>
-						<c:if test="${lv == 0}">
-							<li><a class="dropdown-item" href="/wood/admin/admin.do">마이페이지</a></li>
-						</c:if>
+						<li><a class="dropdown-item" href="/wood/admin/admin.do">마이페이지</a></li>
                     </ul>
                     </c:if>
                 </div> 
                	<c:if test="${not empty id}">
 					<div class="nav-item">
-						<a href = "" class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal2">알림
+						<a href = "" class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal">알림
 							<span class="material-symbols-outlined align-middle" style="border-radius: 50%;background-color: #fff; font-size:18px;" >favorite</span>
 							<span class="badge rounded-pill" style="background-color: #FF5B5B; font-size:8px;" >0</span>
 						</a>
@@ -137,7 +133,7 @@
 			
 			<!-- Modal -->
 			<!-- Modal -->
-<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
