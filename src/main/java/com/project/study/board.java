@@ -21,4 +21,23 @@ public class board extends HttpServlet {
 		dispatcher.forward(req, resp);
 	}
 
+	 
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+	
+		StudyDAO dao = new StudyDAO();
+		StudyDTO dto = new StudyDTO();
+		
+		String title= dto.getTitle();
+		String content =dto.getContent();
+		
+		int result = dao.Setboard();
+		
+		
+		
+		
+		
+	}
+	
 }

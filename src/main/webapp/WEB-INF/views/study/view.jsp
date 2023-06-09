@@ -203,87 +203,79 @@
 </div>		
 						
 				<form>
-			<div>
+			
 				<table id= "study-board">
+			
 					<tr class="board-cotnet board-main">
-						<td>번호</td>
-						<td>제목</td>
-						<td>작성자</td>
-						<td>작성일</td>
-						<td>조회</td>
+						<th>번호</th>
+						<th>제목</th>
+						<th>작성자</th>
+						<th>작성일</th>
+						<th>조회</th>
 					</tr>
-					
-					</div>
-					
-					<div>
+		
+		
+			<c:forEach items="${list}" var="dto">	
 				
 					<tr onclick='location.href="./viewboard.do"'>
-						<td class="txt-center" > 1</td>
-						<td>질문이요!</td>
-						<td class="txt-center">작성자</td>
-						<td class="txt-center">23-06-04</td>
-						<td class="txt-center">2</td>
-					</tr>
-					
-					<tr onclick="location.href='./viewboard.do'">
-						<td class="txt-center"> 1</td>
-						<td>질문이요!</td>
-						<td class="txt-center">작성자</td>
-						<td class="txt-center">23-06-04</td>
-						<td class="txt-center">2</td>
-					</tr>
-					<tr onclick="location.href='./viewboard.do'">
-						<td class="txt-center"> 1</td>
-						<td>질문이요!</td>
-						<td class="txt-center">작성자</td>
-						<td class="txt-center">23-06-04</td>
-						<td class="txt-center">2</td>
-					</tr>
-					<tr onclick="location.href='./viewboard.do'">
-						<td class="txt-center"> 1</td>
-						<td>질문이요!</td>
-						<td class="txt-center">작성자</td>
-						<td class="txt-center">23-06-04</td>
-						<td class="txt-center">2</td>
-					</tr>
-					<tr onclick="location.href='./viewboard.do'">
-						<td class="txt-center"> 1</td>
-						<td>질문이요!</td>
-						<td class="txt-center">작성자</td>
-						<td class="txt-center">23-06-04</td>
-						<td class="txt-center">2</td>
-					</tr>
-					<tr onclick="location.href='./viewboard.do'">
-						<td class="txt-center"> 1</td>
-						<td>질문이요!</td>
-						<td class="txt-center">작성자</td>
-						<td class="txt-center">23-06-04</td>
-						<td class="txt-center">2</td>
-					</tr>
-					
-					</div>
-					
+						<th class="txt-center" >${dto.rownum }</th>
+						<th>${dto.title}</th>
+						<th class="txt-center">id</th>
+						<th class="txt-center">${dto.regdate}</th>
+						<th class="txt-center">조회수</th>
+					</tr>		
+			</c:forEach>
+		
+			
 				</table>
 				
-			</div>
+					    <nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  </ul>
+</nav>
 			</form>
+				
+		
+		</div>	
+		<form action ="./view.do" method="post">
 			
+		<div class="mb-3">
+		
+			<input type="image"  class="profile" src="/wood/asset/img/img.jpg" >
+			<span class="content-margin " style="padding-bottom: 3px;">작성자이름</span>
 			
+		  <label for="exampleFormControlInput1" class="form-label">	</label>
+		  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="제목" name ="title">
+		</div>
+			<input type="text" name = "addlist"  value="on" style="display: none">
+			<input type="text" id = "sseq" name ="openstudyseq"  style="display: none" value="${openstudyseq}">
+	
+		<div class="mb-3">
+		  <label for="exampleFormControlTextarea1" class="form-label"></label>
+		  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder = "텍스트" name="content"></textarea>
+		</div>
+		<div class="btn">
+
+	 
+	<div class="comment-box"  >
+			
+        	<button type="submit" class="button"  >등록하기</button>
+        	
+        	<a href ="./list.do;" class="">
+        	<button type="button" class="button" >목록으로</button>
+        	</a>
+        </div>
+        </form>	
 			
 
 		
 	</div >
-		
-	 
-	<div class="comment-box"  >
-			
-        	<a href ="javascript:history.back();" class="">
-        	<button type="button" class="button" >목록으로</button>
-        	</a>
-        </div>
-        	
-			
-			
+					
 
 
 	
@@ -296,7 +288,13 @@
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 <script>
 
-
+window.onkeydown = function() {
+	var kcode = event.keyCode;
+	if(kcode == 116) {
+	
+	history.replaceState({}, null, './view.do?openstudyseq=${openstudyseq}');
+	}
+	}
 
 </script>
 

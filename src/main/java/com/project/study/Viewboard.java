@@ -1,6 +1,7 @@
 package com.project.study;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,11 +15,12 @@ public class Viewboard extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		//view_board.java
-
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/study/viewboard.jsp");
-		dispatcher.forward(req, resp);
+		
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 	}
 
 }

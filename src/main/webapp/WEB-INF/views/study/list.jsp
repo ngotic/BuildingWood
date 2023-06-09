@@ -118,23 +118,23 @@
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>	
 	<%@ include file="/WEB-INF/views/study/studyheader.jsp" %>  
 
-<form action="">
+<form action="./list.do" method="post">
 
 	<div style=" display: flex;  justify-content: center;align-items: center;  min-height: 100vh; margin-top: 30px;">
 		<div class = "study-content-black">
 			<div class = "menu">
 				
 				
-				  <select class="button" >
+				  <select class="button"  name="ck">
 				    <option value="name" selected="selected">스터디명</option>
 				    <option  value="content">모집 내용</option>
-				    <option value ="tag">태그</option>
+				    <option  value ="tag">태그</option>
 				  </select>
 				
-					<input class = "textbox" type="text" placeholder ="검색어를 입력하세요." style = "align-self: right; align-content: left; padding: 10px;"  >
-					<input class ="button" type ="button" value ="검색" style = "align-content: left;">
+					<input class = "textbox" type="text" name = "name" placeholder ="검색어를 입력하세요." style = "align-self: right; align-content: left; padding: 10px;"  >
+					<input class ="button" type ="submit" value ="검색" style = "align-content: left;">
 					<a href ="./board.do">
-					<input class ="button" type ="button" value ="스터디 개설"style="margin-left: 30px;" >
+					<input class ="button" type ="button" value ="글작성"style="margin-left: 30px;" >
 					</a >
 					<a href ="./add.do">
 				<input class ="button" type ="button" max ="30" value ="스터디 등록"style="margin-left: 30px;" >
@@ -142,106 +142,57 @@
 			</div>
 		<div class="row" style="margin-left: 57px; padding-left: 5%;">	
 		
-
- 	<a href="./view.do" class="card col-2 content-card shadow p-3 mb-5 bg-body rounded">
+		<table class="table">
+		</form>	
+  <thead>
+  	<h1 style="text-align: center">공지사항</h1>
+    <tr>
+      <th scope="col">번호</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td colspan="2">Larry the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+		
+	<c:forEach items="${list}" var="dto">
+	
+ 	<a type="button" href="view.do?openstudyseq=${dto.openstudyseq}&addlist=off" class="card col-2 content-card shadow p-3 mb-5 bg-body rounded">
+ 	
 		<div >	
 		  <img src="/wood/asset/img/img.jpg" class="card-img-top" alt="...">
 		  <div class="content-card-body">
-		    <span class="card-title title">제목<p style="text-align: right; font-size: 15px;">모집인원</p></span>
-		    <p class="card-text">모집 내용</p>
+		  <div style="display: none" name="addlist" vlaues= "off"></div>
+		    <span class="card-title title nametxt"  name="name">${dto.name}   </span>
+		    <p style="text-align: right; font-size: 15px;" name="recruit">${dto.recruit}</p>
+		 
+		    <p class="card-text introtxt" name="intro">${dto.intro}</p>
+		    	<div style="display: none" name="openstudyseq">${dto.openstudyseq}</div>
 		   	<span>태그</span>
 		  </div>
 		</div>
 	</a>
 
- 	<a href="./view.do" class="card col-2 content-card shadow p-3 mb-5 bg-body rounded">
-		<div class="">	
-		  <img src="/wood/asset/img/img.jpg" class="card-img-top" alt="...">
-		  <div class="content-card-body">
-		    <span class="card-title title">제목<p style="text-align: right; font-size: 15px;">모집인원</p></span>
-		    <p class="card-text">모집 내용</p>
-		   	<span>태그</span>
-		  </div>
-		</div>
-	</a>
-	
- 	<a href="./view.do" class="card col-2 content-card shadow p-3 mb-5 bg-body rounded">
-		<div class="">	
-		  <img src="/wood/asset/img/img.jpg" class="card-img-top" alt="...">
-		  <div class="content-card-body">
-		    <span class="card-title title">제목<p style="text-align: right; font-size: 15px;">모집인원</p></span>
-		    <p class="card-text">모집 내용</p>
-		   	<span>태그</span>
-		  </div>
-		</div>
-	</a>
-	
- 	<a href="./view.do" class="card col-2 content-card shadow p-3 mb-5 bg-body rounded">
-		<div class="">	
-		  <img src="/wood/asset/img/img.jpg" class="card-img-top" alt="...">
-		  <div class="content-card-body">
-		    <span class="card-title title">제목<p style="text-align: right; font-size: 15px;">모집인원</p></span>
-		    <p class="card-text">모집 내용</p>
-		   	<span>태그</span>
-		  </div>
-		</div>
-	</a>
-	
- 	<a href="####" class="card col-2 content-card shadow p-3 mb-5 bg-body rounded">
-		<div class="">	
-		  <img src="/wood/asset/img/img.jpg" class="card-img-top" alt="...">
-		  <div class="content-card-body">
-		    <span class="card-title title">제목<p style="text-align: right; font-size: 15px;">모집인원</p></span>
-		    <p class="card-text">모집 내용</p>
-		   	<span>태그</span>
-		  </div>
-		</div>
-	</a>
-	
- 	<a href="####" class="card col-2 content-card shadow p-3 mb-5 bg-body rounded">
-		<div class="">	
-		  <img src="/wood/asset/img/img.jpg" class="card-img-top" alt="...">
-		  <div class="content-card-body">
-		    <span class="card-title title">제목<p style="text-align: right; font-size: 15px;">모집인원</p></span>
-		    <p class="card-text">모집 내용</p>
-		   	<span>태그</span>
-		  </div>
-		</div>
-	</a>
-	
-	
- 	<a href="####" class="card col-2 content-card shadow p-3 mb-5 bg-body rounded">
-		<div class="">	
-		  <img src="/wood/asset/img/img.jpg" class="card-img-top" alt="...">
-		  <div class="content-card-body">
-		    <span class="card-title title">제목<p style="text-align: right; font-size: 15px;">모집인원</p></span>
-		    <p class="card-text">모집 내용</p>
-		   	<span>태그</span>
-		  </div>
-		</div>
-	</a>
-		
- 	<a href="####" class="card col-2 content-card shadow p-3 mb-5 bg-body rounded">
-		<div class="">	
-		  <img src="/wood/asset/img/img.jpg" class="card-img-top" alt="...">
-		  <div class="content-card-body">
-		    <span class="card-title title">제목<p style="text-align: right; font-size: 15px;">모집인원</p></span>
-		    <p class="card-text">모집 내용</p>
-		   	<span>태그</span>
-		  </div>
-		</div>
-	</a>
-		
- 	<a href="####" class="card col-2 content-card shadow p-3 mb-5 bg-body rounded">
-		<div class="">	
-		  <img src="/wood/asset/img/img.jpg" class="card-img-top" alt="...">
-		  <div class="content-card-body">
-		    <span class="card-title title">제목<p style="text-align: right; font-size: 15px;">모집인원</p></span>
-		    <p class="card-text">모집 내용</p>
-		   	<span>태그</span>
-		  </div>
-		</div>
-	</a>
+	</c:forEach>
 			
 
 		</div><!-- div class row -->
@@ -249,15 +200,49 @@
 		
 		</div>
 	</div>	
-</form>	
+
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 <script>
+	$('.introtxt').each((index, item)=>{
+		
+		$(item).text(clipstring($(item).text()));
+		
+	});
+	
+	$('.nametxt').each((index, item)=>{
+		$(item).text(clipstring2($(item).text()));
+	});
+	//$('.introtxt').each()
 
 	
+	
+	function clipstring(str){
+		return str.substring(0, 20);
+	}
+/* 	$('#introtxt').text(clipstring($('#introtxt').text()));
+	$('#nametxt').text(clipstring2($('#nametxt').text())); */
+	
+	function clipstring2(str){
+		return str.substring(0,6);
+	}
 
+ 
+	$('.btn').click(function(){
+
+		    var form = document.getElementByclassName(".btn");
+
+		    form.action = "./view.do";
+
+		    form.method = "get";
+
+		    form.submit();
+
+		}); 
 </script>
 <!-- JavaScript Bundle with Popper -->
 
+	
+ 
 </body>
 </html>
 

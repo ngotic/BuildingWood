@@ -7,6 +7,24 @@ topic 수정
 */
 
 /* 신청하기 */
+
+.basecolor{
+	border : 1px solid #777;
+	background-color : #777;
+	color : white;
+	font-weight:bold;
+	border-radius:0px;
+}
+
+.basecolor:hover{
+	border : 1px solid #777;
+	background-color : white;
+	color :#777;
+	font-weight:bold;
+	border-radius:0px;
+}
+
+
 .greencolor{
 	border : 1px solid #99D685;
 	background-color : #99D685;
@@ -116,11 +134,15 @@ button {
 	top: 0;
 	padding-left: 35px;
 }
+
 button .material-symbols-outlined {
 	position: absolute;
 	left: 10px;
 	top: 4px;
 }
+
+
+
 button.edit::before {
 	font-family: 'Material Symbols Outlined';
   	content: '\e745';
@@ -190,6 +212,26 @@ button.forward::before {
 button.search-check::before {
 	font-family: 'Material Symbols Outlined';
   	content: '\f800';
+	position: absolute;
+	left: 11px;
+	top: 3px;
+	font-size: 1.25rem;
+}
+
+
+button.cancel::before {
+	font-family: 'Material Symbols Outlined';
+  	content: '\e5c9';
+	position: absolute;
+	left: 11px;
+	top: 3px;
+	font-size: 1.25rem;
+}
+
+
+button.delete::before {
+	font-family: 'Material Symbols Outlined';
+  	content: '\e872';
 	position: absolute;
 	left: 11px;
 	top: 3px;

@@ -34,18 +34,42 @@ public class Add extends HttpServlet {
 		
 		
 		String name = req.getParameter("name");
-		int recruit = Integer.parseInt(req.getParameter("age"));
+		String recruit = req.getParameter("recruit");
 		String intro = req.getParameter("intro");
+		String period = req.getParameter("period");
+		String startdate  = req.getParameter("startdate");
+		String enddate = req.getParameter("enddate");
+		String onoff = req.getParameter("onoff");
+		String address = req.getParameter("address");
+			
+		
+		
+		System.out.println(name);
+		System.out.println(recruit);
+		System.out.println(intro);
+		System.out.println(period);
+		System.out.println(startdate);
+		System.out.println(enddate);
+		System.out.println(onoff);
+		System.out.println(address);
+		
+		
 		dto.setName(name);
 		dto.setRecruit(recruit);
 		dto.setIntro(intro);
+		dto.setPeriod(period);
+		dto.setStartdate(startdate);
+		dto.setEnddate(enddate);
+		dto.setOnoff(onoff);
+		dto.setAddress(address);
 		
 		
-		int result=1; 
-		//= dao.OpenStudy(dto);
+		
+		int result = dao.OpenStudy(dto);
 		if(result ==1 ) {
 			
 			resp.sendRedirect("./list.do");
+			
 			
 		}else {
 			
@@ -55,6 +79,9 @@ public class Add extends HttpServlet {
 			
 		}
 		
+
 		
 	}
+	
+	
 }

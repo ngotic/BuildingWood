@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" href="/wood/asset/css/clubBtn.css">
+<!-- <link rel="stylesheet" href="/wood/asset/css/clubBtn.css"> -->
+
 <style>
 	   .navbar-menu .nav-item:hover{
         border-bottom: 3px solid #7ED321;
@@ -66,7 +67,7 @@
                         스터디/과외
                     </a>
                     <ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="">스터디게시판</a></li>
+						<li><a class="dropdown-item" href="/wood/study/list.do">스터디게시판</a></li>
 						<li><a class="dropdown-item" href="">과외게시판</a></li>
                     </ul>
                 </div>
@@ -77,7 +78,7 @@
                         약속/동호회/맛집
                     </a>
                     <ul class="dropdown-menu" >
-                        <li><a class="dropdown-item" href="">약속게시판</a></li>
+                        <li><a class="dropdown-item" href="/wood/promise/list.do">약속게시판</a></li>
 						<li><a class="dropdown-item" href="/wood/club/club.do">동호회게시판</a></li>
 						<li><a class="dropdown-item" href="/wood/recommend/recommend.do">맛집게시판</a></li>
 						        
