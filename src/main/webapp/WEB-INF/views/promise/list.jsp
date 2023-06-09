@@ -5,29 +5,20 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+<!--     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script> -->
 <%@ include file="/WEB-INF/views/include/asset.jsp" %>
 
 
 
-
-
-
-   <style data-tag="default-style-sheet">  
+     
+     
+<style >  
      html {
-       font-family: Inter;
-       font-size: 16px;
+
      }
 
       body {
-       font-weight: 400;
-       font-style:normal;
-       text-decoration: none;
-       text-transform: none;
-       letter-spacing: normal;
-       line-height: 1.15;
-       color: var(--dl-color-gray-black);
-       background-color: var(--dl-color-gray-white);
+
 
      }
      
@@ -66,10 +57,10 @@
      	margin: auto; 
 	    margin-top: 50px;
 	    margin-bottom: 50px;
-        padding: 50px;
+        padding: 10px;
         border-radius: 10px;
 
-        width: 600px; 
+        width: 700px; 
     }
     
     .modal-footer {
@@ -91,9 +82,15 @@
     	margin-left: 20px;
     }
     
-    		#hashtag {
+    	#hashtag {
  			display:flex;
-			justify-content: flex-end; 
+			justify-content: flex-end;  
+			padding: 10px;
+		}
+		
+		.hashtag {
+			display:flex;
+			justify-content: flex-end;  
 			padding: 10px;
 		}
 		
@@ -101,7 +98,6 @@
 		.tag {
             background-color: #a6ffe3;
             color:#343434;
-
             border: none;
             padding: 5px;
             padding-left: 8px;
@@ -136,6 +132,27 @@
 		    box-shadow: #8dffbd 0px 5px 15px;
 		} 
 		
+		li {
+			list-style-type: none;
+		}
+		
+		.endspan {
+			border:2px solid gray;
+			display: inline-block;
+			float:right;
+			color:tomato;
+		}
+		
+		.end {
+			background-color: gray;
+		}
+		
+		.numstate {
+			background-color: tomato;
+			color:white;
+			border-radius:none;
+		}
+
 
 
     
@@ -168,7 +185,7 @@
 	
 <form method="POST" action="/wood/promise/add.do">
 	<!-- Modal -->
-     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+     <div class="modal fade" id="exampleModalPromise" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
         <div class="promise-modal-dialog modal-dialog modal-lg modal-dialog-centered ">
           <div class="promise-modal-dialog modal-content">
             <div class="modal-header">
@@ -192,6 +209,7 @@
                         <option>밥약속</option>
                         <option>술약속</option>
                         <option>단합회</option>
+                        <option>기타</option>
                       </select>
                     </div>
                     <div class="form-group">
@@ -236,7 +254,7 @@
 		    </div>
 		
 		    <div class="searchbar-bg rounded-5">
-		        <input type="text" class="searchbar-input" placeholder="검색어를 입력해주세요">
+		        <input type="text" class="searchbar-input" placeholder="검색어를 입력해주세요" onfocus="this.placeholder = ''" >
 		    </div>
 		
 		
@@ -244,7 +262,7 @@
 		</div>
 	
 		<div>
-		    <button class="btn-add rounded-5"  data-bs-toggle="modal" data-bs-target="#exampleModal" id="promise-add">글쓰기</button>
+		    <button class="btn-add rounded-5"  data-bs-toggle="modal" data-bs-target="#exampleModalPromise" id="promise-add">글쓰기</button>
 		</div>
 	</div>
 		
@@ -260,33 +278,40 @@
                     
 	             <div class="category mb-30">
 	                
-	                <div class="card">
+	                <div class="card" <c:if test="${dto.adminnum == dto.num }"> style="pointer-events:none;"</c:if>>
 	                    <div id="job" class="job" onclick="location.href='/wood/promise/view.do?promiseseq=${dto.promiseseq}'">
-	                        <span class="colors1 mb-4">${dto.category}</span>
+	                    	<div>
+	                        	<span class="colors1 mb-4">${dto.category}</span>
+	                        	<c:if test="${dto.adminnum == dto.num }">
+	                        		<span class="endspan">모집종료</span>
+	                        	</c:if>
+	                        </div>
 	                        <span class="title">${dto.title}</span>
 	                        <ul class="writer">
 	                            <li>
 	                                <img class="profile" src="/wood/asset/img/루피.jpg" width="40" class="rounded-circle mr-3">
 	                            </li>
 	                            <li>
-	                                <p>${dto.nickname}</p>
+	                                <p style="padding-left:10px;">${dto.nickname}</p>
 	                            </li>
 	                        </ul>
 	                        <div class="d-flex align-items-center justify-content-between">
-	                        	<p>모집인원 : ${dto.num}</p>
+	                        	<span class="numstate">${dto.adminnum} / ${dto.num}</span>
 	                        	<p class="date">${dto.regdate}</p>
 	                        </div>                  
 								
 	                    </div>
-	                    <div id="hashtag${status.count}">
-							
+	                    <div id="hashtag${status.count}" class="hashtag">
+							<c:forEach items="${dto.tags}" var="tag">
+		                       <button type="submit" class="tag" onclick="location.href='/wood/promise/list.do?tag=${tag}';">${tag}</button>
+		                    </c:forEach>
 						</div>
 						
 	           		 </div>
 	            </div>
             <input type="hidden" name="promiseseq" value="${dto.promiseseq}">
             
-            <script>
+<!--             <script>
 
 			var temp = '';
 			
@@ -298,7 +323,7 @@
 				
 			</c:forEach> 
 			
-			</script>
+			</script> -->
 			
 			
 			</div>
@@ -313,7 +338,7 @@
 
 
             <div class="col-12 d-flex align-items-center justify-content-center">
-                <button class="btn mb-30 mt-30" >
+                <button id="morelist" class="btn mb-30 mt-30" >
                     더보기
                     <span class="icon material-symbols-outlined">
                         keyboard_double_arrow_down
@@ -327,9 +352,6 @@
 
 		
 	
-	
-		
-		
 
 		
 	</section>
@@ -350,6 +372,7 @@
 <script>
 
 
+
 $('input[name=hashtag]').tagify();
 
 
@@ -359,6 +382,129 @@ $(function() {
 	})
 }); 
     
+
+var n = 7;
+   
+$('#morelist').on('click',function() {
+	
+	
+	
+    $.ajax({
+        type: 'GET',
+        url: '/wood/promise/list.do',
+        data: {
+           n:n
+        },
+        dataType: 'json',//밑에 추가될 10개 데이터 돌려받
+        success: (result)=>{
+        	
+        	
+        	
+           //밑에 추가될 10개 내용
+           $(result).each((index,item)=>{
+
+        	   
+        	   let temp = '';
+        	   
+
+            	temp +=	`<div class="col-lg-4 col-md-6 col-sm-6">
+			             <div class="category mb-30">
+			                <div class="card"`;
+			     
+			    if (item.adminnum == item.num) {
+			    	temp += ' style="pointer-events:none;"';
+			    }
+			    
+			    
+			    temp += `>
+                    <div id="job" class="job" onclick="location.href='/wood/promise/view.do?promiseseq=\${item.promiseseq}'">
+	                <div>
+                    	<span class="colors1 mb-4">\${item.category}</span>
+                    	`;
+                    	
+                if (item.adminnum == item.num) {
+                	
+                	temp += `<span class="endspan" style="border:2px solid gray; display: inline-block; float: right; color: tomato;">모집종료</span>`;
+                
+                }
+			    
+                temp += `</div>
+                    <span class="title">\${item.title}</span>
+                    <ul class="writer">
+                        <li>
+                            <img class="profile" src="/wood/asset/img/루피.jpg" width="40" class="rounded-circle mr-3">
+                        </li>
+                        <li>
+                            <p style="padding-left:10px;">\${item.nickname}</p>
+                        </li>
+                    </ul>
+                    <div class="d-flex align-items-center justify-content-between">
+                    	<span class="numstate">\${item.adminnum} / \${item.num}</span>
+                    	<p class="date">\${item.regdate}</p>
+                    </div>                  
+                </div>
+                <div id="hashtag" style="padding:0px;">`;
+                
+                
+                for (let i=0; i<item.tags.length; i++) {
+                	
+                	temp +=`<button type="submit" class="tag" onclick="location.href='/wood/promise/list.do?tag=\${item.tags[i]}';">\${item.tags[i]}</button>`;
+                	
+                }
+			    
+	                        
+			    temp += `</div>
+	           		 </div>
+		            </div>
+	            <input type="hidden" name="promiseseq" value="\${item.promiseseq}">
+				</div>`;
+             		 
+             		 
+             		 
+   
+           	$('.row').append(temp);
+           
+           
+              
+           });
+           
+           n += 7;
+           
+           
+           //console.log(result.length);
+           
+           
+           //가져올 데이터가 없을때 
+               if(result.length < 1) {
+         	  //더이상 버튼을 누를 수 없도록 조치
+         	  $('#morelist').attr('disabled',true);
+           } 
+           
+           
+           if(result.length == 0) {
+         	  alert('더 이상 게시물이 없습니다.');
+         	  $('#morelist').attr('disabled',true);            	  	  
+           }
+           
+        },
+        error: (a,b,c)=>console.log(a,b,c)
+     });
+	
+	
+	//n+=7;
+	
+});     
+   
+   
+/*    var temp = '';
+	
+	<c:forEach items="${dto.tags}" var="tag">
+	
+		temp = `<button type="submit" class="tag" onclick="location.href='/wood/promise/list.do?tag=${tag}';">${tag}</button>`;
+	
+		$('#hashtag${status.count}').append(temp);
+		
+	</c:forEach> */
     
     
 </script>

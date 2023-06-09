@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@ include file="/WEB-INF/views/include/asset.jsp" %>
 
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
@@ -17,17 +16,18 @@
 />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" >
 
+<%@ include file="/WEB-INF/views/include/asset.jsp" %>
 <style data-tag="reset-style-sheet">
       html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
     </style>
 <style data-tag="default-style-sheet">
 
-@font-face {
-    font-family: 'Pretendard-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-}
+	@font-face {
+	    font-family: 'Pretendard-Regular';
+	    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+	    font-weight: 400;
+	    font-style: normal;
+	}
 
     html {
       font-family: Inter;
@@ -43,7 +43,9 @@
       line-height: 1.15;
       color: var(--dl-color-gray-black);
       background-color: var(--dl-color-gray-white);
-
+    }
+    .header-area {
+    	z-index: 2;
     }
    .frame-group1222 {
 	  top: 162px;
@@ -115,6 +117,7 @@
    }
    #container-loc {
    height: 130px;
+   max-width: auto;
    }
 
    #content {
@@ -189,13 +192,6 @@
     border: 1px solid #DEE2E6;
    }
    
-   .fw-bold > span {
-   background-color: #eee;
-    border-radius: 10px;
-    font-size: 1.5rem;
-    cursor: pointer;
-    margin-left: 35px; 
-   }
    .fw-bold > button {
     background-color: #eee;
     border-radius: 10px;
@@ -215,7 +211,7 @@
     left: 240px; 
    }
    .rec-content {
-    margin: 5px 8px 32px 10px;
+    margin: 5px 8px 35px 10px;
     text-align: justify;
     font-family: 'Pretendard-Regular';
     font-size: 15px;
@@ -243,7 +239,8 @@
     flex-direction: row;
     align-content: center;
     /* justify-content: space-evenly; */
-    align-items: center;
+    /* align-items: center; */
+    align-items: baseline;
     font-family: 'Pretendard';
    }
    .flex-shrink-0 {
@@ -254,6 +251,9 @@
    	font-size:13px;
    	color: #aaa;
    }
+   .ms-3 {
+   }
+   
    
    .map-all {
    height: 40px;
@@ -276,6 +276,23 @@
     margin-bottom: 50px;
     font-family: 'Pretendard-Regular';
    }
+   #btn-ori .btn {
+    padding-left: 33px;
+   }
+   #btn-ori .btn:nth-child(2) {
+    padding-left: 33px;
+    margin-left: 15px;
+   }
+   #ori-icon1 {
+	font-size: 20px;
+    margin-top: 3px;
+   
+   }
+   #ori-icon2 {
+	font-size: 20px;
+    margin-top: 3px;
+   
+   }
 	
 	.container.gallery-container {
     background-color: #fff;
@@ -283,102 +300,137 @@
     min-height: 100vh;
     border-radius: 20px;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.06);
-}
-
-.gallery-container h1 {
-    text-align: center;
-    margin-top: 70px;
-    font-family: 'Droid Sans', sans-serif;
-    font-weight: bold;
-}
-
-.gallery-container p.page-description {
-    text-align: center;
-    max-width: 800px;
-    margin: 25px auto;
-    color: #888;
-    font-size: 18px;
-}
-
-.tz-gallery {
-    padding: 0px;
-}
-
-.tz-gallery .lightbox img {
-    width: 100%;
-    margin-bottom: 30px;
-    transition: 0.2s ease-in-out;
-    box-shadow: 0 2px 3px rgba(0,0,0,0.2);
-    height: 100px;
-    display: block;
-    object-fit: cover;
-}
-
-
-.tz-gallery .lightbox img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.3);
-}
-
-.tz-gallery img {
-    border-radius: 4px;
-}
-
-.baguetteBox-button {
-    background-color: transparent !important;
-}
-.row > div {
-	padding-right: 0px;
-}
-
-@media(max-width: 768px) {
-    body {
-        padding: 0;
-    }
-
-    .container.gallery-container {
-        border-radius: 0;
-    }
-}
-
-/* 별점추가 */
-#myform fieldset{
-    display: inline-block;
-    direction: rtl;
-    border:0;
-    margin-left: 6px;
-}
-#myform fieldset legend{
-    text-align: right;
-}
-#myform input[type=radio]{
-    display: none;
-}
-#myform label{
-    font-size: 2em;
-    color: transparent;
-    text-shadow: 0 0 0 #DDD;
-    transition: text-shadow 0.2s linear;
-}
-#myform label:hover{
-    text-shadow: 0 0 0 gold;
-}
-#myform label:hover ~ label{
-    text-shadow: 0 0 0 gold;
-}
-#myform input[type=radio]:checked ~ label{
-    text-shadow: 0 0 0 gold;
-}
-.text-bold {
-	font-size: 15px;
-	color: #888;
-}
-
-
-/* 댓글 수정 */
-.edit-comment textarea {
-	width: 800px;
-}
+	}
+	
+	.gallery-container h1 {
+	    text-align: center;
+	    margin-top: 70px;
+	    font-family: 'Droid Sans', sans-serif;
+	    font-weight: bold;
+	}
+	
+	.gallery-container p.page-description {
+	    text-align: center;
+	    max-width: 800px;
+	    margin: 25px auto;
+	    color: #888;
+	    font-size: 18px;
+	}
+	
+	.tz-gallery {
+	    padding: 0px;
+	}
+	
+	.tz-gallery .lightbox img {
+	    width: 100%;
+	    margin-bottom: 30px;
+	    transition: 0.2s ease-in-out;
+	    box-shadow: 0 2px 3px rgba(0,0,0,0.2);
+	    height: 100px;
+	    display: block;
+	    object-fit: cover;
+	}
+	
+	
+	.tz-gallery .lightbox img:hover {
+	    transform: scale(1.05);
+	    box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+	}
+	
+	.tz-gallery img {
+	    border-radius: 4px;
+	}
+	
+	.baguetteBox-button {
+	    background-color: transparent !important;
+	}
+	.row > div {
+		padding-right: 0px;
+	}
+	
+	@media(max-width: 768px) {
+	    body {
+	        padding: 0;
+	    }
+	
+	    .container.gallery-container {
+	        border-radius: 0;
+	    }
+	}
+	#next-button {
+		left:1350px !important;
+	}
+	#close-button {
+		left:20px !important;
+		top: 20px !important;
+	}
+	
+	
+	/* 별점추가 */
+	#myform fieldset{
+	    display: inline-block;
+	    direction: rtl;
+	    border:0;
+	    margin-left: 6px;
+	}
+	#myform fieldset legend{
+	    text-align: right;
+	}
+	#myform input[type=radio]{
+	    display: none;
+	}
+	#myform label{
+	    font-size: 2em;
+	    color: transparent;
+	    text-shadow: 0 0 0 #DDD;
+	    transition: text-shadow 0.2s linear;
+	}
+	#myform label:hover{
+	    text-shadow: 0 0 0 gold;
+	}
+	#myform label:hover ~ label{
+	    text-shadow: 0 0 0 gold;
+	}
+	#myform input[type=radio]:checked ~ label{
+	    text-shadow: 0 0 0 gold;
+	}
+	.text-bold {
+		font-size: 15px;
+		color: #888;
+	}
+	
+	
+	/* 댓글 수정 */
+	.edit-comment textarea {
+		width: 800px;
+		height: 80px;
+	    font-size: 14px;
+	    font-family: 'Pretendard-Regular';
+	    margin: 10px;
+	    padding: 10px 14px;
+	}
+	#editCommentForm {
+		margin-left: 20px;
+	}
+	#delCommentForm {
+		margin-left: 7px;
+	}
+	.Reccomment-btn {
+		font-size:15px;
+		border-radius: 41px;
+	}
+	.Reccomment-btn > span {
+	}
+	.Reccommend-nick {
+		margin-bottom: 8px;
+	}
+	#editcomment {
+		padding: 20px;
+	    border: 0.5px solid #ccc;
+	    margin: 10px;
+	}
+	
+	
 
 .customoverlay {position:relative;bottom:85px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;}
 .customoverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}
@@ -392,6 +444,7 @@
 </head>
 <body>
    <!-- template.jsp > index.jsp -->
+   
    <%@ include file="/WEB-INF/views/include/header.jsp" %>
    <section class="container" id="container-loc">
       <h1>맛집 추천 <small>상세보기</small></h1>
@@ -405,10 +458,10 @@
    </section>
          
          
+         
     <div id="main">
       <div id="map">지도</div>
       <table id="list">
-       
       
       <!-- 지도 -->
       	 <tr>
@@ -479,7 +532,10 @@
       </table>
    </div>
 
-         <div id="btn-ori"><button type="button" class="btn btn-outline-secondary btn-sm"  onclick="setBounds()">지도 범위 재설정 하기</button></div>
+         <div id="btn-ori">
+	         <button type="button" class="btn btn-outline-secondary btn-sm"  onclick="setBounds()"><span class="material-symbols-outlined" id="ori-icon1">my_location</span>지도 범위 재설정 하기
+    	     <button type="button" class="btn btn-outline-secondary btn-sm" onclick="location.href='/wood/recommend/recommend.do';"><span class="material-symbols-outlined" id="ori-icon2">format_list_bulleted</span>목록보기</button>
+         </button></div>
          
       <!-- 댓글 -->
       <section class="mb-5">
@@ -505,7 +561,7 @@
 						</fieldset>
 					 </div>
                   
-	                <textarea class="form-control" name="comment" rows="2" placeholder="가게 평가를 남겨주세요!" required></textarea>
+	                <textarea class="form-control" name="comment" rows="2" placeholder="가게 평가를 남겨주세요!" spellcheck="false" required></textarea>
 	                <input type="submit" value="등록" name="comment" id="btn btn-add" class="btn-add1" style="margin:0 0 5px 10px; width:70px">
                   	
                   	<input type="hidden" name="recommendseq" value="${dto.recommendseq}">
@@ -522,16 +578,42 @@
                     <!-- 일반 댓글-->
                     <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..."></div>
                     <div class="ms-3">
-                        <div class="fw-bold">${cdto.nickname}
+                        <div class="fw-bold"><span class="Reccommend-nick">${cdto.nickname}</span>
                             <c:if test="${not empty id && (id == cdto.id || lv == '0')}">
                             
                             	<!-- 수정 -->
-                                <span class="material-symbols-outlined rec-comment-edit" rcseq="${cdto.rcseq}">edit</span>
+                                <%-- <span class="material-symbols-outlined rec-comment-edit" onclick="editComment('${status.index}')">edit</span> --%>
+								<form method="POST" action="/wood/recommend/reccommentedit.do" id="editCommentForm">
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModaledit${status.index}" class="Reccomment-btn"><span class="material-symbols-outlined rec-comment-del">edit</span></button>
 
+                                    <!-- 수정 Modal -->
+                                    <div class="modal fade" id="exampleModaledit${status.index}" tabindex="-1" aria-labelledby="exampleModalLabeledit${status.index}" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabeledit${status.index}">댓글수정</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                 <textarea rows="15" cols="30" id="editcomment" spellcheck="false" autofocus>${cdto.content}</textarea>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-success" onclick="editOkComment('${cdto.rcseq}')">Edit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="rcseq" value="${cdto.rcseq}">
+                                    <input type="hidden" name="recommendseq" value="${dto.recommendseq}">
+                                    <input type="hidden" name="restaurantseq" value="${dto.restaurantseq}">
+                                    <input type="hidden" name="column" value="${column}">
+                                    <input type="hidden" name="word" value="${word}">
+                                    <input type="hidden" name="search" value="${search}">
+                                    <input type="hidden" name="content">
+                                </form>
 
 								<!-- 삭제 -->
-                                <form method="POST" action="/wood/recommend/reccommentdel.do">
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal${status.index}"><span class="material-symbols-outlined rec-comment-del">delete</span></button>
+                                <form method="POST" action="/wood/recommend/reccommentdel.do" id="delCommentForm">
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal${status.index}" class="Reccomment-btn"><span class="material-symbols-outlined rec-comment-del">delete</span></button>
 
                                     <!-- 삭제 Modal -->
                                     <div class="modal fade" id="exampleModal${status.index}" tabindex="-1" aria-labelledby="exampleModalLabel${status.index}" aria-hidden="true">
@@ -578,8 +660,8 @@
                         ★★★★★
                     </c:if>
                 </div>
-
-                <div class="rec-content">${cdto.content}</div>
+               
+            	<div class="rec-content">${cdto.content}</div>
                 
             </c:forEach>
             
@@ -615,15 +697,6 @@
              </div>
           </div> 
       </section><!-- mb-5 댓글 -->
-      
-	<form id="editCommentForm" method="POST" action="/wood/recommend/reccommentedit.do">
-		<input type="hidden" name="rcseq" value="${cdto.rcseq}">
-        <input type="hidden" name="recommendseq" value="${dto.recommendseq}">
-        <input type="hidden" name="restaurantseq" value="${dto.restaurantseq}">
-        <input type="hidden" name="column" value="${column}">
-        <input type="hidden" name="word" value="${word}">
-        <input type="hidden" name="search" value="${search}">
-	</form>
 
       <br><br><br><br><br><br>
    
@@ -634,46 +707,28 @@
 
 <script>
 
-	/* 댓글 함수들 */
 	/* 댓글삭제 */
 	function delComment(rcseq) {
         document.getElementById("rcseqInput").value = rcseq; // rcseq 값을 입력 필드에 설정
         $('#exampleModal').modal('show'); // 모달 창 표시
     }
 
-
 	function del(recommendseq) {
-		location.href='/wodd/recommend/recommenddel.do?recommendseq=' + recommendseq;
+		location.href='/wood/recommend/recommenddel.do?recommendseq=' + recommendseq;
 	}
 	
-	$(document).on('click', '.rec-comment-edit', function(event) {
-	    var rcseq = $(this).attr('rcseq');
-	    editComment(event, rcseq);
-	});
-
 	
 	/* 댓글 수정 */
-	function editComment(event, rcseq) {
-    // 기존에 열려있던 댓글창 닫기
-    $('.edit-comment').remove();
+	function editComment(rcseq) {
+        document.getElementById("rcseqInput").value = rcseq; // rcseq 값을 입력 필드에 설정
+        $('#exampleModaledit').modal('show'); // 모달 창 표시
+    }
 
-    var contentElement = $(event.target).closest('.d-flex').siblings('.rec-content');
-    var content = contentElement.text();
-
-    var editCommentElement = $('<div class="edit-comment">' +
-        '<textarea rows="" cols="" spellcheck="false" oninput="resizeTextarea(this)">' + content + '</textarea>' +
-        '<input type="button" value="확인" onclick="editOkComment(' + rcseq + ');">' +
-        '<input type="button" value="취소" onclick="cancelComment();">' +
-        '</div>');
-
-    $(event.target).closest('.d-flex').parent().append(editCommentElement);
-    resizeTextarea(editCommentElement.find('textarea')[0]); // textarea의 높이 초기 조절
-}
-
-function resizeTextarea(textarea) {
-    textarea.style.height = 'auto'; // height 초기화
-    textarea.style.height = textarea.scrollHeight + 'px'; // 높이 조절
-}
+	function editOkComment(cseq) {
+		$('#editCommentForm input[name=content]').val($('#editcomment').val());
+		$('#editCommentForm').submit();
+		
+	}
 
 
 	

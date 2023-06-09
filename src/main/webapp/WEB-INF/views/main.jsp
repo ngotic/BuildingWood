@@ -288,7 +288,7 @@ a.link-hover span:hover {
 
 				<form method="POST" action="/wood/user/login.do">
 					<input type="hidden" name="id" value="admin"> <input
-						type="hidden" name="password" value="0000"> <input
+						type="hidden" name="password" value="admin"> <input
 						type="submit" value="관리자">
 				</form>
 
@@ -302,6 +302,32 @@ a.link-hover span:hover {
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 	<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
 	<script>
+	
+	
+	  const text = [ `<p class="projectname_f typing-text">&nbsp가까운 이웃들을 연결하는</p>`,
+		     `<p class='projectname_sub typing-text2'>&nbsp;새로운 소셜 네트워크</p>`,
+		     `<p class='projectname typing-text3'>빌딩숲.</p>`];
+
+		    let i = 0;
+
+		    const printString = (i, callback) => {
+		    setTimeout(
+		        () => {
+		        	console.log(1);
+		            $('.intro-text').append(text[i]);
+		            callback(); //setTimeout 내에서 순차적 콜백 실행
+		        }, 
+		        1000
+		      )
+		    }
+
+		    const printAll = () => {
+		        printString(i, () => { 
+		            printString(i+1, () => { 
+		                printString(i+2, () => {}) 
+		            })
+		        })
+		    } 
 	
 	let msg  = "${msg}";
 	
@@ -337,29 +363,7 @@ a.link-hover span:hover {
 		location.href = "${naverUrl}";
 	});
 	
-    const text = [ `<p class="projectname_f typing-text">&nbsp가까운 이웃들을 연결하는</p>`,
-     `<p class='projectname_sub typing-text2'>&nbsp;새로운 소셜 네트워크</p>`,
-     `<p class='projectname typing-text3'>빌딩숲.</p>`];
-
-    let i = 0;
-
-    const printString = (i, callback) => {
-    setTimeout(
-        () => {
-            $('.intro-text').append(text[i]);
-            callback(); //setTimeout 내에서 순차적 콜백 실행
-        }, 
-        1000
-      )
-    }
-
-    const printAll = () => {
-        printString(i, () => { 
-            printString(i+1, () => { 
-                printString(i+2, () => {}) 
-            })
-        })
-    } 
+  
     
 	printAll();
 </script>

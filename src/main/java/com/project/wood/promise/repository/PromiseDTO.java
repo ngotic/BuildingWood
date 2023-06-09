@@ -30,5 +30,8 @@ public class PromiseDTO {
 	private ArrayList<String> tags;
 	
 	
+	private int adminnum;
+	
+	
 
 }

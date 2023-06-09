@@ -124,9 +124,9 @@ public class Recommend extends HttpServlet {
 				
 				//이전 10페이지
 				if (n == 1) {
-					sb.append(String.format(" <li class=\"page-item\"><a href=\"#!\" class=\"page-link disabled\" style=\"padding: 5.5px 11px; \"> < </a></li> ", blockSize));
+					sb.append(String.format(" <li class=\"page-item\"><a href=\"#!\" class=\"page-link disabled\" style=\"padding: 6px 11px; \"> < </a></li> ", blockSize));
 				} else {
-					sb.append(String.format(" <li class=\"page-item\"><a href=\"/wood/recommend/recommend.do?page=%d\" class=\"page-link\" style=\" padding: 5.5px 11px;\"> < </a></li> ", n - 1, blockSize));
+					sb.append(String.format(" <li class=\"page-item\"><a href=\"/wood/recommend/recommend.do?page=%d\" class=\"page-link\" style=\" padding: 6px 11px;\"> < </a></li> ", n - 1, blockSize));
 				}
 				
 				while (!(loop > blockSize || n > totalPage)) {
@@ -145,7 +145,7 @@ public class Recommend extends HttpServlet {
 					sb.append(String.format(" <li class=\"page-item\"><a href=\"#!\" class=\"page-link disabled\" style=\"padding: 6px 11px; \"> > </a></li> ", blockSize));
 					
 				} else {
-					sb.append(String.format(" <li class=\"page-item\"><a href=\"/wood/recommend/recommend.do?page=%d\" class=\"page-link\" style=\"padding: 5.5px 11px; \"> > </a></li> ", n, blockSize));
+					sb.append(String.format(" <li class=\"page-item\"><a href=\"/wood/recommend/recommend.do?page=%d\" class=\"page-link\" style=\"padding: 6px 11px; \"> > </a></li> ", n, blockSize));
 				}
 				
 				
