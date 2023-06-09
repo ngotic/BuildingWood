@@ -72,6 +72,7 @@ update tblCarpool set recruitstatus = '모집 종료' where carpoolseq = 8;
 commit;
 
 
+select * from tblMember where id = 'OaKoFc263';
 
 
 select * from tblCarpool order by carpoolseq desc;

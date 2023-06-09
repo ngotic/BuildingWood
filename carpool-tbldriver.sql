@@ -1,7 +1,7 @@
 
 
 DROP TABLE tblDriver CASCADE CONSTRAINTS;
-DROP TABLE tblCarpoolApply CASCADE CONSTRAINTS;
+
 
 
 --테이블 수정함

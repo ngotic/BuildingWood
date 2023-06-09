@@ -395,6 +395,14 @@
 		            </div>
 	            </div>
 	            
+	            
+	            <!-- 
+	            	현재 모집된 인원: 
+	            	- tblCarpoolApply 테이블에서 
+	            	- carpoolseq = ${dto.carpoolseq}이고
+	            	- applystatus = '신청 완료'인 
+	            	- 사람의 수(count(*))
+	             -->
 	            <div class="card-body">
 	            	<div class="card-text bottom-frame">
 	            		<span class="count-frame">

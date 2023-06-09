@@ -12,42 +12,42 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+
 import com.project.wood.carpool.repository.CarpoolApplyDTO;
 import com.project.wood.carpool.repository.CarpoolDAO;
+import com.project.wood.carpool.repository.CarpoolDTO;
 
 @WebServlet("/carpool/apply.do")
 public class Apply extends HttpServlet {
 
+	CarpoolDAO adao = new CarpoolDAO();
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		//Apply.java
-		HttpSession session = req.getSession();
 		
-		String carpoolapplyseq = req.getParameter("carpoolapplyseq");
 		String carpoolseq = req.getParameter("carpoolseq");
-		String applystatus = req.getParameter("applystatus");
+		String applyid = req.getParameter("applyid");
 		
-		CarpoolDAO dao = new CarpoolDAO();
-		CarpoolApplyDTO adto = new CarpoolApplyDTO();
+		JSONObject obj = new JSONObject();
 		
-		adto.setCarpoolapplyseq(carpoolapplyseq);
-		adto.setCarpoolseq(carpoolseq);
-		adto.setApplystatus(applystatus);
-		adto.setId((String)session.getAttribute("id"));
+		int applyList = adao.applyCarpoolList(carpoolseq, applyid);
 		
-		int result = dao.carpoolApply(adto);
-		
-		if (result == 1) {
-			resp.sendRedirect("/wood/carpool/view.do?carpoolseq=" + carpoolseq);
+		if (applyList == 0) {
+			int result = adao.applyCarpool(carpoolseq, applyid);
+			obj.put("result", result);
 		} else {
-			PrintWriter writer = resp.getWriter();
-			writer.print("<script>alert('failed');history.back();</script>");
-			writer.close();
-		}	
-
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/carpool/apply.jsp");
-		dispatcher.forward(req, resp);
+			obj.put("result", -1);
+		}
+		
+		
+		resp.setContentType("application/json");
+		
+		PrintWriter writer = resp.getWriter();
+		writer.print(obj);
+		writer.close();
 
 	}
 

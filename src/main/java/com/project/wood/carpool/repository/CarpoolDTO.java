@@ -32,9 +32,12 @@ public class CarpoolDTO {
 	
 	
 	//tblCarpoolApply
+	private String carpoolapplyseq;
+	private String applyid;		//신청하는 회원의 아이디(로그인 중인 아이디)
 	private String applystatus;	//신청 상태
 	
 	//tblMember
+	private String profile;
 	private String nickname;	//닉네임
 	private String gender;		//성별
 	

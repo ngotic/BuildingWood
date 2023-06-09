@@ -327,46 +327,17 @@
 	
 	/* 버튼 */
 
-	.apply-frame {
+	.apply {
 	  top: 615px;
 	  left: 36.5%;
 	  width: 142px;
 	  height: 50px;
-	  display: flex;
 	  position: absolute;
-	  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) ;
-	  align-items: flex-start;
-	  flex-shrink: 0;
+	  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 	  background-color: rgba(45, 180, 0, 1);
 	  border-radius: 15px;
 	  border: none;
-	}
-	
-	.apply-box {
-	  top: 13px;
-	  left: 0px;
-	  width: 142px;
-	  height: 24px;
-	  display: flex;
-	  position: absolute;
-	  align-items: flex-start;
-	  flex-shrink: 0;
-	}
-	
-	.apply {
-	  left: 24px;
-	  color: rgba(98, 98, 98, 1);
-	  width: 94px;
-	  height: auto;
-	  position: absolute;
 	  font-size: 20px;
-	  font-style: Medium;
-	  text-align: center;
-	  /* font-family: Roboto; */
-	  font-weight: 500;
-	  line-height: 24px;
-	  font-stretch: normal;
-	  text-decoration: none;
 	}
 	
 	.edit-frame {
@@ -675,20 +646,10 @@
           </c:if>
           
           <c:if test="${(id != dto.id)}">
-          <!-- <form method="POST" action="/wood/carpool/apply.do"> -->
-	          <button class="apply-frame" onclick="apply();">  
-	            <div class="apply-box">
-	            	<span class="apply" style="color: white;">신청하기</span>
-	            	<%-- <c:choose>
-	              		<c:when test="null"><span class="apply" style="color: white;">신청하기</span></c:when>
-	              		<c:when test="${adto.applystatus eq '신청 중'}"> <span style="color: white;">신청 중</span> </c:when>
-                    	<c:when test="${adto.applystatus eq '신청 완료'}"> <span style="color: white;">신청 완료</span> </c:when>
-	              	</c:choose> --%>
-	            </div>
-	          </button>
+	      	<button class="apply" style="color: white;" 
+	      			onclick="apply('${dto.carpoolseq}', '${dto.applyid}', '${dto.carpoolapplyseq}');">신청하기</button>
           </c:if>
           
- 
           
           <c:if test="${(id == dto.id)}">
           <button class="del-frame" onclick="del();">
@@ -700,56 +661,113 @@
           </button>
           </c:if>
           
-        
+      </div>
+      
+      
+      <c:if test="${dto.recruitstatus eq '모집 종료'}">
+	       <div class="end">
+	          	<div class="end-frame">
+	          		<span>모집 종료</span>
+	          	</div>
+		   </div>
+	  </c:if>
+	  
+	  
+      </div>
+      
+    <!-- 현재 접속중인 id가 게시글 작성자의 id와 같고, recruitstatus(모집 상태)가 '모집 종료'가 아닐 시 표시함 -->
+	<c:if test="${id eq dto.id && dto.recruitstatus ne '모집 종료'}">
+    	<h4>신청승인하는거</h4>
+    	<span>닉네임 성별 
+    	
+    	<button>승인</button>
+    	
+    	<button>거절</button>
+    	</span>
+    	
+    	<span>테스트닉네임 성별</span>
+    	
+    	<c:forEach items="${list}" var="dto">
+    		<span>${dto.nickname} ${dto.gender}</span>
+    	</c:forEach>
+    	
+    </c:if>
+    
+    </div>
+		
+	</section>
+	
+	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
+	
+	
+	 
         
         <!-- Add the library (only one file) -->
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<script>
-		    function apply() {
-			  new Swal({
-		        title: "참여하기",
-		        text: "신청",
+		    function apply(carpoolseq, applyid, carpoolapplyseq) {
+		    	
+			  new Swal ({
+		        title: "",
+		        text: "카풀 신청을 하시겠습니까?",
 		        icon: "success",
 		        confirmButtonText: "Yes",
 		        confirmButtonColor: '#2db400',
 		        showCancelButton: true,
 		        cancelButtonText: "No",
 		        cancelButtonColor: '#D8D8D8'
-		      }).then((result) => {
-		        if(result.value){
-		            new Swal({
-				        title: "완료",
-				        text: "신청이 완료되었습니다.",
-				        icon: "success",
-				        confirmButtonColor: '#2db400'
-				      });
-		            .then(function(){
-		            	
-		            	/* 신청 완료 시 신청하기 버튼이 신청중으로 바뀜 */
-		            	
-		            	var applyButton = document.querySelector('.apply');
+		      })
+			  
+			  .then((result) => { //new Swal
+		    	  
+		        	if(result.value) {
+		        	
+			        	$.ajax ({
+			    			type: 'POST',
+			    			url : 'http://localhost:8090/wood/carpool/apply.do',
+			    			dataType: 'json',
+			    			data: 'carpoolapplyseq='+carpoolapplyseq
+			    					+'&carpoolseq='+carpoolseq
+			    					+'&applyid='+applyid,
+			    					
+			    			success: (ajaxresult) => {
+			    				if(ajaxresult.result == 1){
+			    					new Swal ({
+			    						title: "",
+			    				        text: "카풀 신청이 완료되었습니다.",
+			    				        icon: "success"
+			    				        /* confirmButtonColor: '#2db400' */
+			    					});
+			    				} else if(ajaxresult.result == -1){
+			    					new Swal ({
+			    						title: "",
+			    				        text: "이미 신청중이거나 신청이 완료되었습니다.",
+			    				        icon: "error"
+			    				        /* cancelButtonColor: '#D8D8D8' */
+			    					});
+			    				} else {
+			    					new Swal ({
+			    						title: "",
+			    				        text: "카풀 신청에 실패했습니다.",
+			    				        icon: "error"
+			    				        /* cancelButtonColor: '#D8D8D8' */
+			    					});
+			    				}
+			    			}, //success
+			    			
+			    			error : (a, b, c)=> console.log(a, b, c) 				
+			    		}); //$.ajax     	
 
-				        // 버튼을 "신청 중"으로 변경
-				        applyButton.textContent = '신청 중';
-				        applyButton.color = '#2db400';
-				        applyButton.backgroundcolor = '#999999';
-				        applyButton.parentElement.classList.add('loading');
-				        applyButton.parentElement.disabled = true;
-				        
-				        
-				        
-				        
-		            });
-		        } else if (result.dismiss == "cancel"){
-		            new Swal({
-				        title: "취소",
-				        text: "신청이 취소되었습니다.",
-				        icon: "error",
-				        confirmButtonColor: '#2db400'
-				      });
-		        }
-		      });
-		    }
+		        	} else if (result.dismiss == "cancel"){ //if
+			          	new Swal({
+					        title: "",
+					        text: "신청이 취소되었습니다.",
+					        icon: "error",
+					        confirmButtonColor: '#2db400'
+				  		});
+		        	} //else if
+		      }); //then
+		    } //function
 		</script>  
           
 		<!-- Add the library (only one file) -->
@@ -788,40 +806,8 @@
 		      });
 		    }
 		</script>
-          
-      </div>
-      <c:if test="${dto.recruitstatus eq '모집 종료'}">
-	       <div class="end">
-	          	<div class="end-frame">
-	          		<span>모집 종료</span>
-	          	</div>
-		   </div>
-	  </c:if>
-      </div>
-      
-      
-	<c:if test="${id eq dto.id && dto.recruitstatus ne '모집 종료'}">
-    	<h4>신청승인하는거</h4>
-    	<span>닉네임 성별 
-    	
-    	<button>승인</button>
-    	
-    	<button>거절</button>
-    	</span>
-    	
-    	<span>테스트닉네임 성별</span>
-    	
-    	<c:forEach items="${applylist}" var="dto">
-    		<span>${dto.nickname} ${dto.gender}</span>
-    	</c:forEach>
-    	
-    </c:if>
-    
-    </div>
-		
-	</section>
 	
-	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
+	
 <script>
 
 </script>
