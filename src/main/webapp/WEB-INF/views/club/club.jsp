@@ -474,7 +474,7 @@ function salert(seq, name, id, hseq) {
 
 		$.ajax({
 			type: 'POST',
-			url : 'http://localhost:8090/wood/club/register.do',
+			url : '/wood/club/register.do',
 			dataType: 'json',
 			data: 'seq='+seq+'&id='+id+'&hseq='+hseq,
 			success: (ajaxresult) => {

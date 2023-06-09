@@ -9,14 +9,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-// 관리자용도 유저용도 공용으로 썼으면 좋겠음
-@WebServlet("/mypage/mypage.do") // 이용자 정보는 마이페이지 
-public class Mypage extends HttpServlet {
-	
+
+@WebServlet("/mypage/question.do")
+public class QuestionPage extends HttpServlet {
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		//Admin.java
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/mypage/mypage.jsp");
+		//QuestionPage.java
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/mypage/question.jsp");
 		dispatcher.forward(req, resp);
+
 	}
+
 }

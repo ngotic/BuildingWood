@@ -204,52 +204,60 @@
             <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
             <div id="mainnav">
                 <ul class="nav-menu custom-scrollbar">
-                    <li class="back-btn">
-                        <div class="mobile-back text-end"><span>Back</span>
-                        <span class="material-symbols-outlined">
-							arrow_forward_ios
-		  				</span>
-                        </div>
-                    </li>
-                  	<li class="sidebar-main-title">
-                        <div>
-                             <c:if test="${lv==0}">
-					           <h6>관리자 페이지</h6>
+                
+	                    <li class="back-btn">
+	                        <div class="mobile-back text-end"><span>Back</span>
+	                        <span class="material-symbols-outlined">
+								arrow_forward_ios
+			  				</span>
+	                        </div>
+	                    </li>
+	                    
+                  		<li class="sidebar-main-title">
+	                        <div>
+	                             <c:if test="${lv==0}">
+						           <h6>관리자 페이지</h6>
+								</c:if>
+								<c:if test="${lv > 0}">
+						           <h6>마이 페이지</h6>
+								</c:if>
+	                        </div>
+                    	</li>
+                    	
+	                    <c:if test="${lv==0}">
+		                    <li>
+		                        <a class="nav-link menu-title link-nav" href="/wood/admin/adminbuilding.do"><i data-feather="home"></i><span>건물관리</span></a>                  
+		                    </li>
+	                    </c:if>
+                    
+	                    <li>
+	                    	<c:if test="${lv == 0}">
+						       <a class="nav-link menu-title link-nav" href="/wood/admin/adminuser.do"><i data-feather="users"></i><span>이용자 관리</span></a>
 							</c:if>
 							<c:if test="${lv > 0}">
-					           <h6>마이 페이지</h6>
+						       <a class="nav-link menu-title link-nav" href="/wood/mypage/mypage.do"><i data-feather="users"></i><span>이용자 정보</span></a>
 							</c:if>
-                        </div>
-                    </li>
-                    <li>
-                        <a class="nav-link menu-title link-nav" href="javascript:void(0)"><i data-feather="home"></i><span>건물관리</span></a>                  
-                    </li>
-                    
-                    <li>
-                        <a class="nav-link menu-title link-nav" href="javascript:void(0)"><i data-feather="airplay"></i><span>서비스 이용 관리</span></a>
-                    </li>
-                   
-                    <li>
-                    	<c:if test="${lv==0}">
-					       <a class="nav-link menu-title link-nav" href="javascript:void(0)"><i data-feather="users"></i><span>이용자 관리</span></a>
-						</c:if>
-						<c:if test="${lv > 0}">
-					       <a class="nav-link menu-title link-nav" href="javascript:void(0)"><i data-feather="users"></i><span>이용자 정보</span></a>
-						</c:if>
-                    </li>
-                    <c:if test="${lv==0}">
-	                     <li>
-	                        <a class="nav-link menu-title link-nav" href="javascript:void(0)"><i data-feather="bar-chart"></i><span>매출통계</span></a>
 	                    </li>
-                    </c:if>
-                    <li>
-                        <a class="nav-link menu-title link-nav " href="https://laravel.pixelstrap.com/viho/faq"><i data-feather="help-circle"></i><span>공지 및 건의사항</span></a>
-                    </li>
-                    <c:if test="${lv==0}">
-	                    <li>
-	                        <a class="nav-link menu-title link-nav" href="javascript:void(0)"><i data-feather="image"></i><span>배너 광고</span></a>
+	                    
+                    	<li>
+                    		<c:if test="${lv > 0}">
+	                    		<a class="nav-link menu-title link-nav" href="/wood/mypage/service.do"><i data-feather="airplay"></i><span>서비스 이용 관리</span></a>
+	                    	</c:if>
+	                    	<c:if test="${lv==0}">
+	                    		<a class="nav-link menu-title link-nav" href="/wood/admin/adminservice.do"><i data-feather="airplay"></i><span>서비스 이용 관리</span></a>
+	                    	</c:if>
 	                    </li>
-                    </c:if>
+	                    
+	                    
+                   		<li>
+							<c:if test="${lv>0}">
+								<a class="nav-link menu-title link-nav " href="/wood/mypage/question.do"><i data-feather="help-circle"></i><span>공지 및 건의사항</span></a>
+							</c:if>
+							<c:if test="${lv==0}">
+	                        	<a class="nav-link menu-title link-nav " href="/wood/admin/adminquestion.do"><i data-feather="help-circle"></i><span>공지 및 건의사항</span></a>
+	                        </c:if>		                         
+                    	</li>
+	                    
                    </ul>
             </div>
             <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
