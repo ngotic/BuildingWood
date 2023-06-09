@@ -18,5 +18,12 @@ public class ReplyDTO {
 	
 	
 	private ArrayList<String> acceptnickname;
+	
+	private String checknickname;
+	private String checkstate;
+	
+	private String adminnum;
+	
+	
 
 }
