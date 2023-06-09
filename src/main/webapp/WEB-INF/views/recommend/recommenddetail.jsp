@@ -276,16 +276,12 @@
     margin-bottom: 50px;
     font-family: 'Pretendard-Regular';
    }
-   #btn-ori .btn {
-    padding-left: 33px;
-   }
    #btn-ori .btn:nth-child(2) {
-    padding-left: 33px;
     margin-left: 15px;
    }
    #ori-icon1 {
 	font-size: 20px;
-    margin-top: 3px;
+    /* margin-top: 3px; */
    
    }
    #ori-icon2 {

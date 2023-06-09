@@ -217,9 +217,6 @@
 		border: hidden !important;
 	}
 	
-	 .searchdiv .btn {
-    	padding-left: 33px;
-   	}
 	
 	#ori-icon2 {
 	font-size: 20px;
@@ -240,6 +237,10 @@
 <body>
 	<!-- template.jsp > index.jsp -->
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
+	<%@ include file="/WEB-INF/views/suggest/sugheader.jsp" %>
+		
+	<div id="suggest" style="height: 100px; margin-top: -100px;"></div>
+	
 	<section class="container">
 		<h1>건의 게시판<small> 목록</small></h1>
 	</section>
@@ -308,7 +309,7 @@
 			<option value="content">내용</option>
 			<option value="nickname">닉네임</option>
 		</select>
-		<input type="text" name="word" required>
+		<input type="text" name="word" required style="outline:none;">
 		<input type="submit" value="검색하기" class="rec-btn">
 	</form>
 	</div>

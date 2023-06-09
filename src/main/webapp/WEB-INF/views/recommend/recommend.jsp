@@ -385,14 +385,18 @@
 	}
 	
 	 .searchdiv .btn {
-    	padding-left: 33px;
+    	/* padding-left: 33px; */
    	}
 	
 	#ori-icon2 {
 	font-size: 20px;
-    margin-top: 3px;
-   
+    /* margin-top: 3px; */
    }
+   
+   #ori-icon2 > span {
+   	
+   }
+   
    
    #container-loc {
    height: 130px;
@@ -410,6 +414,10 @@
 <body>
 		<!-- template.jsp > index.jsp -->
 		<%@ include file="/WEB-INF/views/include/header.jsp" %>
+		<%@ include file="/WEB-INF/views/recommend/recheader.jsp" %>
+		
+		<div id="recommend" style="height: 100px; margin-top: -100px;"></div>
+		
 		<section class="container" id="container-loc">
 			<h1>맛집 추천
 				<c:if test="${map.search == 'n'}">
@@ -494,7 +502,7 @@
 			<select name ="column">
 				<option value="title">제목</option>
 			</select>
-			<input type="text" name="word" class="long" required>
+			<input type="text" name="word" required style="outline:none;">
 			<input type="submit" value="검색하기" class="rec-btn">
 		</form>
 		</div>

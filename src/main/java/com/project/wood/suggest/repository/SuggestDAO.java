@@ -121,6 +121,7 @@ public class SuggestDAO {
 		
 	}
 
+	//건의게시판 목록
 	public SuggestDTO getSuggest(String suggestseq) {
 
 		try {
@@ -160,12 +161,45 @@ public class SuggestDAO {
 
 	public int suggestadd(SuggestDTO dto) {
 
-		
+		try {
+
+			String sql = "insert into tblSuggest values (suggestseq.nextVal, ?, 27, ?, ?, sysdate, sysdate, ?, default)";
+
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, dto.getId());
+			pstat.setString(2, dto.getTitle());
+			pstat.setString(3, dto.getContent());
+			pstat.setString(4, dto.getCategory());
+
+			return pstat.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		return 0;
 	}
 
-	//건의게시판 목록
+	public int suggestdel(String suggestseq) {
+
+		try {
+
+			String sql = "delete from tblSuggest where suggestseq = ?";
+			
+
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, suggestseq);
+
+			return pstat.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
+	
 	
 	
 	

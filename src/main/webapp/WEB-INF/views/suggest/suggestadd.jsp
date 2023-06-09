@@ -184,17 +184,21 @@
 		font-family: 'Pretendard';
 	}
 	.table-content-real {
-		color: #222 !important;
+		color: #464646 !important;
 		text-align: justify;
 		height: 160px;
 	}
 	
 	#title {
 		width:529px;
+		outline: none;
+		border: 1px solid #bbb;
 	}
 	#content {
 		width:529px;
 		margin-top: 8px;
+		outline: none;
+		border: 1px solid #bbb;
 	}
 	
 	/* 하단 버튼 */
@@ -215,9 +219,10 @@
 	
 	
 	 .searchdiv .btn {
-    	padding-left: 33px;
+    	/* padding-left: 33px; */
    	}
-
+   	
+   	
 </style>
 </head>
 <body>
@@ -237,6 +242,7 @@
 						<td class="table-content">
 							<select name ="category">
 								<option value="건의">건의</option>
+								<option value="질문">질문</option>
 								<c:if test="${lv == '0'}"> <!-- 관리자만 공지 가능 -->
 								<option value="공지">공지</option>
 								</c:if>
@@ -245,11 +251,11 @@
 					</tr>
 					<tr>
 						<td class="table-title">제목</td>
-						<td class="table-content table-content-bold"><input type="text" name="title" id="title" required autofocus></td>
+						<td class="table-content table-content-bold"><input type="text" name="title" id="title" required autofocus spellcheck="false"></td>
 					</tr>
 					<tr>
 						<td class="table-title">내용</td>
-						<td class="table-content table-content-real"><textarea name="content" id="content" rows="5" required spellcheck="true"></textarea></td>
+						<td class="table-content table-content-real"><textarea name="content" id="content" rows="5" required spellcheck="false"></textarea></td>
 					</tr>
 				</tbody>
 			</table>
@@ -257,7 +263,7 @@
 	</div>        
 	
 	<div class="searchdiv">
-		<button type="button" class="btn btn-outline-secondary btn-sm" onclick="location.href='/wood/suggest/suggestadd.do';" style="border: 1px solid #aaa !important;"><span class="material-symbols-outlined" id="ori-icon2" >add_ad</span>글쓰기</button>
+		<button type="submit" class="btn btn-outline-secondary btn-sm" style="border: 1px solid #aaa !important;"><span class="material-symbols-outlined" id="ori-icon2" >add_ad</span>글쓰기</button>
    	    <button type="button" class="btn btn-outline-secondary btn-sm" onclick="location.href='/wood/suggest/suggest.do';" style="border: 1px solid #aaa !important;"><span class="material-symbols-outlined" id="ori-icon2" style="border-left: 1px soild #aaa">format_list_bulleted</span>돌아가기</button>
 	</div>
 	
