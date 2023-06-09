@@ -501,6 +501,7 @@
 		<form id="searchForm" action="/wood/recommend/recommend.do" method="GET">
 			<select name ="column">
 				<option value="title">제목</option>
+				<option value="content">한줄평</option>
 			</select>
 			<input type="text" name="word" required style="outline:none;">
 			<input type="submit" value="검색하기" class="rec-btn">

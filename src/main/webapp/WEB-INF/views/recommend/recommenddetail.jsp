@@ -354,7 +354,7 @@
 	    }
 	}
 	#next-button {
-		left:1350px !important;
+		left:1500px !important;
 	}
 	#close-button {
 		left:20px !important;

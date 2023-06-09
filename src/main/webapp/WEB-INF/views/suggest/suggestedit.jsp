@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -163,7 +162,7 @@
 		color: #777;
 	}
 	.table-title {
-		width: 30px;
+		width: 55px;
 		text-align: center;
 		height: 55px;
 		border-right: 1px solid;
@@ -216,12 +215,14 @@
 	<!-- template.jsp > index.jsp -->
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
 	<section class="container">
-		<h1>건의 게시판<small> 상세보기</small></h1>
+		<h1>건의 게시판<small> 수정</small></h1>
 	</section>
 	
 	
 	<div class="container-xl">
 	<div class="table-responsive">
+	
+		<form method="POST" action="/wood/suggest/suggestedit.do">
 			<table class="table table-striped" id="table-root">
 				<tbody>
 					<tr>
@@ -238,25 +239,41 @@
 						<td class="table-content">${dto.editdate}</td>
 					</tr>
 					<tr>
+						<td class="table-title">카테고리</td>
+						<td class="table-content" colspan="3">
+							<select name ="category" id="category">
+								<option value="건의">건의</option>
+								<option value="질문">질문</option>
+								<c:if test="${lv == '0'}"> <!-- 관리자만 공지 가능 -->
+								<option value="공지">공지</option>
+								</c:if>
+							</select>
+						</td>
+					</tr>
+					<tr>
 						<td class="table-title">제목</td>
-						<td colspan="4" class="table-content table-content-bold">[${dto.category}] ${dto.title}</td>
+						<td colspan="4" class="table-content table-content-bold">
+							<input type="text" name="title" id="title" required value="${dto.title}" autofocus spellcheck="false" style="outline:none; width: 305px;">
+						</td>
 					</tr>
 					<tr>
 						<td class="table-title">내용</td>
-						<td colspan="4" class="table-content table-content-real">${dto.content}</td>
+						<td colspan="4" class="table-content table-content-real">
+							<textarea name="content" id="content" required spellcheck="false" rows="5" style="outline:none; width: 440px;">${dto.content}</textarea>
+						</td>
 					</tr>
 				</tbody>
 			</table>
-		</div>
+			
+			<div class="searchdiv">
+				<button type="submit" class="btn btn-outline-secondary btn-sm" style="border: 1px solid #aaa !important;"><span class="material-symbols-outlined" id="ori-icon2" >edit</span>수정하기</button>
+		   	    <button type="button" class="btn btn-outline-secondary btn-sm" onclick="history.back()" style="border: 1px solid #aaa !important;"><span class="material-symbols-outlined" id="ori-icon2" style="border-left: 1px soild #aaa">reply</span>돌아가기</button>
+			</div>
+			
+			<input type="hidden" name="suggestseq" value="${dto.suggestseq}">
+		</form>
+	</div>
 	</div>        
-	
-	<div class="searchdiv">
-		<c:if test="${not empty id && (id == dto.id || lv == '0')}">
-		<button type="button" class="btn btn-outline-secondary btn-sm" onclick="location.href='/wood/suggest/suggestedit.do?suggestseq=${dto.suggestseq}';"><span class="material-symbols-outlined" id="ori-icon2">edit</span>수정</button>
-		<button type="button" class="btn btn-outline-secondary btn-sm" onclick="location.href='/wood/suggest/suggestdel.do?suggestseq=${dto.suggestseq}';"><span class="material-symbols-outlined" id="ori-icon2">delete</span>삭제</button>
-		</c:if>
-   	    <button type="button" class="btn btn-outline-secondary btn-sm" onclick="location.href='/wood/suggest/suggest.do?column=${column}&word=${word}';"><span class="material-symbols-outlined" id="ori-icon2">format_list_bulleted</span>목록보기</button>
-	</div>	
 	
 	
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>

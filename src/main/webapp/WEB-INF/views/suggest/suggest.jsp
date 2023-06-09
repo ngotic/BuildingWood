@@ -260,7 +260,7 @@
 				<thead id="table-head">
 					<tr id="table-head-tr">
 						<th class="table-center head-th" style="width:70px">번호</th>
-						<th class="table-center head-th" style="width:105px">공지/게시판</th>
+						<th class="table-center head-th" style="width:105px">공지/건의</th>
 						<th class="table-center head-th" style="width:350px">제목</th>
 						<th class="table-center head-th" style="width:150px">닉네임</th>
 						<th class="table-center head-th" style="width:110px">작성날짜</th>

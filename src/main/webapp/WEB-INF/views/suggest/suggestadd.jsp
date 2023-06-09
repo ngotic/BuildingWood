@@ -264,7 +264,7 @@
 	
 	<div class="searchdiv">
 		<button type="submit" class="btn btn-outline-secondary btn-sm" style="border: 1px solid #aaa !important;"><span class="material-symbols-outlined" id="ori-icon2" >add_ad</span>글쓰기</button>
-   	    <button type="button" class="btn btn-outline-secondary btn-sm" onclick="location.href='/wood/suggest/suggest.do';" style="border: 1px solid #aaa !important;"><span class="material-symbols-outlined" id="ori-icon2" style="border-left: 1px soild #aaa">format_list_bulleted</span>돌아가기</button>
+   	    <button type="button" class="btn btn-outline-secondary btn-sm" onclick="location.href='/wood/suggest/suggest.do';" style="border: 1px solid #aaa !important;"><span class="material-symbols-outlined" id="ori-icon2" style="border-left: 1px soild #aaa">reply</span>돌아가기</button>
 	</div>
 	
 	</form>

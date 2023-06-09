@@ -96,17 +96,20 @@ public class Recommend extends HttpServlet {
 				for (RecommendDTO dto : list) {
 					//제목태그 이스케이프
 					String subject = dto.getTitle();
+					String content = dto.getContent();
 					subject = subject.replace("<", "&lt;").replace(">", "&gt;");
 					
 					//제목에서 검색 중 > 검색어 강조 기능
 					if (search.equals("y") && column.equals("title")) {
-						//새글입니다.
-						//<span style="background-color:gold; color:red;">새글</span>
 						subject = subject.replace(word, "<span style=\"background-color:gold; \">" + word + "</span>");
+					}
+					if (search.equals("y") && column.equals("content")) {
+						content = content.replace(word, "<span style=\"background-color:gold; \">" + word + "</span>");
 					}
 					
 					
 					dto.setTitle(subject);
+					dto.setContent(content);
 				
 				}
 				
