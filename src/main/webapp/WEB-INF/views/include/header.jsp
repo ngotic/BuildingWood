@@ -113,7 +113,7 @@
                     <c:if test="${not empty id}">
                      <ul class="dropdown-menu" >
                         <li><a class="dropdown-item" href="/wood/user/logout.do">로그아웃</a></li>
-						<li><a class="dropdown-item" href="/wood/admin/admin.do">마이페이지</a></li>
+						<li><a class="dropdown-item" href="/wood/admin/mypage.do">마이페이지</a></li>
                     </ul>
                     </c:if>
                 </div> 

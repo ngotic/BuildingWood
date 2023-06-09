@@ -288,7 +288,7 @@ a.link-hover span:hover {
 
 				<form method="POST" action="/wood/user/login.do">
 					<input type="hidden" name="id" value="admin"> <input
-						type="hidden" name="password" value="0000"> <input
+						type="hidden" name="password" value="admin"> <input
 						type="submit" value="관리자">
 				</form>
 
