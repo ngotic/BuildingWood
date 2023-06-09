@@ -104,6 +104,7 @@ public class SnsMain extends HttpServlet {
 			
 			int commentresult = dao.addcomment(cdto);
 			
+			
 			if(commentresult==1) {
 				System.out.println("성공");
 			}else {
