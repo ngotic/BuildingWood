@@ -47,7 +47,6 @@ public class Index extends HttpServlet {
 				
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/main.jsp");
 		dispatcher.forward(req, resp);
-
 		
 	}
 

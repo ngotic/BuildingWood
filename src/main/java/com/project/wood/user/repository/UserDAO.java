@@ -29,7 +29,6 @@ public class UserDAO {
 			
 			rs = pstat.executeQuery();
 			
-			
 			if (rs.next()) {
 				UserDTO result = new UserDTO();
 				// 이정도만 넘기자 

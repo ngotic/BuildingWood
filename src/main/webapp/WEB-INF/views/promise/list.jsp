@@ -4,8 +4,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>  -->	
 <%@ include file="/WEB-INF/views/include/asset.jsp" %>
 
 
@@ -14,7 +14,7 @@
 
 
    <style data-tag="default-style-sheet">  
-     html {
+      html {
        font-family: Inter;
        font-size: 16px;
      }
@@ -29,7 +29,7 @@
        color: var(--dl-color-gray-black);
        background-color: var(--dl-color-gray-white);
 
-     }
+     } 
      
      .tagify {
 		border: 1px solid #BBB;
@@ -148,7 +148,7 @@
      data-tag="font"
    />
  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
 
 
@@ -337,16 +337,16 @@
 	
 	
 	
-	
+
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 	
 	
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
 </script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">  -->
 </script>	
-<script src="/toy/asset/js/jQuery.tagify.min.js"></script>
+<script src="/wood/asset/js/jQuery.tagify.min.js"></script>
 <script>
 
 
