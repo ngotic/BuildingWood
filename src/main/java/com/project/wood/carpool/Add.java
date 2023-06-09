@@ -58,10 +58,13 @@ public class Add extends HttpServlet {
 		  dto.setFee(fee); 
 		  dto.setRecruit(recruit);
 		  
+		  dto.setDriverseq((String)session.getAttribute("id"));		  
 		  CarpoolDAO dao = new CarpoolDAO();
 		  
 		  
 		  System.out.println(dto.getTtime());
+		  
+		  
 		  
 		  int result = dao.add(dto);
 		  

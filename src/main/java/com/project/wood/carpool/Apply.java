@@ -31,6 +31,8 @@ public class Apply extends HttpServlet {
 		String carpoolseq = req.getParameter("carpoolseq");
 		String applyid = req.getParameter("applyid");
 		
+		/* System.out.println("applyid : " + applyid); */
+		
 		JSONObject obj = new JSONObject();
 		
 		int applyList = adao.applyCarpoolList(carpoolseq, applyid);

@@ -27,9 +27,14 @@ public class CarpoolDAO {
 		
 		try {
 			
-			String sql = "insert into tblCarpool (carpoolseq, boardcategoryseq, driverseq, content, regdate, departtime, departurescity, departures, arrivalscity, arrivals, fee, recruitstatus, recruit) values (carpoolseq.nextval, default, ?, ?, default, ?, ?, ?, ?, ?, ?, default, ?)";	
+			String sql = "insert into tblCarpool (carpoolseq, boardcategoryseq, driverseq, content, regdate, departtime, departurescity, departures, arrivalscity, arrivals, fee, recruitstatus, recruit) values (carpoolseq.nextval, default, (select driverseq from tblDriver where id = ?), ?, default, to_date(?, 'yyyy-mm-dd hh24:mi:ss'), ?, ?, ?, ?, ?, default, ?)";	
 			
 			pstat = conn.prepareStatement(sql);
+			
+			System.out.println(dto);
+			
+			//CarpoolDTO(carpoolseq=null, boardcategoryseq=null, driverseq=OaKoFc263, content=asdf, regdate=null, ttime=2023-06-16 14:16:00, departurescity=울산, departures=asdfsdf, arrivalscity=인천, arrivals=asdsf, fee=3000, recruitstatus=null, recruit=2, id=null, score=0.0, count=null, carpoolapplyseq=null, applyid=null, applystatus=null, profile=null, nickname=null, gender=null)
+
 			
 			pstat.setString(1, dto.getDriverseq());
 			pstat.setString(2, dto.getContent());
@@ -128,7 +133,7 @@ public class CarpoolDAO {
 					  + "(select (select profile from tblMember where id = tblDriver.id) from tblDriver where driverseq = tblCarpool.driverseq) as profile, "
 					  + "(select (select gender from tblMember where id = tblDriver.id) from tblDriver where driverseq = tblCarpool.driverseq) as gender, "
 					  + "(select (select nickname from tblMember where id = tblDriver.id) from tblDriver where driverseq = tblCarpool.driverseq) as nickname "
-					  /*+ "(select applystatus from tblCarpoolApply where carpoolseq = tblCapool.carpoolseq) as applystatus "*/
+					  /*+ "(select (select * from tblCarpoolApply where applystatus = '신청 중') from tblCarpoolApply where carpoolseq = tblCarpool.carpoolseq) as applyrecruit "*/
 					  + "from tblCarpool where carpoolseq = ?";
 			
 			pstat = conn.prepareStatement(sql);
@@ -153,6 +158,8 @@ public class CarpoolDAO {
 				dto.setRecruit(rs.getString("recruit"));
 				dto.setContent(rs.getString("content"));
 				
+				/* dto.setApplyrecruit(rs.getString("applyrecruit")); */
+				
 				dto.setId(rs.getString("id"));
 				dto.setScore(rs.getDouble("score"));
 				dto.setCount(rs.getString("count"));
@@ -160,6 +167,10 @@ public class CarpoolDAO {
 				dto.setProfile(rs.getString("profile"));
 				dto.setNickname(rs.getString("nickname"));
 				dto.setGender(rs.getString("gender"));
+				
+				dto.setApplyid(sql);
+				dto.setCarpoolapplyseq(carpoolseq);
+			
 				
 				return dto;
 				
@@ -230,7 +241,7 @@ public class CarpoolDAO {
 	
 	
 	
-	
+	// ------------------------- CarpoolApply ---------------------------------
 
 	//이미 해당하는 carpoolseq 게시글에 신청을 했는지
 	public int applyCarpoolList(String carpoolseq, String applyid) {
@@ -280,6 +291,13 @@ public class CarpoolDAO {
 	}
 
 
+
+	
+
+
+	
+	
+	
 
 }
 

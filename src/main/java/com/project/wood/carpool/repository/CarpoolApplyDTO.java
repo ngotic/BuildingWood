@@ -7,7 +7,7 @@ public class CarpoolApplyDTO {
 	
 	private String carpoolapplyseq;
 	private String carpoolseq;
-	private String id;
+	private String applyid;
 	private String applystatus;
 	
 	private String nickname;

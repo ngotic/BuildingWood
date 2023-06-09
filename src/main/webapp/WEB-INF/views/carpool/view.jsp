@@ -84,7 +84,7 @@
 		font-size: 0.9rem;
 	}
 	
-/* 	.top-frame {
+ 	.top-frame {
 	  display: flex;
 	  align-items: center;
 	}
@@ -169,7 +169,7 @@
 	  width: 30px;
 	  height: 30px;
 	  margin-right: 3px;
-	} */
+	} 
 	
 	
 	
@@ -517,39 +517,12 @@
 	            </div>
 	    </button>
       
-          <div class="card-header">
-	              <img
-	              src="https://www.studiopeople.kr/common/img/default_profile.png"
-	              alt="프로필"
-	              class="profile"
-	              />
-	              <div class="user-info" style="margin-left: 10px;">
-	              	<div>
-		              <span class="nickname">${dto.nickname}</span>
-		              <span class="gender">
-		              		<c:if test = "${dto.gender eq 'M'}">
-		              			(남)
-		              		</c:if>
-		              		<c:if test = "${dto.gender eq 'F'}">
-		              			(여)
-		              		</c:if>
-		              </span>
-		            </div>
-		            <div class="rating">
-		              <img
-			            src="/wood/asset/img/star.png"
-			            alt="RatingStar"
-			            class="rating-star"
-			          />
-		              <span class="rating-score">${dto.score} (${dto.count})</span>
-		            </div>
-	              </div>
-	       </div>
+  
 	       
         <div class="info-frame">
         
         
-          <%-- <div class="profile-frame">
+          <div class="profile-frame">
             <img
               src="https://www.studiopeople.kr/common/img/default_profile.png"
               alt="프로필사진"
@@ -585,7 +558,7 @@
             />
             <span>${dto.score}</span>
             <span> (${dto.count})</span>
-          </div> --%>
+          </div>
           
           <!-- 출발지, 도착지, 날짜시간, 가격 -->
           <div class="carpool-info-frame"> 
@@ -646,8 +619,13 @@
           </c:if>
           
           <c:if test="${(id != dto.id)}">
-	      	<button class="apply" style="color: white;" 
-	      			onclick="apply('${dto.carpoolseq}', '${dto.applyid}', '${dto.carpoolapplyseq}');">신청하기</button>
+	      	<button class="apply" style="color: white;" onclick="apply('${dto.carpoolseq}', '${id}');">
+	      		<c:choose>
+	      			<c:when test = "${applystatus eq null}">신청하기</c:when>
+	      			<c:when test = "${applystatus eq '신청 중'}">신청 중</c:when>
+	      			<c:when test = "${applystatus eq '신청 완료'}">신청 완료</c:when>
+	      		</c:choose>
+	      	</button>
           </c:if>
           
           
@@ -677,19 +655,17 @@
       
     <!-- 현재 접속중인 id가 게시글 작성자의 id와 같고, recruitstatus(모집 상태)가 '모집 종료'가 아닐 시 표시함 -->
 	<c:if test="${id eq dto.id && dto.recruitstatus ne '모집 종료'}">
-    	<h4>신청승인하는거</h4>
-    	<span>닉네임 성별 
-    	
-    	<button>승인</button>
-    	
-    	<button>거절</button>
+    	<h4>신청 리스트</h4>
+    	<span>
+    		닉네임 성별 
+    		<button onclick = "applyok()">승인</button>
+    		<button onclick = "applyno()">거절</button>
     	</span>
     	
-    	<span>테스트닉네임 성별</span>
+    	<%-- tblCarpoolApply 테이블에서 carpoolseq = ${dto.carpoolseq}이고 applystatus = '신청 중'인 사람의 nickname과 gender를 출력하는 코드를 작성 --%>
     	
-    	<c:forEach items="${list}" var="dto">
-    		<span>${dto.nickname} ${dto.gender}</span>
-    	</c:forEach>
+    	
+    	    
     	
     </c:if>
     
@@ -704,8 +680,65 @@
         
         <!-- Add the library (only one file) -->
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		
+		<!-- 카풀 신청 승인 applyok() -->
 		<script>
-		    function apply(carpoolseq, applyid, carpoolapplyseq) {
+			function applyok() {
+				
+				new Swal ({
+			        title: "",
+			        text: "카풀 신청을 승인하시겠습니까?",
+			        icon: "success",
+			        confirmButtonText: "Yes",
+			        confirmButtonColor: '#2db400',
+			        showCancelButton: true,
+			        cancelButtonText: "No",
+			        cancelButtonColor: '#D8D8D8'
+			    })
+				
+				.then(function(){
+					new Swal({
+				        title: "",
+				        text: "카풀 신청이 승인되었습니다.",
+				        icon: "success",
+				        confirmButtonColor: '#2db400'
+				    });
+	            });
+			}
+		</script>
+		
+		<!-- 카풀 신청 거절 applyno() -->
+		<script>
+			function applyno() {
+				
+				new Swal ({
+			        title: "",
+			        text: "카풀 신청을 거절하시겠습니까?",
+			        icon: "error",
+			        confirmButtonText: "Yes",
+			        confirmButtonColor: '#2db400',
+			        showCancelButton: true,
+			        cancelButtonText: "No",
+			        cancelButtonColor: '#D8D8D8'
+			    })
+				
+				.then(function(){
+					new Swal({
+				        title: "",
+				        text: "카풀 신청이 거절되었습니다.",
+				        icon: "error",
+				        confirmButtonColor: '#2db400'
+				    });
+	            });
+			}
+		</script>
+		
+		<!-- 카풀 신청 apply() -->
+		<script>
+		    function apply(carpoolseq, applyid) {
+		    	
+		    	/* alert('carpoolseq='+carpoolseq
+    					+'&applyid='+applyid); */
 		    	
 			  new Swal ({
 		        title: "",
@@ -726,8 +759,7 @@
 			    			type: 'POST',
 			    			url : 'http://localhost:8090/wood/carpool/apply.do',
 			    			dataType: 'json',
-			    			data: 'carpoolapplyseq='+carpoolapplyseq
-			    					+'&carpoolseq='+carpoolseq
+			    			data: 'carpoolseq='+carpoolseq
 			    					+'&applyid='+applyid,
 			    					
 			    			success: (ajaxresult) => {
@@ -770,8 +802,7 @@
 		    } //function
 		</script>  
           
-		<!-- Add the library (only one file) -->
-		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<!-- 게시글 삭제 del() -->
 		<script>
 		    function del() {
 		      new Swal({

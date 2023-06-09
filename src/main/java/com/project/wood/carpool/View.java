@@ -1,6 +1,7 @@
 package com.project.wood.carpool;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -31,9 +32,6 @@ public class View extends HttpServlet {
 		CarpoolDAO dao = new CarpoolDAO();
 		
 		CarpoolDTO dto = dao.get(carpoolseq);
-		
-	
-		/* CarpoolApplyDTO adto = dao.alist(carpoolseq); */
 		
 		
 		

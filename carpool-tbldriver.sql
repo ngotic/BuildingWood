@@ -34,6 +34,8 @@ create sequence driverseq;
 drop sequence driverseq;
 
 
+insert into tblCarpool (carpoolseq, boardcategoryseq, driverseq, content, regdate, departtime, departurescity, departures, arrivalscity, arrivals, fee, recruitstatus, recruit) values (carpoolseq.nextval, default, (select driverseq from tblDriver where id = 'OaKoFc263'), 'asdf', default, ', ?, ?, ?, ?, ?, default, ?)
+
 select * from tblDriver;
 select * from tblCarpool;
 select * from tblMember;

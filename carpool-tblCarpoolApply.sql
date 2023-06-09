@@ -17,3 +17,14 @@ drop sequence carpoolapplyseq;
 select * from tblCarpoolApply;
 
 insert into tblCarpoolApply (carpoolapplyseq, carpoolseq, id, applystatus) values (carpoolapplyseq.nextval, 11, 'DArRBi431', default);
+
+
+
+select * from tblCarpoolApply where applystatus = '신청 중';
+
+select (select (select * from tblCarpoolApply where applystatus = '신청 중') from tblCarpool where carpoolseq = tblCarpoolApply.carpoolseq) as applyrecruit from tblCarpool;
+select (select (select nickname from tblMember where id = tblDriver.id) from tblDriver where driverseq = tblCarpool.driverseq) as nickname from tblCarpool;
+
+
+select * from tblCarpoolApply where applystatus = '신청 중' and carpoolseq = tblCarpool.carpoolseq;
+
