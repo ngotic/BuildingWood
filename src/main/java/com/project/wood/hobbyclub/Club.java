@@ -1,6 +1,7 @@
 package com.project.wood.hobbyclub;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -9,6 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import com.project.wood.hobbyclub.repository.ClubBoardDTO;
 import com.project.wood.hobbyclub.repository.ClubDAO;
@@ -40,16 +44,52 @@ public class Club extends HttpServlet {
 		String id = (String)req.getSession().getAttribute("id"); 
 		List<ClubBoardDTO> cblist = cbdao.boardlist(id);
 		
-		//list.stream().filter(null);
-		//cblist = cbdao.statuscheck(cblist);
 		System.out.println(cblist);
 		
-		req.setAttribute("id",id);
+		req.setAttribute("id", id);
 		req.setAttribute("cblist", cblist);
 		
 
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/club/club.jsp");
 		dispatcher.forward(req, resp);
+	}
+	
+	// ajax
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// club.java
+		// List<ClubDTO> list = cdao.list(); // 이건 add에서만 
+		//cbdao
+		
+		String id = (String)req.getSession().getAttribute("id");
+		String keyword = req.getParameter("keyword");
+		String type = req.getParameter("type");
+		String n = req.getParameter("n");
+		
+		List<ClubBoardDTO> cblist = cbdao.boardlist(id, keyword, type, n);
+		
+		JSONArray arr = new JSONArray();
+		if( cblist != null ) {
+			for(ClubBoardDTO dto : cblist) {
+				JSONObject obj = new JSONObject();
+				obj.put("hobbyclubseq", dto.getHobbyclubseq());
+				obj.put("clupseq", dto.getClubseq());
+				obj.put("name", dto.getName());
+				obj.put("buildingname", dto.getBuildingname());
+				obj.put("content", dto.getContent());
+				obj.put("openregdate", dto.getOpenregdate());
+				obj.put("closeregdate", dto.getCloseregdate());
+				obj.put("recruits", dto.getRecruits());
+				arr.add(obj);
+			}
+		}
+		// System.out.println("test > "+arr);
+		resp.setCharacterEncoding("UTF-8");
+		resp.setContentType("application/json");
+		PrintWriter writer;
+		writer = resp.getWriter();
+		writer.print(arr);
+		writer.close();
+		
 
 	}
 

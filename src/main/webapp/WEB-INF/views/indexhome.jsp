@@ -49,15 +49,15 @@
 <body>
 	<!-- template.jsp > index.jsp -->
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
-
+<!-- 
 	<div class="banner-container">
 		<img
 			src="https://cdn.pixabay.com/photo/2020/11/05/23/16/city-5716456_1280.jpg"
 			alt="Banner Image">
 		<h1 class="banner-text">한독 빌딩입니다.</h1>
 		<button class="banner-button">더보기</button>
-	</div>
-	
+	</div> -->
+	<%@ include file="/WEB-INF/views/mainheader.jsp" %>  
 	<section class="container"></section>
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 	<script>
