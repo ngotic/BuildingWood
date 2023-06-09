@@ -168,15 +168,15 @@
 		</div>
 		<!-- <button id="testBtn">더보기</button> -->
 	</section>
-	
+	<div style="height:100px;"></div>
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-let n = 0;
+let n = 1;
 
 //loadClubList();
 
-$('#holder').html('');
+
 
 // loadClubList();
 /* $('#testBtn').click(function(){
@@ -188,8 +188,9 @@ $('#holder').html('');
 let ch = true;
 let ch2 = true;
 
-$(window).scroll(()=>{
-	
+let start = 0;
+
+$(window).scroll(()=> {
 	if( window.innerHeight + window.scrollY >= document.body.offsetHeight ){
 		if (ch) {
 			loadClubList();
@@ -197,8 +198,8 @@ $(window).scroll(()=>{
 		} // 응답이 올 때 까지 기다린다. 
 	}
 });
-function loadClubList(){
-	
+
+/* function loadClubList(){
 	$.ajax({
 		type:'POST',
 		url: '/wood/club/club.do',
@@ -263,9 +264,8 @@ function loadClubList(){
 		},
 		error: (a, b, c) => console.log(a, b, c)
 	});  
-	event.preventDefault();
 	
-}
+} */
 
 
 function loadClubList(){
@@ -349,9 +349,15 @@ $('#keyword').keydown(function(){
 			return
 		};
 	}
-	loadKeyboard();
+	
+	if (ch2) {
+		loadKeyboard();
+		ch2 = false;
+	} 
 	
 });
+
+
 
 function loadKeyboard(){
 
@@ -453,9 +459,6 @@ function loadKeyboard(){
 	}
 }); 
  */
-
-
-
 
 // 이미 신청했는지 알려줘야 함
 function salert(seq, name, id, hseq) {

@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
   <body>
+
     <!-- Loader starts-->
     <div class="loader-wrapper">
       <div class="theme-loader"></div>
@@ -15,7 +16,7 @@
   <div class="main-header-right row m-0">
     <div class="main-header-left">
       <div class="logo-wrapper">
-      	<a href="/wood/index.do">
+      	<a href="/wood/indexhome.do">
       		<img class="img-fluid" src="/wood/adminasset/세로logo.PNG" alt="" width=120px style="border-radius:10%;">
       	</a>
       </div>

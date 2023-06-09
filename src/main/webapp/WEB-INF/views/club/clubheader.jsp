@@ -51,7 +51,6 @@
 }
 </style>
 
-
 <body>
 	<div class ="cropping">
 			<img src="https://as2.ftcdn.net/v2/jpg/05/91/44/53/1000_F_591445318_1hpuwhUFwPfD213REpclgkeoRxpDPtWK.jpg" 
