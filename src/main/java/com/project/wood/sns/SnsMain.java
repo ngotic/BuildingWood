@@ -39,8 +39,13 @@ public class SnsMain extends HttpServlet {
 		String profile = dao.getuserprofile(uid);
 		String ubuildingseq = dao.getuserbuildingseq(uid);
 		String buildingseq = req.getParameter("buildingseq");  
+		String hidemapbox = req.getParameter("hidemapbox");
+		System.out.println(hidemapbox);
 		if(req.getParameter("buildingseq")==null) {
 			buildingseq = ubuildingseq;
+		}
+		if(hidemapbox==null) {
+			hidemapbox="f";
 		}
 		
 		String udong = dao.getuserdong(buildingseq);
@@ -74,7 +79,7 @@ public class SnsMain extends HttpServlet {
 		int selected = Integer.parseInt(buildingseq)-1;
 		req.setAttribute("selected", selected);
 		req.setAttribute("udong", udong);
-		
+		req.setAttribute("hidemapbox", hidemapbox);
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/sns/snsmain.jsp");
 		dispatcher.forward(req, resp);
 		

@@ -179,13 +179,23 @@
 					</div>
 				</div>
 			</div>
-			<div id="map"></div>
+			<c:if test="${hidemapbox eq 'f'}">
+			<div style="width:50%;">
+				<div id="hidemap" style="text-align:right;" onclick="hidemap();">맵 숨기기</div>
+				<div id="map" style="width:600px;"></div>
+			</div>
+			</c:if>
+			<c:if test="${hidemapbox eq 't'}">
+			<div style="width:50%;">
+				<div id="hidemap" style="text-align:right;" onclick="hidemap();">맵 보이기</div>
+				<div id="map" style="width:600px;"></div>
+			</div>
+			</c:if>
 		</div>
 	</section>
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 	
 		
-	
 	
 	
 	
@@ -195,8 +205,8 @@
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl">
-    <div class="modal-content">
-      <div class="modal-header">
+    <div class="modal-content" style="border-radius: 0;">
+      <div class="modal-header" style="border-bottom: none;">
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" style="padding: 5px 5px; ">
@@ -261,6 +271,27 @@
 
 <script type="	text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0c837c78add7b31e526a1b98c5a9910f"></script>	
 <script>
+	let hidemapbox="${hidemapbox}";
+	console.log(hidemapbox);
+	function hidemap(){
+		if(hidemapbox=='f'){
+			$('#map').css("transition-duration","2s");
+   			$('#content').css("transition-duration","2s");
+			$('#map').css("transform","translate(1000px,0)");
+			$('#content').css("transform","translate(300px,0)");
+			
+			$('#hidemap').html('맵 보이기');
+			hidemapbox='t'
+		}
+		else{
+			$('#map').css("transition-duration","2s");
+   			$('#content').css("transition-duration","2s");
+			$('#map').css("transform","translate(0,0)"); 
+			$('#content').css("transform","translate(0,0)"); 
+			$('#hidemap').html('맵 숨기기');
+			hidemapbox= 'f';
+		}
+	}
 
 	$('#blist').children().eq(${selected}).attr("selected",true);
 	
@@ -311,7 +342,6 @@
 	var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);	
 	const ms=[];
 	$(document).ready(function(){
-		
 		<c:forEach items="${blist}" var="dto" varStatus="status">
 		content${status.count}='<div class="overlaybox">' +
 	    '    <div class="boxtitle">${dto.name}</div>' +
@@ -359,9 +389,11 @@
 		 $.ajax({
 	            url:"/wood/snsmain.do",
 	            type: "get", // GET 방식
-	            data:{buildingseq:$('#blist option:selected').data('buildingseq')},// json 방식으로 서블릿에 보낼 데이터
+	            data:{buildingseq:$('#blist option:selected').data('buildingseq'),
+	            	hidemapbox:hidemapbox
+	            	},// json 방식으로 서블릿에 보낼 데이터
 	            success:function(data){
-	            	location.href='/wood/snsmain.do?buildingseq='+$('#blist option:selected').data('buildingseq');
+	            	location.href='/wood/snsmain.do?buildingseq='+$('#blist option:selected').data('buildingseq')+'&hidemapbox='+hidemapbox;
 	            },
 	            error:function(){
 	                alert("error");
@@ -452,8 +484,25 @@
 	
 	    	
    	$(document).ready(function() {     
-       $('#staticBackdrop').on('show.bs.modal', function(event) {     
-    	$('#header').css("opacity","0.5");
+   		if(hidemapbox=='t'){
+   			$('#map').css("transition-duration","1s");
+   			$('#content').css("transition-duration","2s");
+			$('#map').css("transform","translate(1000px,0)");
+			$('#content').css("transform","translate(300px,0)");
+			
+			$('#hidemap').html('맵 보이기');
+			hidemapbox='t'
+		}
+		else{
+			$('#map').css("transition-duration","1s");
+   			$('#content').css("transition-duration","2s");
+			$('#map').css("transform","translate(0,0)"); 
+			$('#content').css("transform","translate(0,0)"); 
+			$('#hidemap').html('맵 숨기기');
+			hidemapbox= 'f';
+		}
+       $('#staticBackdrop').on('show.bs.modal', function(event) {       
+    	 $('#header').css("opacity","0.5");
        	var Idx =1; //현재 슬라이드 index
        	const snsboardseq=$(event.relatedTarget).data('snsboardseq');
        	const index= 1+$(event.relatedTarget).data('index');

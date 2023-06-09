@@ -33,13 +33,16 @@
 		  height:864px;
 		  margin-right:50px;
 		  overflow:hidden;
+		  transition-property: all;
 	}
 	#content:last-child{
 		margin-right:0px;
 	}
 	#map{
-	width:52%;
+	width:700px;
 	height:864px;
+	margin:none;
+	 transition-property: all;
 	
 	}
 	#cheader{
