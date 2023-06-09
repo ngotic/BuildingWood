@@ -68,7 +68,9 @@
 						</c:forEach>
 					</select>
 				</div>
-				<div class="box" style="position:absolute; right:0px;"><button id="addsnscontent">접기</button></div>
+				<c:if test="${ubuildingseq==buildingseq}">
+					<div class="box" style="position:absolute; right:0px;"><button id="addsnscontent">접기</button></div>
+				</c:if>
 				</div>
 				<div id="board">
 					<!--로드 할 게시물들  -->
@@ -195,7 +197,6 @@
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" style="padding: 5px 5px; ">
@@ -261,8 +262,6 @@
 <script type="	text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0c837c78add7b31e526a1b98c5a9910f"></script>	
 <script>
 
-
-	
 	$('#blist').children().eq(${selected}).attr("selected",true);
 	
 	$("#addsnscontent").on("click",function(){
@@ -281,15 +280,16 @@
 			
 		}
 	});
-	
+	//addsnscontent
 	
 
- 	var content = '<div class="overlaybox">' +
+	//forkakao
+ /* 	var content = '<div class="overlaybox">' +
     '    <div class="boxtitle">${buildinginfo.name}</div>' +
     '    <div class="first">' +
     '        <div class="movietitle text">${buildinginfo.name}</div>' +
     '    </div>' +
-    '</div>'; 
+    '</div>';  */
 
 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 	var options = { //지도를 생성할 때 필요한 기본 옵션
@@ -304,45 +304,47 @@
 	
 	// 마커가 표시될 위치입니다 
 	var markerPosition  = new kakao.maps.LatLng(${buildinginfo.lat}, ${buildinginfo.lng}); 
-
-	
+	var imageSrc = '/wood/asset/sns/free-icon-buildings-2084178.png'; // 마커이미지의 주소입니다 
+	var imageSize = new kakao.maps.Size(50, 50); // 마커이미지의 크기입니다
+	var imageOption = {offset: new kakao.maps.Point(25, 50)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+	  
+	var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);	
 	const ms=[];
 	$(document).ready(function(){
-		var content = '<div class="overlaybox">' +
-	    '    <div class="boxtitle">${buildinginfo.name}</div>' +
+		
+		<c:forEach items="${blist}" var="dto" varStatus="status">
+		content${status.count}='<div class="overlaybox">' +
+	    '    <div class="boxtitle">${dto.name}</div>' +
 	    '    <div class="first">' +
-	    '        <div class="movietitle text">${buildinginfo.name}</div>' +
+	    '        <div class="movietitle text">${dto.name}</div>' +
 	    '    </div>' +
 	    '</div>'; 
-		<c:forEach items="${blist}" var="dto" varStatus="status">
-		
 		let p${status.count} = new kakao.maps.LatLng(${dto.lat},${dto.lng});
 		
 		let m${status.count} = new kakao.maps.Marker({
 			position: p${status.count},
+			image: markerImage
 		});
-		var infowindow = new daum.maps.InfoWindow({
+		var customOverlay${status.count}=new kakao.maps.CustomOverlay({
 		    position : p${status.count},
-		    content : content
+		    content : content${status.count},
+		    xAnchor: 0.35,
+		    yAnchor: 1.15
 		});
 		
 		kakao.maps.event.addListener(m${status.count}, 'click', function(mouseEvent) {        
-			 
 			location.href = '/wood/snsmain.do?buildingseq=${status.count}';
 		});
 		kakao.maps.event.addListener(m${status.count}, 'mouseover', function() {        
-			 
-			  infowindow.open(map, m${status.count});
+			customOverlay${status.count}.setMap(map);
 		});
-		kakao.maps.event.addListener(m${status.count}, 'mouseout', function() {        
-			 
-			 infowindow.close();
+		kakao.maps.event.addListener(m${status.count}, 'mouseout', function() {      
+			customOverlay${status.count}.setMap(null);     
 		});
 		
 		m${status.count}.setMap(map);
 		
 		ms.push(m${status.count});
-		
 		$('#list td').css('background-color','transparent');
 		$(this).css('background-color','gold');
 		
@@ -367,7 +369,10 @@
 	            
 	        });
 		 
-	 
+	
+		};
+		//change
+
 	//슬라이드 이벤트
 	let currentIdx = [];
 	let picscount = [];
@@ -379,13 +384,13 @@
 	if(${ubuildingseq==buildingseq}){
 		user=1;
 		heart.push(0);
-	}
+	};
 	for (i= user; i < contentlength; i++) {
 		currentIdx.push(1);
 		picscount.push($(`#slide${i}`).parent().data("count"));
 		heart.push(0);
-	}
-
+	};
+		
 	$('.prev').on('click', function () {
 		picscount[parseInt(parseInt($(this).data('num'))) - 1] = $(this).parent().parent().data("count");
 		
@@ -409,7 +414,7 @@
 		  currentIdx[parseInt($(this).data('num')) - 1]++;
 		}
 	});
-	
+			
 	//좋아요 처리 
 	 $(".like").on('click',function(){
 		 var index = parseInt($(this).data('index')-1);
@@ -446,99 +451,96 @@
 
 	
 	    	
-    	$(document).ready(function() {     
-            $('#staticBackdrop').on('show.bs.modal', function(event) {       
-            	var Idx =1; //현재 슬라이드 index
-            	const snsboardseq=$(event.relatedTarget).data('snsboardseq');
-            	const index= 1+$(event.relatedTarget).data('index');
-            	const modal_content=$(event.relatedTarget).data('content');
-    	        const clike=$(event.relatedTarget).data('clike');
-    	        const profile="/wood/asset/sns/"+$(event.relatedTarget).data('profile');
-    	        const nickname=$(event.relatedTarget).data('nickname');
-    	        const cpic=$(event.relatedTarget).data('cpic');
-    	        
-    	        $("#modal_usernick").text(nickname);
-    	        $("#u_imagebox").html("<img alt="+"\"\" src=\""+profile+"\"class=\"comment_userimage\">");
-    	        $("#modal_content").text(modal_content);
-    	        
-    	        let str= $("#boardwrap").children().eq(index).find("#send_modal").html().substring();
-    	        let commented = $("#boardwrap").children().eq(index).find("#to_modal_commentlist").html().substring();
-    	        let like = $("#boardwrap").children().eq(index).find(".like").html().substring();
-    	        
-    	        if(${ubuildingseq!=buildingseq}){
-    	        	str= $("#boardwrap").children().eq(index-1).find("#send_modal").html().substring();
-    	        	commented = $("#boardwrap").children().eq(index-1).find("#to_modal_commentlist").html().substring();
-    	        	like = $("#boardwrap").children().eq(index-1).find(".like").html().substring();
-    	        }
-    	        str=str.replaceAll('450px','600px');
-    	        str=str.replaceAll('300px','600px');
-    	        str=str.replaceAll('class=\"','class=\"m');
-    	        str=str.replaceAll('left: -900px;','');
-    	        str=str.replaceAll('left: -600px;','');
-    	        str=str.replaceAll('left: -300px;','');
-    	        str=str.replaceAll('calc(1350px);','calc(1800px);');
-    	        str=str.replaceAll('calc(900px);','calc(1200px);');
-    	        str=str.replaceAll('calc(450px);','calc(600px);');
-    	        
-    	        commented= commented.replaceAll('style=\"display:none;\"','');
-    	        like = like.replaceAll('ed\"','ed\" style=\"font-size:40px; margin-left:15px;\"')
-    	        $('#modal_scroll').html(commented);
-    	        
-    	        $("#modal_imagebox").html(str); 
-    	        $("#modal_react").html(like);
-    	        
-    	    	$('.mprev').on('click', function () {
-    	    		if(Idx<=1){
-    	    			Idx=1;
-    	    		}
-    	    		else{
-    	    		 $(".mslides").css("left",$(".mslides").position().left + 600);
-    	    		  Idx--;
-    	    		}
-    	    	});
-    	    	
-    	    	$('.mnext').on('click', function () {
-    	    		if(Idx>=cpic){
-    	    			Idx=cpic;
-    	    		}
-    	    		else{
-   	    			 $(".mslides").css("left",$(".mslides").position().left - 600);
-    	    		  Idx++;
-    	    		}
-    	    	 
-    	    	});
-    	    	
-    	    	$(".to_comment").on("click",function(){
-    	    		$("#w_modal_comment").val('@'+this.value+" ");
-    	    		$("#w_modal_comment").focus();
-    	    	});
-    	    	
-    	    	 $('#btnadd').on("click",function addcomment(){
-    	     		$.ajax({
-    	  	            url:"/wood/snsmain.do",
-    	  	            type: "post", // post 방식
-    	  	            data:{
-    	  	            	type:"1",
-    	  	            	snsboardseq:snsboardseq, 
-    	  	            	comment:$('#w_modal_comment').val()},// json 방식으로 서블릿에 보낼 데이터
-    	  	            success:function(data){
-    	 	                alert("success");
-    	 	                
-    	 	                location.replace();
-    	  	            },
-    	  	            error:function(){
-    	  	                alert("error");
-    	  	            }
-    	  	        });
-    	     	});
-            });
-        });
+   	$(document).ready(function() {     
+       $('#staticBackdrop').on('show.bs.modal', function(event) {     
+    	$('#header').css("opacity","0.5");
+       	var Idx =1; //현재 슬라이드 index
+       	const snsboardseq=$(event.relatedTarget).data('snsboardseq');
+       	const index= 1+$(event.relatedTarget).data('index');
+       	const modal_content=$(event.relatedTarget).data('content');
+        const clike=$(event.relatedTarget).data('clike');
+        const profile="/wood/asset/sns/"+$(event.relatedTarget).data('profile');
+        const nickname=$(event.relatedTarget).data('nickname');
+        const cpic=$(event.relatedTarget).data('cpic');
+        
+        $("#modal_usernick").text(nickname);
+        $("#u_imagebox").html("<img alt="+"\"\" src=\""+profile+"\"class=\"comment_userimage\">");
+        $("#modal_content").text(modal_content);
+        
+        let str= $("#boardwrap").children().eq(index).find("#send_modal").html().substring();
+        let commented = $("#boardwrap").children().eq(index).find("#to_modal_commentlist").html().substring();
+        let like = $("#boardwrap").children().eq(index).find(".like").html().substring();
+        
+        if(${ubuildingseq!=buildingseq}){
+        	str= $("#boardwrap").children().eq(index-1).find("#send_modal").html().substring();
+        	commented = $("#boardwrap").children().eq(index-1).find("#to_modal_commentlist").html().substring();
+        	like = $("#boardwrap").children().eq(index-1).find(".like").html().substring();
+        }
+        str=str.replaceAll('450px','600px');
+        str=str.replaceAll('300px','600px');
+        str=str.replaceAll('class=\"','class=\"m');
+        str=str.replaceAll('left: -900px;','');
+        str=str.replaceAll('left: -600px;','');
+        str=str.replaceAll('left: -300px;','');
+        str=str.replaceAll('calc(1350px);','calc(1800px);');
+        str=str.replaceAll('calc(900px);','calc(1200px);');
+        str=str.replaceAll('calc(450px);','calc(600px);');
+        
+        commented= commented.replaceAll('style=\"display:none;\"','');
+        like = like.replaceAll('ed\"','ed\" style=\"font-size:40px; margin-left:15px;\"')
+        $('#modal_scroll').html(commented);
+        
+        $("#modal_imagebox").html(str); 
+        $("#modal_react").html(like);
+        
+    	$('.mprev').on('click', function () {
+    		if(Idx<=1){
+    			Idx=1;
+    		}
+    		else{
+    		 $(".mslides").css("left",$(".mslides").position().left + 600);
+    		  Idx--;
+    		}
+    	});
+    	
+    	$('.mnext').on('click', function () {
+    		if(Idx>=cpic){
+    			Idx=cpic;
+    		}
+    		else{
+   			 $(".mslides").css("left",$(".mslides").position().left - 600);
+    		  Idx++;
+    		}
+    	 
+    	});
+    	
+    	$(".to_comment").on("click",function(){
+    		$("#w_modal_comment").val('@'+this.value+" ");
+    		$("#w_modal_comment").focus();
+    	});
+    	
+    	 $('#btnadd').on("click",function addcomment(){
+     		$.ajax({
+  	            url:"/wood/snsmain.do",
+  	            type: "post", // post 방식
+  	            data:{
+  	            	type:"1",
+  	            	snsboardseq:snsboardseq, 
+  	            	comment:$('#w_modal_comment').val()},// json 방식으로 서블릿에 보낼 데이터
+  	            success:function(data){
+ 	                alert("success");
+ 	                
+ 	                location.replace();
+  	            },
+  	            error:function(){
+  	                alert("error");
+  	            }
+  	        });
+     	});
+       });
+     });
     	
     	
-    	
-   	 let addpics=["addpic","addpic2"];
-	 let picsto=["preview-image1","preview-image2"];
-	
 	 $("#addpic1").on("change", function(event) {
 			$(this).parent().css("outline","none");
 		    var file = event.target.files[0];
@@ -551,7 +553,7 @@
 		    }
 
 		    reader.readAsDataURL(file);
-		});
+	});
 	 $("#addpic2").on("change", function(event) {
 		 $(this).parent().css("outline","none");
 		    var file = event.target.files[0];
@@ -564,9 +566,7 @@
 		    }
 
 		    reader.readAsDataURL(file);
-		});
-	}
-	
+	});
 	 
 	 
 
