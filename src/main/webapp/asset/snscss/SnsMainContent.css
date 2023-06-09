@@ -21,10 +21,7 @@
 	.container {
 	    font-size: 14px; 
 	    max-width: 1300px;
-	    margin-top: 100px;    
 	    font-family: var(--main-content-font-family);
-	    
-	    
 	} 
 	.wrap{
 		display:flex;
@@ -141,8 +138,9 @@
 		background-color:transparent;
 	}
 	#addcontent{
+		position:relative;
 		width:90%;
-		height:410px;
+		height:500px ! important;
 		background-color:white;
 		display:flex;
 		border-bottom: 3px solid rgb(219,219,219);
@@ -160,6 +158,12 @@
 		display:inline-block;
 		border-radius: 5px;
 		outline-color: rgb(219,219,219);
+	}
+	.add{
+		position:absolute;
+		bottom:20px;
+		right:30px;
+		
 	}
 	.add:hover{
 		border:1px solid rgb(219,219,219);
@@ -227,15 +231,16 @@
 .next{
   right: 10px;
 }
-.col{
-	width:126px;
-	margin-top:-100px;
-	/* background-color:black; */
-	height:130px;
+.coll{
+	width:180px;
+	height:120px;
 	padding:0 0 0 0;
-	margin-left: 12px;
-	margin-right: 12px;
-	border:3px solid gray;
+	margin:auto;
+	outline:3px solid gray;
+}
+#addpic{
+	display:inline-box;
+	width:180px;
 }
 	
 .material-symbols-rounded {

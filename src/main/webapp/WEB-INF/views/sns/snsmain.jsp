@@ -85,32 +85,19 @@
 										<input type="text" name = "id" value="${unickname}" readonly>
 									</div>
 									<textarea id="add_useritem" name="add_useritem"></textarea>
-									<div class="container">
+									<div class="image-container">
 									  <div class="row">
-									    <div class="col">
-										    <label for="addpic" id="label_addpic" style="text-align:center; vertical-align:middle; width:126px; height:130px; overflow:hidden;">
-											    <span class="material-symbols-outlined" style="font-size:70px; margin-top:30px;">
-													add
-												</span>
+									    <div class="coll">
+										    <label for="addpic" id="label_addpic" style="text-align:center; vertical-align:middle; width:180px; height:120px; overflow:hidden;">
+													<img style="height:120px;" id="preview-image1" src="">
 											</label>
-										    <input type="file" id="addpic" name="addpic" style="display:none;" onchange="f1();"/>
-									      
+										    <input type="file" id="addpic1" name="addpic1"  multiple='multiple'/>
 									    </div>
-									    <div class="col">
-									      	<label for="addpic2" id="label_addpic" style="text-align:center; vertical-align:middle; width:126px; height:130px; overflow:hidden;">
-											    <span class="material-symbols-outlined" style="font-size:70px; margin-top:30px;">
-													add
-												</span>
+									    <div class="coll">
+									      	 <label for="addpic2" id="label_addpic" style="text-align:center; vertical-align:middle; width:180px; height:120px; overflow:hidden;">
+													<img style="height:120px;" id="preview-image2" src="">
 											</label>
-										    <input type="file" id="addpic2" name="addpic2" style="display:none;" onchange="f1();"/>
-									    </div>
-									    <div class="col">
-									      	<label for="addpic3" id="label_addpic" style="text-align:center; vertical-align:middle; width:126px; height:130px; overflow:hidden;">
-											    <span class="material-symbols-outlined" style="font-size:70px; margin-top:30px;">
-													add
-												</span>
-											</label>
-										    <input type="file" id="addpic3" name="addpic3" style="display:none;" onchange="f1();"/>
+										    <input type="file" id="addpic2" name="addpic2" onchange="imageChange()"/>
 									    </div>
 									  </div>
 									</div>
@@ -273,8 +260,6 @@
 
 <script type="	text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0c837c78add7b31e526a1b98c5a9910f"></script>	
 <script>
-
-
 
 
 	
@@ -607,7 +592,7 @@
             });
         });
     	
-    	
+
     	
     	
     
