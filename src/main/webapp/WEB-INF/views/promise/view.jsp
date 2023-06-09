@@ -142,6 +142,16 @@
             border-radius: 5px;
             box-shadow: rgba(108, 108, 108, 0.35) 0px 5px 15px;
         }
+        
+        .comment-card{
+            margin: auto;
+            width: 800px;
+            min-height: 230px;
+            border: 1px solid transparent;
+            padding: 30px 19px 25px 19px;
+            border-radius: 5px;
+            box-shadow: rgba(108, 108, 108, 0.35) 0px 5px 15px;
+        }
 
         .form-color{
 
@@ -531,7 +541,7 @@
 
           <div class="">
 
-            <div class="card ">
+            <div class="comment-card">
 
               <div class="p-sm-1">
 
