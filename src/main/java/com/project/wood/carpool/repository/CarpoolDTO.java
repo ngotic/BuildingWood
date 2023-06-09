@@ -24,7 +24,7 @@ public class CarpoolDTO {
 	private String recruitstatus;
 	private String recruit;
 	
-	private String applyrecruit;//승인 완료된 모집인원 수
+	private String recruitcount;//신청 완료(승인)된 모집인원 수
 	
 	//tblDriver
 	private String id;

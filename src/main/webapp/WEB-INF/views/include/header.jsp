@@ -54,7 +54,9 @@
 <header class="header-area navbar-fade" id="header">
 		<nav id="navbar">
 			<div id="brand-logo">
-				<a class="navbar-brand" id="navbarBrand"><img width=60px src="/wood/asset/img/logo.png"></a>
+				<a class="navbar-brand" id="navbarBrand" href="/wood/indexhome.do">
+					<img width=60px src="/wood/asset/img/logo.png"> <!-- 06/09 17:41 수정함 -->
+				</a>
 			</div>
 			<a class="navbar-toggler" id="toggleBtn"><i class="fa fa-bars"></i></a>
 			<div class="navbar-menu" id="menu">

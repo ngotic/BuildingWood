@@ -71,10 +71,10 @@ public class CarpoolDAO {
 							  + "(select id from tblDriver where driverseq = tblCarpool.driverseq) as id, "
 							  + "(select (select profile from tblMember where id = tblDriver.id) from tblDriver where driverseq = tblCarpool.driverseq) as profile, "
 							  + "(select (select gender from tblMember where id = tblDriver.id) from tblDriver where driverseq = tblCarpool.driverseq) as gender, "
-							  + "(select (select nickname from tblMember where id = tblDriver.id) from tblDriver where driverseq = tblCarpool.driverseq) as nickname "
+							  + "(select (select nickname from tblMember where id = tblDriver.id) from tblDriver where driverseq = tblCarpool.driverseq) as nickname, "
+							  + "(select count(*) from tblCarpoolApply where applystatus = '신청 완료' and carpoolseq = tblCarpool.carpoolseq) as recruitcount "
 							  + "from tblCarpool order by carpoolseq desc";
 			
-			//String sql = "select tblCarpool.*, tblDriver.score, tblDriver.count from tblCarpool join tblDrvier on tblDriver.driverseq = tblCarpool.driverseq order by carpoolseq desc";
 			
 			stat = conn.createStatement();
 			rs = stat.executeQuery(sql);
@@ -95,6 +95,7 @@ public class CarpoolDAO {
 				dto.setRecruitstatus(rs.getString("recruitstatus"));
 				dto.setRecruit(rs.getString("recruit"));
 				
+				dto.setRecruitcount(rs.getString("recruitcount"));
 				
 				dto.setId(rs.getString("id"));
 				dto.setScore(rs.getDouble("score"));
@@ -103,6 +104,8 @@ public class CarpoolDAO {
 				dto.setProfile(rs.getString("profile"));
 				dto.setNickname(rs.getString("nickname"));
 				dto.setGender(rs.getString("gender"));
+				
+				System.out.println(rs.getString("carpoolseq") + ":" + rs.getString("recruitcount"));
 				
 				
 				list.add(dto);
@@ -133,13 +136,12 @@ public class CarpoolDAO {
 					  + "(select (select profile from tblMember where id = tblDriver.id) from tblDriver where driverseq = tblCarpool.driverseq) as profile, "
 					  + "(select (select gender from tblMember where id = tblDriver.id) from tblDriver where driverseq = tblCarpool.driverseq) as gender, "
 					  + "(select (select nickname from tblMember where id = tblDriver.id) from tblDriver where driverseq = tblCarpool.driverseq) as nickname "
-					  /*+ "(select (select * from tblCarpoolApply where applystatus = '신청 중') from tblCarpoolApply where carpoolseq = tblCarpool.carpoolseq) as applyrecruit "*/
 					  + "from tblCarpool where carpoolseq = ?";
 			
 			pstat = conn.prepareStatement(sql);
 			
 			pstat.setString(1, carpoolseq);
-			
+;			
 			rs = pstat.executeQuery();
 			
 			if (rs.next()) {
@@ -157,8 +159,7 @@ public class CarpoolDAO {
 				dto.setRecruitstatus(rs.getString("recruitstatus"));
 				dto.setRecruit(rs.getString("recruit"));
 				dto.setContent(rs.getString("content"));
-				
-				/* dto.setApplyrecruit(rs.getString("applyrecruit")); */
+
 				
 				dto.setId(rs.getString("id"));
 				dto.setScore(rs.getDouble("score"));
