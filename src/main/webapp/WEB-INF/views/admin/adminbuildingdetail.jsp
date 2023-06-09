@@ -33,48 +33,7 @@
 	    <%@ include file="/WEB-INF/views/admininclude/header.jsp" %>
 	    
 		
-      	 <!-- Container-fluid starts-->
-          <div class="container-fluid">
-            <div class="row">
-              <!-- Zero Configuration  Starts-->
-              <div class="col-sm-12">
-                <div class="card">
-                  <div class="card-header">
-                    <h2 style="font-weight:900px;">건물관리 페이지</h2><span style="font-size:20px;">이 페이지에서 빌딩숲 관리자가 건물을 관리합니다.</span><span></span>
-                  </div>
-                  <div class="card-body">
-                    <div class="table-responsive">
-                      <table class="display" id="basic-1">
-                        <thead>
-                          <tr>
-                          	<th>번호</th>
-                            <th>건물이름</th>
-                            <th>동</th>
-                            <th>주소</th>
-                            <th>위도</th>
-                            <th>경도</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                         <c:forEach items="${blist}" var="dto">
-                        	<tr>
-	                          	<td>${dto.buildingseq}</td>
-	                            <td><a href="/wood/admin/adminbuildingdetail.do?buildingseq=${dto.buildingseq}">${dto.name}</a></td>
-	                            <td>${dto.dong}</td>
-	                            <td>${dto.address}</td>
-	                            <td>${dto.lat}</td>
-	                            <td>${dto.lng}</td>
-                           </tr>
-                         </c:forEach>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-             </div>
-            </div>
-              <!-- Zero Configuration  Ends-->
+
 		
     
          <%@ include file="/WEB-INF/views/admininclude/footer.jsp" %>
