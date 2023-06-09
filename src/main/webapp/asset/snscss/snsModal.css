@@ -5,9 +5,6 @@
 		margin: 15px auto;
 		border: 5px solid transparent;
 	    border-radius: 20px;
-	    background-image: linear-gradient(312deg, #49aea8, #8cc9c4, #c7e4e1, #ffffff), linear-gradient(to right, #B6DDC6, #65D8A7);
-	    background-origin: border-box;
-	    background-clip: content-box, border-box;
 	}
 	.modal_usernick{
 		display:inline-block;
@@ -39,7 +36,7 @@
 		margin:7px 0;
 		height:65px;
 		padding-bottom:2px ;
-		border-bottom:3px solid #fff;
+		border-bottom: 3px solid rgb(219,219,219);
 	}
 	
 	
@@ -74,7 +71,7 @@
 .mcontroller span{
   position:absolute;
   background-color: transparent;
-  color: black;
+  color: gray;
   text-align: center;
   border-radius: 50%;
   padding: 10px 20px;

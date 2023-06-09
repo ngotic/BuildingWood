@@ -84,20 +84,20 @@
 									<div id="usernickname"  style="margin-bottom:15px;">
 										<input type="text" name = "id" value="${unickname}" readonly>
 									</div>
-									<textarea id="add_useritem" name="add_useritem"></textarea>
+									<textarea id="add_useritem" name="add_useritem" ></textarea>
 									<div class="image-container">
 									  <div class="row">
 									    <div class="coll">
-										    <label for="addpic" id="label_addpic" style="text-align:center; vertical-align:middle; width:180px; height:120px; overflow:hidden;">
+										    <label for="addpic1" id="label_addpic" style="text-align:center; vertical-align:middle; width:180px; height:120px; overflow:hidden;">
 													<img style="height:120px;" id="preview-image1" src="">
 											</label>
-										    <input type="file" id="addpic1" name="addpic1"  multiple='multiple'/>
+										    <input type="file" id="addpic1" name="addpic1" style="display:none"/>
 									    </div>
 									    <div class="coll">
 									      	 <label for="addpic2" id="label_addpic" style="text-align:center; vertical-align:middle; width:180px; height:120px; overflow:hidden;">
 													<img style="height:120px;" id="preview-image2" src="">
 											</label>
-										    <input type="file" id="addpic2" name="addpic2" onchange="imageChange()"/>
+										    <input type="file" id="addpic2" name="addpic2" style="display:none"/>
 									    </div>
 									  </div>
 									</div>
@@ -207,7 +207,7 @@
      				<div class="modal_imagebox" id="modal_imagebox"></div>
      			</td>
      			<!-- 오른쪽  -->
-     			<td style="width:550px;height:50px; border-bottom:3px solid black;" >
+     			<td style="width:550px;height:50px; border-bottom: 3px solid rgb(219,219,219);" >
      				<div class="u_imagebox box" id="u_imagebox">
      					<img alt="" src="/wood/asset/sns/pic.png" class="comment_userimage">
      				</div>
@@ -216,7 +216,7 @@
      				
      			</td>
      		</tr>
-     		<tr style="height:500px; border-bottom:3px solid black;">
+     		<tr style="height:500px; border-bottom: 3px solid rgb(219,219,219);">
      			<!-- 댓글  -->
 	   			<td>
 	     			<div id="modal_scroll" style="vertical-align:top; height:500px; overflow-y:scroll;">
@@ -235,7 +235,7 @@
      			</td>
      		</tr>	
      		<tr>
-     			<td style="border-bottom:3px solid black;">
+     			<td style="border-bottom: 3px solid rgb(219,219,219);">
      				<form>
      					<input name="w_modal_comment" id="w_modal_comment" type="text" value="text" style="font-size:12px;">
      					<div style="float:right; margin-top:5px;"><button id="btnadd" type="button" style="font-size:12px;">게시하기</button></div>
@@ -284,78 +284,79 @@
 	
 	
 
+ 	var content = '<div class="overlaybox">' +
+    '    <div class="boxtitle">${buildinginfo.name}</div>' +
+    '    <div class="first">' +
+    '        <div class="movietitle text">${buildinginfo.name}</div>' +
+    '    </div>' +
+    '</div>'; 
+
 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 	var options = { //지도를 생성할 때 필요한 기본 옵션
 		center: new kakao.maps.LatLng(${buildinginfo.lat}, ${buildinginfo.lng}), //지도의 중심좌표.
-		level: 3 //지도의 레벨(확대, 축소 정도)
+		level: 3 //지도의 레벨(확대, 축소 정도),
 	};
 	
 	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 	
 	let m  = null;
 	
-	var content = '<div class="overlaybox">' +
-    '    <div class="boxtitle">${buildinginfo.name}</div>' +
-    '    <div class="first">' +
-    '        <div class="movietitle text">${buildinginfo.name}</div>' +
-    '    </div>' +
-    '</div>';
-
 	
 	// 마커가 표시될 위치입니다 
 	var markerPosition  = new kakao.maps.LatLng(${buildinginfo.lat}, ${buildinginfo.lng}); 
 
-	// 마커를 생성합니다
-	var marker = new kakao.maps.Marker({
-	    position: markerPosition
-	});
-	var customOverlay = new kakao.maps.CustomOverlay({
-	    position: markerPosition,
-	    content: content,
-	    xAnchor: 1,
-	    yAnchor: 0.91
-	});
-	// 마커가 지도 위에 표시되도록 설정합니다
-	marker.setMap(map);
-	// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
-	// marker.setMap(null);    
-
 	
-	//클릭이벤트
-	kakao.maps.event.addListener(marker, 'click', function(mouseEvent) {        
-	    
+	const ms=[];
+	$(document).ready(function(){
+		var content = '<div class="overlaybox">' +
+	    '    <div class="boxtitle">${buildinginfo.name}</div>' +
+	    '    <div class="first">' +
+	    '        <div class="movietitle text">${buildinginfo.name}</div>' +
+	    '    </div>' +
+	    '</div>'; 
+		<c:forEach items="${blist}" var="dto" varStatus="status">
 		
-	    var customOverlay = new kakao.maps.CustomOverlay({
-		    position: markerPosition,
-		    content: content,
-		    xAnchor: 0.3,
-		    yAnchor: 1.02
+		let p${status.count} = new kakao.maps.LatLng(${dto.lat},${dto.lng});
+		
+		let m${status.count} = new kakao.maps.Marker({
+			position: p${status.count},
 		});
-	    
-	    marker.setMap(null);
-		customOverlay.setMap(map);
-	
+		var infowindow = new daum.maps.InfoWindow({
+		    position : p${status.count},
+		    content : content
+		});
+		
+		kakao.maps.event.addListener(m${status.count}, 'click', function(mouseEvent) {        
+			 
+			location.href = '/wood/snsmain.do?buildingseq=${status.count}';
+		});
+		kakao.maps.event.addListener(m${status.count}, 'mouseover', function() {        
+			 
+			  infowindow.open(map, m${status.count});
+		});
+		kakao.maps.event.addListener(m${status.count}, 'mouseout', function() {        
+			 
+			 infowindow.close();
+		});
+		
+		m${status.count}.setMap(map);
+		
+		ms.push(m${status.count});
+		
+		$('#list td').css('background-color','transparent');
+		$(this).css('background-color','gold');
+		
+		</c:forEach>
 	});
-	kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
-		marker.setMap(map);
-		$('.overlaybox').hide();
-	});
+	 
 	
-	
-	 const ms = [];
-	function dongchange(){
-		alert($('#ddong option:selected').data("ddong"));
-	}
 	
 	function change(){
 		
-		//alert($(this).data('lat'));
-		//alert($('#blist option:selected').data('buildingseq'));
 		
 		 $.ajax({
 	            url:"/wood/snsmain.do",
 	            type: "get", // GET 방식
-//	             data: "id=abc&pw=123",
 	            data:{buildingseq:$('#blist option:selected').data('buildingseq')},// json 방식으로 서블릿에 보낼 데이터
 	            success:function(data){
 	            	location.href='/wood/snsmain.do?buildingseq='+$('#blist option:selected').data('buildingseq');
@@ -365,66 +366,7 @@
 	            }
 	            
 	        });
-		
-		
-		if (m!=null){
-			m.setMap(null);
-		}
-		
-		ms.forEach(item=>{
-			
-			item.setMap(null);
-		});
-		let p = new kakao.maps.LatLng($('#blist option:selected').data('lat'),$('#blist option:selected').data('lng'));
-		
-		
-		m = new kakao.maps.Marker({
-			position: p,
-			content:content,
-			xAnchor: 0.3,
-		    yAnchor: 0.99
-
-		});
-		
-		
-		m.setMap(map);
-		map.panTo(p);
-		
-		$('#blist td').css('background-color','transparent');
-		$(this).css('background-color','gold');
-		
-	};
-	
-	$(document).ready(function(){
-		
-		if (m!=null){
-			m.setMap(null);
-		}
-		
-		
-		<c:forEach items="${blist}" var="dto" varStatus="status">
-		
-		let p${status.count} = new kakao.maps.LatLng(${dto.lat},${dto.lng});
-		
-		let m${status.count} = new kakao.maps.Marker({
-			position: p${status.count}
-		});
-		
-		
-		m${status.count}.setMap(map);
-		
-		ms.push(m${status.count});
-		
-		
-		$('#list td').css('background-color','transparent');
-		$(this).css('background-color','gold');
-		
-		</c:forEach>
-	});
-	
-	
-	//좋아요 늘리기
-		
+		 
 	 
 	//슬라이드 이벤트
 	let currentIdx = [];
@@ -501,7 +443,7 @@
  	 });
 	
 	
-	
+
 	
 	    	
     	$(document).ready(function() {     
@@ -509,7 +451,7 @@
             	var Idx =1; //현재 슬라이드 index
             	const snsboardseq=$(event.relatedTarget).data('snsboardseq');
             	const index= 1+$(event.relatedTarget).data('index');
-            	const content=$(event.relatedTarget).data('content');
+            	const modal_content=$(event.relatedTarget).data('content');
     	        const clike=$(event.relatedTarget).data('clike');
     	        const profile="/wood/asset/sns/"+$(event.relatedTarget).data('profile');
     	        const nickname=$(event.relatedTarget).data('nickname');
@@ -517,7 +459,7 @@
     	        
     	        $("#modal_usernick").text(nickname);
     	        $("#u_imagebox").html("<img alt="+"\"\" src=\""+profile+"\"class=\"comment_userimage\">");
-    	        $("#modal_content").text(content);
+    	        $("#modal_content").text(modal_content);
     	        
     	        let str= $("#boardwrap").children().eq(index).find("#send_modal").html().substring();
     	        let commented = $("#boardwrap").children().eq(index).find("#to_modal_commentlist").html().substring();
@@ -592,10 +534,43 @@
             });
         });
     	
+    	
+    	
+   	 let addpics=["addpic","addpic2"];
+	 let picsto=["preview-image1","preview-image2"];
+	
+	 $("#addpic1").on("change", function(event) {
+			$(this).parent().css("outline","none");
+		    var file = event.target.files[0];
 
-    	
-    	
-    
+		    var reader = new FileReader(); 
+		    reader.onload = function(e) {
+
+		        $("#preview-image1").attr("src", e.target.result);
+		        $("#preview-image1").css("border","3px solid gray"); 
+		    }
+
+		    reader.readAsDataURL(file);
+		});
+	 $("#addpic2").on("change", function(event) {
+		 $(this).parent().css("outline","none");
+		    var file = event.target.files[0];
+
+		    var reader = new FileReader(); 
+		    reader.onload = function(e) {
+
+		        $("#preview-image2").attr("src", e.target.result);
+		        $("#preview-image2").css("border","3px solid gray"); 
+		    }
+
+		    reader.readAsDataURL(file);
+		});
+	}
+	
+	 
+	 
+
+		
 </script>
 
 

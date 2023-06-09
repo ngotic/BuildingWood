@@ -129,7 +129,7 @@ public class SnsMain extends HttpServlet {
 				
 				String content = multi.getParameter("add_useritem");
 				
-				String pic = multi.getFilesystemName("addpic");
+				String pic1 = multi.getFilesystemName("addpic1");
 				String pic2 = multi.getFilesystemName("addpic2");
 				String pic3 = multi.getFilesystemName("addpic3");	
 				
@@ -139,7 +139,7 @@ public class SnsMain extends HttpServlet {
 				dto.setContent(content);
 				
 				ArrayList<String> piclist = new ArrayList<String>();
-				piclist.add(pic);
+				piclist.add(pic1);
 				piclist.add(pic2);
 				piclist.add(pic3);
 				
