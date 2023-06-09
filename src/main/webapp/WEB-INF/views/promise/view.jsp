@@ -475,7 +475,7 @@
 		<div class="application-box">
 			<div class="application-word colors1">신청내역</div>
 		</div>
-		<div class="accept-nickname-box">
+		<div class="accept-nickname-box" style="display:flex; justify-content: center; align-items:center; <c:if test="${adminnum == dto.num }">background-color:gray;</c:if>">
 			<c:forEach items="${acceptnickname}" var="rdto">
 			<c:if test="${rdto.checkstate == 'F'}" >
 				<div class="accept-nickname" <c:if test="${adminnum == dto.num }">style="display:none;"</c:if>>
@@ -485,7 +485,7 @@
 			</c:if>
 			</c:forEach>
 			<c:if test="${adminnum == dto.num }">
-				<div style="font-size:30px;">
+				<div style="font-size:30px; color:white; font-weight: bolder;">
 					모집 완료
 				</div>
 			</c:if>
