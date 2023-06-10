@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.project.wood.teach.repository.TeachDAO;
+
 @WebServlet("/teach/del.do")
 public class Del extends HttpServlet {
 

@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.project.wood.teach.repository.TeachDAO;
+import com.project.wood.teach.repository.TeachDTO;
+
 @WebServlet("/teach/view.do")
 public class View extends HttpServlet {
 

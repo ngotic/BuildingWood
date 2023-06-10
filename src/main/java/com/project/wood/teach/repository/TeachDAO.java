@@ -1,4 +1,4 @@
-package com.project.wood.teach;
+package com.project.wood.teach.repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
