@@ -63,7 +63,7 @@ public class Add extends HttpServlet {
 		dto.setContent(content);
 		dto.setId(id);
 		dto.setWeekend(weekend);
-		dto.setTime(time);
+		dto.setSettime(time);
 		
 //		String num = dao.test(id);
 		

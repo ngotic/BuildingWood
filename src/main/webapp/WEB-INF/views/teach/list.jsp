@@ -405,9 +405,11 @@ section {
 												step="1">
 												<img src="/wood/asset/img/teach/star.png" />
 											</c:forEach>
-											<c:if
-												test="${Integer.parseInt(dto.matchNum.substring(2))<=5 &&Integer.parseInt(dto.matchNum.substring(2))>0}">
+											<c:if test="${Integer.parseInt(dto.matchNum.substring(2))<=5 && Integer.parseInt(dto.matchNum.substring(2))>0}">
 												<img src="/wood/asset/img/teach/leftstar.png" />
+											</c:if>
+											<c:if test="${Integer.parseInt(dto.matchNum.substring(2))>5}">
+												<img src="/wood/asset/img/teach/rightstar.png" />
 											</c:if>
 										</c:if>
 										<c:if test="${empty dto.matchNum}">

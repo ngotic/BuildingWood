@@ -38,7 +38,7 @@ public class TeachDAO {
 			pstat.setString(6, dto.getTitle());
 			pstat.setString(7, dto.getContent());
 			pstat.setString(8, dto.getWeekend());
-			pstat.setString(9, dto.getTime());
+			pstat.setString(9, dto.getSettime());
 
 			return pstat.executeUpdate();
 
@@ -52,17 +52,24 @@ public class TeachDAO {
 
 		try {
 
-			String sql = "select \r\n" + "    t.*,\r\n"
+			String sql = "select \r\n"
+					+ "    t.*,\r\n"
 					+ "    (select profile from tblMember where t.id = tblMember.id)as img, \r\n"
 					+ "    (select name from tblMember where t.id=tblMember.id)as name,\r\n"
 					+ "    (select nickname from tblMember where t.id=tblMember.id)as nickname,\r\n"
-					+ "    c.intro, \r\n" + "    s.studentseq as student,\r\n"
-					+ "    (select avg(matchnum) from tblMatch where c.teacherseq= tblMatch.teacherseq)as matchnum,\r\n"
-					+ "    (select count(review) from tblMatch where c.teacherseq= tblMatch.teacherseq)as review\r\n"
-					+ "        from tblTeach t\r\n" + "            left outer join tblTeacher c\r\n"
-					+ "                on t.id = c.id\r\n" + "                    left outer join tblStudent s\r\n"
+					+ "    c.intro,\r\n"
+					+ "    s.studentseq as student,\r\n"
+					+ "    a.ateachseq as a,\r\n"
+					+ "    (select avg(matchnum) from tblMatch where tblMatch.aseq =(select aseq from tblApply where c.teacherseq = tblApply.ateachseq and s.studentseq = tblApply.astudentseq))as matchnum,\r\n"
+					+ "    (select count(review) from tblMatch where tblMatch.aseq =(select aseq from tblApply where c.teacherseq = tblApply.ateachseq and s.studentseq = tblApply.astudentseq))as review\r\n"
+					+ "        from tblTeach t\r\n"
+					+ "            left outer join tblTeacher c\r\n"
+					+ "                on t.id = c.id\r\n"
+					+ "                    left outer join tblStudent s\r\n"
 					+ "                        on t.id = s.id\r\n"
-					+ "                           order by t.teachseq desc";
+					+ "                            left outer join tblApply a\r\n"
+					+ "                                on t.teachseq = a.ateachseq\r\n"
+					+ "                                    order by t.teachseq desc";
 
 			stat = conn.createStatement();
 			rs = stat.executeQuery(sql);
@@ -136,7 +143,7 @@ public class TeachDAO {
 				dto.setEditdate(rs.getString("editdate"));
 				dto.setTitle(rs.getString("title"));
 				dto.setContent(rs.getString("content"));
-				dto.setTime(rs.getString("setime"));
+				dto.setSettime(rs.getString("settime"));
 				dto.setWeekend(rs.getString("weekend"));
 
 				return dto;

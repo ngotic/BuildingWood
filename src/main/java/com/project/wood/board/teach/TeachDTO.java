@@ -18,16 +18,16 @@ public class TeachDTO {
 	private String student;
 
 	private String nickname;
-	
+
 	private String matchNum;
 	private String review;
-	
+
 	private String ateachseq;
 	private String aseq;
-	
+
 	private String weekend;
-	private String time;
-	
+	private String settime;
+
 	public String getNickname() {
 		return nickname;
 	}
@@ -196,11 +196,11 @@ public class TeachDTO {
 		this.weekend = weekend;
 	}
 
-	public String getTime() {
-		return time;
+	public String getSettime() {
+		return settime;
 	}
 
-	public void setTime(String time) {
-		this.time = time;
+	public void setSettime(String settime) {
+		this.settime = settime;
 	}
 }
