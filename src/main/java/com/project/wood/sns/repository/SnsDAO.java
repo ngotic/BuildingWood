@@ -256,11 +256,68 @@ public class SnsDAO {
 		return 0;
 		
 	}
+
+	//좋아요 늘리기
+	public int addlike(LikeDTO ldto) {
+		
+		try {
+			
+			String sql = "insert into tblsnslike (snslikeseq, id, snsboardseq) values(snslikeseq.nextVal, ?, ?)";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, ldto.getId());
+			pstat.setString(2, ldto.getSnsboardseq());
+			
+			return pstat.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		
+		}
+		
+		return 0;
+	}
+
+	public int cancellike(LikeDTO ldto) {
+		try {
+			
+			String sql = "delete tblsnslike where id =? and snsboardseq =?";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, ldto.getId());
+			pstat.setString(2, ldto.getSnsboardseq());
+			
+			return pstat.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		
+		}
+		return 0;
+	}
+
+	public List<String> getUserLiked(String uid) {
+		try {
+			ArrayList<String> likelist = new ArrayList<String>();
+			String sql = "select * from tblsnslike where id=?";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, uid);
+			rs = pstat.executeQuery();
+			
+			while (rs.next()) {
+				LikeDTO dto = new LikeDTO();
+				dto.setSnsboardseq(rs.getString("snsboardseq"));
+				
+				likelist.add(dto.getSnsboardseq());
+				
+			}
+			return likelist;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	
-	
-	
-	
-	
+	}
 	
 	
 }	

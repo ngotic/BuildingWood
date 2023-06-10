@@ -91,13 +91,13 @@
 									  <div class="row">
 									    <div class="coll">
 										    <label for="addpic1" id="label_addpic" style="text-align:center; vertical-align:middle; width:210px; height:140px; overflow:hidden;">
-													<img style="width:210px; height:140px;" id="preview-image1" src="">
+													<img style="max-width:210px; max-height:140px;" id="preview-image1" src="/wood/asset/sns/free-icon-photo-album-6103474.png">
 											</label>
 										    <input type="file" id="addpic1" name="addpic1" style="display:none"/>
 									    </div>
 									    <div class="coll">
 									      	 <label for="addpic2" id="label_addpic" style="text-align:center; vertical-align:middle; width:210px; height:140px; overflow:hidden;">
-													<img style="width:210px;height:140px;" id="preview-image2" src="">
+													<img style="max-width:210px; max-height:140px;" id="preview-image2" src="/wood/asset/sns/free-icon-photo-album-6103474.png">
 											</label>
 										    <input type="file" id="addpic2" name="addpic2" style="display:none"/>
 									    </div>
@@ -114,18 +114,18 @@
 								<!-- 유저 이미지 넣기  -->
 								<img alt="" src="/wood/asset/sns/${dto.profile}" style="width:50px;">
 							</div>
-							<div id="usercontent" style="position:relative;">
-								<div id="userid">
+							<div id="usercontent">
+								<div id="userid" data-bs-toggle="modal" data-bs-target="#staticBackdrop" data-snsboardseq="${dto.snsboardseq}" data-content="${dto.content}" data-clike="${dto.clike }" data-profile="${dto.profile}" data-nickname="${dto.nickname}" data-cpic="${dto.cpic}" data-index="${status.index}" style="background:transparent;border:none;">
 									${dto.nickname}
 								</div>
-								<div id="useritem">
+								<div id="useritem" data-bs-toggle="modal" data-bs-target="#staticBackdrop" data-snsboardseq="${dto.snsboardseq}" data-content="${dto.content}" data-clike="${dto.clike }" data-profile="${dto.profile}" data-nickname="${dto.nickname}" data-cpic="${dto.cpic}" data-index="${status.index}" style="background:transparent;border:none;">
 									${dto.content}
 								</div>
 								<div class="imagebox" data-count="${dto.cpic}" id="send_modal">
 								    <ul class="slides" id="slide${status.count}" style="width:calc(${dto.cpic} * 450px)"> 
 								   		<c:forEach items="${plist}" var="pic">
 							   			<c:if test="${dto.snsboardseq==pic.snsboardseq}">
-								     		<li><img alt="" src="/wood/asset/sns/${pic.pic}" style="width:450px;height:300px; "></li>
+								     		<li style="display: flex; justify-content: center; width:450px;height:300px;" onclick="event.stopPropagation()"><img alt="" src="/wood/asset/sns/${pic.pic}" style="max-width:450px;max-height:300px;"></li>
 								     	</c:if>
 								     	</c:forEach>
 								    </ul>  
@@ -133,8 +133,10 @@
 								      
 								      <!-- &lang: 왼쪽 방향 화살표
 								      &rang: 오른쪽 방향 화살표 -->
+								      <c:if test="${dto.cpic ne \"1\"}">
 								      <span class="prev" data-num="${status.count}">&lang;</span>  
 								      <span class="next" data-num="${status.count}">&rang;</span>
+										</c:if>								    
 								    </p>
 								  </div>
 						       	
@@ -145,7 +147,7 @@
 						     					<div class="u_imagebox box">
 						     						<img alt="" src="/wood/asset/sns/${clist.profile}" class="comment_userimage">
 							     				</div>
-							     				<div class="modal_usernick">
+							     				<div class="modal_usernick" style="width:120px;">
 													<div class="box top modal_commentnick">
 														${clist.nickname}
 													</div>
@@ -153,7 +155,7 @@
 														<button class="to_comment" value="${clist.nickname}">답글 달기</button>
 													</div>
 												</div>
-												<div class="modal_comment top">
+												<div class="modal_comment top" style="margin-left:10px;">
 													${clist.content}
 												</div>
 						     				</div>
@@ -162,10 +164,26 @@
 								</div>
 								
 								<div id="react">
-									<div class="like" data-index="${status.count}">
-										<span class="material-symbols-outlined">
-											favorite
-										</span>
+								<%-- <c:forEach items="${likelist}" var="i">
+									<c:if test="${dto.snsboardseq==likelist[i]}">
+										<div class="like" data-index="${status.count}"data-likesnsboardseq="${dto.snsboardseq }">
+											<span class="material-symbols-rounded">
+												favorite
+											</span>
+										</div>
+									</c:if>
+									<c:if test="${dto.snsboardseq!=likelist[i]}">
+										<div class="like" data-index="${status.count}"data-likesnsboardseq="${dto.snsboardseq }">
+											<span class="material-symbols-outlined">
+												favorite
+											</span>
+										</div>
+									</c:if>
+								</c:forEach> --%>
+									<div class="like" data-index="${status.count}"data-likesnsboardseq="${dto.snsboardseq }">
+												<span class="material-symbols-outlined">
+												favorite
+											</span>
 									</div>
 									<div id="comment">
 										 <button class="material-symbols-outlined" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" data-snsboardseq="${dto.snsboardseq}" data-content="${dto.content}" data-clike="${dto.clike }" data-profile="${dto.profile}" data-nickname="${dto.nickname}" data-cpic="${dto.cpic}" data-index="${status.index}">
@@ -218,12 +236,12 @@
      				<div class="modal_imagebox" id="modal_imagebox"></div>
      			</td>
      			<!-- 오른쪽  -->
-     			<td style="width:550px;height:50px; border-bottom: 3px solid rgb(219,219,219);" >
+     			<td style="width:550px;height:50px; border-bottom: 3px solid rgb(219,219,219);vertical-align: top; " >
      				<div class="u_imagebox box" id="u_imagebox">
      					<img alt="" src="/wood/asset/sns/pic.png" class="comment_userimage">
      				</div>
-     				<div id="modal_usernick"></div>
-					<div class="modal_comment" id="modal_content"></div>
+     				<div id="modal_usernick" style="width:120px;"></div>
+					<div class="modal_comment" id="modal_content"style="margin-left:10px;"></div>
 					<div class="box">...</div>
      				
      			</td>
@@ -297,7 +315,7 @@
 			hidemapbox= 'f';
 		}
 	}
-
+	
 	$('#blist').children().eq(${selected}).attr("selected",true);
 	
 	$("#addsnscontent").on("click",function(){
@@ -370,7 +388,7 @@
 		kakao.maps.event.addListener(m${status.count}, 'click', function(mouseEvent) {        
 			location.href = '/wood/snsmain.do?buildingseq=${status.count}';
 		});
-		kakao.maps.event.addListener(m${status.count}, 'mouseover', function() {        
+		kakao.maps.event.addListener(m${status.count}, 'mouseover', function() {   
 			customOverlay${status.count}.setMap(map);
 		});
 		kakao.maps.event.addListener(m${status.count}, 'mouseout', function() {      
@@ -427,7 +445,7 @@
 		picscount.push($(`#slide${i}`).parent().data("count"));
 		heart.push(0);
 	};
-		
+	
 	$('.prev').on('click', function () {
 		picscount[parseInt(parseInt($(this).data('num'))) - 1] = $(this).parent().parent().data("count");
 		
@@ -441,6 +459,7 @@
 	});
 	
 	$('.next').on('click', function () {
+		
 		picscount[parseInt($(this).data('num')) - 1] = $(this).parent().parent().data("count");
 		
 		if(currentIdx[parseInt($(this).data('num')) - 1]>=picscount[parseInt($(this).data('num')) - 1]){
@@ -456,7 +475,8 @@
 	 $(".like").on('click',function(){
 		 var heartseq = 1;
 		 var index = parseInt($(this).data('index')-1);
-		 
+		 var likesnsboardseq = $(this).data('likesnsboardseq');
+		 console.log(likesnsboardseq);
 		 if(user==1){
 			 var tofill = $('#boardwrap').children().eq(index+1).find('.like').html();
 			 var toblank = $('#boardwrap').children().eq(index+1).find('.like').html();
@@ -465,11 +485,41 @@
 			 if(heart[index]==0){
 				 $('#boardwrap').children().eq(index+1).find('.like').html(tofill);
 	   				heart[index]=1;
-	   				heartseq = 1;
+	   			 $.ajax({
+		  	            url:"/wood/snsmain.do",
+		  	            type: "post", // post 방식
+		  	            data:{
+		  	            	type:"2",
+		  	            	like:"1", 
+		  	            	likesnsboardseq:likesnsboardseq},
+	  	            	success:function(data){
+		 	                alert("succss");
+		 	               
+		  	            },
+		  	            error:function(){
+		  	                alert("error");
+		  	            }
+		  	        });
+				 
+	   				
 			 }else{
 				 $('#boardwrap').children().eq(index+1).find('.like').html(toblank);
 	 				heart[index]=0;
-	 				heartseq = 0;
+	 				 $.ajax({
+			  	            url:"/wood/snsmain.do",
+			  	            type: "post", // post 방식
+			  	            data:{
+			  	            	type:"2",
+			  	            	like:"0", 
+			  	            	likesnsboardseq:likesnsboardseq},
+		  	            	success:function(data){
+			 	                alert("succss");
+			 	               
+			  	            },
+			  	            error:function(){
+			  	                alert("error");
+			  	            }
+			  	        });
 			 }
 		 }
 		 else{
@@ -547,6 +597,7 @@
         }
         str=str.replaceAll('450px','600px');
         str=str.replaceAll('300px','600px');
+        str=str.replaceAll('max-height:600px','max-height:400px');
         str=str.replaceAll('class=\"','class=\"m');
         str=str.replaceAll('left: -900px;','');
         str=str.replaceAll('left: -600px;','');
@@ -648,15 +699,44 @@
        });
        
      });
-    	
-    	
+    
+   	
+   	//파일 용량 제한
+    $("#addpic1").off().on("change", function(){
+
+		if (this.files && this.files[0]) {
+
+			var maxSize = 10 * 1024 * 1024;
+			var fileSize = this.files[0].size;
+
+			if(fileSize > maxSize){
+				alert("첨부파일 사이즈는 10MB 이내로 등록 가능합니다.");
+				$(this).val('');
+				return false;
+			}
+		}
+	});
+    $("#addpic2").off().on("change", function(){
+
+		if (this.files && this.files[0]) {
+
+			var maxSize = 10 * 1024 * 1024;
+			var fileSize = this.files[0].size;
+
+			if(fileSize > maxSize){
+				alert("첨부파일 사이즈는 10MB 이내로 등록 가능합니다.");
+				$(this).val('');
+				return false;
+			}
+		}
+	});
+
 	 $("#addpic1").on("change", function(event) {
-			$(this).parent().css("outline","none");
 		    var file = event.target.files[0];
 
 		    var reader = new FileReader(); 
 		    reader.onload = function(e) {
-
+		    	$("#addpic1").parent().css("outline","none");
 		        $("#preview-image1").attr("src", e.target.result);
 		        $("#preview-image1").css("border","3px solid gray"); 
 		    }
@@ -664,12 +744,12 @@
 		    reader.readAsDataURL(file);
 	});
 	 $("#addpic2").on("change", function(event) {
-		 $(this).parent().css("outline","none");
 		    var file = event.target.files[0];
-
+				
 		    var reader = new FileReader(); 
 		    reader.onload = function(e) {
-
+		    	$("#addpic2").parent().css("outline","none");
+		         // 이미지 객체의 로드가 완료되면 실행될 콜백 함수를 정의합니다.
 		        $("#preview-image2").attr("src", e.target.result);
 		        $("#preview-image2").css("border","3px solid gray"); 
 		    }
@@ -677,8 +757,7 @@
 		    reader.readAsDataURL(file);
 	});
 	 
-
-
+	
 		
 </script>
 

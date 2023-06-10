@@ -18,6 +18,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.project.wood.sns.repository.BuildingDTO;
 import com.project.wood.sns.repository.CommentDTO;
+import com.project.wood.sns.repository.LikeDTO;
 import com.project.wood.sns.repository.MapDAO;
 import com.project.wood.sns.repository.SnsDAO;
 import com.project.wood.sns.repository.SnsDTO;
@@ -40,6 +41,10 @@ public class SnsMain extends HttpServlet {
 		String ubuildingseq = dao.getuserbuildingseq(uid);
 		String buildingseq = req.getParameter("buildingseq");  
 		String hidemapbox = req.getParameter("hidemapbox");
+		
+		
+		
+		
 		if(req.getParameter("buildingseq")==null) {
 			buildingseq = ubuildingseq;
 		}
@@ -52,6 +57,8 @@ public class SnsMain extends HttpServlet {
 		List<SnsDTO> list = dao.getSNSList(buildingseq);
 		List<SnsDTO> plist = dao.getPicList();
 		List<SnsDTO> commentlist = dao.getComment();
+		List<String> likelist = dao.getUserLiked(uid);
+		
 		
 		MapDAO mdao = new MapDAO();
 		
@@ -79,6 +86,11 @@ public class SnsMain extends HttpServlet {
 		req.setAttribute("selected", selected);
 		req.setAttribute("udong", udong);
 		req.setAttribute("hidemapbox", hidemapbox);
+		req.setAttribute("likelist", likelist);
+		
+		System.out.println(list.toString());
+		System.out.println(likelist.toString());
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/sns/snsmain.jsp");
 		dispatcher.forward(req, resp);
 		
@@ -93,6 +105,16 @@ public class SnsMain extends HttpServlet {
 		String uid=(session.getAttribute("id").toString());
 		String type = req.getParameter("type");
 		System.out.println(type);
+		String ubuildingseq = dao.getuserbuildingseq(uid);
+		String buildingseq = req.getParameter("buildingseq"); 
+		
+		
+		
+		
+		if(req.getParameter("buildingseq")==null) {
+			buildingseq = ubuildingseq;
+		}
+		
 		if("1".equals(type)) {
 			String snsboardseq=req.getParameter("snsboardseq");
 			String comment = req.getParameter("comment");
@@ -116,6 +138,35 @@ public class SnsMain extends HttpServlet {
 				w.print("<script>alert('failed');history.back();</script>");
 				w.close();
 			}
+			
+		}
+		else if("2".equals(type)) {
+			String likesnsboardseq =req.getParameter("likesnsboardseq");
+			String like =req.getParameter("like");
+			
+			LikeDTO ldto = new LikeDTO();
+			ldto.setId(uid);
+			ldto.setSnsboardseq(likesnsboardseq);
+			int likeadd=0;
+			int likecancel=0;
+			
+			if(like.equals("1")) {
+				likeadd = dao.addlike(ldto);
+				System.out.println(ldto.toString());
+				System.out.println(likesnsboardseq);
+				System.out.println(like);
+			}else {
+				likecancel = dao.cancellike(ldto);
+				System.out.println(ldto.toString());
+				System.out.println(likesnsboardseq);
+				System.out.println(like);
+			}
+			if(likeadd!=0||likecancel!=0) {
+				System.out.println("성공");
+			}else {
+				System.out.println("실패");
+			}
+			
 			
 		}
 		else{
@@ -153,8 +204,8 @@ public class SnsMain extends HttpServlet {
 				int result = dao.addsnsboard(dto);
 				int result2 = dao.addpic(piclist);
 				
-				if(result!=0&&result2!=0) {
-					resp.sendRedirect("/wood/snsmain.do");
+				if(result+result2!=0) {
+					resp.sendRedirect("/wood/snsmain.do?");
 				}else {
 					PrintWriter w = resp.getWriter();
 					w.print("<script>alert('failed');history.back();</script>");

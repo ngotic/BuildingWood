@@ -73,13 +73,18 @@
 		border-bottom: 3px solid rgb(219,219,219);
 		margin: 15px auto;
 	}
-	
+	.boardcontent:hover{
+	border-radius:15px;
+	 background-color: rgba(128, 128, 128, 0.11);
+		
+	}
 	
 	#usercontent{
 		width:450px;
 		height:450px;
 		max-height:700px;
 		position:realtive;
+		z-index:0;
 	}
 	#useritem{
 		height:40px;
@@ -95,14 +100,13 @@
 		text-align:center;
 		vertical-align:center;
 		align-items: center;
-			-size:contain;
 		overflow:hidden;
+		
 	}
 	#react{
-		margin-top:10px;
+		width:450px;
 		position:absolute;
 		bottom:0px;
-		
 	}
 	#comment , .like{
 		display:inline-block;
@@ -122,9 +126,8 @@
     	display: none; /* 크롬, 사파리, 오페라, 엣지 */
 	}
 	img{
-		margin:auto;
 		display:block;
-		object-fit: cover;
+		object-fit: contain;
 	}
 		.to_comment{
 		font-size:12px;
@@ -145,6 +148,7 @@
 		overflow:hidden;
 	}
 	.modal_commentnick{
+		width: 120px;
 		font-size:12px;
 	}
 	input{
@@ -182,11 +186,17 @@
 		background-color:rgb(219,219,219);
 		color:white;
 	}
+	modal_commentbox{
+		width:520px;
+		margin-right:0px;
+		
+	}
 	.imagebox{
 		 width: 450px;
 		  height: 300px;
 		  position: relative;
 		  overflow:hidden;
+		   justify-content: center;
 	}
 	.u_imagebox{
 		background-color:none;
@@ -245,18 +255,26 @@
 
 .prev{
   left: 10px;
+  z-index:999;
 }
 
 
 .next{
   right: 10px;
+   z-index:999;
 }
 .coll{
 	width:210px;
 	height:140px;
 	padding:0 0 0 0;
 	margin:auto;
-	outline:3px solid gray;
+}
+.coll:hover{
+
+	transform:translate(0,-10px);
+	transition-property: all;
+	cursor:pointer;
+		
 }
 #addpic{
 	display:inline-box;
@@ -274,5 +292,9 @@ color:red;
 
 img{
 	border-radius:15px;
-	object-fit:contain;
+	object-fit:cover;
+}
+.mslides > li{
+	margin-top:100px;
+	margin-bottom:100px;
 }
