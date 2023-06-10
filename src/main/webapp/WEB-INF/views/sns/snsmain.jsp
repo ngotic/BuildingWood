@@ -164,27 +164,20 @@
 								</div>
 								
 								<div id="react">
-								<%-- <c:forEach items="${likelist}" var="i">
-									<c:if test="${dto.snsboardseq==likelist[i]}">
-										<div class="like" data-index="${status.count}"data-likesnsboardseq="${dto.snsboardseq }">
-											<span class="material-symbols-rounded">
-												favorite
-											</span>
-										</div>
-									</c:if>
-									<c:if test="${dto.snsboardseq!=likelist[i]}">
+									<c:if test="${not likelist.contains(dto.snsboardseq)}">
 										<div class="like" data-index="${status.count}"data-likesnsboardseq="${dto.snsboardseq }">
 											<span class="material-symbols-outlined">
 												favorite
 											</span>
 										</div>
 									</c:if>
-								</c:forEach> --%>
-									<div class="like" data-index="${status.count}"data-likesnsboardseq="${dto.snsboardseq }">
-												<span class="material-symbols-outlined">
+									<c:if test="${likelist.contains(dto.snsboardseq)}">
+										<div class="like" data-index="${status.count}"data-likesnsboardseq="${dto.snsboardseq}">
+											<span class="material-symbols-rounded">
 												favorite
 											</span>
-									</div>
+										</div> 
+									</c:if>
 									<div id="comment">
 										 <button class="material-symbols-outlined" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" data-snsboardseq="${dto.snsboardseq}" data-content="${dto.content}" data-clike="${dto.clike }" data-profile="${dto.profile}" data-nickname="${dto.nickname}" data-cpic="${dto.cpic}" data-index="${status.index}">
 											chat_bubble
@@ -295,7 +288,6 @@
 	
 	
 	let hidemapbox="${hidemapbox}";
-	console.log(hidemapbox);
 	function hidemap(){
 		if(hidemapbox=='f'){
 			$('#map').css("transition-duration","2s");
@@ -470,13 +462,12 @@
 		  currentIdx[parseInt($(this).data('num')) - 1]++;
 		}
 	});
-			
+	
 	//좋아요 처리 
 	 $(".like").on('click',function(){
 		 var heartseq = 1;
 		 var index = parseInt($(this).data('index')-1);
 		 var likesnsboardseq = $(this).data('likesnsboardseq');
-		 console.log(likesnsboardseq);
 		 if(user==1){
 			 var tofill = $('#boardwrap').children().eq(index+1).find('.like').html();
 			 var toblank = $('#boardwrap').children().eq(index+1).find('.like').html();
@@ -490,7 +481,6 @@
 		  	            type: "post", // post 방식
 		  	            data:{
 		  	            	type:"2",
-		  	            	like:"1", 
 		  	            	likesnsboardseq:likesnsboardseq},
 	  	            	success:function(data){
 		 	                alert("succss");
@@ -509,8 +499,7 @@
 			  	            url:"/wood/snsmain.do",
 			  	            type: "post", // post 방식
 			  	            data:{
-			  	            	type:"2",
-			  	            	like:"0", 
+			  	            	type:"3",
 			  	            	likesnsboardseq:likesnsboardseq},
 		  	            	success:function(data){
 			 	                alert("succss");
@@ -530,11 +519,43 @@
 			 if(heart[index]==0){
 				 $('#boardwrap').children().eq(index).find('.like').html(tofill);
 					heart[index]=1;
-					heartseq = 0;
+					 $.ajax({
+			  	            url:"/wood/snsmain.do",
+			  	            type: "post", // post 방식
+			  	            data:{
+			  	            	type:"2",
+			  	            	like:"1", 
+			  	            	likesnsboardseq:likesnsboardseq},
+		  	            	success:function(data){
+			 	                alert("succss");
+			 	               
+			  	            },
+			  	            error:function(){
+			  	                alert("error");
+			  	            }
+			  	        });
+					 
+					
 			 }else{
 				 $('#boardwrap').children().eq(index).find('.like').html(toblank);
 					heart[index]=0;
-					heartseq = 0;
+					
+					 $.ajax({
+			  	            url:"/wood/snsmain.do",
+			  	            type: "post", // post 방식
+			  	            data:{
+			  	            	type:"3",
+			  	            	like:"1", 
+			  	            	likesnsboardseq:likesnsboardseq},
+		  	            	success:function(data){
+			 	                alert("succss");
+			 	               
+			  	            },
+			  	            error:function(){
+			  	                alert("error");
+			  	            }
+			  	        });
+					 
 			 }
 		 }
  	 });
@@ -566,9 +587,7 @@
 			$('#hidemap').html('맵 숨기기');
 			hidemapbox= 'f';
 		}
-   		
-   		
-       $('#staticBackdrop').on('show.bs.modal', function(event) {       
+       	$('#staticBackdrop').on('show.bs.modal', function(event) {       
     	 $('#header').css("opacity","0.5");
     	 
        	var Idx =1; //현재 슬라이드 index
@@ -584,17 +603,20 @@
         $("#u_imagebox").html("<img alt="+"\"\" src=\""+profile+"\"class=\"comment_userimage\">");
         $("#modal_content").text(modal_content);
         
-        let str= $("#boardwrap").children().eq(index).find("#send_modal").html().substring();
-        let commented = $("#boardwrap").children().eq(index).find("#to_modal_commentlist").html().substring();
-        let like = $("#boardwrap").children().eq(index).find(".like").html().substring();
+        let str= $("#boardwrap").children().eq(index).find("#send_modal").html();
+        let commented = $("#boardwrap").children().eq(index).find("#to_modal_commentlist").html()
+        let like = $("#boardwrap").children().eq(index).find(".like").html()
         
        
         
         if(${ubuildingseq!=buildingseq}){
-        	str= $("#boardwrap").children().eq(index-1).find("#send_modal").html().substring();
-        	commented = $("#boardwrap").children().eq(index-1).find("#to_modal_commentlist").html().substring();
-        	like = $("#boardwrap").children().eq(index-1).find(".like").html().substring();
+        	str= $("#boardwrap").children().eq(index-1).find("#send_modal").html();
+        	commented = $("#boardwrap").children().eq(index-1).find("#to_modal_commentlist").html()
+        	like = $("#boardwrap").children().eq(index-1).find(".like").html()
         }
+        str=str.substring();
+        commented=commented.substring();
+        like = like.substring();
         str=str.replaceAll('450px','600px');
         str=str.replaceAll('300px','600px');
         str=str.replaceAll('max-height:600px','max-height:400px');
@@ -646,24 +668,83 @@
 				 like=like.replaceAll("rounded","outlined");
 				  mtblike=like.replaceAll('ed\" style=\"font-size:40px; margin-left:15px;\"','ed\"style="font-size:24px; margin-left:1px;"');
 				 if(${ubuildingseq!=buildingseq}){
-					 
 		        	$("#boardwrap").children().eq(index-1).find(".like").html(mtblike);
+		        	$.ajax({
+		  	            url:"/wood/snsmain.do",
+		  	            type: "post", // post 방식
+		  	            data:{
+		  	            	type:"3",
+		  	            	likesnsboardseq:$("#boardwrap").children().eq(index-1).find(".like").data("likesnsboardseq")},
+	  	            	success:function(data){
+		 	                alert("succss");
+		 	               
+		  	            },
+		  	            error:function(){
+		  	                alert("error");
+		  	            }
+		  	        });
+		        	
 		         }
 				 else{
 				 	$("#boardwrap").children().eq(index).find(".like").html(mtblike);
+				 	$.ajax({
+		  	            url:"/wood/snsmain.do",
+		  	            type: "post", // post 방식
+		  	            data:{
+		  	            	type:"3",
+		  	            	likesnsboardseq:$("#boardwrap").children().eq(index).find(".like").data("likesnsboardseq")},
+	  	            	success:function(data){
+		 	                alert("succss");
+		 	               
+		  	            },
+		  	            error:function(){
+		  	                alert("error");
+		  	            }
+		  	        });
 			 	 }
+				 
 			 }else{
 				 $('#like').html(tofill);
 				 like=like.replaceAll("outlined","rounded");
 				  mtblike=like.replaceAll('ed\" style=\"font-size:40px; margin-left:15px;\"','ed\"style="font-size:24px; margin-left:1px;"');
+				  console.log($("#boardwrap").children().eq(index-1).find(".like").data("likesnsboardseq"));
 				 if(${ubuildingseq!=buildingseq}){
 	        		$("#boardwrap").children().eq(index-1).find(".like").html(mtblike);
+	        		$.ajax({
+		  	            url:"/wood/snsmain.do",
+		  	            type: "post", // post 방식
+		  	            data:{
+		  	            	type:"2",
+		  	            	likesnsboardseq:$("#boardwrap").children().eq(index-1).find(".like").data("likesnsboardseq")},
+	  	            	success:function(data){
+		 	                alert("succss");
+		 	               
+		  	            },
+		  	            error:function(){
+		  	                alert("error");
+		  	            }
+		  	        });
+	        		
 			     }
 				 else{
 				 	$("#boardwrap").children().eq(index).find(".like").html(mtblike);
+				 	$.ajax({
+		  	            url:"/wood/snsmain.do",
+		  	            type: "post", // post 방식
+		  	            data:{
+		  	            	type:"2",
+		  	            	likesnsboardseq:$("#boardwrap").children().eq(index).find(".like").data("likesnsboardseq")},
+	  	            	success:function(data){
+		 	                alert("succss");
+		 	               
+		  	            },
+		  	            error:function(){
+		  	                alert("error");
+		  	            }
+		  	        });
 				 }
 			 }
-    		
+			
     	});
     	
     	$(".to_comment").on("click",function(){

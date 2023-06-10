@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -54,12 +55,12 @@ public class SnsMain extends HttpServlet {
 		
 		String udong = dao.getuserdong(buildingseq);
 		
+		List<String> likelist = dao.getUserLiked(uid);
 		List<SnsDTO> list = dao.getSNSList(buildingseq);
 		List<SnsDTO> plist = dao.getPicList();
 		List<SnsDTO> commentlist = dao.getComment();
-		List<String> likelist = dao.getUserLiked(uid);
 		
-		
+
 		MapDAO mdao = new MapDAO();
 		
 		HashMap<String, String> buildingInfo = new HashMap<String, String>();
@@ -72,6 +73,10 @@ public class SnsMain extends HttpServlet {
 		
 		List<BuildingDTO> dlist = mdao.dlist(); //장소 동
 		req.setAttribute("dlist", dlist);
+		
+		System.out.println(list.toString());
+
+		System.out.println(likelist.toString());
 		
 		
 		req.setAttribute("plist", plist);
@@ -88,8 +93,9 @@ public class SnsMain extends HttpServlet {
 		req.setAttribute("hidemapbox", hidemapbox);
 		req.setAttribute("likelist", likelist);
 		
-		System.out.println(list.toString());
-		System.out.println(likelist.toString());
+		
+		
+		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/sns/snsmain.jsp");
 		dispatcher.forward(req, resp);
@@ -142,33 +148,31 @@ public class SnsMain extends HttpServlet {
 		}
 		else if("2".equals(type)) {
 			String likesnsboardseq =req.getParameter("likesnsboardseq");
-			String like =req.getParameter("like");
 			
 			LikeDTO ldto = new LikeDTO();
 			ldto.setId(uid);
 			ldto.setSnsboardseq(likesnsboardseq);
-			int likeadd=0;
-			int likecancel=0;
 			
-			if(like.equals("1")) {
-				likeadd = dao.addlike(ldto);
-				System.out.println(ldto.toString());
-				System.out.println(likesnsboardseq);
-				System.out.println(like);
-			}else {
-				likecancel = dao.cancellike(ldto);
-				System.out.println(ldto.toString());
-				System.out.println(likesnsboardseq);
-				System.out.println(like);
-			}
-			if(likeadd!=0||likecancel!=0) {
-				System.out.println("성공");
-			}else {
-				System.out.println("실패");
-			}
+			int likeadd = dao.addlike(ldto);
+			System.out.println(ldto.toString());
+			System.out.println(likesnsboardseq);
+			System.out.println("저장");
 			
 			
-		}
+		}  
+		else if("3".equals(type)) {
+			String likesnsboardseq =req.getParameter("likesnsboardseq");
+			
+			LikeDTO ldto = new LikeDTO();
+			ldto.setId(uid);
+			ldto.setSnsboardseq(likesnsboardseq);
+			
+			int likecancel = dao.cancellike(ldto);
+			System.out.println(ldto.toString());
+			System.out.println(likesnsboardseq);
+			System.out.println("지우기");
+			
+		}  
 		else{
 			try {
 				

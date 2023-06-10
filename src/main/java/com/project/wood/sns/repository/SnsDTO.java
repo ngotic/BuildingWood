@@ -1,5 +1,7 @@
 package com.project.wood.sns.repository;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -21,8 +23,12 @@ public class SnsDTO {
 	private String pic3;
 	private String cpic;
 	
+	boolean liked;
 	
+	private String snslikeseq;
 	private String snscommentseq;
-	
+
+	private List<String> likelist;
+
 	
 }

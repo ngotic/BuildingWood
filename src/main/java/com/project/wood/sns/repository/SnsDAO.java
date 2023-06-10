@@ -24,9 +24,10 @@ public class SnsDAO {
 			String sql = String.format("select * from snslist where buildingseq = %s order by regdate desc",buildingseq);
 			stat = conn.createStatement();
 			rs = stat.executeQuery(sql);
+			
+			
 			while (rs.next()) {
 				SnsDTO dto = new SnsDTO();
-				
 				dto.setNickname(rs.getString("nickname"));
 				dto.setContent(rs.getString("content"));
 				dto.setRegdate(rs.getString("regdate"));
@@ -36,6 +37,7 @@ public class SnsDAO {
 				dto.setSnsboardseq(rs.getString("snsboardseq"));
 				dto.setCpic(rs.getString("cpic"));
 				dto.setBuildingseq(rs.getString("buildingseq"));
+				
 				list.add(dto);
 				
 			}
@@ -262,14 +264,29 @@ public class SnsDAO {
 		
 		try {
 			
-			String sql = "insert into tblsnslike (snslikeseq, id, snsboardseq) values(snslikeseq.nextVal, ?, ?)";
+			String sql = "select * from tblsnslike where id =? and snsboardseq=?";
 			pstat = conn.prepareStatement(sql);
 			pstat.setString(1, ldto.getId());
 			pstat.setString(2, ldto.getSnsboardseq());
-			
+			rs = pstat.executeQuery();
+			if(rs.next()) {
+				System.out.println("이미 존재");
+				
+				return 0;
+			}
+			else {
+			sql = "insert into tblsnslike (snslikeseq, id, snsboardseq) values(snslikeseq.nextVal, ?, ?)";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, ldto.getId());
+			pstat.setString(2, ldto.getSnsboardseq());
+			}
+					
+			System.out.println("성공");
 			return pstat.executeUpdate();
 			
 		} catch (Exception e) {
+			
+			System.out.println("실패");
 			e.printStackTrace();
 		
 		}
@@ -285,9 +302,12 @@ public class SnsDAO {
 			pstat.setString(1, ldto.getId());
 			pstat.setString(2, ldto.getSnsboardseq());
 			
+			System.out.println("성공");
 			return pstat.executeUpdate();
 			
 		} catch (Exception e) {
+			
+			System.out.println("실패");
 			e.printStackTrace();
 		
 		}
