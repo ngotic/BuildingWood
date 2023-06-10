@@ -154,7 +154,7 @@
                        <c:forEach items="${mlist}" var="mdto">
                         <li>
                           <div class="media align-self-center">
-                          <img class="align-self-center mr-0" style="width:40px;height:40px; margin-right:20px;" src="/wood/asset/img/루피.jpg">
+                          <img class="align-self-center mr-0" style="width:40px;height:40px; padding :2px; object-fit: cover; margin-right:20px;" src="/wood/asset/img/profile.jpg">
                             <div class="media-body">
                               <div class="row d-flex justify-content-center align-items-center">
                                 <div class="col-md-10">
@@ -214,7 +214,6 @@
 	 let address = $('#address').val();
 	 let blat = $('#lat').val();
 	 let blng = $('#lng').val();
-	 
 	 $.ajax({
 		 type:'POST',
 		 url: '/wood/admin/adminbuildingdetail.do',

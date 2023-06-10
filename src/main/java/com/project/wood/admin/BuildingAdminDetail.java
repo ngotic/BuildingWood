@@ -42,6 +42,8 @@ public class BuildingAdminDetail extends HttpServlet {
 
 	}
 	
+	
+	// 빌딩 정보를 수정하는 Post 요청
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
@@ -61,7 +63,6 @@ public class BuildingAdminDetail extends HttpServlet {
 		int result = dao.updateBuildingInfo(dto);
 		JSONObject obj = new JSONObject();
 		obj.put("result", result);
-		System.out.println(">>>>>>"+dto+">"+result);
 		resp.setContentType("application/json"); 
 		PrintWriter writer = resp.getWriter();
 		writer.print(obj);

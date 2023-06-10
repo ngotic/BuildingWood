@@ -25,6 +25,7 @@ import org.json.simple.parser.ParseException;
 
 import com.project.wood.user.repository.UserDAO;
 import com.project.wood.user.repository.UserDTO;
+import com.project.wood.user.service.GoogleLoginApi;
 import com.project.wood.user.service.NaverLoginApi;
 import com.project.wood.util.ApiKeyHolder;
 
@@ -34,15 +35,19 @@ public class SocialCallbackNaver extends HttpServlet {
 	
 	UserDAO dao = new UserDAO();
 	
-	
-	private NaverLoginApi naverapi;
+	private NaverLoginApi naverApi;
+	private GoogleLoginApi googleApi;
 	
 	@Override
 	public void init() throws ServletException {
 		// TODO Auto-generated method stub
 		String clientSecret = ApiKeyHolder.getNaverLoginSecretKey(getServletContext().getRealPath("/"));
-		naverapi = NaverLoginApi.instance();
-		naverapi.setClientSecret(clientSecret);
+		naverApi = NaverLoginApi.instance();
+		naverApi.setClientSecret(clientSecret);
+		
+		String clientSecretGoogle = ApiKeyHolder.getGoogleLoginSecretKey(getServletContext().getRealPath("/"));
+		googleApi = GoogleLoginApi.instance();
+		googleApi.setClientSecret(clientSecretGoogle);
 	}
 	
 	@Override
@@ -50,13 +55,21 @@ public class SocialCallbackNaver extends HttpServlet {
 
 		String access_token;
 		try {
-			access_token = naverapi.getAccessToken(req);
+			access_token = naverApi.getAccessToken(req);
 			req.getSession().setAttribute("access_token", access_token);// 일단 저장
-			UserDTO userinfo = naverapi.getUserInfo(access_token);
+			UserDTO userinfo = naverApi.getUserInfo(access_token);
 			UserDTO user = dao.existMember(userinfo.getId());
 
 			if (user != null) {
-				System.out.println("네이버 유저 아이디 "+user.getId());
+				
+				
+				if (user.getBan().equals("y")) { // 차단으로 인한 로그인 실패
+					// 로그인 실패
+					req.getSession().setAttribute("msg", "LOGIN_BAN_ERR");
+					resp.sendRedirect("/wood/index.do?naverUrl="+naverApi.getNaverLoginUrl()+"&googleUrl="+googleApi.getGoogleLoginUrl());
+					return ;
+				}
+				
 				req.getSession().setAttribute("id", user.getId());
 				req.getSession().setAttribute("lv", user.getLv());
 				req.getSession().setAttribute("nickname", user.getNickname());

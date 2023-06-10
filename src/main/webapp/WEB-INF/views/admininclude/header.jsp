@@ -173,7 +173,7 @@
         </span></div>
         <a href="user-profile"> <h6 class="mt-3 f-14 f-w-600">
         <c:if test="${not empty id}">
-                         	${nickname}
+           ${nickname}
 		</c:if>
 		</h6></a>
         <p class="mb-0 font-roboto">

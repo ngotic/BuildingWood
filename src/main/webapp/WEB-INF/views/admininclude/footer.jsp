@@ -21,7 +21,7 @@
         localStorage.setItem('page-body-wrapper', 'sidebar-icon');    
     </script>
 
-<script src="/wood/adminasset/js/jquery-3.5.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <!-- feather icon js-->
 <script src="/wood/adminasset/js/icons/feather-icon/feather.min.js"></script>
 <script src="/wood/adminasset/js/icons/feather-icon/feather-icon.js"></script>

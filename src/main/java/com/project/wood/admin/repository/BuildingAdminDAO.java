@@ -129,5 +129,80 @@ public class BuildingAdminDAO {
 		
 		return 0;
 	}
+
+	public List<MemberInBuildingDTO> AllMemberList() {
+
+		
+		try {
+				
+				String sql = "select id, name, nickname,\r\n"
+						+ "(select name from tblBuilding where buildingseq = ( select buildingseq from tblAddress where id=m.id and main='T' )) as buildingname,\r\n"
+						+ "birth, gender, email, tel, lv, ban, ((select count(*) from tblCarpoolReview where id=m.id )+(select count(*) from tblSnscomment where id=m.id)+(select count(*) from tblSnsRecomment where id=m.id)+(select count(*) from tblRestaurantComment where id=m.id)+(select count(*) from tblRestaurantReComment where id=m.id)+(select count(*) from tblPromiseReply where id=m.id)+(select count(*) from tblPromiseReply where id=m.id)) as replycnt, ((select count(*) from tblopenstudy where id=m.id) + (select count(*) from tblTeach  where id=m.id) + (select count(*) from tblHobbyclub where clubseq = (select clubseq from tblclub  where id=m.id)) + (select count(*) from tblCarpool where driverseq = m.id) + (select count(*) from tblSnsboard where id = m.id) + (select count(*) from tblSuggest where id = m.id) + (select count(*) from tblpromise where writer = m.id)) as boardcnt\r\n"
+						+ "from tblMember m where lv<> 0";
+				
+				pstat = conn.prepareStatement(sql);
+				rs = pstat.executeQuery();
+				
+				List<MemberInBuildingDTO> list = new ArrayList<MemberInBuildingDTO>();
+				
+				while (rs.next()) {
+					
+					MemberInBuildingDTO dto = new MemberInBuildingDTO();
+					dto.setId(rs.getString("id"));
+					dto.setName(rs.getString("name"));
+					dto.setNickname(rs.getString("nickname"));
+					dto.setBuildingname(rs.getString("buildingname"));
+					dto.setBirth(rs.getString("birth").substring(0, 10));
+					dto.setGender(rs.getString("gender").equals("M")==true ? "남성":"여성");
+					dto.setEmail(rs.getString("email"));
+					dto.setTel(rs.getString("tel"));
+					dto.setLv( rs.getString("lv").equals("0") ? "관리자":"유저");
+					dto.setBan(rs.getString("ban").equals("n")? "아니요":"예");
+					dto.setBoardcnt(rs.getString("boardcnt"));
+					dto.setReplycnt(rs.getString("replycnt"));
+					list.add(dto);
+				}
+				return list;
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+		return null;
+	}
+
+	public int adminUserRecovery(String id) {
+		
+		try {
+			String sql = "update tblMember set ban='n' where id=?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, id);
+
+			return pstat.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return 0;
+	}
+
+	public int adminUserBan(String id) {
+		
+		try {
+			String sql = "update tblMember set ban='y' where id=?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, id);
+
+			return pstat.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return 0;
+	}
 	
 }

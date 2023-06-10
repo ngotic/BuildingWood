@@ -208,6 +208,8 @@ table tr th {
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 	<script>
 	
+	loadreview();
+	
 	function closeRecruit(hobbyclubseq){
 		$.ajax({
 			type:'POST',
@@ -258,7 +260,7 @@ table tr th {
 	});
 	
 	
-	loadreview();
+	
 	
 	function delreview(clubassessmentseq, reviewid){
 		let hobbyclubseq= '${cbdto.hobbyclubseq}';
