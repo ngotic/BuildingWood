@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
   <body>
+
     <!-- Loader starts-->
     <div class="loader-wrapper">
       <div class="theme-loader"></div>
@@ -15,7 +16,7 @@
   <div class="main-header-right row m-0">
     <div class="main-header-left">
       <div class="logo-wrapper">
-      	<a href="/wood/index.do">
+      	<a href="/wood/indexhome.do">
       		<img class="img-fluid" src="/wood/adminasset/세로logo.PNG" alt="" width=120px style="border-radius:10%;">
       	</a>
       </div>
@@ -172,7 +173,7 @@
         </span></div>
         <a href="user-profile"> <h6 class="mt-3 f-14 f-w-600">
         <c:if test="${not empty id}">
-                         	${nickname}
+           ${nickname}
 		</c:if>
 		</h6></a>
         <p class="mb-0 font-roboto">
@@ -226,7 +227,7 @@
                     	
 	                    <c:if test="${lv==0}">
 		                    <li>
-		                        <a class="nav-link menu-title link-nav" href="/wood/admin/adminbuilding.do"><i data-feather="home"></i><span>건물관리</span></a>                  
+		                        <a class="nav-link menu-title link-nav" href="/wood/admin/adminbuilding.do"><i data-feather="home"></i><span>건물정보 관리</span></a>                  
 		                    </li>
 	                    </c:if>
                     

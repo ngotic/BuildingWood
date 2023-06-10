@@ -153,7 +153,7 @@
     flex-direction: row;
     align-items: flex-end;
     justify-content: space-between;">
-			<div><input type="image"  class="profile" src="/wood/asset/img/${profile}" >${odto.nickname }</div>
+			<div><input type="image"  class="profile" src="/wood/asset/img/img.jpg" >작성자이름</div>
 		  <div class="content-margin "> <span >${odto.status}</span></div>	
 		  
 		  </div>
@@ -201,49 +201,33 @@
 						<th>조회</th>
 					</tr>
 		
-
-			<c:forEach items="${list}" var="dto" begin="${pagedto.startNumber }" end="${pagedto.endNumber }">	
+		
+			<c:forEach items="${list}" var="dto" begin="0" end="4">	
 				
 					<tr onclick='location.href="./viewboard.do?openstudyseq=${openstudyseq}&studyseq=${dto.studyseq}"'>
 						<th class="txt-center" >${dto.rownum }</th>
 						<th>${dto.title}</th>
-						<th class="txt-center">${dto.nickname }</th>
+						<th class="txt-center">id</th>
 						<th class="txt-center date2">${dto.regdate}</th>
-						<th class="txt-center ">${dto.checke }</th>
+						<th class="txt-center ">조회수</th>
 					</tr>		
 			</c:forEach>
-				<div>
-						<a class="pagingtd" onclick="page_click(this)" href="./pagingview.do?openstudyseq=${openstudyseq}&pagenumber=이전&startListpageNumber=${pagedto.startListpageNumber}&endtListpageNumber=${pagedto.endtListpageNumber}" type="submit">이전</a>
-							
-						<c:forEach var="pagenum" begin="${pagedto.startListpageNumber }" end="${pagedto.endtListpageNumber}">
+	
+						<a class="pagingtd" type="submit">이전</a>
 						
-						<a class="pagingtd page" onclick="page_click(this)" href="./pagingview.do?openstudyseq=${openstudyseq}&startListpageNumber=${pagedto.startListpageNumber}&endtListpageNumber=${pagedto.endtListpageNumber}&pagenumber=${pagenum}" >${pagenum }</a>
-						
-						</c:forEach>
-						<a class="pagingtd" onclick="page_click(this)" href="./pagingview.do?openstudyseq=${openstudyseq}&pagenumber=다음&startListpageNumber=${pagedto.startListpageNumber}&endtListpageNumber=${pagedto.endtListpageNumber}" >다음</a>
-					
-					</div>
-				<div class="menu"
-					style="display: inline-flex; justify-content: center;">
-
-
-					<select class="button" name="ck">
-
-						<option value="name" selected="selected">제목</option>
-						<option value="content">작성자</option>
-
-					</select> <input class="textbox" type="text" name="name"
-						placeholder="검색어를 입력하세요."
-						style="align-self: right; align-content: left; padding: 10px;">
-					<input class="button" type="submit" value="검색"
-						style="align-content: left;"> <a href="./add.do">
-					</a>
-				</div>
+						<a class="pagingtd page" class= ="page" data-value="1"  onclick="page_click(this);" href="./pagingview.do?openstudyseq=${openstudyseq}&pagenumber=${pagedto.startNumber}" >1</a>
+						<a class="pagingtd page">2</a>
+						<a class="pagingtd page">3</a>
+						<a class="pagingtd page">4</a>
+						<a class="pagingtd page">5</a>
+						<a class="pagingtd">다음</a>
+				
+				
 				</table>
 	
 
 		</div>		
-		<form action ="./view.do" method="get" style="border: 5px solid; margin-top: 35px;   padding: 27px;
+		<form action ="./view.do?openstudyseq=${openstudyseq}" method="post" style="border: 5px solid; margin-top: 35px;   padding: 27px;
     display: flex;
 
     flex-direction: column;
@@ -252,7 +236,7 @@
 		<div class="mb-3">
 		
 			<input type="image"  class="profile" src="/wood/asset/img/img.jpg" >
-			<span class="content-margin " style="padding-bottom: 3px;">${nickname }</span>
+			<span class="content-margin " style="padding-bottom: 3px;">작성자이름</span>
 			
 		  <label for="exampleFormControlInput1" class="form-label">	</label>
 		  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="제목" name ="title">

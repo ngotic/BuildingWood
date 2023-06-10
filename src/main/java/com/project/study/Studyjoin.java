@@ -1,5 +1,5 @@
 package com.project.study;
 
-public class StudyopenDAO {
+public class Studyjoin {
 
 }

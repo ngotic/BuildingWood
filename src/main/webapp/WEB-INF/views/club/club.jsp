@@ -168,15 +168,15 @@
 		</div>
 		<!-- <button id="testBtn">더보기</button> -->
 	</section>
-	
+	<div style="height:100px;"></div>
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-let n = 0;
+let n = 1;
 
 //loadClubList();
 
-$('#holder').html('');
+
 
 // loadClubList();
 /* $('#testBtn').click(function(){
@@ -188,8 +188,9 @@ $('#holder').html('');
 let ch = true;
 let ch2 = true;
 
-$(window).scroll(()=>{
-	
+let start = 0;
+
+$(window).scroll(()=> {
 	if( window.innerHeight + window.scrollY >= document.body.offsetHeight ){
 		if (ch) {
 			loadClubList();
@@ -197,76 +198,6 @@ $(window).scroll(()=>{
 		} // 응답이 올 때 까지 기다린다. 
 	}
 });
-function loadClubList(){
-	
-	$.ajax({
-		type:'POST',
-		url: '/wood/club/club.do',
-		data : {
-			n: n,
-			type : $('#type').val(),
-			keyword : $('#keyword').val().trim()
-		},
-		dataType: 'json',
-		success: (result)=> {
-			
-			ch = true;
-			let id ='${id}';
-			$(result).each((index, item)=>{
-				console.log(item.hobbyseq);
-				
-					let template = 
-					`<div class="col-md-3 col-sm-6 mb-3 mb-sm-0 mt-2">
-						<div class="card mb-6" >
-						  <div class="card-body">
-						    <h5 class="card-title">\${item.name}
-						    `;
-						    
-						    if( item.openregdate==item.closeregdate ){
-						    	template += `<span class="badge bg-danger" style="float:right;">모집마감</span>`
-						    } else {
-						    	template += `<span class="badge bg-success" style="float:right;">모집중</span>`
-						    }
-						    
-						    
-					 template += `
-						    </h5>
-						    <h6 class="card-subtitle mb-2 text-body-secondary mt-1"> \${item.buildingname}</h6>
-						    
-						    <p class="card-text">\${item.content}</p>
-						    <hr>
-						    	<div class="text-center">
-						    		<div><span>모집시작 : \${item.openregdate}  </span></div>
-						    		<div><span>모집마감 : \${item.closeregdate}  </span></div>
-						    		<div><span>모집인원 : \${item.recruits}  </span></div>
-						    	</div>
-						    <hr>
-							<div class="d-flex justify-content-evenly mt-3">
-				    			<button class="detail bluecolor" onclick="location.href='/wood/club/detail.do?hseq=\${item.hobbyclubseq}'">상세</button>
-				    			<button class="edit greencolor" onclick="salert('\${item.clubseq}',
-				    			'\${item.name}', '\${id}', '\${item.hobbyclubseq}');">신청</button>
-				    		</div>
-						  </div>
-						</div>
-					 </div>
-					`;
-					 $('#holder').append(template);
-			});
-			
-			if(result.length == 0) {
-				// alert(' 더 이상 게시물이 없습니다.');
-			} else {
-				// console.log('호출');
-				n += 4;	
-			}
-			
-		},
-		error: (a, b, c) => console.log(a, b, c)
-	});  
-	event.preventDefault();
-	
-}
-
 
 function loadClubList(){
 	
@@ -349,9 +280,15 @@ $('#keyword').keydown(function(){
 			return
 		};
 	}
-	loadKeyboard();
+	
+	if (ch2) {
+		loadKeyboard();
+		ch2 = false;
+	} 
 	
 });
+
+
 
 function loadKeyboard(){
 
@@ -453,9 +390,6 @@ function loadKeyboard(){
 	}
 }); 
  */
-
-
-
 
 // 이미 신청했는지 알려줘야 함
 function salert(seq, name, id, hseq) {
