@@ -54,7 +54,7 @@
 <header class="header-area navbar-fade" id="header">
 		<nav id="navbar">
 			<div id="brand-logo">
-				<a class="navbar-brand" id="navbarBrand"><img width=60px src="/wood/asset/img/logo.png"></a>
+				<a href="/wood/indexhome.do" class="navbar-brand" id="navbarBrand"><img width=60px src="/wood/asset/img/logo.png"></a>
 			</div>
 			<a class="navbar-toggler" id="toggleBtn"><i class="fa fa-bars"></i></a>
 			<div class="navbar-menu" id="menu">
@@ -114,7 +114,12 @@
                     <c:if test="${not empty id}">
                      <ul class="dropdown-menu" >
                         <li><a class="dropdown-item" href="/wood/user/logout.do">로그아웃</a></li>
-						<li><a class="dropdown-item" href="/wood/admin/admin.do">마이페이지</a></li>
+                    	<c:if test="${lv == 0}">    
+							<li><a class="dropdown-item" href="/wood/admin/admin.do">마이페이지</a></li>
+						</c:if>
+						<c:if test="${lv > 0}">
+							<li><a class="dropdown-item" href="/wood/mypage/mypage.do">마이페이지</a></li>
+						</c:if>
                     </ul>
                     </c:if>
                 </div> 

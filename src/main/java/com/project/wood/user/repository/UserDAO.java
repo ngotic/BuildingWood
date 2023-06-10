@@ -36,6 +36,7 @@ public class UserDAO {
 				result.setId(rs.getString("id"));
 				result.setNickname(rs.getString("nickname"));
 				result.setLv(rs.getString("lv"));
+				result.setBan(rs.getString("ban"));
 
 				return result;
 			}
@@ -183,6 +184,7 @@ public class UserDAO {
 				result.setId(rs.getString("id"));
 				result.setNickname(rs.getString("nickname"));
 				result.setLv(rs.getString("lv"));
+				result.setBan(rs.getString("ban"));
 				return result;
 			}
 		} catch (SQLException e) {

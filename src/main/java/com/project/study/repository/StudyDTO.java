@@ -1,4 +1,4 @@
-package com.project.study;
+package com.project.study.repository;
 
 import lombok.Data;
 
@@ -17,8 +17,8 @@ public class StudyDTO {
 	private String enddate;
 	private String regdate;
 	private String editdate;
-	
-	
+	private String nickname;
+	private String prifile;
 	private String recruit;
 	//스터디 개설
 	
@@ -30,5 +30,11 @@ public class StudyDTO {
 	
 	private String title;
 	private String content;
+	
+	private String rownum;
+
+	private String JSESSIONID;
+
+	private String pic;
 	
 }

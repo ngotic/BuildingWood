@@ -334,6 +334,9 @@ a.link-hover span:hover {
 	if ( msg == "LOGIN_ERR") 
 		new Swal('로그인 실패', '아이디나 비밀번호가 틀렸습니다.','error');
 	
+	if ( msg == "LOGIN_BAN_ERR") 
+		new Swal('로그인 실패', '차단된 유저입니다.','error');
+	
 	 function formCheck(){
 		let id = $('#formIdInput');
 		if( id.val()=='' ) { 

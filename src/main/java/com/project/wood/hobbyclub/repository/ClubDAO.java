@@ -233,7 +233,7 @@ public class ClubDAO {
 		try {
 				System.out.println(n);
 				int begin = Integer.parseInt(n);
-				int end   = begin+4;
+				int end   = begin+3;
 				
 				System.out.println(begin +", "+ end);
 				String sql="";

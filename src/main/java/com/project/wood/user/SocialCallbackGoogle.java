@@ -37,25 +37,38 @@ public class SocialCallbackGoogle extends HttpServlet {
 	
 	UserDAO dao = new UserDAO();
 	
-	private GoogleLoginApi googleapi;
+	private NaverLoginApi naverApi;
+	private GoogleLoginApi googleApi;
 	
 	@Override
 	public void init() throws ServletException {
 		// TODO Auto-generated method stub
-		String clientSecret = ApiKeyHolder.getGoogleLoginSecretKey(getServletContext().getRealPath("/"));
-		googleapi = GoogleLoginApi.instance();
-		googleapi.setClientSecret(clientSecret);
+		String clientSecret = ApiKeyHolder.getNaverLoginSecretKey(getServletContext().getRealPath("/"));
+		naverApi = NaverLoginApi.instance();
+		naverApi.setClientSecret(clientSecret);
+		
+		String clientSecretGoogle = ApiKeyHolder.getGoogleLoginSecretKey(getServletContext().getRealPath("/"));
+		googleApi = GoogleLoginApi.instance();
+		googleApi.setClientSecret(clientSecretGoogle);
 	}
-	
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Token token = googleapi.getAccessToken(req);
+		Token token = googleApi.getAccessToken(req);
 		req.getSession().setAttribute("access_token", token.getAccess_token());// 일단 저장
-		UserDTO userinfo = googleapi.getUserInfo(token);		
+		UserDTO userinfo = googleApi.getUserInfo(token);		
 		UserDTO user = dao.existMember(userinfo.getId());
 		
 		if( user != null) { // 이때도 문제긴하다.
+			
+			
+			if (user.getBan().equals("y")) { // 차단으로 인한 로그인 실패
+				// 로그인 실패
+				req.getSession().setAttribute("msg", "LOGIN_BAN_ERR");
+				resp.sendRedirect("/wood/index.do?naverUrl="+naverApi.getNaverLoginUrl()+"&googleUrl="+googleApi.getGoogleLoginUrl());
+				return ;
+			}
+			
 			req.getSession().setAttribute("id", user.getId());
 			req.getSession().setAttribute("lv", user.getLv());
 			req.getSession().setAttribute("nickname", user.getNickname());

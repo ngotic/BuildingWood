@@ -53,7 +53,9 @@ public class Login extends HttpServlet {
 		UserDTO user = dao.login(dto);
 		RecBuildingDTO bdto = dao.recmemberloc(id); //지역정보 ex)'강남구 역삼동'
 		//3. 없으면 fail
-
+		
+		req.getSession().removeAttribute("msg");
+		
 		// 쿠키의 setPath는 ContextRoot 바로 아래 
 		if(rememberId != null ) {
             // 1. 쿠키를 생성
@@ -72,8 +74,17 @@ public class Login extends HttpServlet {
         }
         
 		if (user != null) {
-			
-			// 로그인 성공, requset 객체가 session을 가지고 있다. 
+			// 로그인 성공, requset 객체가 session을 가지고 있다.
+			if (user.getBan().equals("y")) {
+				// 로그인 실패
+				req.setAttribute("msg", "LOGIN_BAN_ERR");
+				req.setAttribute("naverUrl", naverApi.getNaverLoginUrl());
+				req.setAttribute("googleUrl", googleApi.getGoogleLoginUrl());
+				RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/main.jsp");
+				dispatcher.forward(req, resp);
+				return ;
+			}
+		
 			req.getSession().setAttribute("id", id);
 			req.getSession().setAttribute("lv", user.getLv());
 			req.getSession().setAttribute("nickname", user.getNickname());
@@ -84,8 +95,8 @@ public class Login extends HttpServlet {
 		    }
 			
 			resp.sendRedirect("/wood/indexhome.do");
-			
-		} else {
+		
+		}  else {
 			// 로그인 실패
 			req.setAttribute("msg", "LOGIN_ERR");
 			req.setAttribute("naverUrl", naverApi.getNaverLoginUrl());
