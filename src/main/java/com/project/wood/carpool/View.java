@@ -34,8 +34,18 @@ public class View extends HttpServlet {
 		CarpoolDTO dto = dao.get(carpoolseq);
 		
 		
-		
 		req.setAttribute("dto", dto);
+		
+		
+		
+		
+		CarpoolDTO adto = new CarpoolDTO();
+		
+		ArrayList<CarpoolDTO> apply = dao.getApply(carpoolseq);
+		
+		req.setAttribute("apply", apply);
+		
+		
 
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/carpool/view.jsp");
 		dispatcher.forward(req, resp);

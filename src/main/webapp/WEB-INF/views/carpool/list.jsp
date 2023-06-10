@@ -345,7 +345,7 @@
 		<!-- 카풀 카드 리스트 -->
 		<div class="container">
 	      <div class="row">
-		<c:forEach items="${list}" var="dto">
+			<c:forEach items="${list}" var="dto">
 	      
 	      	<!-- 테스트1 -->
 	      	<div class="col-4">

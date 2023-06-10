@@ -105,7 +105,7 @@ public class CarpoolDAO {
 				dto.setNickname(rs.getString("nickname"));
 				dto.setGender(rs.getString("gender"));
 				
-				System.out.println(rs.getString("carpoolseq") + ":" + rs.getString("recruitcount"));
+				/*System.out.println(rs.getString("carpoolseq") + ":" + rs.getString("recruitcount"));*/
 				
 				
 				list.add(dto);
@@ -289,6 +289,49 @@ public class CarpoolDAO {
 		}
 		
 		return 0;
+	}
+
+
+
+	public ArrayList<CarpoolDTO> getApply(String carpoolseq) {
+
+		try {
+			
+			String sql = "select "
+					+ "(select nickname from tblMember where id = tblCarpoolApply.id) as applynickname, "
+					+ "(select gender from tblMember where id = tblCarpoolApply.id) as applygender "
+					+ "from tblCarpoolApply "
+					+ "where carpoolseq = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, carpoolseq);
+			
+			rs = pstat.executeQuery();
+			
+			
+			ArrayList<CarpoolDTO> apply = new ArrayList<CarpoolDTO>();
+			
+			while (rs.next()) {
+				
+				CarpoolDTO adto = new CarpoolDTO();
+				
+				adto.setApplynickname(rs.getString("applynickname"));
+				adto.setApplygender(rs.getString("applygender"));
+				
+				System.out.println("nickname:" + rs.getString("applynickname"));
+				System.out.println("gender:" + rs.getString("applygender"));
+				
+				apply.add(adto);
+				
+			}
+			
+			return apply;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 
 
