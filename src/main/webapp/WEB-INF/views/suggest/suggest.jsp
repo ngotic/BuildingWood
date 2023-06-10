@@ -98,7 +98,7 @@
 	}
 	table.table td a {
 		font-weight: bold;
-		color: #566787;
+		color: #555;
 		display: inline-block;
 		text-decoration: none;
 		outline: none !important;
@@ -193,7 +193,7 @@
 	/* 페이징 */
 	.page-link.active {
 		background-color: rgb(126 211 33 / 72%); !important;
-		border-color: rgb(126 211 33 / 72%); !important;
+		border-color: #dee2e6 !important;
 		font-family: 'Pretendard-Regular';
 		color: #fff !important;
 	}
@@ -256,6 +256,7 @@
 					</div>
 				</div>
 			</div> -->
+			
 			<table class="table table-striped table-hover" id="table-root">
 				<thead id="table-head">
 					<tr id="table-head-tr">
@@ -264,7 +265,7 @@
 						<th class="table-center head-th" style="width:350px">제목</th>
 						<th class="table-center head-th" style="width:150px">닉네임</th>
 						<th class="table-center head-th" style="width:110px">작성날짜</th>
-						<th class="table-center head-th" style="width:70px">추가?</th>
+						<th class="table-center head-th" style="width:70px">조회수</th>
 					</tr>
 				</thead>
 				

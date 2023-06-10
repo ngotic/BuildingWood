@@ -255,7 +255,7 @@
 		<button type="button" class="btn btn-outline-secondary btn-sm" onclick="location.href='/wood/suggest/suggestedit.do?suggestseq=${dto.suggestseq}';"><span class="material-symbols-outlined" id="ori-icon2">edit</span>수정</button>
 		<button type="button" class="btn btn-outline-secondary btn-sm" onclick="location.href='/wood/suggest/suggestdel.do?suggestseq=${dto.suggestseq}';"><span class="material-symbols-outlined" id="ori-icon2">delete</span>삭제</button>
 		</c:if>
-   	    <button type="button" class="btn btn-outline-secondary btn-sm" onclick="location.href='/wood/suggest/suggest.do?column=${column}&word=${word}';"><span class="material-symbols-outlined" id="ori-icon2">format_list_bulleted</span>목록보기</button>
+   	    <button type="button" class="btn btn-outline-secondary btn-sm" onclick="history.back()"><span class="material-symbols-outlined" id="ori-icon2">reply</span>돌아가기</button>
 	</div>	
 	
 	

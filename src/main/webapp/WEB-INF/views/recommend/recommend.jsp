@@ -32,7 +32,9 @@
         line-height: 1.15;
         color: var(--dl-color-gray-black);
         background-color: var(--dl-color-gray-white);
-
+      }
+      .container {
+      	margin-bottom: 51px !important;
       }
      .frame-group1222 {
 	  top: 162px;
@@ -46,6 +48,7 @@
 	  border-width: 0.5px;
 	  border-radius: 30px;
 	  background-color: rgba(255, 255, 255, 1);
+	  margin-top: 21px;
 	}
 	.frame-mappin {
 	  top: 8px;
@@ -359,8 +362,8 @@
 
 /* 페이징 */
 .page-link.active {
-	background-color: #1BC060 !important;
-	border-color: #1BC060 !important;
+	background-color: rgb(126 211 33 / 72%) !important;
+	border-color: #dee2e6 !important;
 	font-family: 'Pretendard-Regular';
 	color: #fff !important;
 }
