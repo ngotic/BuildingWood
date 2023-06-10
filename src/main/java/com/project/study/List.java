@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.project.study.repository.StudyDAO;
 import com.project.study.repository.StudyDTO;
+import com.project.study.repository.StudyListDTO;
 
 @WebServlet("/study/list.do")
 public class List extends HttpServlet {
@@ -25,10 +26,13 @@ public class List extends HttpServlet {
 		StudyDAO dao = new StudyDAO();
 		StudyDTO dto = new StudyDTO();
 		
+		
 		ArrayList<StudyDTO> list = dao.ListContent();
 		
 		req.setAttribute("list", list);
 		req.setAttribute("openstudyseq", dto.getOpenstudyseq());
+		
+		req.setAttribute("dto", dto);
 		
 		
 		
@@ -55,7 +59,7 @@ public class List extends HttpServlet {
 		
 		String ck = req.getParameter("ck");
 		System.out.println(name);
-		System.out.println(ck);
+		
 		ArrayList<StudyDTO> list;
 		if(ck.equals("name")) {
 			

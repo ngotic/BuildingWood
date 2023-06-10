@@ -206,7 +206,7 @@
 			
 				<table id= "study-board">
 					<input type="image"  class="profile" src="/wood/asset/img/img.jpg" >
-			<span class="content-margin " style="padding-bottom: 3px;">작성자이름</span>
+			<span class="content-margin " style="padding-bottom: 3px;">${dto.nickname }</span>
 			<div class="mb-3">
 	  
 	  <span>${dto.title }</span>
@@ -215,13 +215,15 @@
 	  
 	  	<span>${dto.content}</span>
 	</div>
-					
+			<div >	
+			<span>  댓글 </span>	
 		<c:forEach items="${commentlist}" var="cdto">
 	
  	
  	
-		<div >	
-		  <img src="/wood/asset/img/img.jpg" class="card-img-top" alt="..." style="width: 40px;">
+		<div style="border: 1px solid black;">	
+		  <img src="/wood/asset/img/img.jpg" class="card-img-top" alt="..." style="width: 20px; height: 20px;">
+		  <span class="content-margin " style="padding-bottom: 3px; padding-left: 24px; font-size: 20px;">${cdto.nickname }</span>
 		  <div class="content-card-body">
 		  <div style="display: none" name="addlist" vlaues= "off"></div>
 		    <span class="card-title title nametxt"  name="name">${cdto.content}</span>
@@ -233,7 +235,7 @@
 	
 
 	</c:forEach>
-				
+				</div>
 
 				
 				</table>
@@ -247,7 +249,7 @@
 		<div class="mb-3">
 		
 			<input type="image"  class="profile" src="/wood/asset/img/img.jpg" >
-			<span class="content-margin " style="padding-bottom: 3px;">작성자이름</span>
+			<span class="content-margin " style="padding-bottom: 3px;">${nickname }</span>
 			
 		  	
 		  
@@ -265,8 +267,10 @@
 	<div class="comment-box"  >
 			
         	<button type="submit" class="button"  >댓글 등록 하기</button>
-        	
-        	<a href ="./list.do;" class="">
+        	<a href ="./view.do?openstudyseq=${dto.openstudyseq}" class="">
+        	<button type="button" class="button" >목록으로</button>
+        	</a>
+        	<a href ="./list.do" class="">
         	<button type="button" class="button" >목록으로</button>
         	</a>
         </div>

@@ -15,7 +15,8 @@ public class StudyListDTO {
 	private String rownum;
 	private String maxrownum;
 	private String modifydate;
-	
+	private String nickname;
+	private int checke;
 	
 	
 }

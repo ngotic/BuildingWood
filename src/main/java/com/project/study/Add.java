@@ -5,10 +5,12 @@ import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.project.study.repository.StudyDAO;
 import com.project.study.repository.StudyDTO;
@@ -27,15 +29,20 @@ public class Add extends HttpServlet {
 
 	
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
+
+		 
 		
 		StudyDAO dao = new StudyDAO();
 		StudyDTO dto = new StudyDTO();
 		
 		
+		
 		/* String jessionid = */
+	
+		String id = (String)req.getSession().getAttribute("id");
+		String nickname = (String)req.getSession().getAttribute("nickname");
+		System.out.println((String)req.getSession().getAttribute("nickname")+"닉네임 #@");
 		String name = req.getParameter("name");
 		String recruit = req.getParameter("recruit");
 		String intro = req.getParameter("intro");
@@ -56,7 +63,8 @@ public class Add extends HttpServlet {
 		System.out.println(onoff);
 		System.out.println(address);
 		
-		
+		dto.setJSESSIONID(id);
+		dto.setNickname(nickname);
 		dto.setName(name);
 		dto.setRecruit(recruit);
 		dto.setIntro(intro);
@@ -66,7 +74,7 @@ public class Add extends HttpServlet {
 		dto.setOnoff(onoff);
 		dto.setAddress(address);
 		
-		
+		System.out.println("아이디 = " +dto.getJSESSIONID());
 		
 		int result = dao.OpenStudy(dto);
 		if(result ==1 ) {

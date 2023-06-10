@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import com.test.my.DBUtil;
 
 
@@ -31,19 +33,23 @@ public class StudyDAO {
 		try {
 
 			String sql = "insert into tblOpenStudy "
-					+ " values (openstudyseq.nextVal,?,'진행중',?,?,?,?,?,?,?)";
+					+ " values (openstudyseq.nextVal,?,?,?,'진행중',?,?,?,?,?,?,?)";
 	         pstat = conn.prepareStatement(sql);
-
-	         pstat.setString(1, dto.getName());
+	         pstat.setString(1, dto.getJSESSIONID());
+	         pstat.setString(2, dto.getNickname());
+	         pstat.setString(3, dto.getName());
 	         
-	         pstat.setString(2, dto.getRecruit());
-	         pstat.setString(3, dto.getIntro());
-	         pstat.setString(4, dto.getPeriod());
-	         pstat.setString(5, dto.getStartdate());
-	         pstat.setString(6, dto.getEnddate());
-	         pstat.setString(7, dto.getOnoff());
-	         pstat.setString(8, dto.getAddress());
+	         pstat.setString(4, dto.getRecruit());
+	         pstat.setString(5, dto.getIntro());
+	         pstat.setString(6, dto.getPeriod());
+	         pstat.setString(7, dto.getStartdate());
+	         pstat.setString(8, dto.getEnddate());
+	         pstat.setString(9, dto.getOnoff());
+	         pstat.setString(10, dto.getAddress());
+	       
 	         
+	         System.out.println("세션id ="+ dto.getJSESSIONID());
+	         System.out.println("id = "+dto.getJSESSIONID());
 
 	         return pstat.executeUpdate();
 
@@ -72,7 +78,7 @@ public class StudyDAO {
                   dto.setOpenstudyseq(rs.getString("openstudyseq"));
                   dto.setRecruit(rs.getString("recruit"));
                   dto.setIntro(rs.getString("intro"));
-
+                  dto.setNickname(rs.getString("nickname"));
 
                  list.add(dto);
 
@@ -152,23 +158,25 @@ public class StudyDAO {
 		
 		return null;	}
 
-	public int Setboard(StudyDTO dto) {
+	public int Setboard(StudyDTO odto) {
 
 		try {
 			
-		String sql = "insert into tblstudy values (studyseq.nextVAl , ? , (select boardcategoryseq from tblBoardCategory where board = '스터디') ,sysdate,sysdate, ?, ?)";
+		String sql = "insert into tblstudy values (studyseq.nextVAl , ? , ? , (select boardcategoryseq from tblBoardCategory where board = '스터디') ,sysdate,sysdate, ?, ?,0)";
 		
 		pstat = conn.prepareStatement(sql);
 
 		
-		 pstat.setString(1, dto.getOpenstudyseq());
-		 pstat.setString(2, dto.getTitle());
-		 pstat.setString(3, dto.getContent());
-		System.out.println("oseq="+dto.getOpenstudyseq());
-		System.out.println("title="+dto.getTitle());
-		System.out.println("contetnt= "+dto.getContent());
+		 pstat.setString(1, odto.getOpenstudyseq());
+		 pstat.setString(2, odto.getNickname());
+		 pstat.setString(3, odto.getContent());
+		 pstat.setString(4, odto.getTitle());
+		System.out.println("oseq="+odto.getOpenstudyseq());
+		System.out.println("title="+odto.getTitle());
+		System.out.println("contetnt= "+odto.getContent());
 		
 		 return pstat.executeUpdate();
+		 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -201,8 +209,8 @@ public class StudyDAO {
                 dto.setEditdate(rs.getString("editdate"));
                 dto.setContent(rs.getString("content"));
                 dto.setTitle(rs.getString("title"));
-
-              
+                dto.setNickname(rs.getString("nickname"));
+                dto.setChecke(rs.getInt("checke"));
                 
                list.add(dto);
 
@@ -254,8 +262,11 @@ public class StudyDAO {
 			if(rs.next()) {
 				
 			dto.setTitle(rs.getString("title"));
+			dto.setNickname(rs.getString("nickname"));
 			System.out.println("dto = " + dto);
 			dto.setContent(rs.getString("content"));
+			dto.setChecke(rs.getInt("checke"));
+			
 			
 			}
 			return dto;
@@ -273,12 +284,13 @@ public class StudyDAO {
 		
 		
 		
-		String sql = "insert into tblStudyComment values (studycommentseq.nextVAL,?,?,sysdate,sysdate)";
+		String sql = "insert into tblStudyComment values (studycommentseq.nextVAL,?,?,?,sysdate,sysdate)";
 		
 		try {
 		pstat = conn.prepareStatement(sql);		
 		pstat.setString(1, dto.getStudyseq());
-		pstat.setString(2, dto.getContent());
+		pstat.setString(2, dto.getNickname());
+		pstat.setString(3, dto.getContent());
 		
 		
 		
@@ -311,6 +323,8 @@ public class StudyDAO {
 		
 			dto.setContent(rs.getString("content"));
 			dto.setModifydate(rs.getString("modifydate"));
+			dto.setNickname(rs.getString("nickname"));
+			
 			
 			list.add(dto);
 			
@@ -346,6 +360,8 @@ public class StudyDAO {
 			dto.setEnddate(rs.getString("enddate"));
 			dto.setOnoff(rs.getString("onoff"));
 			dto.setAddress(rs.getString("address"));
+			dto.setNickname(rs.getString("nickname"));
+			
 			}
 			return dto;
 		} catch (Exception e) {
@@ -357,9 +373,25 @@ public class StudyDAO {
 		return null;
 	}
 
+	public int chcke(String parameter) {
+		String sql = "update tblstudy set checke = NVL(checke,0)+1 where studyseq ="+parameter;
+		try {
+			pstat = conn.prepareStatement(sql);
+		
+		
+			return pstat.executeUpdate();
+		}catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		}	
+		return 0;
+	}
+
+
+	}
+
 
 	
 
 
-	
-}
+
