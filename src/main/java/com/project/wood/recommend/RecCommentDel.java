@@ -29,7 +29,7 @@ public class RecCommentDel extends HttpServlet {
 		
 		RecommendDAO dao = new RecommendDAO();
 		
-		int result = dao.delComment(rcseq);
+		int result = dao.delRecComment(rcseq);
 		
 		if (result == 1) {	
 			resp.sendRedirect("/wood/recommend/recommenddetail.do?recommendseq=" + recommendseq + "&column=" + column + "&word=" + URLEncoder.encode(word,"UTF-8") + "&search=" + search + "&restaurantseq=" + restaurantseq);
@@ -39,7 +39,7 @@ public class RecCommentDel extends HttpServlet {
 			writer.close();
 
 		}
-	}//get
+	}//
 	
 	
 	

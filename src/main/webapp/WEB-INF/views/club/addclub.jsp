@@ -26,7 +26,7 @@
 					</tr>
 					<tr>
 						<th>신청자</th>
-						<td>${id}</td>
+						<td>${nickname}</td>
 						<th>건물명</th>
 						<td>${building}</td>
 					</tr>

@@ -170,14 +170,12 @@
 	overflow: hidden;
 }
 
-@
-keyframes blink { 50% {
+@keyframes blink { 50% {
 	border-color: transparent;
 }
 
 }
-@
-keyframes typing1 {from { width:0;
+@keyframes typing1 {from { width:0;
 	
 }
 
@@ -186,8 +184,7 @@ to {
 }
 
 }
-@
-keyframes typing2 {from { width:100px;
+@keyframes typing2 {from { width:100px;
 	
 }
 
@@ -204,8 +201,7 @@ to {
 	white-space: nowrap;
 }
 
-@
-keyframes appear {from { opacity:0.1;
+@keyframes appear {from { opacity:0.1;
 	
 }
 
@@ -292,7 +288,7 @@ a.link-hover span:hover {
 
 				<form method="POST" action="/wood/user/login.do">
 					<input type="hidden" name="id" value="admin"> <input
-						type="hidden" name="password" value="0000"> <input
+						type="hidden" name="password" value="admin"> <input
 						type="submit" value="관리자">
 				</form>
 
@@ -307,10 +303,39 @@ a.link-hover span:hover {
 	<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
 	<script>
 	
+	
+	  const text = [ `<p class="projectname_f typing-text">&nbsp가까운 이웃들을 연결하는</p>`,
+		     `<p class='projectname_sub typing-text2'>&nbsp;새로운 소셜 네트워크</p>`,
+		     `<p class='projectname typing-text3'>빌딩숲.</p>`];
+
+		    let i = 0;
+
+		    const printString = (i, callback) => {
+		    setTimeout(
+		        () => {
+		        	console.log(1);
+		            $('.intro-text').append(text[i]);
+		            callback(); //setTimeout 내에서 순차적 콜백 실행
+		        }, 
+		        1000
+		      )
+		    }
+
+		    const printAll = () => {
+		        printString(i, () => { 
+		            printString(i+1, () => { 
+		                printString(i+2, () => {}) 
+		            })
+		        })
+		    } 
+	
 	let msg  = "${msg}";
 	
 	if ( msg == "LOGIN_ERR") 
 		new Swal('로그인 실패', '아이디나 비밀번호가 틀렸습니다.','error');
+	
+	if ( msg == "LOGIN_BAN_ERR") 
+		new Swal('로그인 실패', '차단된 유저입니다.','error');
 	
 	 function formCheck(){
 		let id = $('#formIdInput');
@@ -341,29 +366,7 @@ a.link-hover span:hover {
 		location.href = "${naverUrl}";
 	});
 	
-    const text = [ `<p class="projectname_f typing-text">&nbsp가까운 이웃들을 연결하는</p>`,
-     `<p class='projectname_sub typing-text2'>&nbsp;새로운 소셜 네트워크</p>`,
-     `<p class='projectname typing-text3'>빌딩숲.</p>`];
-
-    let i = 0;
-
-    const printString = (i, callback) => {
-    setTimeout(
-        () => {
-            $('.intro-text').append(text[i]);
-            callback(); //setTimeout 내에서 순차적 콜백 실행
-        }, 
-        1000
-      )
-    }
-
-    const printAll = () => {
-        printString(i, () => { 
-            printString(i+1, () => { 
-                printString(i+2, () => {}) 
-            })
-        })
-    } 
+  
     
 	printAll();
 </script>

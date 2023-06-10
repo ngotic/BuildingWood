@@ -40,15 +40,16 @@
 		
 		<div style="display: flex;">
 		<form method="POST" action='/wood/recommend/reclogin.do'>
-			<input type="hidden" name="id" value="httYNJ465">
-			<input type="hidden" name="pw" value="YHSDBJ919">
-			<input type="submit" value="모현손(역삼동)">
+			<input type="hidden" name="id" value="bwgOXg113">
+			<input type="hidden" name="pw" value="eNlFyz736">
+			<input type="submit" value="편술소(역삼동)">
 		</form>
-		<form method="POST" action='/toy/user/login.do'>
-			<input type="hidden" name="id" value="test">
-			<input type="hidden" name="pw" value="1111">
-			<input type="submit" value="테스트(test)">
+		<form method="POST" action='/wood/recommend/reclogin.do'>
+			<input type="hidden" name="id" value="sfHFUK601">
+			<input type="hidden" name="pw" value="daEnWm506">
+			<input type="submit" value="양권열(역삼동)">
 		</form>
+		
 		
 	</main>
 	</section>

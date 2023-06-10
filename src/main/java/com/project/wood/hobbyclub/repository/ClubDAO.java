@@ -3,6 +3,7 @@ package com.project.wood.hobbyclub.repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -120,23 +121,175 @@ public class ClubDAO {
 		
 		return 0;
 	}
-
+	
 	// 해당 사용자의 건물별 동호회를 출력한다. 
-	public List<ClubBoardDTO> boardlist(String id) { // 지역별
+		public List<ClubBoardDTO> boardlist(String id) { // 지역별
+			
+			try {
+					String sql = "select hc.*,c.*,  b.buildingseq, b.name as buildingname, (select nickname from tblMember where id=c.id) as nickname "
+							+ "from tblHobbyClub hc \r\n"
+							+ "    inner join tblclub c on hc.clubseq = c.clubseq \r\n"
+							+ "        inner join tbladdress a on c.id = a.id \r\n"
+							+ "            inner join tblbuilding b on b.buildingseq = a.buildingseq and b.buildingseq = (select buildingseq from tblAddress where id = ?)";
+					
+					pstat = conn.prepareStatement(sql);
+					pstat.setString(1, id);
+					rs = pstat.executeQuery();
+					
+					List<ClubBoardDTO> list = new ArrayList<ClubBoardDTO>();
+					
+					while (rs.next()) {
+						
+						ClubBoardDTO dto = new ClubBoardDTO();
+						
+						dto.setHobbyclubseq(rs.getString("hobbyclubseq"));
+						dto.setClubseq(rs.getString("clubseq"));
+						dto.setRecruits(rs.getString("recruits"));
+						dto.setRegdate(rs.getString("hobbyclubseq"));
+						dto.setEditdate(rs.getString("editdate"));
+						dto.setOpenregdate(rs.getString("openregdate").substring(0, 10));
+						dto.setCloseregdate(rs.getString("closeregdate").substring(0, 10));
+						dto.setContent(rs.getString("content"));
+						dto.setId(rs.getString("id"));
+						dto.setName(rs.getString("name"));
+						
+						dto.setBuildingname(rs.getString("buildingname"));
+						dto.setOpendate(rs.getString("opendate"));
+						dto.setAmount(rs.getString("amount"));
+						dto.setNickname(rs.getString("nickname"));
+						list.add(dto);
+					}
+					
+					
+					return list;
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+			}
+			return null;
+	}
+	
+
+		public List<ClubBoardDTO> boardlist(String id, String word, String type) { // 지역별
+			
+			try {
+					String sql="";
+					if( type.equals("title") ) {
+						sql = "select hc.*, c.*,  b.buildingseq, b.name as buildingname, (select nickname from tblMember where id=c.id) as nickname from tblHobbyClub hc inner join tblclub c on hc.clubseq = c.clubseq inner join tbladdress a on c.id = a.id inner join tblbuilding b on b.buildingseq = a.buildingseq and c.name LIKE '%'||?||'%' and b.buildingseq = (select buildingseq from tblAddress where id = ?)";
+						pstat = conn.prepareStatement(sql);
+						pstat.setString(1, word);
+						pstat.setString(2, id);
+						
+					} else if(type.equals("content")) {
+						sql = "select hc.*,c.*,  b.buildingseq, b.name as buildingname, (select nickname from tblMember where id=c.id) as nickname "
+								+ "from tblHobbyClub hc \r\n"
+								+ "    inner join tblclub c on hc.clubseq = c.clubseq \r\n"
+								+ "        inner join tbladdress a on c.id = a.id \r\n"
+								+ "            inner join tblbuilding b on b.buildingseq = a.buildingseq and b.buildingseq = (select buildingseq from tblAddress where id = ?) where hc.content LIKE '%'||?||'%'";
+						pstat = conn.prepareStatement(sql);
+						pstat.setString(1, id);
+						pstat.setString(2, word);
+					}
+					
+					
+					
+					rs = pstat.executeQuery();
+					
+					List<ClubBoardDTO> list = new ArrayList<ClubBoardDTO>();
+					
+					while (rs.next()) {
+						
+						ClubBoardDTO dto = new ClubBoardDTO();
+						
+						dto.setHobbyclubseq(rs.getString("hobbyclubseq"));
+						dto.setClubseq(rs.getString("clubseq"));
+						dto.setRecruits(rs.getString("recruits"));
+						dto.setRegdate(rs.getString("hobbyclubseq"));
+						dto.setEditdate(rs.getString("editdate"));
+						dto.setOpenregdate(rs.getString("openregdate").substring(0, 10));
+						dto.setCloseregdate(rs.getString("closeregdate").substring(0, 10));
+						dto.setContent(rs.getString("content"));
+						dto.setId(rs.getString("id"));
+						dto.setName(rs.getString("name"));
+						
+						dto.setBuildingname(rs.getString("buildingname"));
+						dto.setOpendate(rs.getString("opendate"));
+						list.add(dto);
+					}
+					
+					
+					return list;
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+			}
+			return null;
+		}	
+		
+		
+	// 해당 사용자의 건물별 동호회를 출력한다. 
+	public List<ClubBoardDTO> boardlist(String id, String word, String type, String n) { // 지역별
 		
 		try {
-				String sql = "select hc.*,c.*,  b.buildingseq, b.name as buildingname, (select nickname from tblMember where id=c.id) as nickname "
-						+ "from tblHobbyClub hc \r\n"
-						+ "    inner join tblclub c on hc.clubseq = c.clubseq \r\n"
-						+ "        inner join tbladdress a on c.id = a.id \r\n"
-						+ "            inner join tblbuilding b on b.buildingseq = a.buildingseq and b.buildingseq = (select buildingseq from tblAddress where id = ?)";
+				System.out.println(n);
+				int begin = Integer.parseInt(n);
+				int end   = begin+3;
 				
-				pstat = conn.prepareStatement(sql);
-				pstat.setString(1, id);
+				System.out.println(begin +", "+ end);
+				String sql="";
+				if( type.equals("title") ) {
+//					sql = "select hc.*,c.*,  b.buildingseq, b.name as buildingname, (select nickname from tblMember where id=c.id) as nickname "
+//						+ "from tblHobbyClub hc \r\n"
+//						+ "    inner join tblclub c on hc.clubseq = c.clubseq \r\n"
+//						+ "        inner join tbladdress a on c.id = a.id \r\n"
+//						+ "            inner join tblbuilding b on b.buildingseq = a.buildingseq and b.buildingseq = (select buildingseq from tblAddress where id = ?) where c.name LIKE '%'||?||'%'";
+
+					
+					//sql = "select hc.*, c.*,  b.buildingseq, b.name as buildingname, (select nickname from tblMember where id=c.id) as nickname from tblHobbyClub hc inner join tblclub c on hc.clubseq = c.clubseq inner join tbladdress a on c.id = a.id inner join tblbuilding b on b.buildingseq = a.buildingseq and c.name LIKE '%'||?||'%' and b.buildingseq = (select buildingseq from tblAddress where id = ?)";
+					
+					sql = "select * from ( select  cb.*, rownum as rnum from \r\n"
+							+ "( select hc.hobbyclubseq, hc.clubseq, hc.recruits, hc.regdate, hc.openregdate, hc.closeregdate, hc.content, c.id, c.name, b.buildingseq, b.name as buildingname, (select nickname from tblMember m where m.id=c.id) as nickname \r\n"
+							+ "from tblHobbyClub hc \r\n"
+							+ "inner join tblclub c on hc.clubseq = c.clubseq \r\n"
+							+ "inner join tbladdress a on c.id = a.id \r\n"
+							+ "inner join tblbuilding b on b.buildingseq = a.buildingseq ) cb ) where name LIKE '%'|| ? || '%' and rnum between ? and ?";
+					
+					pstat = conn.prepareStatement(sql);
+					pstat.setString(1, word);
+					pstat.setInt(2, begin);
+					pstat.setInt(3, end);
+					
+				} else if(type.equals("content")) {
+					/*
+					 * sql =
+					 * "select hc.*,c.*,  b.buildingseq, b.name as buildingname, (select nickname from tblMember where id=c.id) as nickname "
+					 * + "from tblHobbyClub hc \r\n" +
+					 * "    inner join tblclub c on hc.clubseq = c.clubseq \r\n" +
+					 * "        inner join tbladdress a on c.id = a.id \r\n" +
+					 * "            inner join tblbuilding b on b.buildingseq = a.buildingseq and b.buildingseq = (select buildingseq from tblAddress where id = ?) where hc.content LIKE '%'||?||'%'"
+					 * ;
+					 */
+					
+					sql = "select * from ( select  cb.*, rownum as rnum from \r\n"
+							+ "( select hc.hobbyclubseq, hc.clubseq, hc.recruits, hc.regdate, hc.openregdate, hc.closeregdate, hc.content, c.id, c.name, b.buildingseq, b.name as buildingname, (select nickname from tblMember m where m.id=c.id) as nickname \r\n"
+							+ "from tblHobbyClub hc \r\n"
+							+ "inner join tblclub c on hc.clubseq = c.clubseq \r\n"
+							+ "inner join tbladdress a on c.id = a.id \r\n"
+							+ "inner join tblbuilding b on b.buildingseq = a.buildingseq ) cb ) where content LIKE '%'|| ? || '%' and rnum between ? and ?";
+					
+					
+					
+					pstat = conn.prepareStatement(sql);
+					/* pstat.setString(1, id); */
+					pstat.setString(1, word);
+					pstat.setInt(2, begin);
+					pstat.setInt(3, end);
+				}
+				
+				
 				rs = pstat.executeQuery();
 				
 				List<ClubBoardDTO> list = new ArrayList<ClubBoardDTO>();
-				
 				while (rs.next()) {
 					
 					ClubBoardDTO dto = new ClubBoardDTO();
@@ -144,18 +297,15 @@ public class ClubDAO {
 					dto.setHobbyclubseq(rs.getString("hobbyclubseq"));
 					dto.setClubseq(rs.getString("clubseq"));
 					dto.setRecruits(rs.getString("recruits"));
-					dto.setRegdate(rs.getString("hobbyclubseq"));
-					dto.setEditdate(rs.getString("editdate"));
+					dto.setRegdate(rs.getString("regdate"));
 					dto.setOpenregdate(rs.getString("openregdate").substring(0, 10));
 					dto.setCloseregdate(rs.getString("closeregdate").substring(0, 10));
 					dto.setContent(rs.getString("content"));
 					dto.setId(rs.getString("id"));
-					dto.setName(rs.getString("name"));
-					
+					dto.setName(rs.getString("name"));					
 					dto.setBuildingname(rs.getString("buildingname"));
-					dto.setOpendate(rs.getString("opendate"));
-					dto.setAmount(rs.getString("amount"));
-					dto.setNickname(rs.getString("nickname"));
+					//dto.setOpendate(rs.getString("opendate"));
+
 					list.add(dto);
 				}
 				
@@ -301,5 +451,175 @@ public class ClubDAO {
 		}
 		return 0;
 	}
+
+	public int addReview(ClubAssessmentDTO dto) {
+		
+		try {
+			
+			String sql = "insert into tblClubAssessment values(clubassessmentseq.nextVal, ?, ?, ? ,? )";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, dto.getClubseq());
+			pstat.setString(2, dto.getId());
+			pstat.setString(3, dto.getScore());
+			pstat.setString(4, dto.getReview());
+
+			return pstat.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	public int updateClubBoard(ClubBoardDTO cbDto) {
+		
+		try {
+			
+			String sql = "update tblHobbyClub set recruits=?, editdate=sysdate, openregdate=?, closeregdate=?, content=? where hobbyclubseq = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, cbDto.getRecruits());
+			pstat.setString(2, cbDto.getOpenregdate());
+			pstat.setString(3, cbDto.getCloseregdate());
+			pstat.setString(4, cbDto.getContent());
+			pstat.setString(5, cbDto.getHobbyclubseq());
+			
+			return pstat.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+		
+		
+	}
+
+	public String statusString(String str) {
+		if(str.equals("N"))
+			return "미가입";
+		else if(str.equals("N"))
+			return "가입";
+		return null;
+	}
+	
+	public List<ClubRegisterDTO> clubRegisterList(String hseq) {
+		
+
+		
+		try {
+			
+			String sql="select r.clubregisterseq, r.hobbyclubseq, r.status,  (select nickname from tblmember where id=r.id) as nickname, (select tel from tblmember where id=r.id) as tel from tblClubRegister r where hobbyclubseq=?";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, hseq);
+			
+			rs = pstat.executeQuery();
+			
+			List<ClubRegisterDTO> clubarr = new ArrayList<ClubRegisterDTO>();
+			while (rs.next()) {
+				System.out.println("print print print ");
+				ClubRegisterDTO dto = new ClubRegisterDTO();
+				dto.setClubregisterseq(rs.getString("clubregisterseq"));
+				dto.setHobbyclubseq(rs.getString("hobbyclubseq"));
+				dto.setNickname(rs.getString("nickname"));
+				dto.setTel(rs.getString("tel"));
+				dto.setStatus(statusString(rs.getString("status")));
+				clubarr.add(dto);
+			}
+			return clubarr;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		return null;
+	}
+
+
+	public int updateStatus(String clubregisterseq, String hobbyclubseq, String status) {
+		
+		try {
+			String sql = "update tblClubRegister set status = ? where clubregisterseq = ? and hobbyclubseq = ?";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, status);
+			pstat.setString(2, clubregisterseq);
+			pstat.setString(3, hobbyclubseq);
+			return pstat.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	public int deleteClubBoard(String hobbyclubseq) {
+
+		
+		try {
+			String sql = "update tblHobbyclub set closeregdate = openregdate where hobbyclubseq=?";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, hobbyclubseq);
+
+			return pstat.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
+	public List<ClubAssessmentDTO> listReview(String clubseq) {
+		
+		try {
+				
+				String sql = "select c.*, (select nickname from tblmember where id=c.id) as nickname from tblClubAssessment c where clubseq = ?";
+				
+				pstat = conn.prepareStatement(sql);
+				pstat.setString(1, clubseq);
+				rs = pstat.executeQuery();
+				
+				List<ClubAssessmentDTO> list = new ArrayList<ClubAssessmentDTO>();
+				
+				
+				  while (rs.next()) {
+				  
+					ClubAssessmentDTO dto = new ClubAssessmentDTO();
+					dto.setClubassessmentseq(rs.getString("clubassessmentseq"));
+					dto.setClubseq(rs.getString("clubseq"));
+					dto.setId(rs.getString("id"));
+					dto.setScore(rs.getString("score"));
+					dto.setReview(rs.getString("review"));
+					dto.setNickname(rs.getString("nickname"));
+				  	list.add(dto);
+				  } 
+				  
+				  return list;
+				 
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+		
+		return null;
+	}
+
+	public int delReview(String clubassessmentseq) {
+		try {
+			String sql = "delete from tblclubassessment where clubassessmentseq=?";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, clubassessmentseq);
+			return pstat.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
 	
 }

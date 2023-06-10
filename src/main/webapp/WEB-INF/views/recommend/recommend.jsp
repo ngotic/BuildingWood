@@ -321,7 +321,7 @@
 	margin-top: 4px;
 }
 .recommend-quote {
-	color: #BBB !important;
+	color: tomato !important;
 	font-size: 20px;
 }
 #recommend-map {
@@ -354,12 +354,13 @@
     border: 1px solid #aaa;
     border-radius: 5px;
     font-family: 'Pretendard-Regular';
+    margin-bottom: 20px;
 }
 
 /* 페이징 */
 .page-link.active {
 	background-color: #1BC060 !important;
-	border-color: #dee2e6 !important;
+	border-color: #1BC060 !important;
 	font-family: 'Pretendard-Regular';
 	color: #fff !important;
 }
@@ -371,10 +372,32 @@
 	color: #444444 !important;
 }
 
-/* 버튼 */
-.rec-btn {
-	padding: 5px;
-}
+	/* 버튼 */
+	.rec-btn {
+		padding: 5px;
+		border-radius: 0 4px 4px 0;
+	    height: 38px;
+		
+	}
+
+	input, textarea, button, select {
+		border: hidden !important;
+	}
+	
+	 .searchdiv .btn {
+    	padding-left: 33px;
+   	}
+	
+	#ori-icon2 {
+	font-size: 20px;
+    margin-top: 3px;
+   
+   }
+   
+   #container-loc {
+   height: 130px;
+   width: 980px;
+   }
 
 </style>
 <link
@@ -387,7 +410,7 @@
 <body>
 		<!-- template.jsp > index.jsp -->
 		<%@ include file="/WEB-INF/views/include/header.jsp" %>
-		<section class="container">
+		<section class="container" id="container-loc">
 			<h1>맛집 추천
 				<c:if test="${map.search == 'n'}">
 				<small>목록</small>
@@ -442,9 +465,9 @@
 		                <span class="material-symbols-outlined" id="recommend-star">grade</span><span class="recommend-score">${dto.avgscore}</span>
 		              </div>
 		            </div>
-		              <div class="frame1-group frame1-love">
+		              <%-- <div class="frame1-group frame1-love">
 		                <span class="material-symbols-outlined" id="recommend-like">favorite</span><span class="recommend-score">${dto.love}</span>
-		              </div>
+		              </div> --%>
 		            </div>
 		          </div>
 		          
@@ -477,14 +500,14 @@
 		</div>
 		
 		<!-- 페이징 -->
-		<ul class="pagination d-flex justify-content-center flex-wrap pagination-rounded-flat pagination-success" style="text-align: center; margin-bottom:10px; font-family: 'Pretendard-Regular';">${pagination}</ul>
+		<ul class="pagination d-flex justify-content-center flex-wrap pagination-rounded-flat pagination-success" style="text-align: center; margin-bottom:20px; font-family: 'Pretendard-Regular';">${pagination}</ul>
 			
 		<div class="searchdiv">
 			<!-- 관리자만 글쓰기 가능 -->
 			<%-- <% if (session.getAttribute("lv").toString().equals("0")) { %>
 			<button type="button" class="add primary" onclick="location.href='/toy/board/add.do?mode=new';">글쓰기</button>
 			<% } %>	 --%>
-			<button type="button" class="list primary rec-btn" onclick="location.href='/wood/recommend/recommend.do';">목록보기</button>
+    	     <button type="button" class="btn btn-outline-secondary btn-sm" onclick="location.href='/wood/recommend/recommend.do';"><span class="material-symbols-outlined" id="ori-icon2">format_list_bulleted</span>목록보기</button>
 		</div>
 	
 <%-- 	<form method="POST" action="/recommend/recommenddetail.do">

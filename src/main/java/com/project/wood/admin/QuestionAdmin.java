@@ -1,4 +1,4 @@
-package com.project.wood.carpool;
+package com.project.wood.admin;
 
 import java.io.IOException;
 
@@ -9,15 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/carpool/list2.do")
-public class List2 extends HttpServlet {
+@WebServlet("/admin/adminquestion.do")
+public class QuestionAdmin extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		//
-
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/carpool/list2.jsp");
+		//QuestionAdmin.java
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/admin/adminquestion.jsp");
 		dispatcher.forward(req, resp);
 
 	}

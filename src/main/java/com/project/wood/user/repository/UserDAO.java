@@ -29,13 +29,13 @@ public class UserDAO {
 			
 			rs = pstat.executeQuery();
 			
-			
 			if (rs.next()) {
 				UserDTO result = new UserDTO();
 				// 이정도만 넘기자 
 				result.setId(rs.getString("id"));
 				result.setNickname(rs.getString("nickname"));
 				result.setLv(rs.getString("lv"));
+				result.setBan(rs.getString("ban"));
 
 				return result;
 			}
@@ -183,6 +183,7 @@ public class UserDAO {
 				result.setId(rs.getString("id"));
 				result.setNickname(rs.getString("nickname"));
 				result.setLv(rs.getString("lv"));
+				result.setBan(rs.getString("ban"));
 				return result;
 			}
 		} catch (SQLException e) {
