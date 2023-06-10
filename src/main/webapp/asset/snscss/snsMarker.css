@@ -3,7 +3,7 @@
 .overlaybox div, ul {overflow:hidden;margin:0;padding:0;}
 .overlaybox li {list-style: none;}
 .overlaybox .boxtitle {color:#fff;font-size:16px;font-weight:bold;;margin-bottom:8px;}
-.overlaybox .first {position:relative;width:157px;height:160px;background: url('/wood/asset/img/포스코타워 역삼.png') no-repeat center;margin-left:5px;margin-bottom:8px;background-size: cover;}
+.overlaybox .first {position:relative;width:157px;height:160px;margin-left:5px;margin-bottom:8px;background-size: cover;}
 .first .text {color:#fff;font-weight:bold;}
 .first .triangle {position:absolute;width:48px;height:48px;top:0;left:0;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/triangle.png') no-repeat; padding:6px;font-size:18px;}
 .first .movietitle {position:absolute;width:100%;bottom:0;background:rgba(0,0,0,0.4);padding:7px 15px;font-size:14px;}

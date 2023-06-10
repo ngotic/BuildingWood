@@ -35,7 +35,7 @@
 <link href="asset/snscss/SnsMainContent.css" rel="stylesheet" type="text/css">
 
 </head>
-<body>
+<body style= "scroll:no;">
 	<!-- template.jsp > index.jsp -->
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
 	<section class="container">
@@ -90,14 +90,14 @@
 									<div class="image-container">
 									  <div class="row">
 									    <div class="coll">
-										    <label for="addpic1" id="label_addpic" style="text-align:center; vertical-align:middle; width:180px; height:120px; overflow:hidden;">
-													<img style="height:120px;" id="preview-image1" src="">
+										    <label for="addpic1" id="label_addpic" style="text-align:center; vertical-align:middle; width:210px; height:140px; overflow:hidden;">
+													<img style="width:210px; height:140px;" id="preview-image1" src="">
 											</label>
 										    <input type="file" id="addpic1" name="addpic1" style="display:none"/>
 									    </div>
 									    <div class="coll">
-									      	 <label for="addpic2" id="label_addpic" style="text-align:center; vertical-align:middle; width:180px; height:120px; overflow:hidden;">
-													<img style="height:120px;" id="preview-image2" src="">
+									      	 <label for="addpic2" id="label_addpic" style="text-align:center; vertical-align:middle; width:210px; height:140px; overflow:hidden;">
+													<img style="width:210px;height:140px;" id="preview-image2" src="">
 											</label>
 										    <input type="file" id="addpic2" name="addpic2" style="display:none"/>
 									    </div>
@@ -146,7 +146,7 @@
 						     						<img alt="" src="/wood/asset/sns/${clist.profile}" class="comment_userimage">
 							     				</div>
 							     				<div class="modal_usernick">
-													<div class="box top">
+													<div class="box top modal_commentnick">
 														${clist.nickname}
 													</div>
 													<div>
@@ -207,7 +207,7 @@
   <div class="modal-dialog modal-xl">
     <div class="modal-content" style="border-radius: 0;">
       <div class="modal-header" style="border-bottom: none;">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="headershow();"></button>
       </div>
       <div class="modal-body" style="padding: 5px 5px; ">
      	
@@ -224,6 +224,7 @@
      				</div>
      				<div id="modal_usernick"></div>
 					<div class="modal_comment" id="modal_content"></div>
+					<div class="box">...</div>
      				
      			</td>
      		</tr>
@@ -271,6 +272,10 @@
 
 <script type="	text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0c837c78add7b31e526a1b98c5a9910f"></script>	
 <script>
+
+
+	
+	
 	let hidemapbox="${hidemapbox}";
 	console.log(hidemapbox);
 	function hidemap(){
@@ -345,7 +350,7 @@
 		<c:forEach items="${blist}" var="dto" varStatus="status">
 		content${status.count}='<div class="overlaybox">' +
 	    '    <div class="boxtitle">${dto.name}</div>' +
-	    '    <div class="first">' +
+	    '    <div class="first" style="background: url(\'/wood/asset/sns/${dto.name}.jpg\') no-repeat center;position:relative;width:157px;height:160px;margin-left:5px;margin-bottom:8px;background-size: cover;" >' +
 	    '        <div class="movietitle text">${dto.name}</div>' +
 	    '    </div>' +
 	    '</div>'; 
@@ -449,6 +454,7 @@
 			
 	//좋아요 처리 
 	 $(".like").on('click',function(){
+		 var heartseq = 1;
 		 var index = parseInt($(this).data('index')-1);
 		 
 		 if(user==1){
@@ -459,9 +465,11 @@
 			 if(heart[index]==0){
 				 $('#boardwrap').children().eq(index+1).find('.like').html(tofill);
 	   				heart[index]=1;
+	   				heartseq = 1;
 			 }else{
 				 $('#boardwrap').children().eq(index+1).find('.like').html(toblank);
 	 				heart[index]=0;
+	 				heartseq = 0;
 			 }
 		 }
 		 else{
@@ -472,21 +480,29 @@
 			 if(heart[index]==0){
 				 $('#boardwrap').children().eq(index).find('.like').html(tofill);
 					heart[index]=1;
+					heartseq = 0;
 			 }else{
 				 $('#boardwrap').children().eq(index).find('.like').html(toblank);
 					heart[index]=0;
+					heartseq = 0;
 			 }
 		 }
  	 });
-	
-	
 
+	
+	 function headershow(){
+			$("#header").css('opacity','1');		 
+			
+			
+			
+		 }
+		
 	
 	    	
    	$(document).ready(function() {     
    		if(hidemapbox=='t'){
-   			$('#map').css("transition-duration","1s");
-   			$('#content').css("transition-duration","2s");
+   			$('#map').css("transition-duration","0s");
+   			$('#content').css("transition-duration","0s");
 			$('#map').css("transform","translate(1000px,0)");
 			$('#content').css("transform","translate(300px,0)");
 			
@@ -494,15 +510,17 @@
 			hidemapbox='t'
 		}
 		else{
-			$('#map').css("transition-duration","1s");
-   			$('#content').css("transition-duration","2s");
+			$('#content').fadeIn(3000);
 			$('#map').css("transform","translate(0,0)"); 
 			$('#content').css("transform","translate(0,0)"); 
 			$('#hidemap').html('맵 숨기기');
 			hidemapbox= 'f';
 		}
+   		
+   		
        $('#staticBackdrop').on('show.bs.modal', function(event) {       
     	 $('#header').css("opacity","0.5");
+    	 
        	var Idx =1; //현재 슬라이드 index
        	const snsboardseq=$(event.relatedTarget).data('snsboardseq');
        	const index= 1+$(event.relatedTarget).data('index');
@@ -519,6 +537,8 @@
         let str= $("#boardwrap").children().eq(index).find("#send_modal").html().substring();
         let commented = $("#boardwrap").children().eq(index).find("#to_modal_commentlist").html().substring();
         let like = $("#boardwrap").children().eq(index).find(".like").html().substring();
+        
+       
         
         if(${ubuildingseq!=buildingseq}){
         	str= $("#boardwrap").children().eq(index-1).find("#send_modal").html().substring();
@@ -540,7 +560,7 @@
         $('#modal_scroll').html(commented);
         
         $("#modal_imagebox").html(str); 
-        $("#modal_react").html(like);
+        $("#like").html(like);
         
     	$('.mprev').on('click', function () {
     		if(Idx<=1){
@@ -563,12 +583,44 @@
     	 
     	});
     	
+    	//modallike
+    	$("#like").on('click',function(){
+    		var mtblike='';
+    		 var tofill = $('#like').html();
+			 var toblank =  $('#like').html();
+			 tofill=tofill.replaceAll("outlined","rounded");
+			 toblank=toblank.replaceAll("rounded","outlined");
+			 if(like.includes('rounded')==true){
+				 $('#like').html(toblank);
+				 like=like.replaceAll("rounded","outlined");
+				  mtblike=like.replaceAll('ed\" style=\"font-size:40px; margin-left:15px;\"','ed\"style="font-size:24px; margin-left:1px;"');
+				 if(${ubuildingseq!=buildingseq}){
+					 
+		        	$("#boardwrap").children().eq(index-1).find(".like").html(mtblike);
+		         }
+				 else{
+				 	$("#boardwrap").children().eq(index).find(".like").html(mtblike);
+			 	 }
+			 }else{
+				 $('#like').html(tofill);
+				 like=like.replaceAll("outlined","rounded");
+				  mtblike=like.replaceAll('ed\" style=\"font-size:40px; margin-left:15px;\"','ed\"style="font-size:24px; margin-left:1px;"');
+				 if(${ubuildingseq!=buildingseq}){
+	        		$("#boardwrap").children().eq(index-1).find(".like").html(mtblike);
+			     }
+				 else{
+				 	$("#boardwrap").children().eq(index).find(".like").html(mtblike);
+				 }
+			 }
+    		
+    	});
+    	
     	$(".to_comment").on("click",function(){
     		$("#w_modal_comment").val('@'+this.value+" ");
     		$("#w_modal_comment").focus();
     	});
     	
-    	 $('#btnadd').on("click",function addcomment(){
+   	 	$('#btnadd').on("click",function addcomment(){
      		$.ajax({
   	            url:"/wood/snsmain.do",
   	            type: "post", // post 방식
@@ -578,15 +630,23 @@
   	            	comment:$('#w_modal_comment').val()},// json 방식으로 서블릿에 보낼 데이터
   	            success:function(data){
  	                alert("success");
- 	                
- 	                location.replace();
+ 	               // 팝업 호출 url
+ 	               var url = 'http://localhost:8090/wood/snsmain.do?buildingseq='+$('#blist option:selected').data('buildingseq')+'&hidemapbox='+hidemapbox;
+ 	               // 팝업 호출
+ 	               
+ 	              location.href=url;
+ 	          		
+ 	               
   	            },
   	            error:function(){
   	                alert("error");
   	            }
   	        });
      	});
+    	 
+    	 
        });
+       
      });
     	
     	
@@ -617,7 +677,7 @@
 		    reader.readAsDataURL(file);
 	});
 	 
-	 
+
 
 		
 </script>

@@ -1,5 +1,9 @@
 @charset "EUC-KR";
 
+	.body{
+	overflow:hidden;
+	}
+	
 	*{
 		  -webkit-user-select:none;
 		  -moz-user-select:none;
@@ -19,13 +23,16 @@
 	}
 	/*컨테이너 오버라이딩  */
 	.container {
+		margin-top:0px;
 	    font-size: 14px; 
 	    max-width: 1300px;
 	    font-family: var(--main-content-font-family);
+	    max-height: 800px;
+	    margin-bottom:0px;
 	} 
 	.wrap{
 		display:flex;
-		margin-top: 110px;
+		margin-top: 90px;
 	}
 
 	#content{
@@ -40,7 +47,7 @@
 	}
 	#map{
 	width:700px;
-	height:864px;
+	height:800px;
 	margin:none;
 	 transition-property: all;
 	
@@ -48,7 +55,7 @@
 	#cheader{
 		height:40px;
 		text-align:center;
-		position:relative;
+		position:relative;;
 		color:black;
 		margin:10px;
 		border-bottom:3px solid #008D62;
@@ -111,12 +118,16 @@
 	#board::-webkit-scrollbar {
     	display: none; /* 크롬, 사파리, 오페라, 엣지 */
 	}
+	body::-webkit-scrollbar {
+    	display: none; /* 크롬, 사파리, 오페라, 엣지 */
+	}
 	img{
 		margin:auto;
 		display:block;
 		object-fit: cover;
 	}
 		.to_comment{
+		font-size:12px;
 		position:absolute;
 		bottom:5px;
 	}
@@ -132,6 +143,9 @@
 		width:273px;
 		height:18px;
 		overflow:hidden;
+	}
+	.modal_commentnick{
+		font-size:12px;
 	}
 	input{
 		background-color:transparent;
@@ -238,8 +252,8 @@
   right: 10px;
 }
 .coll{
-	width:180px;
-	height:120px;
+	width:210px;
+	height:140px;
 	padding:0 0 0 0;
 	margin:auto;
 	outline:3px solid gray;
@@ -260,5 +274,5 @@ color:red;
 
 img{
 	border-radius:15px;
-	object-fit:scale-down;
+	object-fit:contain;
 }

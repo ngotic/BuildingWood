@@ -40,7 +40,6 @@ public class SnsMain extends HttpServlet {
 		String ubuildingseq = dao.getuserbuildingseq(uid);
 		String buildingseq = req.getParameter("buildingseq");  
 		String hidemapbox = req.getParameter("hidemapbox");
-		System.out.println(hidemapbox);
 		if(req.getParameter("buildingseq")==null) {
 			buildingseq = ubuildingseq;
 		}
