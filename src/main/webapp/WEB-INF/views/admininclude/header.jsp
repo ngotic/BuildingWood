@@ -227,7 +227,7 @@
                     	
 	                    <c:if test="${lv==0}">
 		                    <li>
-		                        <a class="nav-link menu-title link-nav" href="/wood/admin/adminbuilding.do"><i data-feather="home"></i><span>건물관리</span></a>                  
+		                        <a class="nav-link menu-title link-nav" href="/wood/admin/adminbuilding.do"><i data-feather="home"></i><span>건물정보 관리</span></a>                  
 		                    </li>
 	                    </c:if>
                     

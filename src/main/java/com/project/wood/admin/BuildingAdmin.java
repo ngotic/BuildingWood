@@ -15,11 +15,13 @@ import com.project.wood.admin.repository.BuildingAdminDTO;
 
 @WebServlet("/admin/adminbuilding.do")
 public class BuildingAdmin extends HttpServlet {
-
+	
+	BuildingAdminDAO dao = new BuildingAdminDAO();
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//BuildingAdmin.java
-		BuildingAdminDAO dao = new BuildingAdminDAO();
+		
 		List<BuildingAdminDTO> blist = dao.buildingList();
 		System.out.println(blist);
 		req.setAttribute("blist", blist);

@@ -40,7 +40,8 @@
               <div class="col-sm-12">
                 <div class="card">
                   <div class="card-header">
-                    <h2 style="font-weight:900px;">건물관리 페이지</h2><span style="font-size:20px;">이 페이지에서 빌딩숲 관리자가 건물을 관리합니다.</span><span></span>
+                    <h2 style="font-weight:900; margin-bottom:20px;">건물관리 페이지</h2>
+                    <span style="font-size:20px;">이 페이지에서 빌딩숲 관리자가 건물을 관리합니다.</span>
                   </div>
                   <div class="card-body">
                     <div class="table-responsive">
