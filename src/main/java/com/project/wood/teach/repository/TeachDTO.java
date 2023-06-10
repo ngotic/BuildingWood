@@ -1,4 +1,4 @@
-package com.project.wood.board.teach;
+package com.project.wood.teach;
 
 public class TeachDTO {
 	private String teachseq;

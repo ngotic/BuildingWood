@@ -1,4 +1,4 @@
-package com.project.wood.board.teach;
+package com.project.wood.teach;
 
 import java.io.IOException;
 import java.io.PrintWriter;
