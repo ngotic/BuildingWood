@@ -24,7 +24,7 @@ public class CarpoolDTO {
 	private String recruitstatus;
 	private String recruit;
 	
-	private String applyrecruit;//승인 완료된 모집인원 수
+	private String recruitcount;//신청 완료(승인)된 모집인원 수
 	
 	//tblDriver
 	private String id;
@@ -34,8 +34,11 @@ public class CarpoolDTO {
 	
 	//tblCarpoolApply
 	private String carpoolapplyseq;
-	private String applyid;		//신청하는 회원의 아이디(로그인 중인 아이디)
-	private String applystatus;	//신청 상태
+	private String applyid;			//신청하는 회원의 아이디(로그인 중인 아이디)
+	private String applystatus;		//신청 상태
+	
+	private String applynickname;	//신청한 회원의 닉네임
+	private String applygender;		//신청한 회원의 성별
 	
 	//tblMember
 	private String profile;

@@ -277,12 +277,16 @@
 <body>
 	<!-- template.jsp > index.jsp -->
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
+	<%@ include file="/WEB-INF/views/carpool/carpoolheader.jsp" %> 
 	<section class="container">
-		<h1><small>카풀 게시판</small></h1>
+		<!-- <h1><small>카풀 게시판</small></h1> -->
 	
 	
 		<!-- 검색 -->
 		<form id="searchForm" action="/wood/carpool/list.do" method="GET">
+		
+		<div id="carpool-moving" style="height: 100px; margin-top: -100px;"></div>
+		
 		<div class="search-box-frame">
 		
 	        <div class="component-container1">
@@ -341,7 +345,7 @@
 		<!-- 카풀 카드 리스트 -->
 		<div class="container">
 	      <div class="row">
-		<c:forEach items="${list}" var="dto">
+			<c:forEach items="${list}" var="dto">
 	      
 	      	<!-- 테스트1 -->
 	      	<div class="col-4">
@@ -406,7 +410,7 @@
 	            <div class="card-body">
 	            	<div class="card-text bottom-frame">
 	            		<span class="count-frame">
-	            			<span>0/${dto.recruit}명 모집</span>
+	            			<span>${dto.recruitcount}/${dto.recruit}명 모집</span>
 	            		</span>
 		              	<span class="price">${dto.fee}원</span>
 		            </div>
