@@ -230,13 +230,14 @@
      			</td>
      			<!-- 오른쪽  -->
      			<td style="width:550px;height:50px; border-bottom: 3px solid rgb(219,219,219);vertical-align: top; " >
+     				<div class="box">
      				<div class="u_imagebox box" id="u_imagebox">
      					<img alt="" src="/wood/asset/sns/pic.png" class="comment_userimage">
      				</div>
      				<div id="modal_usernick" style="width:120px;"></div>
 					<div class="modal_comment" id="modal_content"style="margin-left:10px;"></div>
 					<div class="box">...</div>
-     				
+     				</div>
      			</td>
      		</tr>
      		<tr style="height:500px; border-bottom: 3px solid rgb(219,219,219);">

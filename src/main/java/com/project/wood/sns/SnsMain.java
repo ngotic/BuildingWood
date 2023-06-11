@@ -186,6 +186,8 @@ public class SnsMain extends HttpServlet {
 						
 						);
 				
+				System.out.println(req.getRealPath("/asset/sns"));
+				
 				String content = multi.getParameter("add_useritem");
 				
 				String pic1 = multi.getFilesystemName("addpic1");
