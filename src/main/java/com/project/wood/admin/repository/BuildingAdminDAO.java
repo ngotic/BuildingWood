@@ -7,6 +7,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import com.test.my.DBUtil;
 
 public class BuildingAdminDAO {
@@ -203,6 +206,42 @@ public class BuildingAdminDAO {
 		}
 
 		return 0;
+	}
+
+	public JSONObject getGenderRatio(JSONObject obj, String gender) {
+				
+	 try {
+
+		String sql = "select round( count(case when age between 10 and 19 then '10대' end)/count(*)*100, 1) \"10대\",\r\n"
+				+ "round( count(case when age between 20 and 29 then '20대' end)/count(*)*100, 1) \"20대\",\r\n"
+				+ "round( count(case when age between 30 and 39 then '30대' end)/count(*)*100, 1) \"30대\",\r\n"
+				+ "round( count(case when age between 40 and 49 then '40대' end)/count(*)*100, 1) \"40대\",\r\n"
+				+ "round( count(case when age between 50 and 59 then '50대' end)/count(*)*100, 1) \"50대\",\r\n"
+				+ "round( count(case when age >= 60 then '60대이상' end)/count(*)*100, 1) \"60대\" ,\r\n"
+				+ "count(*) \"sum\"\r\n"
+				+ "from (select ((to_char(sysdate, 'yyyy') - to_char(m.birth ,'yyyy'))+1) as age from tblMember m where m.gender=?)";
+
+		pstat = conn.prepareStatement(sql);
+		pstat.setString(1, gender);
+		rs = pstat.executeQuery();
+
+		if (rs.next()) {
+			
+			obj.put("age10", rs.getString("10대"));
+			obj.put("age20", rs.getString("20대"));
+			obj.put("age30", rs.getString("30대"));
+			obj.put("age40", rs.getString("40대"));
+			obj.put("age50", rs.getString("50대"));
+			obj.put("age60", rs.getString("60대"));
+			
+			return obj;
+		}
+
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+		
+		return null;
 	}
 	
 }

@@ -82,7 +82,7 @@
                     <ul class="dropdown-menu" >
                         <li><a class="dropdown-item" href="/wood/promise/list.do">약속게시판</a></li>
 						<li><a class="dropdown-item" href="/wood/club/club.do">동호회게시판</a></li>
-						<li><a class="dropdown-item" href="">맛집게시판</a></li>
+						<li><a class="dropdown-item" href="/wood/recommend/recommend.do">맛집게시판</a></li>
 						        
                     </ul>
                 </div>
@@ -117,7 +117,7 @@
                      <ul class="dropdown-menu" >
                         <li><a class="dropdown-item" href="/wood/user/logout.do">로그아웃</a></li>
                         <c:if test="${lv == 0}">
-							<li><a class="dropdown-item" href="/wood/admin/admin.do">마이페이지</a></li>
+							<li><a class="dropdown-item" href="/wood/admin/adminbuilding.do">마이페이지</a></li>
                     	</c:if>
                     	<c:if test="${lv > 0 }">
                     		<li><a class="dropdown-item" href="/wood/mypage/mypage.do">마이페이지</a></li>

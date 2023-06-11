@@ -46,7 +46,6 @@ public class ListReview extends HttpServlet {
 			}
 		}
 		
-		System.out.println("this is list review!!");
 		resp.setCharacterEncoding("UTF-8");
 		resp.setContentType("application/json");
 		PrintWriter writer;

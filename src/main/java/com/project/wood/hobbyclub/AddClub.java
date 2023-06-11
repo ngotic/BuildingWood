@@ -23,7 +23,8 @@ public class AddClub extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//AddClub.java
-		String id = "WJssd875"; 
+		
+		String id = (String)req.getSession().getAttribute("id");
 		String building = "한독빌딩";
 		req.setAttribute("id",id);
 		req.setAttribute("building",building);

@@ -34,59 +34,7 @@
 </style>
 
 <script>
-google.charts.load('current', {'packages':['corechart']});
-google.charts.setOnLoadCallback(drawChart1);
-google.charts.setOnLoadCallback(drawChart2);
 
-function drawChart1() {
-	
-	
-  $.ajax({
-		 
-  });
-	
-	
-  var data = google.visualization.arrayToDataTable([
-    ['연령대', '수'],
-    ['10대',     11],
-    ['20대',      2],
-    ['30대',  2],
-    ['40대', 2],
-    ['50대',    7],
-    ['60대이상',    7]
-  ]);
-
-  var options = {
-    title: '남성 연령대별 회원'
-  };
-
-  var chart = new google.visualization.PieChart(document.getElementById('manpiechart'));
-
-  chart.draw(data, options);
-}
-
-
-function drawChart2() {
-
-  var data = google.visualization.arrayToDataTable([
-    ['연령대', '수'],
-    ['10대',     11],
-    ['20대',      2],
-    ['30대',  2],
-    ['40대', 2],
-    ['50대',    7],
-    ['60대이상',    7]
-  ]);
-
-  var options = {
-    title: '여성 연령대별 회원'
-  };
-
-  var chart = new google.visualization.PieChart(document.getElementById('womanpiechart'));
-
-  chart.draw(data, options);
-  
-  }
 </script>
 </head>
         <!-- template.jsp > index.jsp -->
@@ -104,7 +52,7 @@ function drawChart2() {
                     <span style="font-size:20px;">글 작성수를 조회하여 통계치를 구하였습니다.</span>
                   </div>
                   <div class="card-body">
-               		<div style="display:flex; border:1px solid #777;">
+               		<div style="display:flex; border:1px solid #777; justify-content:center;">
 				      <div id="manpiechart" style="width: 500px; height: 500px;"></div>
 				      <div id="womanpiechart" style="width: 500px; height: 500px;"></div>
 				    </div>
@@ -122,8 +70,8 @@ function drawChart2() {
                     <span style="font-size:20px;">통계정보를 이용하여 유저들의 성향을 파악합니다.</span>
                   </div>
                   <div class="card-body">
-               		<div style="display:flex; border:1px solid #777;">
-  						<canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+               		<div style="display:flex; border:1px solid #777; justify-content:center;">
+  						<canvas id="myChart" style="width:100%;max-width:700px; "></canvas>
 				    </div>
                   </div>
                 </div>
@@ -135,11 +83,11 @@ function drawChart2() {
               <div class="col-sm-12">
                 <div class="card">
                  <div class="card-header">
-                    <h2 style="font-weight:900; margin-bottom:20px;">빌딩별 게시판 글 작성수</h2>
+                    <h2 style="font-weight:900; margin-bottom:20px;">빌딩별 게시판 글 작성 통계</h2>
                     <span style="font-size:20px;">통계정보를 이용하여 유저들의 성향을 파악합니다.</span>
                   </div>
                   <div class="card-body">
-               		<div style="display:flex; border:1px solid #777;">
+               		<div style="display:flex; border:1px solid #777; justify-content:center;">
   						<div id="container"></div>
 				    </div>
                   </div>
@@ -180,16 +128,82 @@ function drawChart2() {
 	    <script src="https://code.highcharts.com/highcharts.js"></script>
 	    <!-- Plugins JS Ends-->
  <script>
+ google.charts.load('current', {'packages':['corechart']});
+ google.charts.setOnLoadCallback(drawChart1);
+ google.charts.setOnLoadCallback(drawChart2);
+
+ 
+
+ function drawChart1() {
+ 	  
+	  let list =  [ ['연령대','수'], ['10대'], ['20대'], ['30대'], ['40대'], ['50대'], ['60대이상']] ;
+	 
+	  $.ajax({
+			 type:'GET',
+			 url: '/wood/admin/genderratio.do',
+			 data: {
+				 gender : 'M'
+			 },
+			 dataType: 'json',
+			 success: (result)=> {
+				list[1].push(parseInt(result.age10));
+				list[2].push(parseInt(result.age20));
+				list[3].push(parseInt(result.age30));
+				list[4].push(parseInt(result.age40));
+				list[5].push(parseInt(result.age50));
+				list[6].push(parseInt(result.age60));	
+			   var data = google.visualization.arrayToDataTable(list);
+
+			   var options = {
+			     title: '남성 연령대별 회원'
+			   };
+
+			   var chart = new google.visualization.PieChart(document.getElementById('manpiechart'));
+
+			   chart.draw(data, options);
+			 },
+			 error: (a, b, c) => console.log(a, b, c) 
+	 	 });	  
+	 
+
+ }
+
+
+ function drawChart2() {
+	 let list = [ ['연령대','수'], ['10대'], ['20대'], ['30대'], ['40대'], ['50대'], ['60대이상']] ;
+	 
+  $.ajax({
+		 type:'GET',
+		 url: '/wood/admin/genderratio.do',
+		 data: {
+			 gender : 'F'
+		 },
+		 dataType: 'json',
+		 success: (result)=> {
+			list[1].push(parseInt(result.age10));
+			list[2].push(parseInt(result.age20));
+			list[3].push(parseInt(result.age30));
+			list[4].push(parseInt(result.age40));
+			list[5].push(parseInt(result.age50));
+			list[6].push(parseInt(result.age60));	 
+			 var data = google.visualization.arrayToDataTable(list);
+			   var options = {
+			     title: '여성 연령대별 회원'
+			   };
+			   var chart = new google.visualization.PieChart(document.getElementById('womanpiechart'));
+			   chart.draw(data, options);
+		 },
+		 error: (a, b, c) => console.log(a, b, c) 
+ 	 });	 
+   }
+ 
  
  Highcharts.chart('container', {
 	  chart: {
 	    type: 'column'
 	  },
 	  title: {
-	    text: 'World\'s largest cities per 2021'
-	  },
-	  subtitle: {
-	    text: 'Source: <a href="https://worldpopulationreview.com/world-cities" target="_blank">World Population Review</a>'
+	    text: '빌딩별 게시판 글 작성수'
 	  },
 	  xAxis: {
 	    type: 'category',
@@ -258,14 +272,14 @@ function drawChart2() {
 	      }
 	    }
 	  }]
-	});    
+});    
  
  
  // 전체 지역기준
  // SNS, 건의공지, 약속, 동호회, 카풀, 스터디, 과외 
- var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
- var yValues = [55, 49, 44, 24, 15];
- var barColors = ["red", "green","blue","orange","brown"];
+ var xValues = ["Italy", "France", "Spain", "USA", "Argentina", "Argentina", "Argentina"];
+ var yValues = [55, 49, 44, 24, 15, 10, 20];
+ var barColors = ["red", "green","blue","orange","brown", "brown", "brown"];
 
  new Chart("myChart", {
    type: "bar",
@@ -280,7 +294,7 @@ function drawChart2() {
      legend: {display: false},
      title: {
        display: true,
-       text: "World Wine Production 2018"
+       text: "게시판별 극작성수"
      }
    }
  });
