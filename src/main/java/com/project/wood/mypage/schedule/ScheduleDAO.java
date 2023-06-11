@@ -24,7 +24,7 @@ public class ScheduleDAO {
 	public int addSchedule(ScheduleDTO dto) {
 	
 		try {
-			String sql ="insert into tblSchedule values(scheduleseq.nextVal, ?, ?, ?, ?, ?)";
+			String sql ="insert into tblSchedule values(scheduleseq.nextVal, ?, ?, ?, to_date(?, 'yyyy-mm-dd hh24:mi:ss'), to_date(?, 'yyyy-mm-dd hh24:mi:ss'))";
 			pstat = conn.prepareStatement(sql);
 			
 			pstat.setString(1, dto.getCategory());

@@ -36,30 +36,17 @@ public class AddSchedule extends HttpServlet {
 		String startdate = req.getParameter("startdate");
 		String enddate = req.getParameter("enddate");
 		
-		DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-		try {
-			Date sdate = (Date)formatter.parse(startdate);
-			startdate = formatter.format(sdate);
-			Date edate = (Date)formatter.parse(enddate);
-			enddate = formatter.format(edate);
-			
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		
-		
+	
 		ScheduleDTO dto = new ScheduleDTO();
-		System.out.println(startdate+ enddate);
+		
 		dto.setCategory(category);
 		dto.setId(id);
 		dto.setTitle(title);
 		dto.setStartdate(startdate);
 		dto.setEnddate(enddate);
 		
-		System.out.println(dto);
 		JSONObject obj = new JSONObject();
+		
 		int result = dao.addSchedule(dto);
 		
 		if(result == 1 ) {
@@ -74,6 +61,7 @@ public class AddSchedule extends HttpServlet {
 			writer.print("<script>alert('failed.'); history.back();</script>");
 			writer.close();
 		}
+		
 
 	}
 

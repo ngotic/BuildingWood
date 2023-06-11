@@ -26,6 +26,35 @@ button.close{
 	margin-left:5px;
 }
 
+.myscheduleitem{
+	display:flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 15px;
+	border-radius: 5px;
+	background-color : #F6FFDE;
+	color: #666;
+}
+
+.myscheduleitem:hover{
+	padding: 15px;
+	border-radius: 5px;
+	background-color: #E3F2C1;
+
+}
+
+.mybtncolor{
+	width:100px;
+	font-size:12px;
+	background-color: #2C3E50;
+	color: white;
+}
+.mybtncolor:hover{
+	width:100px;
+	font-size:12px;
+	background-color: #727F8C;
+	color: white;
+}
 
 </style>
 </head>	
@@ -33,11 +62,12 @@ button.close{
 	    <%@ include file="/WEB-INF/views/admininclude/header.jsp" %>
 		<div class="row">
       	<!-- 드래그 박스 -->
-      	<div class="col-2">
+      	<div class="col-2"  style="padding-top:55px;">
       	<div class="card" style="padding:10px;">
-      	<ul id="scheduleholder">
-      		
-      	</ul>
+      		<h2 style="text-align:center; font-weight:bold; padding:10px; color:#333;">나의 일정들</h2>
+	      	<ul id="scheduleholder">
+	      		
+	      	</ul>
       	</div>
       	</div>
       	<div class="col-10">
@@ -71,15 +101,15 @@ button.close{
                         <label for="taskId" class="col-form-label">일정 내용</label>
                         <input type="text" class="form-control" id="calendar_content" name="calendar_content">
                         <label for="taskId" class="col-form-label">날짜</label>
-                        <input type="date" class="form-control" id="calendar_start_date" name="calendar_start_date">
+                        <input type="datetime-local" class="form-control" id="calendar_start_date" name="calendar_start_date">
                         <label for="taskId" class="col-form-label">종료 날짜</label>
-                        <input type="date" class="form-control" id="calendar_end_date" name="calendar_end_date">
+                        <input type="datetime-local" class="form-control" id="calendar_end_date" name="calendar_end_date">
                         
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-warning" id="addCalendar">추가</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                    <button type="button" class="btn mybtncolor" id="addCalendar">추가</button>
+                    <button type="button" class="btn mybtncolor" data-dismiss="modal"
                         id="ModalClose">취소</button>
                 </div>
     
@@ -95,8 +125,7 @@ button.close{
 
  
  (function(){
-	 
-
+	
 	    $(function(){
 	      // calendar element 취득
 	      var calendarEl = $('#calendar')[0];
@@ -125,8 +154,8 @@ button.close{
                         	
                         	
                             var title = $("#calendar_content").val();
-                            var start_date = $("#calendar_start_date").val();
-                            var end_date = $("#calendar_end_date").val();
+                            var start_date = $("#calendar_start_date").val().replace("T", " ");
+                            var end_date = $("#calendar_end_date").val().replace("T", " ");
                             var category = $('#category').val();
                             // 유효성 체크
                             if(category  == "분류"){
@@ -213,16 +242,16 @@ button.close{
 	        eventSources :[ 
 	            {
 	                googleCalendarId : 'ko.south_korea#holiday@group.v.calendar.google.com'
-	                , color: 'white'   // an option!
-	                , textColor: '#B31312' // an option!
+	                , color: '#0B8043'   // an option!
+	                , textColor: 'white' // an option!
 	            } 
 	        ],
 	        events: function(info, successCallback, failureCallback) {
 	        	// ajax처리로 여기서 받아서 데이터 셋팅
 	        		const colorMap = new Map([
-					  ['약속', 'red'],
-					  ['동호회', 'yellow'],
-					  ['스터디', 'green'],
+					  ['약속', '#FF78C4'],
+					  ['동호회', '#116D6E'],
+					  ['스터디', '#00DFA2'],
 					]);
 	        	
 	        		let id = '${id}';
@@ -235,17 +264,20 @@ button.close{
 						},
 						success : (result) => {
 							let newevent=[];
+							$('#scheduleholder').html('');// 달력 넘길 때 리스트 추가되는 것 수정
 							$(result).each((index, item)=>{
 								contents = {};
 								contents.title = item.title;
-								contents.start = item.start.substring(0,10);
-								contents.end   = item.end.substring(0,10);
+								contents.start = item.start;
+								contents.end   = item.end;
 								contents.color  = colorMap.get(item.category);
 								
 								$('#scheduleholder').append(`
 									<li style="text-align:center;margin:5px;">
-										<span>\${item.title}</span><br>
-											<button class="mybtn" onclick="delschedule(\${item.scheduleseq});">삭제</button>      			
+										<div class="myscheduleitem">
+											<span>\${item.title}</span>
+											<button type="button" class="btn mybtncolor" onclick="delschedule(\${item.scheduleseq});">삭제</button>
+										</div>
 						      		</li>
 								`);
 								
@@ -267,7 +299,6 @@ button.close{
  	
  
  function delschedule(scheduleseq){
-	 alert(scheduleseq);
 	 $.ajax({
 			type:'GET',
 			url : '/wood/mypage/delschedule.do',
