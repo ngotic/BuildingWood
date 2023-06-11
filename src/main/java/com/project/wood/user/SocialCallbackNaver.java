@@ -77,7 +77,7 @@ public class SocialCallbackNaver extends HttpServlet {
 				req.getSession().setAttribute("id", user.getId());
 				req.getSession().setAttribute("lv", user.getLv());
 				req.getSession().setAttribute("nickname", user.getNickname());
-				resp.sendRedirect("/wood/club/club.do"); // redirect로 이동 [임시 url] 
+				resp.sendRedirect("/wood/indexhome.do"); // redirect로 이동 [임시 url] 
 			} else {
 				resp.sendRedirect("/wood/user/socialregister.do?id=" + userinfo.getId() + "&email="
 						+ userinfo.getEmail() + "&name=" + URLEncoder.encode(userinfo.getName()) + "&profile="

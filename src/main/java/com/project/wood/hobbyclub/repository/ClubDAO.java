@@ -434,7 +434,7 @@ public class ClubDAO {
 		
 		try {
 			// id, name, intro, amount, pic, opendate, approve
-			String sql = "insert into tblClub values(clubseq.nextVal, ?, ?, ?, ?, ?, ?, default )";
+			String sql = "insert into tblClub values(clubseq.nextVal, ?, ?, ?, ?, ?, ? ,'T')";
 			
 			pstat = conn.prepareStatement(sql);
 			pstat.setString(1, cdto.getId());

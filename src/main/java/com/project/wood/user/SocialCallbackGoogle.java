@@ -56,7 +56,8 @@ public class SocialCallbackGoogle extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Token token = googleApi.getAccessToken(req);
 		req.getSession().setAttribute("access_token", token.getAccess_token());// 일단 저장
-		UserDTO userinfo = googleApi.getUserInfo(token);		
+		UserDTO userinfo = googleApi.getUserInfo(token);	
+		System.out.println(userinfo);
 		UserDTO user = dao.existMember(userinfo.getId());
 		
 		if( user != null) { // 이때도 문제긴하다.
@@ -75,7 +76,7 @@ public class SocialCallbackGoogle extends HttpServlet {
 			req.getSession().setAttribute("id", user.getId());
 			req.getSession().setAttribute("lv", user.getLv());
 			req.getSession().setAttribute("nickname", user.getNickname());
-			resp.sendRedirect("/wood/club/club.do"); // redirect로 이동 이상한 쿼리 스트링 달고오면 redirect로 이동 [임시 url] 
+			resp.sendRedirect("/wood/indexhome.do"); // redirect로 이동 이상한 쿼리 스트링 달고오면 redirect로 이동 [임시 url] 
 		} else {
 			resp.sendRedirect("/wood/user/socialregister.do?id="+userinfo.getId()+"&email="+userinfo.getEmail()+"&name="+URLEncoder.encode(userinfo.getName())+"&profile="+userinfo.getProfile());
 		}

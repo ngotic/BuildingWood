@@ -10,6 +10,13 @@
 <title>Document</title>
 <%@ include file="/WEB-INF/views/include/asset.jsp"%>
 <style>
+
+@font-face {
+    font-family: 'BMDOHYEON';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 .mainbackground {
 	height: 100vh;
 	width: 100vw;
@@ -117,6 +124,9 @@
 }
 
 .intro-text {
+
+
+	font-family:'BMDOHYEON';
 	width: 800px;
 	color: white;
 	height: 50px;
@@ -139,7 +149,7 @@
 }
 
 .projectname_f {
-	font-size: 68px;
+	font-size: 70px;
 }
 
 .projectname {
@@ -278,8 +288,10 @@ a.link-hover span:hover {
 			</div>
 
 			<div>
-				<h4>아래 버튼은 테스트 용도</h4>
-				<!-- 버튼하나 눌러버리면 hidden 태그에 담긴 것이 서버로 넘어가서 로그인이 된다.  -->
+			
+			
+<!-- 				<h4>아래 버튼은 테스트 용도</h4>
+				버튼하나 눌러버리면 hidden 태그에 담긴 것이 서버로 넘어가서 로그인이 된다. 
 				<form method="POST" action="/wood/user/login.do">
 					<input type="hidden" name="id" value="owFSkN242"> <input
 						type="hidden" name="password" value="OIQetu252"> <input
@@ -291,8 +303,8 @@ a.link-hover span:hover {
 						type="hidden" name="password" value="admin"> <input
 						type="submit" value="관리자">
 				</form>
-
-				<a class="dropdown-item" href="/wood/user/logout.do">로그아웃</a>
+ -->
+				<!-- <a class="dropdown-item" href="/wood/user/logout.do">로그아웃</a> -->
 			</div>
 		</div>
 

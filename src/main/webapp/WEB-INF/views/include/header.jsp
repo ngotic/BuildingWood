@@ -161,50 +161,12 @@
 		    </p>
 		    
 		    <div class="text-end">
-				<button class="forward pinkcolor" onclick="location.href='/wood/club/addclub.do';">게시판으로 이동</button>
+				<button class="forward pinkcolor" onclick="location.href='/wood/club/club.do';">게시판으로 이동</button>
 				<button class="search-check greencolor" onclick="location.href='/wood/club/add.do';">확인하기</button>
 			</div>
 		  </div>
 		</div>
 		
-		<div class="card custom-card" >
-		  <div class="card-body">
-		    <h5 class="card-title mb-3">
-		    	<span class="material-symbols-outlined align-middle">check_circle</span> <span class="align-middle">알림</span>
-		    	<button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
-		    </h5>
-		    
-		    <h6 class="card-subtitle mb-2 text-muted">동호회 게시판</h6>
-		    
-		    <p class="card-text">
-		    	동호회 개설이 승인되었습니다.
-		    </p>
-		    
-		    <div class="text-end">
-				<button class="forward pinkcolor" onclick="location.href='/wood/club/addclub.do';">게시판으로 이동</button>
-				<button class="search-check greencolor" onclick="location.href='/wood/club/add.do';">확인하기</button>
-			</div>
-		  </div>
-		</div>
-		
-		<div class="card custom-card" >
-		  <div class="card-body">
-		    <h5 class="card-title mb-3">
-		    	<span class="material-symbols-outlined align-middle">check_circle</span> <span class="align-middle">알림</span>
-		    	<button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
-		    </h5>
-		    <h6 class="card-subtitle mb-2 text-muted">동호회 게시판</h6>
-		    
-		    <p class="card-text">
-		    	동호회 개설이 승인되었습니다.
-		    </p>
-		    
-		    <div class="text-end">
-				<button class="forward pinkcolor" onclick="location.href='/wood/club/addclub.do';">게시판으로 이동</button>
-				<button class="search-check greencolor" onclick="location.href='/wood/club/add.do';">확인하기</button>
-			</div>
-		  </div>
-		</div>
 		
       </div>
     </div>

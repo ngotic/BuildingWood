@@ -32,7 +32,7 @@ public class Mypage extends HttpServlet {
 		String id = (String)session.getAttribute("id");
 		
 		dto = dao.getInfo(id);
-		
+		req.getSession().setAttribute("profile", dto.getProfile());
 		
 		req.setAttribute("dto", dto);
 		

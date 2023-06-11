@@ -78,8 +78,8 @@
               </div>
              </div>
              
-             <div class="row">
-              <!-- Zero Configuration  Starts-->
+         <!--     <div class="row">
+              Zero Configuration  Starts
               <div class="col-sm-12">
                 <div class="card">
                  <div class="card-header">
@@ -93,7 +93,7 @@
                   </div>
                 </div>
               </div>
-             </div>
+             </div> -->
              
              
          </div>
@@ -198,7 +198,7 @@
    }
  
  
- Highcharts.chart('container', {
+/*  Highcharts.chart('container', {
 	  chart: {
 	    type: 'column'
 	  },
@@ -238,7 +238,7 @@
 	    colorByPoint: true,
 	    groupPadding: 0,
 	    data: [
-	      ['Tokyo', 37.33],
+	      ['한독빌딩', 37.33],
 	      ['Delhi', 31.18],
 	      ['Shanghai', 27.79],
 	      ['Sao Paulo', 22.23],
@@ -273,13 +273,13 @@
 	    }
 	  }]
 });    
- 
+  */
  
  // 전체 지역기준
  // SNS, 건의공지, 약속, 동호회, 카풀, 스터디, 과외 
- var xValues = ["Italy", "France", "Spain", "USA", "Argentina", "Argentina", "Argentina"];
- var yValues = [55, 49, 44, 24, 15, 10, 20];
- var barColors = ["red", "green","blue","orange","brown", "brown", "brown"];
+ var xValues = ["맛집", "약속", "카풀", "과외", "동호회", "스터디"];
+ var yValues = [45,  34, 24, 22, 21, 30];
+ var barColors = ["#D7FC03", "#03CAFC","orange", "brown", "black", "pink"];
 
  new Chart("myChart", {
    type: "bar",
@@ -294,7 +294,7 @@
      legend: {display: false},
      title: {
        display: true,
-       text: "게시판별 극작성수"
+       text: "게시판별 글 작성수"
      }
    }
  });

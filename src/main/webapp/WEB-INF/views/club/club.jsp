@@ -140,7 +140,7 @@
 	</div> -->
 	
 	<section class="container" id="club">
-		<h1 class="text-center" style="margin: 20px 0 20px 0;">동호회 게시판</h1>
+		<h1 style="margin: 20px 0 20px 0; padding-top:60px; font-weight:900;">동호회 게시판</h1>
 		<div class="text-start" id="search" style="display:inline; transform: translate(0, -10px);">
 			
 		</div>
