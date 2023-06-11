@@ -241,10 +241,12 @@
 						<td class="table-title">카테고리</td>
 						<td class="table-content">
 							<select name ="category">
-								<option value="건의">건의</option>
-								<option value="질문">질문</option>
 								<c:if test="${lv == '0'}"> <!-- 관리자만 공지 가능 -->
-								<option value="공지">공지</option>
+									<option value="공지">공지</option>
+								</c:if>
+								<c:if test="${lv != '0'}"> <!-- 일반유저는 건의/질문 만 -->
+									<option value="건의">건의</option>
+									<option value="질문">질문</option>
 								</c:if>
 							</select>
 						</td>

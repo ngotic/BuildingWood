@@ -49,11 +49,11 @@
     }
 
     .slide_prev_button {
-        left: 10px;
+        left: 200px;
     }
 
     .slide_next_button {
-        right: 10px;
+        right: 200px;
     }
 
     .slide_pagination {
