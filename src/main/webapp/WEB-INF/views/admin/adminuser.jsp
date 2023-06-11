@@ -35,52 +35,6 @@
 	    	
 	   <div class="row">
         	
-        <!-- Feature Unable /Disable Order Starts-->
-              <div class="col-sm-12">
-                <div class="card">
-                  <div class="card-header">
-                  	<h2 style="font-weight:900; margin-bottom:20px;">신규가입자 확인</h2>
-                    <span style="font-size:20px;">최근 가입한 신규 가입자의 정보를 확인합니다.</span>
-                  </div>
-                  <div class="card-body">
-                    <div class="table-responsive">
-                      <table class="display" id="basic-2">
-                        <thead>
-                          <tr>
-                            <th>아이디</th>
-                            <th>이름</th>
-                            <th>닉네임</th>
-                            <th>소속빌딩</th>
-                            <th>생년월일</th>
-                            <th>성별</th>
-                            <th>이메일</th>
-                            <th>전화번호</th>
-                            <th>가입일시</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        
-                         <tr>
-                           <td>Tiger Nixon</td>
-                           <td>System Architect</td>
-                           <td>Edinburgh</td>
-                           <td>61</td>
-                           <td>2011/04/25</td>
-                           <td>$320,800</td>
-                           <td>61</td>
-                           <td>2011/04/25</td>
-                           <td>$320,800</td>
-                         </tr>
-                    
-
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>	
-        	
-        	
       	 <!-- Container-fluid starts-->
           <div class="container-fluid">
             <div class="row">

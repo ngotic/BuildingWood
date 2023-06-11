@@ -32,6 +32,7 @@ public class ScheduleList extends HttpServlet {
 			obj.put("scheduleseq", dto.getScheduleseq());
 			obj.put("category", dto.getCategory());
 			obj.put("title", dto.getTitle());
+			obj.put("content", dto.getContent());
 			obj.put("start", dto.getStartdate());
 			obj.put("end", dto.getEnddate());
 			arr.add(obj);

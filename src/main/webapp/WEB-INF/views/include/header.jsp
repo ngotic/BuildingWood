@@ -85,7 +85,7 @@
                     </ul>
                 </div>
 
-				<div class="nav-item"><a href = "" class="nav-link" >고객지원</a></div> 
+				<div class="nav-item"><a href = "/wood/suggest/suggest.do" class="nav-link" >고객지원</a></div> 
 				<!-- <div class="nav-item dropdown">
                     <a href = "" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="true">
                         고객지원

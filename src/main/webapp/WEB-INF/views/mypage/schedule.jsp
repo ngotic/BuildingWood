@@ -62,15 +62,15 @@ button.close{
 	    <%@ include file="/WEB-INF/views/admininclude/header.jsp" %>
 		<div class="row">
       	<!-- 드래그 박스 -->
-      	<div class="col-2"  style="padding-top:55px;">
+      	<div class="col-3"  style="padding-top:55px;">
       	<div class="card" style="padding:10px;">
-      		<h2 style="text-align:center; font-weight:bold; padding:10px; color:#333;">나의 일정들</h2>
+      		<h4 style="text-align:center; font-weight:bold; padding:10px; color:#333;">나의 일정들</h4>
 	      	<ul id="scheduleholder">
 	      		
 	      	</ul>
       	</div>
       	</div>
-      	<div class="col-10">
+      	<div class="col-9">
       		 <div id="calendarBox">
         		<div id="calendar"></div>
     		</div>
@@ -84,7 +84,7 @@ button.close{
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header" s>
+                <div class="modal-header" >
                 	<select class="form-select" style="width:100px;" id="category">
                 		<option selected>분류</option>
                 		<option value='약속'>약속</option>
@@ -100,11 +100,10 @@ button.close{
                     <div class="form-group">
                         <label for="taskId" class="col-form-label">일정 내용</label>
                         <input type="text" class="form-control" id="calendar_content" name="calendar_content">
-                        <label for="taskId" class="col-form-label">날짜</label>
+                        <label for="taskId" class="col-form-label">시작 날짜</label>
                         <input type="datetime-local" class="form-control" id="calendar_start_date" name="calendar_start_date">
                         <label for="taskId" class="col-form-label">종료 날짜</label>
                         <input type="datetime-local" class="form-control" id="calendar_end_date" name="calendar_end_date">
-                        
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -122,7 +121,8 @@ button.close{
   
  <script>
  
-
+ let dateInput = document.getElementById("calendar_start_date");
+ dateInput.min = new Date().toISOString().slice(0,new Date().toISOString().lastIndexOf(":"));
  
  (function(){
 	
@@ -275,7 +275,7 @@ button.close{
 								$('#scheduleholder').append(`
 									<li style="text-align:center;margin:5px;">
 										<div class="myscheduleitem">
-											<span>\${item.title}</span>
+											<span>[\${item.category}]</span><span>\${item.content}</span>
 											<button type="button" class="btn mybtncolor" onclick="delschedule(\${item.scheduleseq});">삭제</button>
 										</div>
 						      		</li>

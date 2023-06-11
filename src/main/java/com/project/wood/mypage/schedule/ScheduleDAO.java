@@ -47,7 +47,7 @@ public class ScheduleDAO {
 
 		try {
 				
-				String sql = "select scheduleseq, category, ('['||category||']' ||title) as title, startdate, enddate from tblSchedule where id=?";
+				String sql = "select scheduleseq, category, title as content, ('['||category||']' ||title) as title, startdate, enddate from tblSchedule where id=?";
 				
 				pstat = conn.prepareStatement(sql);
 				pstat.setString(1, id);
@@ -61,6 +61,7 @@ public class ScheduleDAO {
 					dto.setScheduleseq(rs.getString("scheduleseq"));
 					dto.setCategory(rs.getString("category"));
 					dto.setTitle(rs.getString("title"));
+					dto.setContent(rs.getString("content"));
 					dto.setStartdate(rs.getString("startdate"));
 					dto.setEnddate(rs.getString("enddate"));
 					

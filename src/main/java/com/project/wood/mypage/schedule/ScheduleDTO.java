@@ -8,6 +8,7 @@ public class ScheduleDTO {
 	private String category;
 	private String id;
 	private String title;
+	private String content;
 	private String startdate;
 	private String enddate;
 	
