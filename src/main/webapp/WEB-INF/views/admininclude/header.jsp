@@ -16,7 +16,11 @@
   <div class="main-header-right row m-0">
     <div class="main-header-left">
       <div class="logo-wrapper">
+<<<<<<< HEAD
       	<a href="/wood/indexhome.do">
+=======
+      	<a href="/wood/indexhome.do">	<!-- 06/09 17:38 수정함! -->
+>>>>>>> feature/carpool
       		<img class="img-fluid" src="/wood/adminasset/세로logo.PNG" alt="" width=120px style="border-radius:10%;">
       	</a>
       </div>
