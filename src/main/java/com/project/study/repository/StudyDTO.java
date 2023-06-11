@@ -37,4 +37,5 @@ public class StudyDTO {
 
 	private String pic;
 	
+	private String id;
 }
