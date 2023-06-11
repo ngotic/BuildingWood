@@ -44,6 +44,7 @@ public class List extends HttpServlet {
 		
 	    ArrayList<CarpoolDTO> list = dao.list();
 	    
+	    
 	    req.setAttribute("list", list);
 	    
 	    RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/carpool/list.jsp");
