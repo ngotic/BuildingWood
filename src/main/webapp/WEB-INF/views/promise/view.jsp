@@ -142,6 +142,16 @@
             border-radius: 5px;
             box-shadow: rgba(108, 108, 108, 0.35) 0px 5px 15px;
         }
+        
+        .comment-card{
+            margin: auto;
+            width: 800px;
+            min-height: 230px;
+            border: 1px solid transparent;
+            padding: 30px 19px 25px 19px;
+            border-radius: 5px;
+            box-shadow: rgba(108, 108, 108, 0.35) 0px 5px 15px;
+        }
 
         .form-color{
 
@@ -421,6 +431,37 @@
 		margin-bottom:5px;
 	}
 	
+	.btn-accept {
+		margin-right:10px;
+		margin-bottom:10px;
+		padding: 7px;
+		padding-left:10px;
+		padding-right:10px;
+		border:none;
+		border-radius: 15px;
+		background-color: #1BC060;
+		color: white;
+		font-size: 13pt;
+		
+		
+	
+	}
+	
+	.btn-accept-quit {
+		margin-left:10px;
+		margin-bottom:10px;
+		padding: 7px;
+		padding-left:10px;
+		padding-right:10px;
+		border:none;
+		border-radius: 15px;
+		background-color: gray;
+		color: white;
+		font-size: 13pt;
+		
+	
+	}
+	
 	
 	
 	
@@ -475,7 +516,7 @@
 		<div class="application-box">
 			<div class="application-word colors1">신청내역</div>
 		</div>
-		<div class="accept-nickname-box" style="display:flex; justify-content: center; align-items:center; <c:if test="${adminnum == dto.num }">background-color:gray;</c:if>">
+		<div class="accept-nickname-box" style="justify-content: center; align-items:center; <c:if test="${adminnum == dto.num }">background-color:gray;</c:if>">
 			<c:forEach items="${acceptnickname}" var="rdto">
 			<c:if test="${rdto.checkstate == 'F'}" >
 				<div class="accept-nickname" <c:if test="${adminnum == dto.num }">style="display:none;"</c:if>>
@@ -507,8 +548,8 @@
         약속신청을 수락하시겠습니까?
       </div>
       <div class="modal-footer" style="border:none; display:flex; justify-content: space-between;">
-        <button type="button" class="btn" data-bs-dismiss="modal">취소</button>
-        <button type="button" class="btn" onclick="$('#acceptForm').submit();">수락</button>
+        <button type="button" class="btn-accept-quit" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn-accept" onclick="$('#acceptForm').submit();">수락</button>
       </div>
     </div>
   </div>
@@ -531,7 +572,7 @@
 
           <div class="">
 
-            <div class="card ">
+            <div class="comment-card">
 
               <div class="p-sm-1">
 
