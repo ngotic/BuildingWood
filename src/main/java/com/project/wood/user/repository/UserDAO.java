@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.project.wood.recommend.repository.RecBuildingDTO;
 import com.project.wood.user.valid.Type;
 import com.test.my.DBUtil;
 
@@ -192,6 +193,35 @@ public class UserDAO {
 		}
 		return null;
 		
+	}
+
+	//지역정보 가져오기 ex)'강남구 역삼동'
+	public RecBuildingDTO recmemberloc(String id) {
+		
+		try {
+
+			String sql = "select substr(address, 4, 7) as loc from tblBuilding where buildingseq = (select buildingseq from tblAddress where id = ?)";
+
+			pstat = conn.prepareStatement(sql);
+
+			pstat.setString(1, id);
+
+			rs = pstat.executeQuery();
+
+			if (rs.next()) {
+
+				RecBuildingDTO bdto = new RecBuildingDTO();
+
+				bdto.setAddress(rs.getString("loc"));
+
+				return bdto;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 
 }

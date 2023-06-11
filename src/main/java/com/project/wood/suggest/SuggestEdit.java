@@ -9,46 +9,46 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.project.wood.suggest.repository.SuggestDAO;
 import com.project.wood.suggest.repository.SuggestDTO;
 
-@WebServlet("/suggest/suggestadd.do")
-public class SuggestAdd extends HttpServlet {
+@WebServlet("/suggest/suggestedit.do")
+public class SuggestEdit extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		//SuggestAdd.java
-
+		//SuggestEdit.java
+		String suggestseq = req.getParameter("suggestseq");
+		SuggestDAO dao = new SuggestDAO();
+		SuggestDTO dto = dao.getSuggest(suggestseq);
+		
+		req.setAttribute("dto", dto);
+		
+		
 		//JSP 호출
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/suggest/suggestadd.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/suggest/suggestedit.jsp");
 		dispatcher.forward(req, resp);
 	}//get
-	
-	
 	
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		HttpSession session = req.getSession();
-		
+		String suggestseq = req.getParameter("suggestseq");
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
 		String category = req.getParameter("category");
 		
-		
+		SuggestDAO dao = new SuggestDAO();
 		SuggestDTO dto = new SuggestDTO();
+		dto.setSuggestseq(suggestseq);
 		dto.setTitle(title);
 		dto.setContent(content);
 		dto.setCategory(category);
-		dto.setId((String)session.getAttribute("id"));
 		
-		SuggestDAO dao = new SuggestDAO();
-		
-		int result  = dao.suggestadd(dto);
+		int result = dao.suggestedit(dto);
 		
 		if (result == 1) {
 			//성공
@@ -59,9 +59,12 @@ public class SuggestAdd extends HttpServlet {
 			writer.close();
 		}
 	
-	}//post
-	
+	}
 }
+
+
+
+
 
 
 

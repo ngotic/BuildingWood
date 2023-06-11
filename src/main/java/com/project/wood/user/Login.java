@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.project.wood.recommend.repository.RecBuildingDTO;
 import com.project.wood.user.repository.UserDAO;
 import com.project.wood.user.repository.UserDTO;
 import com.project.wood.user.service.GoogleLoginApi;
@@ -50,6 +51,7 @@ public class Login extends HttpServlet {
 		//1.  비밀번호, 아아디 db에 있나 확인하기.
 		//2.  있으면 성공  
 		UserDTO user = dao.login(dto);
+		RecBuildingDTO bdto = dao.recmemberloc(id); //지역정보 ex)'강남구 역삼동'
 		//3. 없으면 fail
 		
 		req.getSession().removeAttribute("msg");
@@ -86,6 +88,12 @@ public class Login extends HttpServlet {
 			req.getSession().setAttribute("id", id);
 			req.getSession().setAttribute("lv", user.getLv());
 			req.getSession().setAttribute("nickname", user.getNickname());
+			
+			//관리자가 아닐 때만 지역정보 가져오기 ex)'강남구 역삼동'
+			if (!user.getLv().equals("0")) {								  
+		        req.getSession().setAttribute("location", bdto.getAddress());
+		    }
+			
 			resp.sendRedirect("/wood/indexhome.do");
 		
 		}  else {

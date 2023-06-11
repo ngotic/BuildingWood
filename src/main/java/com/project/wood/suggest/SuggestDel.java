@@ -9,46 +9,33 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.project.wood.suggest.repository.SuggestDAO;
-import com.project.wood.suggest.repository.SuggestDTO;
 
-@WebServlet("/suggest/suggestadd.do")
-public class SuggestAdd extends HttpServlet {
+@WebServlet("/suggest/suggestdel.do")
+public class SuggestDel extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		//SuggestAdd.java
-
+		//SuggestDel.java
+		String suggestseq = req.getParameter("suggestseq");
+		req.setAttribute("suggestseq", suggestseq);
+		
 		//JSP 호출
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/suggest/suggestadd.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/suggest/suggestdel.jsp");
 		dispatcher.forward(req, resp);
 	}//get
-	
-	
 	
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		HttpSession session = req.getSession();
-		
-		String title = req.getParameter("title");
-		String content = req.getParameter("content");
-		String category = req.getParameter("category");
-		
-		
-		SuggestDTO dto = new SuggestDTO();
-		dto.setTitle(title);
-		dto.setContent(content);
-		dto.setCategory(category);
-		dto.setId((String)session.getAttribute("id"));
-		
+		String suggestseq = req.getParameter("suggestseq");
 		SuggestDAO dao = new SuggestDAO();
 		
-		int result  = dao.suggestadd(dto);
+		int result = 0;
+		result = dao.suggestdel(suggestseq);
 		
 		if (result == 1) {
 			//성공
@@ -59,17 +46,5 @@ public class SuggestAdd extends HttpServlet {
 			writer.close();
 		}
 	
-	}//post
-	
+	}
 }
-
-
-
-
-
-
-
-
-
-
-

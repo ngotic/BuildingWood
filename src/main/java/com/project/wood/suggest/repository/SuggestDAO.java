@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.project.wood.recommend.repository.RecCommentDTO;
 import com.project.wood.recommend.repository.RecommendDTO;
 import com.test.my.DBUtil;
 
@@ -121,6 +122,7 @@ public class SuggestDAO {
 		
 	}
 
+	//건의게시판 목록
 	public SuggestDTO getSuggest(String suggestseq) {
 
 		try {
@@ -160,12 +162,105 @@ public class SuggestDAO {
 
 	public int suggestadd(SuggestDTO dto) {
 
-		
+		try {
+
+			String sql = "insert into tblSuggest values (suggestseq.nextVal, ?, 27, ?, ?, sysdate, sysdate, ?, default)";
+
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, dto.getId());
+			pstat.setString(2, dto.getTitle());
+			pstat.setString(3, dto.getContent());
+			pstat.setString(4, dto.getCategory());
+
+			return pstat.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		return 0;
 	}
 
-	//건의게시판 목록
+	public int suggestdel(String suggestseq) {
+
+		try {
+
+			String sql = "delete from tblSuggest where suggestseq = ?";
+			
+
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, suggestseq);
+
+			return pstat.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
+	public int suggestedit(SuggestDTO dto) {
+
+		try {
+
+			String sql = "update tblSuggest set title = ?, content = ? where suggestseq = ?";
+
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, dto.getTitle());
+			pstat.setString(2, dto.getContent());
+			pstat.setString(3, dto.getSuggestseq());
+
+			return pstat.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
+	public List<SuggestDTO> mysuggestlist(String id) {
+
+		try {
+
+			String sql = "select * from tblSuggest where id = ? order by suggestseq desc";
+
+			pstat = conn.prepareStatement(sql);
+
+			pstat.setString(1, id);
+
+			rs = pstat.executeQuery();
+
+			List<SuggestDTO> myslist = new ArrayList<SuggestDTO>();
+
+			while (rs.next()) {
+
+				SuggestDTO sdto = new SuggestDTO();
+
+				sdto.setSuggestseq(rs.getString("suggestseq"));
+				sdto.setId(rs.getString("id"));
+				sdto.setBoardcategoryseq(rs.getString("boardcategoryseq"));
+				sdto.setTitle(rs.getString("title"));
+				sdto.setContent(rs.getString("content"));
+				sdto.setRegdate(rs.getString("regdate"));
+				sdto.setEditdate(rs.getString("editdate"));
+				sdto.setCategory(rs.getString("category"));
+				sdto.setReadcount(rs.getString("readcount"));
+
+				myslist.add(sdto);
+			}
+
+			return myslist;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	
 	
 	
 	

@@ -150,7 +150,6 @@
 <body>
 	<!-- template.jsp > index.jsp -->
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
-	<%@ include file="/WEB-INF/views/mainheader.jsp" %>  
 <!-- 
 	<div class="banner-container">
 		<img
@@ -160,6 +159,8 @@
 		<button class="banner-button">더보기</button>
 	</div> -->
 	<section class="container">
+	
+		<%@ include file="/WEB-INF/views/mainheader.jsp" %> 
         <div id="minibar">
 	        <div class="minmenu">
 	            <span class="material-symbols-outlined"
@@ -318,5 +319,6 @@
 			}, 3000); // Change slide every 3 seconds
 		});
 	</script>
+	
 </body>
 </html>

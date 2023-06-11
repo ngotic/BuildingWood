@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>빌딩숲</title>
 <%@ include file="/WEB-INF/views/include/asset.jsp" %>
+
+<!-- 카드 info -->
 <style>
 
 	.carpool-view-card {
@@ -24,7 +26,6 @@
 	  width: 656px;
 	  height: auto;
 	  display: flex;
-	  /* padding: 50px 16px 0; */
 	  box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.25) ;
 	  align-items: center;
 	  flex-shrink: 0;
@@ -34,39 +35,44 @@
 	  border-radius: 12px;
 	  flex-direction: column;
 	  background-color: #F2F2F2;
+	  padding-left: 30px;
+      padding-right: 30px;
+      /* padding-bottom: 30px; */
 	}
 	
 	.info-frame {
-	  gap: 24px;
-	  width: 526px;
-	  height: 704px;
-	 /*  display: flex; */
+	  width: 656px;
 	  position: relative;
 	  align-items: center;
 	  flex-shrink: 0;
+	  padding: 30px;
 	}
 	
-	.card-header {
-		display: flex; 
-		align-items: center;
+	
+ 	.info-top-frame {
+	  display: flex;
+	  align-items: center;
+	  margin-right: 30px;
 	}
+	
 	
 	.user-info {
 		padding-left: 4px;
 	}
 	
 	.profile {
-	  width: 48px;
-	  height: 48px;
-	  border-radius: 50%;
+		width: 70px;
+		height: 70px;
+		border-radius: 50%;
+		box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
 	}
 	
 	.nickname {
-	
+		font-size: 1.2rem;
 	}
 	
 	.gender {
-	
+		font-size: 1.2rem;
 	}
 	
 	.rating {
@@ -75,124 +81,32 @@
 	}
 	
 	.rating-star {
-		width: 18px;
-		height: 18px;
+		width: 20px;
+		height: 20px;
 		margin-right: 5px;
 	}
 	
 	.rating-score {
-		font-size: 0.9rem;
+		font-size: 1rem;
 	}
 	
- 	.top-frame {
-	  display: flex;
-	  align-items: center;
+	.apply-list-check {
+		right: 40px;
+    	position: absolute;
 	}
 	
-	.profile-frame {
-	  top: 12px;
-	  left: 193px;
-	  width: 80px;
-	  height: 80px;
-	  display: flex;
-	  position: absolute;
-	  align-items: flex-start;
-	  flex-shrink: 1;
-	  background-color: rgba(196, 196, 196, 1);
-	  border-radius: 50%;
+	.apply-list-view {
+		padding: 10px;
+		background-color: rgba(255, 255, 255, 1);
+	  	border-radius: 15px;
+	  	border: none;
 	}
 	
-	.profile {
-	  top: 0px;
-	  left: 0px;
-	  width: 80px;
-	  height: 80px;
-	  position: absolute;
-	  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.25);
-	  border-radius: 50%;
-	}
-	
-	.nickname-frame {
-	  top: 177px;
-	  left: 0px;
-	  width: 526px;
-	  display: flex;
-	  position: absolute;
-	  align-self: stretch;
-	  align-items: flex-start;
-	  flex-direction: column;
-	}
-	
-	.nickname {
-	  color: var(--dl-color-grays-gray950);
-	  height: auto;
-	  align-self: stretch;
-	  text-align: center;
-	  line-height: 32px;
-	  font-size: 2rem;
-	}
-	
-	.user-info-frame {
-	  top: 210px;
-	  left: 0px;
-	  width: 526px;
-	  height: 32px;
-	  display: flex;
-	  position: absolute;
-	  align-self: stretch;
-	  align-items: flex-start;
-	}
-	
-	.user-info {
-	  color: var(--dl-color-grays-gray950);
-	  width: 526px;
-	  height: auto;
-	  position: absolute;
-	  font-size: 20px;
-	  align-self: stretch;
-	  font-style: Medium;
-	  text-align: center;
-	}
-	
-	.rating {
-	  gap: 5px;
-	  top: 268px;
-	  left: 205px;
-	  width: auto;
-	  display: flex;
-	  position: absolute;
-	  align-items: center;
-	  font-size: 1.2rem;
-	}
-	
-	.rating-star {
-	  width: 30px;
-	  height: 30px;
-	  margin-right: 3px;
-	} 
-	
-	
-	
-	.carpool-info-frame {
-	  /* top: 330px; */
-	  left: 115px;
-	  width: 295px;
-	  height: 212.71192932128906px;
-	  display: flex;
-	  position: absolute;
-	  align-items: flex-start;
-	  flex-shrink: 1;
-	}
 	
 	.carpool-info-box {
-	  top: 0px;
-	  left: 0px;
-	  width: 295px;
 	  display: flex;
 	  padding: 24px 24px 24px;
-	  position: absolute;
 	  align-items: flex-start;
-	  flex-shrink: 0;
 	  border-color: rgba(232, 234, 234, 1);
 	  border-style: solid;
 	  border-width: 1px;
@@ -250,6 +164,8 @@
 	  align-self: stretch;
 	  align-items: flex-start;
 	  flex-direction: column;
+	  border-bottom: 1px solid #d8d8d8;
+      padding-bottom: 15px;
 	}
 	
 	.arrivals {
@@ -278,7 +194,7 @@
 	.datetime {
 	  color: var(--dl-color-grays-gray950);
 	  height: auto;
-	  font-size: 15px;
+	  font-size: 1.1rem;
 	  align-self: stretch;
 	  text-align: center;
 	  /* font-family: Roboto; */
@@ -308,19 +224,30 @@
 	  font-size: 2rem;
 	  align-self: stretch;
 	  font-style: Regular;
-	  text-align: center;
-	  /* font-family: Roboto; */
+	  text-align: right;
 	  font-weight: 400;
 	  line-height: 24px;
 	  font-stretch: normal;
 	  text-decoration: none;
-	  padding-top: 10px;
+	  padding-top: 15px;
 	  padding-bottom: 10px;
 	}
 	
 	.content-frame {
 		display: flex;
-		position: absolute;
+		border-bottom: 1px solid #d8d8d8;
+		padding-bottom: 15px;	
+		align-self: stretch;
+    	align-items: flex-start;
+    	flex-direction: column;
+	}
+	
+	.content {
+		font-size: 1rem;
+		padding-left: 50px;
+    	padding-right: 50px;
+    	text-align: center;
+    	align-self: stretch;
 	}
 	
 	
@@ -328,11 +255,8 @@
 	/* 버튼 */
 
 	.apply {
-	  top: 615px;
-	  left: 36.5%;
 	  width: 142px;
 	  height: 50px;
-	  position: absolute;
 	  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 	  background-color: rgba(45, 180, 0, 1);
 	  border-radius: 15px;
@@ -340,103 +264,38 @@
 	  font-size: 20px;
 	}
 	
-	.edit-frame {
-	  top: 615px;
-	  left: 0px;
-	  width: 142px;
-	  height: 50px;
-	  display: flex;
-	  position: absolute;
-	  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) ;
-	  align-items: flex-start;
-	  flex-shrink: 0;
-	  background-color: rgba(255, 255, 255, 1);
-	  border-radius: 15px;
-	  border: none;
-	}
-	
-	.edit-box {
-	  top: 13px;
-	  left: 0px;
-	  width: 142px;
-	  height: 24px;
-	  display: flex;
-	  position: absolute;
-	  align-items: flex-start;
-	  flex-shrink: 0;
-	}
-	
 	.edit {
-	  left: 24px;
-	  color: rgba(98, 98, 98, 1);
-	  width: 94px;
-	  height: auto;
-	  position: absolute;
-	  font-size: 20px;
-	  font-style: Medium;
-	  text-align: center;
-	  /* font-family: Roboto; */
-	  font-weight: 500;
-	  line-height: 24px;
-	  font-stretch: normal;
-	  text-decoration: none;
-	}
-	
-	.del-frame {
-	  top: 615px;
-	  right: 0px;
 	  width: 142px;
 	  height: 50px;
-	  display: flex;
-	  position: absolute;
-	  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) ;
-	  align-items: flex-start;
-	  flex-shrink: 0;
+	  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 	  border-radius: 15px;
-	  background-color: rgba(255, 255, 255, 1);
 	  border: none;
-	}
-	
-	.del-box {
-	  top: 13px;
-	  left: 0px;
-	  width: 142px;
-	  height: 24px;
-	  display: flex;
-	  position: absolute;
-	  align-items: flex-start;
-	  flex-shrink: 0;
+	  font-size: 20px;
+	  color: rgba(98, 98, 98, 1);
+	  background-color: rgba(255, 255, 255, 1);
 	}
 	
 	.del {
-	  left: 24px;
-	  color: rgba(255, 255, 255, 1);
-	  width: 94px;
-	  height: auto;
-	  position: absolute;
-	  font-size: 20px;
-	  font-style: Medium;
-	  text-align: center;
-	  /* font-family: Roboto; */
-	  font-weight: 500;
-	  line-height: 24px;
-	  font-stretch: normal;
-	  text-decoration: none;
-	}
-	
-	.back-frame {
-	  left: 240px;
-      top: 150px;
-	  width: 50px;
+	  width: 142px;
 	  height: 50px;
-	  display: flex;
-	  position: absolute;
-	  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) ;
-	  align-items: flex-start;
-	  flex-shrink: 0;
-	  background-color: rgba(255, 255, 255, 1);
+	  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 	  border-radius: 15px;
 	  border: none;
+	  font-size: 20px;
+	  color: rgba(98, 98, 98, 1);
+	  background-color: rgba(255, 255, 255, 1);
+	}
+	
+	
+	.back-button {
+	  width: 40px;
+	  height: 40px;
+	  border: none;
+	  margin-bottom: 100px;
+	  margin-right: 30px;
+	  position: relative;
+	  z-index: 1;
+	  background: none;
 	}
 	
 	.back-box {
@@ -469,6 +328,8 @@
 		width: 20px;
 		height: 20px;
 	}
+	
+	
 
 </style>	
 	
@@ -478,13 +339,17 @@
 
 	.end {
 		position: absolute;
-		width: 656px;
-		height: 766px;
-		background: rgba(0,0,0,0.70);
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		border-radius: 0.25rem;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    height: 100%;
+	    background: rgba(0,0,0,0.70);
+	    justify-content: center;
+	    align-items: center;
+	    display: flex;
+	    flex-direction: column;
+	    border-radius: 0.25rem;
+	    box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.25);
 	}
 	
 	.end-frame {
@@ -499,6 +364,64 @@
 </style>	
 
 
+<!-- 신청내역보기 버튼 눌렀을때 -->
+<style>
+
+	.carpool-applylist {
+		padding: 30px 30px 20px 30px;
+    	margin-top: 30px;
+    	margin-bottom: 30px;
+    	background-color: #F2F2F2;
+	    border-color: rgba(255, 255, 255, 1);
+	    border-style: solid;
+	    border-width: 1px;
+	    border-radius: 12px;
+	    width: 656px;
+	    box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.25);
+	}
+	
+	.apply-list {
+		font-size: 1.3rem;
+    	padding-bottom: 25px;
+	}
+	
+	.apply-list-detail {
+		font-size: 0.9rem;
+	    background: white;
+	    border-radius: 12px;
+	    padding: 7px 15px 7px 15px;
+	    margin-bottom: 10px;
+	    display: flex;
+    	justify-content: space-between;
+	}
+	
+	.applyuserinfo {
+		display: flex;
+		align-items: center;
+	}
+	
+	.applybutton-ok {
+		padding: 1px;
+	    border: none;
+	    background: #2db400;
+	    color: white;
+	    border-radius: 10px;
+    	width: 50px;
+	}
+	
+	.applybutton-no {
+		padding: 1px;
+	    border: 1px solid #2db400;
+	    background: white;
+	    color: #2db400;
+	    border-radius: 10px;
+    	width: 50px;
+	}
+
+
+</style>
+
+
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
@@ -507,64 +430,68 @@
 		
 	<div class="carpool-view-card">
 	
+	
+	
       <div class="carpool-view-frame">
-      
-		<button class="back-frame" onclick="location.href='/wood/carpool/list.do';">
-	 			<div class="back-box">
-	              <span class="back">
-	              	<img class="back-icon" alt="뒤로가기" src="/wood/asset/img/back-icon.png">
-	              </span>
-	            </div>
-	    </button>
-      
-  
-	       
-        <div class="info-frame">
         
+     	<div class="info-frame">
         
-          <div class="profile-frame">
-            <img
-              src="https://www.studiopeople.kr/common/img/default_profile.png"
-              alt="프로필사진"
-              class="profile"
-            />
-          </div>
+        <div class="info-top-frame">
           
-          <div class="nickname-frame">
-            <span class="nickname">
-              <span>${dto.nickname}</span>
-            </span>
-          </div>
-          
-          <!-- 성별, 레벨(?) -->
-          <div class="user-info-frame">
-            <span class="user-info">
-              <span>
-              		<c:if test = "${dto.gender eq 'M'}">
-		        		(남)
-		        	</c:if>
-		        	<c:if test = "${dto.gender eq 'F'}">
-		        		(여)
-		        	</c:if></span>
-            </span>
-          </div>
-          
-          <!-- ex) ★ 4.7 (30)  -->
-          <div class="rating">
-            <img
-              src="/wood/asset/img/star.png"
-              alt="RatingStar"
-              class="rating-star"
-            />
-            <span>${dto.score}</span>
-            <span> (${dto.count})</span>
-          </div>
+			<button class="back-button" 
+		            		onclick="location.href='/wood/carpool/list.do';">
+			 			<img class="back-icon" alt="뒤로가기" 
+			 				 src="/wood/asset/img/back-icon.png">
+			</button>
+				
+			<img
+	        src="https://www.studiopeople.kr/common/img/default_profile.png"
+	        alt="프로필"
+	        class="profile"
+	        />
+	        
+	        <div class="user-info" style="margin-left: 10px;">
+	        	<div>
+		        	<span class="nickname">${dto.nickname}</span>
+		        	<span class="gender">
+			            <c:if test = "${dto.gender eq 'M'}">
+			            	(남)
+			            </c:if>
+			            <c:if test = "${dto.gender eq 'F'}">
+			            	(여)
+			            </c:if>
+		            </span>
+		        </div>
+		        
+		        <div class="rating">
+			        <img
+				    src="/wood/asset/img/star.png"
+				    alt="RatingStar"
+				    class="rating-star"
+				    />
+		        	<span class="rating-score">${dto.score} (${dto.count})</span>
+		        </div>
+		    </div>
+		    
+		    <c:if test="${(id == dto.id)}">
+		        <div id="carpool-apply" class="apply-list-check">
+	            	<button id="carpool-apply-button" class="apply-list-view" type="submit">신청내역보기</button>
+	        	</div>  
+        	</c:if>        
+
+       	</div>
           
           <!-- 출발지, 도착지, 날짜시간, 가격 -->
-          <div class="carpool-info-frame"> 
             <div class="carpool-info-box">
               <div class="carpool-info">
               
+                <div class="datetime-frame">
+                	<span class="datetime">
+                		<span>${dto.ttime}</span>
+                	</span>
+                </div>    
+                
+                
                 <div class="departures-frame">
                   <span class="departures">
                   	<span style="color: #2db400">${dto.departurescity}</span>
@@ -587,11 +514,16 @@
                   </span>
                 </div>
                 
-                <div class="datetime-frame">
-                	<span class="datetime">
-                		<span>${dto.ttime}</span>
-                	</span>
-                </div>       
+                
+                <!-- 내용 -->      
+		          <div class="content-frame">
+		          	<span class="content">
+						${dto.content} <br>
+						글이 두줄이상일때 <br>
+						어떻게나오는지
+					</span>
+		          </div>
+       
                 
                 <div class="price-frame">
                   <span class="price">
@@ -600,25 +532,21 @@
                 </div>
               </div> 
             </div>
-          </div>
-          
-          <!-- 내용 -->      
-          <div class="content-frame">
-          	${dto.content} view 디자인변경해야함나중에
-          </div>
-    
           
           <c:if test="${(id == dto.id)}">
-          <button class="edit-frame" onclick="location.href='/wood/carpool/edit.do?carpoolseq=${dto.carpoolseq}';">
- 			<div class="edit-box">
-              <span class="edit">
-              	<span>수정하기</span>
-              </span>
-            </div>
-          </button>
+        	<div style="padding-top: 25px; display: flex; justify-content: space-between;">
+	      	<button class="edit" onclick="location.href='/wood/carpool/edit.do?carpoolseq=${dto.carpoolseq}';">
+	      		<span>수정하기</span>
+	      	</button>
+                    
+	      	<button class="del" onclick="del();">
+	      		<span>삭제하기</span>
+	      	</button>
+        	</div>
           </c:if>
-          
+        
           <c:if test="${(id != dto.id)}">
+        	<div style="padding-top: 25px; display: flex; justify-content: center;">
 	      	<button class="apply" style="color: white;" onclick="apply('${dto.carpoolseq}', '${id}');">
 	      		<c:choose>
 	      			<c:when test = "${applystatus eq null}">신청하기</c:when>
@@ -626,22 +554,10 @@
 	      			<c:when test = "${applystatus eq '신청 완료'}">신청 완료</c:when>
 	      		</c:choose>
 	      	</button>
+        	</div>
           </c:if>
           
           
-          <c:if test="${(id == dto.id)}">
-          <button class="del-frame" onclick="del();">
- 			<div class="del-box">
-              <span class="del">
-              	<span>삭제하기</span>
-              </span>
-            </div>
-          </button>
-          </c:if>
-          
-      </div>
-      
-      
       <c:if test="${dto.recruitstatus eq '모집 종료'}">
 	       <div class="end">
 	          	<div class="end-frame">
@@ -652,23 +568,46 @@
 	  
 	  
       </div>
+	  
+      </div>
       
-    <!-- 현재 접속중인 id가 게시글 작성자의 id와 같고, recruitstatus(모집 상태)가 '모집 종료'가 아닐 시 표시함 -->
-	<c:if test="${id eq dto.id && dto.recruitstatus ne '모집 종료'}">
-    	<h4>신청 리스트</h4>
-    	<span>
-    		닉네임 성별 
-    		<button onclick = "applyok()">승인</button>
-    		<button onclick = "applyno()">거절</button>
-    	</span>
-    	
-    	<%-- tblCarpoolApply 테이블에서 carpoolseq = ${dto.carpoolseq}이고 applystatus = '신청 중'인 사람의 nickname과 gender를 출력하는 코드를 작성 --%>
-    	
-    	
-    	    
-    	
-    </c:if>
+
+	<div  id="carpool-applylist" class="carpool-applylist" style="display:none; ">
+		<div class="accept-job">
+		
+			<!-- 현재 접속중인 id가 게시글 작성자의 id와 같고, recruitstatus(모집 상태)가 '모집 종료'가 아닐 시 표시함 -->
+			<c:if test="${id eq dto.id && dto.recruitstatus ne '모집 종료'}">
+				<div class="apply-list-box">
+					<div class="apply-list">신청 내역</div>
+				</div>
+				
+				
+				<c:forEach items="${apply}" var="adto">
+				<div class="apply-list-detail">
+			    	<span class="applyuserinfo">${adto.applynickname}
+			    		<c:if test = "${dto.gender eq 'M'}">
+		              		(남)
+		              	</c:if>
+		              	<c:if test = "${dto.gender eq 'F'}">
+		              		(여)
+		              	</c:if>
+			    	</span>
+			    	<span>
+				    	<button onclick = "applyok()" class="applybutton-ok">승인</button>
+				    	<button onclick = "applyno()" class="applybutton-no">거절</button>
+			    	</span>
+		    	</div>
+		    	</c:forEach>
+		    	
+		    	<%-- tblCarpoolApply 테이블에서 carpoolseq = ${dto.carpoolseq}이고 applystatus = '신청 중'인 사람의 nickname과 gender를 출력하는 코드를 작성 --%>
+		    	
+		
+		    </c:if>
+			
+		</div>
+	</div> 
     
+
     </div>
 		
 	</section>
@@ -840,6 +779,16 @@
 	
 	
 <script>
+
+		$('#carpool-apply-button').on('click', function() {
+			
+			if($("#carpool-applylist").css("display") == "none"){
+			     $("#carpool-applylist").slideDown('slow');
+			} else {
+			    $("#carpool-applylist").slideUp('slow');
+			}
+			
+		});
 
 </script>
 </body>

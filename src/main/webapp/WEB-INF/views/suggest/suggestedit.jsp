@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -131,7 +130,7 @@
 
 	
 	#table-root {
-		width: 60%;
+		width: 75%;
 		margin: 0 auto;
 		font-size: 16px;
 	}
@@ -163,7 +162,7 @@
 		color: #777;
 	}
 	.table-title {
-		width: 120px;
+		width: 55px;
 		text-align: center;
 		height: 55px;
 		border-right: 1px solid;
@@ -184,22 +183,11 @@
 		font-family: 'Pretendard';
 	}
 	.table-content-real {
-		color: #464646 !important;
+		color: #222 !important;
 		text-align: justify;
 		height: 160px;
 	}
 	
-	#title {
-		width:529px;
-		outline: none;
-		border: 1px solid #bbb;
-	}
-	#content {
-		width:529px;
-		margin-top: 8px;
-		outline: none;
-		border: 1px solid #bbb;
-	}
 	
 	/* 하단 버튼 */
 	.searchdiv {
@@ -217,30 +205,43 @@
     	margin-top: 3px;
    }
 	
-	
-	 .searchdiv .btn {
+	.searchdiv .btn {
     	/* padding-left: 33px; */
    	}
-   	
-   	
+
 </style>
 </head>
 <body>
 	<!-- template.jsp > index.jsp -->
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
 	<section class="container">
-		<h1>건의 게시판<small> 작성</small></h1>
+		<h1>건의 게시판<small> 수정</small></h1>
 	</section>
 	
-	<form method="POST" action="/wood/suggest/suggestadd.do">
+	
 	<div class="container-xl">
 	<div class="table-responsive">
+	
+		<form method="POST" action="/wood/suggest/suggestedit.do">
 			<table class="table table-striped" id="table-root">
 				<tbody>
 					<tr>
+						<td class="table-title">글번호</td>
+						<td class="table-content table-content-mid">${dto.suggestseq}</td>
+						<td class="table-title ">조회수</td>
+						<td class="table-content">${dto.readcount}</td>
+					</tr>
+					<tr>
+					
+						<td class="table-title">작성자</td>
+						<td class="table-content table-content-mid table-content-bold">${dto.nickname}</td>
+						<td class="table-title">작성일</td>
+						<td class="table-content">${dto.editdate}</td>
+					</tr>
+					<tr>
 						<td class="table-title">카테고리</td>
-						<td class="table-content">
-							<select name ="category">
+						<td class="table-content" colspan="3">
+							<select name ="category" id="category">
 								<option value="건의">건의</option>
 								<option value="질문">질문</option>
 								<c:if test="${lv == '0'}"> <!-- 관리자만 공지 가능 -->
@@ -251,24 +252,29 @@
 					</tr>
 					<tr>
 						<td class="table-title">제목</td>
-						<td class="table-content table-content-bold"><input type="text" name="title" id="title" required autofocus spellcheck="false"></td>
+						<td colspan="4" class="table-content table-content-bold">
+							<input type="text" name="title" id="title" required value="${dto.title}" autofocus spellcheck="false" style="outline:none; width: 305px;">
+						</td>
 					</tr>
 					<tr>
 						<td class="table-title">내용</td>
-						<td class="table-content table-content-real"><textarea name="content" id="content" rows="5" required spellcheck="false"></textarea></td>
+						<td colspan="4" class="table-content table-content-real">
+							<textarea name="content" id="content" required spellcheck="false" rows="5" style="outline:none; width: 440px;">${dto.content}</textarea>
+						</td>
 					</tr>
 				</tbody>
 			</table>
-		</div>
+			
+			<div class="searchdiv">
+				<button type="submit" class="btn btn-outline-secondary btn-sm" style="border: 1px solid #aaa !important;"><span class="material-symbols-outlined" id="ori-icon2" >edit</span>수정하기</button>
+		   	    <button type="button" class="btn btn-outline-secondary btn-sm" onclick="history.back()" style="border: 1px solid #aaa !important;"><span class="material-symbols-outlined" id="ori-icon2" style="border-left: 1px soild #aaa">reply</span>돌아가기</button>
+			</div>
+			
+			<input type="hidden" name="suggestseq" value="${dto.suggestseq}">
+		</form>
+	</div>
 	</div>        
 	
-	<div class="searchdiv">
-		<button type="submit" class="btn btn-outline-secondary btn-sm" style="border: 1px solid #aaa !important;"><span class="material-symbols-outlined" id="ori-icon2" >add_ad</span>글쓰기</button>
-   	    <button type="button" class="btn btn-outline-secondary btn-sm" onclick="location.href='/wood/suggest/suggest.do';" style="border: 1px solid #aaa !important;"><span class="material-symbols-outlined" id="ori-icon2" style="border-left: 1px soild #aaa">reply</span>돌아가기</button>
-	</div>
-	
-	</form>
-		
 	
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 <script>

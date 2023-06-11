@@ -98,7 +98,7 @@
 	}
 	table.table td a {
 		font-weight: bold;
-		color: #566787;
+		color: #555;
 		display: inline-block;
 		text-decoration: none;
 		outline: none !important;
@@ -193,7 +193,7 @@
 	/* 페이징 */
 	.page-link.active {
 		background-color: rgb(126 211 33 / 72%); !important;
-		border-color: rgb(126 211 33 / 72%); !important;
+		border-color: #dee2e6 !important;
 		font-family: 'Pretendard-Regular';
 		color: #fff !important;
 	}
@@ -217,9 +217,6 @@
 		border: hidden !important;
 	}
 	
-	 .searchdiv .btn {
-    	padding-left: 33px;
-   	}
 	
 	#ori-icon2 {
 	font-size: 20px;
@@ -240,6 +237,10 @@
 <body>
 	<!-- template.jsp > index.jsp -->
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
+	<%@ include file="/WEB-INF/views/suggest/sugheader.jsp" %>
+		
+	<div id="suggest" style="height: 100px; margin-top: -100px;"></div>
+	
 	<section class="container">
 		<h1>건의 게시판<small> 목록</small></h1>
 	</section>
@@ -255,15 +256,16 @@
 					</div>
 				</div>
 			</div> -->
+			
 			<table class="table table-striped table-hover" id="table-root">
 				<thead id="table-head">
 					<tr id="table-head-tr">
 						<th class="table-center head-th" style="width:70px">번호</th>
-						<th class="table-center head-th" style="width:105px">공지/게시판</th>
+						<th class="table-center head-th" style="width:105px">공지/건의</th>
 						<th class="table-center head-th" style="width:350px">제목</th>
 						<th class="table-center head-th" style="width:150px">닉네임</th>
 						<th class="table-center head-th" style="width:110px">작성날짜</th>
-						<th class="table-center head-th" style="width:70px">추가?</th>
+						<th class="table-center head-th" style="width:70px">조회수</th>
 					</tr>
 				</thead>
 				
@@ -308,7 +310,7 @@
 			<option value="content">내용</option>
 			<option value="nickname">닉네임</option>
 		</select>
-		<input type="text" name="word" required>
+		<input type="text" name="word" required style="outline:none;">
 		<input type="submit" value="검색하기" class="rec-btn">
 	</form>
 	</div>

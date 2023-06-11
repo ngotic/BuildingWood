@@ -32,7 +32,9 @@
         line-height: 1.15;
         color: var(--dl-color-gray-black);
         background-color: var(--dl-color-gray-white);
-
+      }
+      .container {
+      	margin-bottom: 51px !important;
       }
      .frame-group1222 {
 	  top: 162px;
@@ -46,6 +48,7 @@
 	  border-width: 0.5px;
 	  border-radius: 30px;
 	  background-color: rgba(255, 255, 255, 1);
+	  margin-top: 21px;
 	}
 	.frame-mappin {
 	  top: 8px;
@@ -359,8 +362,8 @@
 
 /* 페이징 */
 .page-link.active {
-	background-color: #1BC060 !important;
-	border-color: #1BC060 !important;
+	background-color: rgb(126 211 33 / 72%) !important;
+	border-color: #dee2e6 !important;
 	font-family: 'Pretendard-Regular';
 	color: #fff !important;
 }
@@ -385,14 +388,18 @@
 	}
 	
 	 .searchdiv .btn {
-    	padding-left: 33px;
+    	/* padding-left: 33px; */
    	}
 	
 	#ori-icon2 {
 	font-size: 20px;
-    margin-top: 3px;
-   
+    /* margin-top: 3px; */
    }
+   
+   #ori-icon2 > span {
+   	
+   }
+   
    
    #container-loc {
    height: 130px;
@@ -410,6 +417,10 @@
 <body>
 		<!-- template.jsp > index.jsp -->
 		<%@ include file="/WEB-INF/views/include/header.jsp" %>
+		<%@ include file="/WEB-INF/views/recommend/recheader.jsp" %>
+		
+		<div id="recommend" style="height: 100px; margin-top: -100px;"></div>
+		
 		<section class="container" id="container-loc">
 			<h1>맛집 추천
 				<c:if test="${map.search == 'n'}">
@@ -493,8 +504,9 @@
 		<form id="searchForm" action="/wood/recommend/recommend.do" method="GET">
 			<select name ="column">
 				<option value="title">제목</option>
+				<option value="content">한줄평</option>
 			</select>
-			<input type="text" name="word" class="long" required>
+			<input type="text" name="word" required style="outline:none;">
 			<input type="submit" value="검색하기" class="rec-btn">
 		</form>
 		</div>
