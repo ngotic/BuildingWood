@@ -1,4 +1,4 @@
-package com.project.wood.board.teach;
+package com.project.wood.teach;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.project.wood.teach.repository.TeachDAO;
+import com.project.wood.teach.repository.TeachDTO;
 
 @WebServlet("/teach/add.do")
 public class Add extends HttpServlet {
@@ -63,7 +66,7 @@ public class Add extends HttpServlet {
 		dto.setContent(content);
 		dto.setId(id);
 		dto.setWeekend(weekend);
-		dto.setTime(time);
+		dto.setSettime(time);
 		
 //		String num = dao.test(id);
 		

@@ -31,9 +31,9 @@ public class View extends HttpServlet {
 		PagingDTO pagedto = new PagingDTO();
 		PagingDAO pagedao = new PagingDAO();
 		
-	
+		ArrayList<StudyListDTO> list = new ArrayList<StudyListDTO>();
 		
-		
+		System.out.println(req.getParameter("openstudyseq"));
 		pagedto.setMaxPage(pagedao.pagingmaxpage(req.getParameter("openstudyseq")));
 		
 		System.out.println("max page = " + pagedto.getMaxPage());
@@ -74,7 +74,7 @@ public class View extends HttpServlet {
 				
 				
 				
-				ArrayList<StudyListDTO> list = dao.ListContentstudys(dto);
+				list = dao.ListContentstudys(dto);
 				odto = dao.odtocontent(req.getParameter("openstudyseq"));
 		
 			
@@ -84,10 +84,36 @@ public class View extends HttpServlet {
 			}	
 		}
 		
-		ArrayList<StudyListDTO> list = dao.ListContentstudys(dto);
-		odto = dao.odtocontent(req.getParameter("openstudyseq"));
 		
-
+		String ck = req.getParameter("ck");
+		String name = req.getParameter("name");
+		System.out.println(name +"이름이요");
+		System.out.println(ck +"ck이요");
+		if(req.getParameter("name")!=null) {
+			
+			if(ck.equals("name")) {
+				
+				list = dao.Searchboard(name , req.getParameter("openstudyseq"));
+				
+				System.out.println("name list = "+list);
+			}else if(ck.equals("content")) {
+				list = dao.Searchcontentboard(name , req.getParameter("openstudyseq"));
+				
+				System.out.println("content list = "+list);
+			}else {
+				list = dao.Searchboard(name , req.getParameter("openstudyseq"));
+				
+				System.out.println("걍 list = "+list);
+			}
+			
+		}else {
+			
+		
+		 list = dao.ListContentstudys(dto);
+		 odto = dao.odtocontent(req.getParameter("openstudyseq"));
+		 System.out.println("걍 list 2 = "+list);
+		}
+		System.out.println("오디티오에여 " + odto);
 		req.setAttribute("pagedto", pagedto);
 		req.setAttribute("list", list);
 		req.setAttribute("odto", odto);
@@ -132,8 +158,30 @@ public class View extends HttpServlet {
 			
 			
 			
-		ArrayList<StudyListDTO> list = dao.ListContentstudys(dto);
+		ArrayList<StudyListDTO> list ;
+		
+		if(req.getParameter("name")!=null) {
+			String ck = req.getParameter("ck");
+			String name = req.getParameter("name");
+			if(ck.equals("name")) {
+				
+				list = dao.Searchboard(name , req.getParameter("openstudyseq"));
+				
+				
+			}else if(ck.equals("content")) {
+				list = dao.Searchcontentboard(name , req.getParameter("openstudyseq"));
+			
+			}else {
+				list = dao.Searchboard(name , req.getParameter("openstudyseq"));
+				
+			}
+			
+		}else {
+			list = dao.ListContentstudys(dto);
+			
+		}
 		odto = dao.odtocontent(req.getParameter("openstudyseq"));
+		
 		System.out.println("list = "+list);
 		req.setAttribute("list", list);
 		req.setAttribute("dto", dto);

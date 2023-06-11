@@ -51,10 +51,27 @@ section {
 	background-color: #96d04a6e;
 	padding: 10px 5px 10px 5px;
 }
+
+.weekend {
+	border: 0px;
+	outline: none;
+	width: 40px;
+	height: 40px;
+	margin-right: 10px;
+	font-weight: bold;
+	font-size: 1.5rem;
+	border-radius: 100px;
+}
+
+.form-control.time {
+	width: 40% !important;
+	display: inline !important;
+}
 </style>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
+	<%@ include file="/WEB-INF/views/teach/teachheader.jsp"%>
 	<section class="container">
 		<h1 class="text-success text-center">
         과외 신청 게시글
@@ -99,6 +116,29 @@ section {
 	                <input type="text" class="form-control" id="place" value="${dto.place }" name="place">
 	            </div>
 	            <div class="form-group">
+	                <label>요일:</label>
+	                <div>
+				        <input type="button" value="월" class="weekend" />
+				        <input type="button" value="화" class="weekend" />
+				        <input type="button" value="수" class="weekend" />
+				        <input type="button" value="목" class="weekend" />
+				        <input type="button" value="금" class="weekend" />
+				        <input type="button" value="토" class="weekend" />
+				        <input type="button" value="일" class="weekend" />
+				        <input type="hidden" value="" id="hidden" name="hidden">
+				    </div>
+			    </div>
+	            <div class="form-group">
+	                <label>시간:</label>
+	                <div>
+	                	&nbsp;시작 시간: 
+		                <input type="time" class="form-control time" name="sttime" value="${(dto.settime).substring(0,5) }" required>
+		                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		                종료 시간: 
+		                <input type="time" class="form-control time" name="edtime"  value="${(dto.settime).substring(6) }" required>
+	            	</div>
+	            </div>
+	            <div class="form-group">
 	                <label>가격:</label>
 	                <input type="number" class="form-control" id="contact" step="1000" min="9620" max="1000000" value="${dto.price }"
 	                    name="price">
@@ -127,7 +167,29 @@ section {
 	</section>
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 	<script>
+	var insert ='';
+	$(document).ready(function() {
+		  var color = $('.weekend');
+		  
+		  <c:forEach items="${dto.weekend.split(',')}" var="item">
+			$('.weekend[value=${item}]').css('background-color', '#FFE1E1');		  
+		  </c:forEach>
+		  alert(${dto.weekend})
+		});
 
+	$('.weekend').click(function () {
+
+		if($(this).css('background-color') == 'rgb(240, 240, 240)'){
+	        $(this).css('background-color', '#FFE1E1');
+	        insert += event.target.value + ',';
+			
+		}else{
+	        $(this).css('background-color', '');
+			var remove = event.target.value + ',';
+		    insert = insert.replace(remove, '');
+		}
+		$('#hidden').val(insert);
+    });
 </script>
 </body>
 </html>

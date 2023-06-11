@@ -26,6 +26,15 @@ public class List extends HttpServlet {
 		StudyDAO dao = new StudyDAO();
 		StudyDTO dto = new StudyDTO();
 		
+		if(req.getParameter("studyjoin") != null) {
+
+			String id = (String)req.getSession().getAttribute("id");
+			int result = dao.studyjoinck(id,req.getParameter("openstudyseq"));
+			if(result ==1 ) {
+			dao.studyjoin(id,req.getParameter("openstudyseq"));
+			}
+		}
+		
 		
 		ArrayList<StudyDTO> list = dao.ListContent();
 		
