@@ -173,6 +173,17 @@ public class SnsMain extends HttpServlet {
 			System.out.println("지우기");
 			
 		}  
+		else if("4".equals(type)) {
+			String snsboardseq =req.getParameter("delsnsboardseq");
+			
+			SnsDTO dto = new SnsDTO();
+			dto.setId(uid);
+			dto.setSnsboardseq(snsboardseq);
+			
+			int deleteboard = dao.deleteboard(dto);
+			System.out.println("지우기");
+			
+		}  
 		else{
 			try {
 				

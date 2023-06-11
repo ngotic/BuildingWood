@@ -21,12 +21,33 @@
  html { scroll-behavior: smooth  }
 </style>
 <style data-tag="default-style-sheet">
-	span.material-symbols-outlined {
-    margin-top: 1px;
+	.heart.material-symbols-outlined{
+	    color: tomato;
+	    font-weight:bold;
+	}
+	.bubble.material-symbols-outlined{
+	    color: black;
+	    font-weight:bold;
+	}
+	.heart.material-symbols-outlined:hover, .heart.material-symbols-rounded:hover{
+		font-size:30px;
+	}
+	
+	.bubble.material-symbols-outlined{
+	    color: tomato;
+	}
+	.bubble.material-symbols-outlined:hover{
+		font-size:30px;
+	}
+	.bubble.material-symbols-outlined{
     color: tomato;
 	}
-	.frame-text15 > span {
-	color: tomato;
+	#dropdownMenuButton1{
+		color:black;
+	}
+	#dropdownMenuButton1:hover{
+		border-radius:15px;
+		background-color:rgb(219,219,219);
 	}
 </style>	
 <link href="asset/snscss/snsboxSizing.css" rel="stylesheet" type="text/css">
@@ -69,7 +90,7 @@
 					</select>
 				</div>
 				<c:if test="${ubuildingseq==buildingseq}">
-					<div class="box" style="position:absolute; right:0px;"><button id="addsnscontent">접기</button></div>
+					<div class="box" style="position:absolute; right:0px;"><button type="button" id="addsnscontent" class="btn btn-light">접기</button></div>
 				</c:if>
 				</div>
 				<div id="board">
@@ -103,7 +124,7 @@
 									    </div>
 									  </div>
 									</div>
-								<button type="submit" class="add">등록하기</button>
+									<button type="submit" class="add btn btn-secondary"> 등록하기</button>
 								</div>
 							</div>
 						</form>
@@ -166,39 +187,44 @@
 								<div id="react">
 									<c:if test="${not likelist.contains(dto.snsboardseq)}">
 										<div class="like" data-index="${status.count}"data-likesnsboardseq="${dto.snsboardseq }">
-											<span class="material-symbols-outlined">
+											<span class="heart material-symbols-outlined">
 												favorite
 											</span>
 										</div>
 									</c:if>
 									<c:if test="${likelist.contains(dto.snsboardseq)}">
 										<div class="like" data-index="${status.count}"data-likesnsboardseq="${dto.snsboardseq}">
-											<span class="material-symbols-rounded">
+											<span class="heart material-symbols-rounded">
 												favorite
 											</span>
 										</div> 
 									</c:if>
 									<div id="comment">
-										 <button class="material-symbols-outlined" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" data-snsboardseq="${dto.snsboardseq}" data-content="${dto.content}" data-clike="${dto.clike }" data-profile="${dto.profile}" data-nickname="${dto.nickname}" data-cpic="${dto.cpic}" data-index="${status.index}">
+										 <button class="bubble material-symbols-outlined" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" data-snsboardseq="${dto.snsboardseq}" data-content="${dto.content}" data-clike="${dto.clike }" data-profile="${dto.profile}" data-nickname="${dto.nickname}" data-cpic="${dto.cpic}" data-index="${status.index}">
 											chat_bubble
 										</button>
 									</div>
 								</div>
 							</div>
 						</div>
+						
 						</c:forEach>
 					</div>
 				</div>
 			</div>
 			<c:if test="${hidemapbox eq 'f'}">
 			<div style="width:50%;">
-				<div id="hidemap" style="text-align:right;" onclick="hidemap();">맵 숨기기</div>
+				<div style="text-align:right;">
+					<button id="hidemap"  type="submit" class="btn btn-outline-success" onclick="hidemap();">맵 숨기기</button>
+				</div>
 				<div id="map" style="width:600px;"></div>
 			</div>
 			</c:if>
 			<c:if test="${hidemapbox eq 't'}">
 			<div style="width:50%;">
-				<div id="hidemap" style="text-align:right;" onclick="hidemap();">맵 보이기</div>
+				<div style="text-align:right;">
+					<button id="hidemap"  type="submit" class="btn btn-outline-success" onclick="hidemap();">맵 보이기</button>
+				</div>
 				<div id="map" style="width:600px;"></div>
 			</div>
 			</c:if>
@@ -229,14 +255,23 @@
      				<div class="modal_imagebox" id="modal_imagebox"></div>
      			</td>
      			<!-- 오른쪽  -->
-     			<td style="width:550px;height:50px; border-bottom: 3px solid rgb(219,219,219);vertical-align: top; " >
-     				<div class="box">
+     			<td  style="width:550px;height:50px; border-bottom: 3px solid rgba(219,219,219,0.5);vertical-align: top; " >
+     				<div class="box forbox" >
      				<div class="u_imagebox box" id="u_imagebox">
      					<img alt="" src="/wood/asset/sns/pic.png" class="comment_userimage">
      				</div>
      				<div id="modal_usernick" style="width:120px;"></div>
-					<div class="modal_comment" id="modal_content"style="margin-left:10px;"></div>
-					<div class="box">...</div>
+					<div class="modal_comment" id="modal_content"style="margin-left:10px;vertical-align:middle;"></div>
+					<div class="box">
+					<div class="dropdown" id = "fordelete">
+					   <span class="material-symbols-outlined" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+						more_vert
+						</span>
+					  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+					    <li><a class="dropdown-item" id="btndelete" class="btndelete">삭제하기</a></li>
+					  </ul>
+					</div>
+					</div>
      				</div>
      			</td>
      		</tr>
@@ -261,7 +296,7 @@
      		<tr>
      			<td style="border-bottom: 3px solid rgb(219,219,219);">
      				<form>
-     					<input name="w_modal_comment" id="w_modal_comment" type="text" value="text" style="font-size:12px;">
+     					<input name="w_modal_comment" id="w_modal_comment" type="text" value="" style="margn-left:20px;width:400px;font-size:12px;">
      					<div style="float:right; margin-top:5px;"><button id="btnadd" type="button" style="font-size:12px;">게시하기</button></div>
      				</form>
      			</td>
@@ -273,7 +308,7 @@
      	
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="headershow();">Close</button>
       </div>
     </div>
   </div>
@@ -412,7 +447,6 @@
 	            	location.href='/wood/snsmain.do?buildingseq='+$('#blist option:selected').data('buildingseq')+'&hidemapbox='+hidemapbox;
 	            },
 	            error:function(){
-	                alert("error");
 	            }
 	            
 	        });
@@ -465,7 +499,7 @@
 	});
 	
 	//좋아요 처리 
-	 $(".like").on('click',function(){
+	 $(".like").off().on('click',function(){
 		 var heartseq = 1;
 		 var index = parseInt($(this).data('index')-1);
 		 var likesnsboardseq = $(this).data('likesnsboardseq');
@@ -484,11 +518,10 @@
 		  	            	type:"2",
 		  	            	likesnsboardseq:likesnsboardseq},
 	  	            	success:function(data){
-		 	                alert("succss");
-		 	               
+	  	            		console.log('success');
 		  	            },
 		  	            error:function(){
-		  	                alert("error");
+		  	            	console.log('failed');
 		  	            }
 		  	        });
 				 
@@ -503,11 +536,11 @@
 			  	            	type:"3",
 			  	            	likesnsboardseq:likesnsboardseq},
 		  	            	success:function(data){
-			 	                alert("succss");
+			 	                console.log("succss");
 			 	               
 			  	            },
 			  	            error:function(){
-			  	                alert("error");
+			  	                console.log("error");
 			  	            }
 			  	        });
 			 }
@@ -528,11 +561,11 @@
 			  	            	like:"1", 
 			  	            	likesnsboardseq:likesnsboardseq},
 		  	            	success:function(data){
-			 	                alert("succss");
+			 	                console.log("succss");
 			 	               
 			  	            },
 			  	            error:function(){
-			  	                alert("error");
+			  	                console.log("error");
 			  	            }
 			  	        });
 					 
@@ -549,11 +582,11 @@
 			  	            	like:"1", 
 			  	            	likesnsboardseq:likesnsboardseq},
 		  	            	success:function(data){
-			 	                alert("succss");
+			 	                console.log("succss");
 			 	               
 			  	            },
 			  	            error:function(){
-			  	                alert("error");
+			  	                console.log("error");
 			  	            }
 			  	        });
 					 
@@ -564,14 +597,10 @@
 	
 	 function headershow(){
 			$("#header").css('opacity','1');		 
-			
-			
-			
-		 }
+		 };
 		
-	
 	    	
-   	$(document).ready(function() {     
+   	$(document).off().ready(function() {     
    		if(hidemapbox=='t'){
    			$('#map').css("transition-duration","0s");
    			$('#content').css("transition-duration","0s");
@@ -588,7 +617,8 @@
 			$('#hidemap').html('맵 숨기기');
 			hidemapbox= 'f';
 		}
-       	$('#staticBackdrop').on('show.bs.modal', function(event) {       
+   		//모달 생성 시 
+       	$('#staticBackdrop').off().on('show.bs.modal', function(event) {       
     	 $('#header').css("opacity","0.5");
     	 
        	var Idx =1; //현재 슬라이드 index
@@ -615,6 +645,9 @@
         	commented = $("#boardwrap").children().eq(index-1).find("#to_modal_commentlist").html()
         	like = $("#boardwrap").children().eq(index-1).find(".like").html()
         }
+        
+        
+        
         str=str.substring();
         commented=commented.substring();
         like = like.substring();
@@ -628,6 +661,8 @@
         str=str.replaceAll('calc(1350px);','calc(1800px);');
         str=str.replaceAll('calc(900px);','calc(1200px);');
         str=str.replaceAll('calc(450px);','calc(600px);');
+        
+        
         
         commented= commented.replaceAll('style=\"display:none;\"','');
         like = like.replaceAll('ed\"','ed\" style=\"font-size:40px; margin-left:15px;\"')
@@ -677,11 +712,11 @@
 		  	            	type:"3",
 		  	            	likesnsboardseq:$("#boardwrap").children().eq(index-1).find(".like").data("likesnsboardseq")},
 	  	            	success:function(data){
-		 	                alert("succss");
+		 	                console.log("succss");
 		 	               
 		  	            },
 		  	            error:function(){
-		  	                alert("error");
+		  	                console.log("error");
 		  	            }
 		  	        });
 		        	
@@ -695,11 +730,11 @@
 		  	            	type:"3",
 		  	            	likesnsboardseq:$("#boardwrap").children().eq(index).find(".like").data("likesnsboardseq")},
 	  	            	success:function(data){
-		 	                alert("succss");
+		 	                console.log("succss");
 		 	               
 		  	            },
 		  	            error:function(){
-		  	                alert("error");
+		  	                console.log("error");
 		  	            }
 		  	        });
 			 	 }
@@ -718,11 +753,11 @@
 		  	            	type:"2",
 		  	            	likesnsboardseq:$("#boardwrap").children().eq(index-1).find(".like").data("likesnsboardseq")},
 	  	            	success:function(data){
-		 	                alert("succss");
+		 	                console.log("succss");
 		 	               
 		  	            },
 		  	            error:function(){
-		  	                alert("error");
+		  	                console.log("error");
 		  	            }
 		  	        });
 	        		
@@ -736,17 +771,39 @@
 		  	            	type:"2",
 		  	            	likesnsboardseq:$("#boardwrap").children().eq(index).find(".like").data("likesnsboardseq")},
 	  	            	success:function(data){
-		 	                alert("succss");
+		 	                console.log("succss");
 		 	               
 		  	            },
 		  	            error:function(){
-		  	                alert("error");
+		  	                console.log("error");
 		  	            }
 		  	        });
 				 }
 			 }
 			
     	});
+    	
+    	 $("#btndelete").on("click", function(){
+    		 if(user==1){
+	    		 $.ajax({
+	   	            url:"/wood/snsmain.do",
+	   	            type: "post", // post 방식
+	   	            data:{
+	   	            	type:"4",
+	   	            	delsnsboardseq:snsboardseq} ,
+	 	            	success:function(data){
+	  	                console.log("success");
+	  	               // 팝업 호출 url
+	  	               var url = 'http://localhost:8090/wood/snsmain.do?buildingseq='+$('#blist option:selected').data('buildingseq')+'&hidemapbox='+hidemapbox;
+	  	               // 팝업 호출
+	  	              location.href=url;
+	   	            },
+	   	            error:function(){
+	   	                console.log("error");
+	   	            }
+	   	        });
+    		 }
+ 		});
     	
     	$(".to_comment").on("click",function(){
     		$("#w_modal_comment").val('@'+this.value+" ");
@@ -761,10 +818,10 @@
   	            	type:"1",
   	            	snsboardseq:snsboardseq, 
   	            	comment:$('#w_modal_comment').val()},// json 방식으로 서블릿에 보낼 데이터
-  	            success:function(data){
- 	                alert("success");
+	            	success:function(data){
+ 	                console.log("success");
  	               // 팝업 호출 url
- 	               var url = 'http://localhost:8090/wood/snsmain.do?buildingseq='+$('#blist option:selected').data('buildingseq')+'&hidemapbox='+hidemapbox;
+ 	                  var url = 'http://localhost:8090/wood/snsmain.do?buildingseq='+$('#blist option:selected').data('buildingseq')+'&hidemapbox='+hidemapbox;
  	               // 팝업 호출
  	               
  	              location.href=url;
@@ -772,7 +829,7 @@
  	               
   	            },
   	            error:function(){
-  	                alert("error");
+  	                console.log("error");
   	            }
   	        });
      	});
@@ -839,7 +896,6 @@
 		    reader.readAsDataURL(file);
 	});
 	 
-	
 		
 </script>
 

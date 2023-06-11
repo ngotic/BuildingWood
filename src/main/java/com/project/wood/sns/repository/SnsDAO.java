@@ -76,7 +76,7 @@ public class SnsDAO {
 	public List<SnsDTO> getComment() {
 		try {
 			List<SnsDTO> clist = new ArrayList<SnsDTO>();
-			String sql = "select * from snscommentlist";
+			String sql = "select * from snscommentlist order by writedate asc";
 			stat = conn.createStatement();
 			rs = stat.executeQuery(sql);
 			
@@ -246,7 +246,7 @@ public class SnsDAO {
 			String sql = "insert into tblsnscomment (snscommentseq, snsboardseq,id,content,writedate,editdate) values(snscommentseq.nextVal, ?, ?, ?, default,default)";
 			pstat = conn.prepareStatement(sql);
 			pstat.setString(1, cdto.getSnsboardseq());
-			pstat.setString(2,cdto.getId());
+			pstat.setString(2,	cdto.getId());
 			pstat.setString(3, cdto.getContent());
 			
 			return pstat.executeUpdate();
@@ -337,6 +337,65 @@ public class SnsDAO {
 		
 		return null;
 	
+	}
+
+	public int deleteboard(SnsDTO dto) {
+		try {
+			System.out.println(dto.getSnsboardseq());
+			System.out.println(dto.getId());
+			System.out.println("tblsnslike삭제");
+			String sql = "delete tblsnslike where snsboardseq =?";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, dto.getSnsboardseq());
+			rs = pstat.executeQuery();
+			
+			}
+			catch (Exception e) {
+			
+			System.out.println(" tblsnslike 실패");
+			e.printStackTrace();
+		
+		}
+		try {
+
+			System.out.println("tblsnscomment삭제");
+			String sql = "delete tblsnscomment where snsboardseq =?";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, dto.getSnsboardseq());
+			rs = pstat.executeQuery();
+			
+		} catch (Exception e) {
+			
+			System.out.println(" tblsnscomment 실패");
+			e.printStackTrace();
+		}try {
+
+			System.out.println("tblsnspic삭제");
+			String sql = "delete tblsnspic where snsboardseq =?";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, dto.getSnsboardseq());
+			rs = pstat.executeQuery();
+			
+		} catch (Exception e) {
+			
+			System.out.println(" tblsnspic 실패");
+			e.printStackTrace();
+		}
+		try {
+			System.out.println("tblsnsboard삭제");
+			String sql = "delete tblsnsboard where id =? and snsboardseq =?";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, dto.getId());
+			pstat.setString(2, dto.getSnsboardseq());
+			rs = pstat.executeQuery();
+			
+			return pstat.executeUpdate();
+		} catch (Exception e) {
+
+			System.out.println(" tblsnsboard 실패");
+			e.printStackTrace();
+		}
+		return 0;
 	}
 	
 	

@@ -58,14 +58,13 @@
 		position:relative;;
 		color:black;
 		margin:10px;
-		border-bottom:3px solid #008D62;
 		font-size:20px;
 	}
 	#board{
 		overflow-y:scroll;
 		height:830px;
 	}
-
+	
 	.boardcontent{
 		width:90%;
 		height:460px;
@@ -73,12 +72,21 @@
 		border-bottom: 3px solid rgb(219,219,219);
 		margin: 15px auto;
 	}
-	.boardcontent:hover{
+	.boardcontent:hover , #addcontent:hover{
 	border-radius:15px;
 	 background-color: rgba(128, 128, 128, 0.11);
 		
 	}
-	
+	td > .forbox {
+		 display: table-cell;
+		  text-align: left;
+		  vertical-align: top;
+	}
+	td > .forbox >#uimagebox{
+		 display: table-cell;
+		  text-align: center;
+		  vertical-align: top;
+	}
 	#usercontent{
 		width:450px;
 		height:450px;
@@ -116,8 +124,6 @@
 	}
 	#comment:hover , .like:hover{
 		cursor:pointer;
-		color:black;
-		
 	}
 	#board::-webkit-scrollbar {
     	display: none; /* 크롬, 사파리, 오페라, 엣지 */
@@ -181,16 +187,16 @@
 		right:30px;
 		
 	}
-	.add:hover{
-		border:1px solid rgb(219,219,219);
-		background-color:rgb(219,219,219);
-		color:white;
-	}
 	modal_commentbox{
 		width:520px;
 		margin-right:0px;
 		
 	}
+	#modal_content{
+		align-items : center;
+		
+	}
+	
 	.imagebox{
 		 width: 450px;
 		  height: 300px;
@@ -235,7 +241,6 @@
 .slides li{
   float: left;
 }
-
 .controller span{
   position:absolute;
   background-color: transparent;
@@ -257,7 +262,20 @@
   left: 10px;
   z-index:999;
 }
+select{
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 10px;
+    font-family: 'Roboto';
+    font-weight:bold;
+    line-height: 16px;
+}
 
+select:focus{
+    border: 1px solid rgba(128, 128, 128, 0.11);
+    box-sizing: border-box;
+    border-radius: 15px;
+}
 
 .next{
   right: 10px;
@@ -297,4 +315,9 @@ img{
 .mslides > li{
 	margin-top:100px;
 	margin-bottom:100px;
+}
+
+#ddong::-ms-expand{
+	
+	display:none;
 }
