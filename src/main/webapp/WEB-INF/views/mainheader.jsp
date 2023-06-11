@@ -38,9 +38,7 @@
         text-align: right;
 	}
 	
-	
 </style>
-
 
 <body>
 	<div class ="cropping">

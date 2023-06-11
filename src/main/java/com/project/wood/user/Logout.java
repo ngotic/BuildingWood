@@ -49,9 +49,7 @@ public class Logout extends HttpServlet {
 		} else if( id!=null && id.contains("naver:")) {
 			System.out.println("네이버 로그아웃");
 			naverapi.logout((String)req.getSession().getAttribute("access_token"));
-		} else {
-			req.getSession().invalidate();
-		}
+		} 
 		
 		req.getSession().invalidate();
 		resp.sendRedirect("/wood/index.do");

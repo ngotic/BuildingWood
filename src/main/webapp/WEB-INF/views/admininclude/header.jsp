@@ -67,7 +67,7 @@
           <div class="notification-box"><i data-feather="bell"></i><span class="dot-animated"></span></div>
           <ul class="notification-dropdown onhover-show-div">
             <li>
-              <p class="f-w-700 mb-0">You have 3 Notifications<span class="pull-right badge badge-primary badge-pill">4</span></p>
+              <p class="f-w-700 mb-0">알림이 왔어요...!<span class="pull-right badge badge-primary badge-pill">4</span></p>
             </li>
             <li class="noti-primary">
               <div class="media">
@@ -239,16 +239,27 @@
 						       <a class="nav-link menu-title link-nav" href="/wood/mypage/mypage.do"><i data-feather="users"></i><span>이용자 정보</span></a>
 							</c:if>
 	                    </li>
-	                    
-                    	<li>
+	                    <!-- TODO: -->
+                    	<%-- 	<li>
                     		<c:if test="${lv > 0}">
 	                    		<a class="nav-link menu-title link-nav" href="/wood/mypage/service.do"><i data-feather="airplay"></i><span>서비스 이용 관리</span></a>
 	                    	</c:if>
 	                    	<c:if test="${lv==0}">
 	                    		<a class="nav-link menu-title link-nav" href="/wood/admin/adminservice.do"><i data-feather="airplay"></i><span>서비스 이용 관리</span></a>
 	                    	</c:if>
+	                    </li> --%>
+	                    
+	                    <li>
+		                    <c:if test="${lv > 0}">
+							       <a class="nav-link menu-title link-nav" href="/wood/mypage/schedule.do"><i data-feather="calendar"></i><span>나의 스케쥴</span></a>
+							</c:if>
 	                    </li>
 	                    
+	                    <c:if test="${lv==0}">
+		                    <li>
+		                        <a class="nav-link menu-title link-nav" href="/wood/admin/adminstat.do"><i data-feather="pie-chart"></i><span>사이트 통계</span></a>                  
+		                    </li>
+	                    </c:if>
 	                    
                    		<li>
 							<c:if test="${lv>0}">
