@@ -1,4 +1,4 @@
-package com.project.wood.board.teach;
+package com.project.wood.teach;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.project.wood.teach.repository.TeachDAO;
+import com.project.wood.teach.repository.TeachDTO;
 
 @WebServlet("/teach/edit.do")
 public class Edit extends HttpServlet {

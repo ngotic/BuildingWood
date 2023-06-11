@@ -387,10 +387,136 @@ public class StudyDAO {
 		return 0;
 	}
 
+	public int studyjoin(String id, String openstudyseq) {
+		
+		
+		
+		String sql = "insert into tblStudyList values (studylistseq.nextVAL,?,?)";
+		
+		try {
+			
+		pstat = conn.prepareStatement(sql);		
+		pstat.setString(1, openstudyseq);
+		pstat.setString(2, id);
+		
+		
+		
+		
+	    return pstat.executeUpdate();
 
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return 0;
+		
 	}
 
+	public int studyjoinck(String id, String openstudyseq) {
+		// TODO Auto-generated method stub
+		String sqlck = "select * from tblStudyList where openstudyseq=? and id = ?";
+		try {
+		pstat = conn.prepareStatement(sqlck);
+		pstat.setString(1, openstudyseq);
+		pstat.setString(2, id);
+		rs = pstat.executeQuery();
+		if(rs.next()) {
+		if(rs.getString("id").equals(id)) {
+			rs.close();
+			pstat.close();
+			return 0;
+		}
+		}
+		
+	
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 1;
+		
+	}
 
+	public ArrayList<StudyListDTO> Searchboard(String name, String openstudyseq) {
+
+		
+	ArrayList<StudyListDTO> list = new ArrayList<StudyListDTO>();
+
+			try {
+				String sql = "select * from tblStudy  WHERE title LIKE '%' || ? || '%' and openstudyseq = ?  order by openstudyseq DESC"; 
+				pstat = conn.prepareStatement(sql);
+				pstat.setString(1, name);
+				pstat.setString(2, openstudyseq);
+				rs = pstat.executeQuery();
+				
+				
+				while(rs.next()){
+					  StudyListDTO dto = new StudyListDTO();
+						
+						dto.setStudyseq(rs.getString("studyseq"));
+						dto.setOpenstudyseq(rs.getString("openstudyseq"));
+						dto.setNickname(rs.getString("nickname"));
+						dto.setBoardcategoryseq(rs.getString("boardcategoryseq"));
+		                dto.setRegdate(rs.getString("regdate"));
+		                dto.setEditdate(rs.getString("editdate"));
+		                dto.setContent(rs.getString("content"));
+		                dto.setTitle(rs.getString("title"));
+		                dto.setChecke(rs.getInt("checke"));
+			
+			       list.add(dto);
+			
+			        
+				}
+			
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return list;
+	}
+	public ArrayList<StudyListDTO> Searchcontentboard(String content, String openstudyseq) {
+		ArrayList<StudyListDTO> list = new ArrayList<StudyListDTO>();
+		 StudyListDTO dto = new StudyListDTO();
+		try {
+			String sql = "select * from tblStudy  WHERE  nickname LIKE '%' || ? || '%' and openstudyseq = ? order by openstudyseq DESC"; 
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, content);
+			pstat.setString(2, openstudyseq);
+			rs = pstat.executeQuery();
+			
+			
+			while(rs.next()){
+				dto = new StudyListDTO();
+				
+				
+				dto.setStudyseq(rs.getString("studyseq"));
+				dto.setOpenstudyseq(rs.getString("openstudyseq"));
+                dto.setRegdate(rs.getString("regdate"));
+                dto.setEditdate(rs.getString("editdate"));
+                dto.setContent(rs.getString("content"));
+                dto.setTitle(rs.getString("title"));
+                dto.setNickname(rs.getString("nickname"));
+                dto.setChecke(rs.getInt("checke"));
+                
+              list.add(dto);
+
+               
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+		}
+
+
+}
 	
 
 

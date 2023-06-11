@@ -95,10 +95,10 @@
 	
 	<div class="slide">
     <div class="slide_item active">
-        <img src="/wood/asset/img/메인1.jpg" alt="Image 1" >
+        <img src="/wood/asset/img/메인1.jpg" alt="main1" >
     </div>
     <div class="slide_item">
-        <img src="/wood/asset/img/메인2.jpg" alt="Image 2" >
+        <img src="/wood/asset/img/메인2.jpg" alt="main2" >
     </div>
      <!-- 슬라이드 이전 버튼 -->
     <div class="slide_button slide_prev_button"><span class="material-symbols-outlined">navigate_before</span></div>

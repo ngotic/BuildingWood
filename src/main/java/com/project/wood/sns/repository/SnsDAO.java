@@ -7,10 +7,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-
-
 public class SnsDAO {
 	private Connection conn;
 	private PreparedStatement pstat;
@@ -21,12 +17,11 @@ public class SnsDAO {
 		this.conn= new DBConnect().getConn();
 	}
 	
-	public List<SnsDTO> getSNSList() {
-		
+	public List<SnsDTO> getSNSList(String buildingseq) {
 		try {
 
 			List<SnsDTO> list = new ArrayList<SnsDTO>();
-			String sql = "select * from snslist where buildingseq = 1 order by regdate desc";
+			String sql = String.format("select * from snslist where buildingseq = %s order by regdate desc",buildingseq);
 			stat = conn.createStatement();
 			rs = stat.executeQuery(sql);
 			while (rs.next()) {
@@ -137,8 +132,7 @@ public class SnsDAO {
 			
 			if (rs.next()) {
 				snsboardseq=rs.getString("snsboardseq");
-				
-			}
+			};
 			
 			String sql2 = "Insert into tblsnspic (snspicseq,snsboardseq,pic) values (snspicseq.nextVal,?,?)";
 			pstat = conn.prepareStatement(sql2);
@@ -159,4 +153,114 @@ public class SnsDAO {
 		}
 		return 0;
 		}
-}
+
+	public String getusernickname(String uid) {
+		try {
+			String sql ="select * from tblmember where id =?";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1,uid);
+			rs = pstat.executeQuery();
+			String result="";
+					
+			if (rs.next()) {
+				
+				result =(rs.getString("nickname"));
+				
+			}
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+
+	public String getuserprofile(String uid) {
+		try {
+			String sql ="select * from tblmember where id =?";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1,uid);
+			rs = pstat.executeQuery();
+			String result="";
+					
+			if (rs.next()) {
+				
+				result =(rs.getString("profile"));
+				
+			}
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public String getuserbuildingseq(String uid) {
+		try {
+			String sql ="select buildingseq from tbladdress where id =?";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1,uid);
+			rs = pstat.executeQuery();
+			String result="";
+					
+			if (rs.next()) {
+				
+				result =(rs.getString("buildingseq"));
+				
+			}
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public String getuserdong(String buildingseq) {
+		try {
+			String sql ="select dong from snsbuilding where buildingseq = ?";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1,buildingseq);
+			rs = pstat.executeQuery();
+			String result="";
+					
+			if (rs.next()) {
+				
+				result =(rs.getString("dong"));
+				
+			}
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	
+	//댓글 등록
+	public int addcomment(CommentDTO cdto) {
+
+		try {
+			
+			String sql = "insert into tblsnscomment (snscommentseq, snsboardseq,id,content,writedate,editdate) values(snscommentseq.nextVal, ?, ?, ?, default,default)";
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, cdto.getSnsboardseq());
+			pstat.setString(2,cdto.getId());
+			pstat.setString(3, cdto.getContent());
+			
+			return pstat.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		
+		}
+		return 0;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+}	

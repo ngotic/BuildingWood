@@ -138,50 +138,55 @@
     border-radius: 64px;">
 			
 			
-<div><!-- 소개 -->
-  <div class = "menu" style="display: flex;
-    text-align: center;
-    flex-direction: column-reverse;
-    align-items: stretch;
-    border-bottom: 0px;">
-		
+			
+			
+			
+			
+			
+	<table class="table">
+	  <thead>
+	    <tr>
+	      <th scope="col">${odto.name}</th>
+	      <td></td>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr>
+	      <th scope="row">닉네임</th>
+	      <td>${odto.nickname }</td>
+	      <th>모집여부</th>
+	      <td>${odto.status}</td>
+	    </tr>
+	    <tr>
+	      <th scope="row">2모집 종료일자</th>
+	      <td> ${odto.period}</td>
+	      <td>모집인원</td>
+	      <td>${odto.recruit }</td>
+	    </tr>
+	    <tr>
+	      <th scope="row">시작날짜</th>
+	      <td>${odto.startdate}</td>
+	      <td>종료날짜</td>
+	      <td>${odto.enddate }</td>
+	    </tr>
+	    <tr>
+	      <th scope="row">온오프라인</th>
+	      <td>${odto.onoff }</td>
+	      <td>주소</td>
+	      <td>${odto.address}</td>
+	    </tr>
 
+	    <tr>
+	    	<td colspan="4">${odto.intro }</td>
+	    </tr>
 
-	  <div class="" >  			
-		<div class="mb-3">
-		<div style="    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: space-between;">
-			<div><input type="image"  class="profile" src="/wood/asset/img/${profile}" >${odto.nickname }</div>
-		  <div class="content-margin "> <span >${odto.status}</span></div>	
-		  
-		  </div>
-		  <div class="mb-3">
-		  <span style="font-size: 35px;">${odto.name}</span>
-		  </div>
-		  
-		  <div style="    display: block;
-    font-size: 23px;
-    margin-top: 16px;">
-		  <label for="exampleFormControlTextarea1" class="form-content" placeholder="내용" style="padding: 0px 13%;
-    font-size: 18px;">${odto.intro }</label>
-		  
-		</div>
-		<div style="margin-top: 14px;">
-		  <span class="content-margin date">모집 종료 기간 : ${odto.period}</sapn>
-		  </div>
-		<div style="margin-top: 14px;">  
-			<span class="content-margin date3">시작 날짜 : ${odto.startdate}</span>
-			<span class="content-margin date3">종료 날짜 : ${odto.enddate }</span>
-			<p style="margin-top: 14px;">모집인원 : ${odto.recruit }</p>
-			<p id= "onoff">${odto.onoff }</p>
-			<p>주소 : ${odto.address}</p>
-		  </div>
-		</div>
-		</div>	
-		</div>
-</div>						
+	  </tbody>
+	</table>	
+			
+			
+			
+			
+				
 				<form style="margin-top: 14px;
     border-top: 1px solid;
     padding: 30px;
@@ -223,6 +228,7 @@
 						<a class="pagingtd" onclick="page_click(this)" href="./pagingview.do?openstudyseq=${openstudyseq}&pagenumber=다음&startListpageNumber=${pagedto.startListpageNumber}&endtListpageNumber=${pagedto.endtListpageNumber}" >다음</a>
 					
 					</div>
+					<form action="./view.do" method="get">
 				<div class="menu"
 					style="display: inline-flex; justify-content: center;">
 
@@ -235,10 +241,12 @@
 					</select> <input class="textbox" type="text" name="name"
 						placeholder="검색어를 입력하세요."
 						style="align-self: right; align-content: left; padding: 10px;">
+						
+					<input type="hidden" name ="openstudyseq" value= "${openstudyseq}">
 					<input class="button" type="submit" value="검색"
-						style="align-content: left;"> <a href="./add.do">
-					</a>
+						style="align-content: left;"> 
 				</div>
+				</form>
 				</table>
 	
 

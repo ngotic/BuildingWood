@@ -38,7 +38,7 @@
 }
 
 .study-content-black {
-	width: 70%;
+	width: 100%;
 	height: auto;
 	/* border: solid 5px black; */
 	display: block;
@@ -76,11 +76,14 @@
 .button {
 	width: 100px;
 	height: 50px;
+	border-radius: 25px;
+	    margin: 0px 10px;
 }
 
 .textbox {
 	width: 300px;
 	height: 50px;
+	border-radius: 25px;
 }
 
 .title {
@@ -114,6 +117,10 @@ a {
 .content-card-body:nth-child(2) {
 	text-align: left;
 }
+.modal{
+	z-index: 1500;
+}
+$zindex-modal:1055;
 </style>
 </head>
 <body>
@@ -148,34 +155,7 @@ a {
 
 					<table class="table">
 						</form>
-						<thead>
-							<h1 style="text-align: center">공지사항</h1>
-							<tr>
-								<th scope="col">번호</th>
-								<th scope="col">First</th>
-								<th scope="col">Last</th>
-								<th scope="col">Handle</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th scope="row">1</th>
-								<td>Mark</td>
-								<td>Otto</td>
-								<td>@mdo</td>
-							</tr>
-							<tr>
-								<th scope="row">2</th>
-								<td>Jacob</td>
-								<td>Thornton</td>
-								<td>@fat</td>
-							</tr>
-							<tr>
-								<th scope="row">3</th>
-								<td colspan="2">Larry the Bird</td>
-								<td>@twitter</td>
-							</tr>
-						</tbody>
+							
 					</table>
 					<div class="modal" tabindex="-1">
 
@@ -246,7 +226,7 @@ a {
 								    margin-top: 27px;">
 								    
 							<a type="button" style="    width: 100%;
-													    z-index: 1;
+													    z-index: 0;
 													    margin: 0px;
 													    height: 304px;"
 								href="view.do?openstudyseq=${dto.openstudyseq}"
@@ -254,7 +234,7 @@ a {
 
 								<div>
 									<span value="모집중"
-										style="z-index: 3 color: black; background: #d2ddf2; border: 2px solid #d2ddf2; border-radius: 11px; position: absolute; margin-left: 12px; margin-top: 6px;">${dto.status}</span>
+										style="z-index: 1 color: black; background: #d2ddf2; border: 2px solid #d2ddf2; border-radius: 11px; position: absolute; margin-left: 12px; margin-top: 6px;">${dto.status}</span>
 									<img src="/wood/asset/img/img.jpg" style="margin-top: -7px;"
 										class="card-img-top" alt="...">
 									<div class="content-card-body" style="height: 139px;">
@@ -268,13 +248,16 @@ a {
 										<div style="display: none;" name="openstudyseq">${dto.openstudyseq}</div>
 										
 									</div>
-								</div>
+										
+							
+					</div>
 
-		
-
+	
 
 							</a>
-							<a ="button" href="studyadd.do?openstudyseq=${dto.openstudyseq}" 
+
+							
+				<a ="button" href="list.do?openstudyseq=${dto.openstudyseq}&studyjoin=join" 
 							style="margin-bottom: 27px;
 						    bottom: 95px;
 						    position: relative;
@@ -290,10 +273,15 @@ a {
 						    margin-bottom:0px;
 						    font-size: 23px;"		
    							 >등록하기</a>
+   							 
+   					<!-- 		
+						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" onclik="href='./list.do$studylist=ok'">
+								등록하기
+								</button> -->
 						</div>
 
 
-
+					
 					</c:forEach>
 					
 						
@@ -307,6 +295,7 @@ a {
 
 			</div>
 		</div>
+		
 		<!-- Modal -->
 
 <!-- Button trigger modal -->
