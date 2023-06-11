@@ -38,18 +38,29 @@
         text-align: right;
 	}
 	
+	#move{
+		font-size:60px !important;
+		animation-name: arrow-move;
+	    animation-iteration-count: infinite;
+	    animation-duration: 1.5s;
+	}
 	
+	@keyframes arrow-move {
+    from { transform : translate(0, 0px); } 
+    to   { transform : translate(0, 10px);} 
+}
 </style>
 
 
 <body>
 	<div class ="cropping">
-			<img src="/wood/asset/img/그림1.png" 
+			<img src="https://www.theladders.com/wp-content/uploads/friends_190412.jpg" 
 			class="img-fluid " alt="..." 
 				style=" ">
 	
 	<div class= "page-title">
-		<p>여기는 한독빌딩</p>
+		<p>약속 게시판<span class="material-symbols-outlined" id="move" style="font-size: 60px;"><a href="#promise-moving" style="text-decoration:none; color:white; font-size:60px;">expand_more</a></span></p>
+		
 	</div>
 </div> 
 </body>
