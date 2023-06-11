@@ -44,12 +44,12 @@
 
 <body>
 	<div class ="cropping">
-			<img src="/wood/asset/img/그림1.png" 
+			<img src="/wood/asset/img/teach/wallpaper.jpg" 
 			class="img-fluid " alt="..." 
 				style=" ">
 	
 	<div class= "page-title">
-		<p>여기는 한독빌딩</p>
+		<p>1:1 과외 게시판</p>
 	</div>
 </div> 
 </body>
