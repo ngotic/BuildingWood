@@ -15,6 +15,7 @@
         overflow: hidden;
     }
 
+
     .slide_item {
         /* layout */
         position: absolute;
@@ -91,6 +92,7 @@
     }
 	
 </style>
+
 <body>
 	
 	<div class="slide">
@@ -170,7 +172,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     // 3초마다 슬라이드 자동 전환
-    setInterval(autoSlide, 4300);
+    setInterval(autoSlide, 4000);
 });
 	
 	

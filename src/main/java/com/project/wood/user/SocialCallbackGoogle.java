@@ -64,6 +64,9 @@ public class SocialCallbackGoogle extends HttpServlet {
 			
 			if (user.getBan().equals("y")) { // 차단으로 인한 로그인 실패
 				// 로그인 실패
+				googleApi.logout((String)req.getSession().getAttribute("access_token") );
+				req.getSession().removeAttribute("access_token");
+				// 차단 계정인 경우 토큰 세션을 지우고 소셜로그인 로그아웃 처리
 				req.getSession().setAttribute("msg", "LOGIN_BAN_ERR");
 				resp.sendRedirect("/wood/index.do?naverUrl="+naverApi.getNaverLoginUrl()+"&googleUrl="+googleApi.getGoogleLoginUrl());
 				return ;

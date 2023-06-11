@@ -65,6 +65,10 @@ public class SocialCallbackNaver extends HttpServlet {
 				
 				if (user.getBan().equals("y")) { // 차단으로 인한 로그인 실패
 					// 로그인 실패
+					
+					naverApi.logout((String)req.getSession().getAttribute("access_token"));
+					req.getSession().removeAttribute("access_token");
+					
 					req.getSession().setAttribute("msg", "LOGIN_BAN_ERR");
 					resp.sendRedirect("/wood/index.do?naverUrl="+naverApi.getNaverLoginUrl()+"&googleUrl="+googleApi.getGoogleLoginUrl());
 					return ;
