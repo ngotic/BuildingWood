@@ -71,6 +71,7 @@ section {
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
+	<%@ include file="/WEB-INF/views/teach/teachheader.jsp"%>
 	<section class="container">
 		<h1 class="text-success text-center">
         과외 신청 게시글

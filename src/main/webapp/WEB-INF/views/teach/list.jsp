@@ -274,27 +274,23 @@ section {
 	font-size: 18px;
 }
 
+element.style {
+}
+.navbar-fade {
+    animation-name: navbar-fade;
+    animation-duration: 0.5s;
+    -webkit-animation-name: navbar-fade;
+    -webkit-animation-duration: 0.5s;
+}
+.header-area {
+    z-index: 2;
+}
 
 </style>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/teach/teachheader.jsp"%>
 	<section class="container">
-		<h1>
-			1:1 과외<small>게시판</small>
-			<div>
-				<c:if test="${not empty id}">
-					<form method="POST" action="/wood/teach/logout.do">
-						<input type="submit" value="로그아웃">
-					</form>
-				</c:if>
-				<c:if test="${empty id}">
-					<form method="GET" action="/wood/teach/login.do">
-						<input type="submit" value="로그인">
-					</form>
-				</c:if>
-			</div>
-		</h1>
-
 		<select id="sel1" onchange="go()">
 			<option value="" selected disabled hidden>지역</option>
 			<option value="전체">전체</option>
@@ -427,11 +423,11 @@ section {
 								</c:if>
 								<c:if test="${not empty dto.student}">
 									<div class="stars">
-										<span class="rate"> <c:if
-												test="${(dto.place).length() < 15}">
+										<span class="rate"> 
+											<c:if test="${(dto.place).length() < 13}">
 												<span> 위치: ${dto.place }</span>
-											</c:if> <c:if test="${(dto.place).length() > 15}">
-												<span id="fifteen"> 위치: ${dto.place.substring(0, 15)}...</span>
+											</c:if> <c:if test="${(dto.place).length() > 13}">
+												<span id="fifteen"> 위치: ${dto.place.substring(0, 13)}...</span>
 											</c:if>
 										</span>
 									</div>
@@ -488,25 +484,6 @@ section {
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 	<script>
 
-            /* $('.apply') */
-            /*  $('.apply').click(function () {
-                 if ($(this).val() === '신청하기') {
-                     $(this).prop('readonly', true);
-                     $(this).val("신청 중");
-                     $(this).css({
-                         'background-color': '#999',
-                         'color': 'white'
-                     });
-                 } else {
-                     $(this).prop('readonly', true);
-                     $(this).val("신청하기");
-                     $(this).css({
-                         'background-color': 'rgba(0, 0, 0, 0.0)',
-                         'color': 'black'
-                     });
-                     $.post('/wood/teach/signup.do'),{teachseq: "${dto.teachseq}"};
-                 }
-             }); */
             function go() {
 
                  $('.card.green').each((index, item) => {
@@ -523,27 +500,11 @@ section {
                     }
 
                 });
-                 /* const list = Array.from(document.getElementsByClassName('card'));
-
-                 $('#dis').html('');
-            	 
-                	 list.forEach(item => {
-
-                	if(event.target.value == '전체'){
-                	 	$('#dis').append(item);
-                	 
-                	}else ($(item).data('place') == event.target.value) {
-                	 	$('#dis').append(item);
-//                    	$(item).css('visibility', 'visible');
-                    	//$(item).show();
-                	}
-                }); */
 
              }
              function dollar() {
 
                  const list = Array.from(document.getElementsByClassName('card'));
-                 //console.log(list.length);
 
                  $('#dis').html('');
 
@@ -583,62 +544,6 @@ section {
                  
              }
             	
-            		
-            	/*
-            	$('.card.green').each((index, item) => {
-            			$(item).css('visibility', 'hidden');
-            		});
-             
-            	 
-
-            	 for (var i = 0; i < don.length; i++) {
-                $('.card.green').each((index, item) => {
-
-                	if(event.target.value == '전체'){
-                		$(item).css('visibility', 'visible');	
-                	}else if (event.target.value == '저가') {
-                		don.sort(function(a, b) {
-    	            		  return a - b;
-                  		});
-  	                		if($(item).data('money') == don[i]){
-  	                    		$(item).css('visibility', 'visible');
-                  			 }
-                  	}else if (event.target.value == '고가') {
-                  		don.sort(function(a, b) {
-    	            		  return b - a;
-                  		});
-  	                		if($(item).data('money') == don[i]){
-  	                			console.log(don[i],$(item).data('money'));
-  	                    		$(item).css('visibility', 'visible');
-  	                		}
-                      } else {
-                		$(item).css('visibility', 'hidden');
-              	     
-                  			 }
-                });
-
-             }
-            	 */
-            
-
-                /* location.href='/wood/teach/list.do?'+(decodeURIComponent($('#sel1 option:selected').val())); */
-            
-        /*$('#sel1').change(function () {
-                                            var select = $('#sel1 option:selected').val();
-                                            if($('input[name=place]').val() == select){
-                                            	
-                                                $('.card').hide();
-                                            	
-                                            }
-                                            /* if(select != null){
-                                        	
-                                                $('.card').hide();
-                                                $('.select').show();
-                                                $('.select').css('display', 'block');
-                                            } */
-            /*
-            });
-            */
         </script>
 </body>
 </html>
