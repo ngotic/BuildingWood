@@ -42,7 +42,7 @@
 
 <body>
 	<div class ="cropping">
-			<img src="https://cdn.pixabay.com/photo/2020/11/05/23/16/city-5716456_1280.jpg" 
+			<img src="/wood/asset/img/그림1.png" 
 			class="img-fluid " alt="..." 
 				style=" ">
 	

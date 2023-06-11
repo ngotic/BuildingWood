@@ -41,7 +41,7 @@
 	
 
 	 .modal-dialog {
-	    margin: auto;
+	   /*  margin: auto; */
 	}  
     
     
@@ -55,8 +55,8 @@
     
     .modal-body {
      	margin: auto; 
-	    margin-top: 50px;
-	    margin-bottom: 50px;
+	    margin-top: 30px;
+	    margin-bottom: 30px;
         padding: 10px;
         border-radius: 10px;
 
@@ -152,6 +152,16 @@
 			color:white;
 			border-radius:none;
 		}
+		
+
+		
+		.form-group {
+			margin-bottom: 30px;
+		}
+		
+		.form-group {
+			margin-top: 10px;
+		}
 
 
 
@@ -189,19 +199,24 @@
         <div class="promise-modal-dialog modal-dialog modal-lg modal-dialog-centered ">
           <div class="promise-modal-dialog modal-content">
             <div class="modal-header">
-                  <h1 class="text-success text-center">
+              	<div>
+                  <h1 class="text-modal text-success text-center">
                       약속 등록
                   </h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              	</div>
+              	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="float:right;"></button>
             </div>
             <div class="modal-body">
              <div class="form-group">
                       <label class="modal-label">제목</label>
                       <input type="text" class="form-control" name="title" placeholder="글 제목을 입력하세요" >
                   </div>
-                  <div class="form-floating">
+                  <div class="form-group">
+                  
                       <label class="modal-label">소개글</label>
-                      <textarea class="form-control" placeholder="소개글을 작성하세요" id="floatingTextarea2" style="height: 100px" name="content"></textarea>
+                      <div class="form-floating">
+                      <textarea class="form-control" placeholder="글을 입력하세요" id="floatingTextarea2" style="height: 100px" name="content"></textarea>
+                    </div>
                     </div>
                     <div class="form-group">
                       <label class="modal-label">글머리</label>
@@ -216,9 +231,11 @@
                       <label class="modal-label">해쉬태그</label>
                       <input type="text" class="form-control" id="hashtag" placeholder="해쉬태그를 입력하세요" name="hashtag" >
                   </div>
+                  <div class="form-group">
                   <div class="form-outline" style="width: 10rem;">
                       <label class="form-label" for="typeNumber">모집인원</label>
                       <input min="1" max="100" type="number" id="typeNumber" class="form-control" name="num" />
+                  </div>
                   </div>
                   </div>
             <div class="modal-footer">
@@ -240,10 +257,11 @@
 
 	<!-- template.jsp > index.jsp -->
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
+	<%@ include file="/WEB-INF/views/promise/promiseheader.jsp" %>
 	
 <section class="container">
 	
-
+	<div id="promise-moving" style="height: 100px; margin-top: -100px;"></div>
 		
 		
 	<div class="upperside2">
@@ -505,6 +523,12 @@ $('#morelist').on('click',function() {
 		$('#hashtag${status.count}').append(temp);
 		
 	</c:forEach> */
+	
+	
+	
+	
+	
+	
     
     
 </script>

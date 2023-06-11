@@ -34,7 +34,7 @@
 button {
 	border: 0px;
 	padding: 10px;
-	margin : 10px 5px 5px 5px;
+	margin: 10px 5px 5px 5px;
 	border-radius: 10px;
 	margin: 10px 5px 5px 5px;
 }
@@ -43,10 +43,11 @@ input {
 	display: block;
 	border: 0px;
 	padding: 10px;
-	margin : 10px 5px 5px 5px;
+	margin: 10px 5px 5px 5px;
 	border-radius: 10px;
 	margin: 10px 5px 5px 5px;
 }
+
 .rightbtn {
 	float: right;
 }
@@ -56,18 +57,48 @@ input {
 }
 
 section {
-	background-color: #96d04a6e;
+	background-color: #;
 	padding: 10px 5px 10px 5px;
+}
+
+.container {
+	padding-right: 0px;
+	margin-right:20px;
+}
+
+#rightbar {
+	width: 20%;
+	height: 680px;
+	background-color: #a6f7a93d;
+}
+#pot {
+  position: relative;
+}
+
+#rightbar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: auto;
+  height: 98%;
+}
+
+#date{
+	margin-right:21%;
 }
 </style>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/include/header.jsp"%>
+	<%@ include file="/WEB-INF/views/teach/teachheader.jsp"%>
 	<section class="container">
 		<h1 class="text-success text-center">
         과외 신청 게시글
 	    </h1>
 	    <h2 class="text-center">상세보기</h2>
+<div id="pot">
+	    <div id="rightbar">ddd</div>
 	        <div class="container">
 	            <div class="form-group">
 	                <label for="fname">제목:</label>
@@ -98,7 +129,7 @@ section {
 	            <div class="form-group">
 	                <label>시간:</label>
 	                <div>
-	             	${dto.time }
+	             	${dto.settime }
 	            	</div>
 	            </div>
 	            <div class="form-group">
@@ -136,7 +167,7 @@ section {
 					</button>
 				</c:if>
 			</div>
-	    </form>
+			</div>
 	</section>
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 	<script>

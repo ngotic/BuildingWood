@@ -106,6 +106,21 @@
 		padding: 4px;
 		
 	}
+	
+			
+	.pagingtbl{
+    display: flex;
+    justify-content: center;
+	}
+
+	.pagingtr{
+		
+	}
+	
+	.pagingtd{
+	
+	}
+	
 </style>
 </head>
 <body>
@@ -118,93 +133,70 @@
 
 <div style=" display: flex;  justify-content: center; align-items: center;  min-height: 50vh; text-align: left; margin-top:50px;">
 		<div class = "study-content-black">
-			<div class = " menu-board" style="border:  3px solid black;">
+			<div class = " menu-board" style="
+    background-color: #abdbff1a;
+    border-radius: 64px;">
 			
 			
-<div><!-- 소개 -->
-  <div class = "menu" >
-	<span style="float: left;">		
-	 <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-	    강의 일정
-	  </button>
-	  
-	
-	</span>
-	<span style="float: left; margin-left:30px;">		
-	 <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#notification" aria-expanded="false" aria-controls="notification">
-	   	공지사항
-	  </button>
-	  
-	
-	</span>
-		
-	
-			<select class="button" >
-			<option value="name" selected="selected">제목</option>
-			</select>
-			<input class = "textbox" type="text" placeholder ="검색어를 입력하세요." style = "align-self: right; align-content: left; padding: 10px;"  >
-			<input class ="button" type ="button" value ="검색" style = "align-content: left;">
-		</div>
-		
-		
-	<div class="collapse" id="collapseExample">
-	  <div class="card card-body">
-	   			
-		<div class="mb-3">
-		<div style="display: flex;">
-			<input type="image"  class="profile" src="/wood/asset/img/img.jpg" >
-		  <p class="content-margin ">작성자이름</p>	
-		  </div>
-		  
-		  <p class="content-margin">제목~~</p>
-		    <p class="content-margin">모집 종료 기간 : 2023-06-25</p>
-		  
-		<div>  
-			<p class="content-margin">시작 날짜 : 2023-06-30</p>
-			<p class="content-margin" style="margin-bottom: 20px;">종료 날짜 : 2023-09-30</p>
-		  </div>
-		
-		</div>
-		<div class="mb-3">
-		  <label for="exampleFormControlTextarea1" class="form-content" placeholder="내용">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus eligendi saepe, maiores labore commodi nemo dolorem minus officia sequi quaerat fugit dolores sunt odio aliquam, explicabo suscipit molestiae cum. Ipsam!</label>
-		  
-		</div>
-		
-	  </div>
-	</div>
-
-
-
-
-	<div class="collapse" id="notification">
-	  <div class="card card-body">	
-		<div class="mb-3">
-		<div style="display: flex;">
-			<input type="image"  class="profile" src="/wood/asset/img/img.jpg" >
-		  <p class="content-margin ">작성자이름</p>	
-		  </div>
-		  
-		  <p class="content-margin">제목~~</p>
-		   
-		</div>
-		<div class="mb-3">
-		  <label for="exampleFormControlTextarea1" class="form-content" placeholder="내용">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus eligendi saepe, maiores labore commodi nemo dolorem minus officia sequi quaerat fugit dolores sunt odio aliquam, explicabo suscipit molestiae cum. Ipsam!</label>
-		</div>
-			  
-		<div>  
-			<p class="content-margin">작성 날짜 : 2023-06-30</p>
-		  </div>
-	  </div>
-	</div>
-
-
-
-
-</div>		
-						
-				<form>
 			
-				<table id= "study-board">
+			
+			
+			
+			
+	<table class="table">
+	  <thead>
+	    <tr>
+	      <th scope="col">${odto.name}</th>
+	      <td></td>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr>
+	      <th scope="row">닉네임</th>
+	      <td>${odto.nickname }</td>
+	      <th>모집여부</th>
+	      <td>${odto.status}</td>
+	    </tr>
+	    <tr>
+	      <th scope="row">2모집 종료일자</th>
+	      <td> ${odto.period}</td>
+	      <td>모집인원</td>
+	      <td>${odto.recruit }</td>
+	    </tr>
+	    <tr>
+	      <th scope="row">시작날짜</th>
+	      <td>${odto.startdate}</td>
+	      <td>종료날짜</td>
+	      <td>${odto.enddate }</td>
+	    </tr>
+	    <tr>
+	      <th scope="row">온오프라인</th>
+	      <td>${odto.onoff }</td>
+	      <td>주소</td>
+	      <td>${odto.address}</td>
+	    </tr>
+
+	    <tr>
+	    	<td colspan="4">${odto.intro }</td>
+	    </tr>
+
+	  </tbody>
+	</table>	
+			
+			
+			
+			
+				
+				<form style="margin-top: 14px;
+    border-top: 1px solid;
+    padding: 30px;
+    margin-left: 10%;
+    border-bottom: 1px solid;">
+			
+				<table style="    width: 100%;
+    height: auto;
+    border-collapse: separate;
+    border-spacing: 0px 6px;">
 			
 					<tr class="board-cotnet board-main">
 						<th>번호</th>
@@ -214,40 +206,61 @@
 						<th>조회</th>
 					</tr>
 		
-		
-			<c:forEach items="${list}" var="dto">	
+
+			<c:forEach items="${list}" var="dto" begin="${pagedto.startNumber }" end="${pagedto.endNumber }">	
 				
-					<tr onclick='location.href="./viewboard.do"'>
+					<tr onclick='location.href="./viewboard.do?openstudyseq=${openstudyseq}&studyseq=${dto.studyseq}"'>
 						<th class="txt-center" >${dto.rownum }</th>
 						<th>${dto.title}</th>
-						<th class="txt-center">id</th>
-						<th class="txt-center">${dto.regdate}</th>
-						<th class="txt-center">조회수</th>
+						<th class="txt-center">${dto.nickname }</th>
+						<th class="txt-center date2">${dto.regdate}</th>
+						<th class="txt-center ">${dto.checke }</th>
 					</tr>		
 			</c:forEach>
-		
-			
+				<div>
+						<a class="pagingtd" onclick="page_click(this)" href="./pagingview.do?openstudyseq=${openstudyseq}&pagenumber=이전&startListpageNumber=${pagedto.startListpageNumber}&endtListpageNumber=${pagedto.endtListpageNumber}" type="submit">이전</a>
+							
+						<c:forEach var="pagenum" begin="${pagedto.startListpageNumber }" end="${pagedto.endtListpageNumber}">
+						
+						<a class="pagingtd page" onclick="page_click(this)" href="./pagingview.do?openstudyseq=${openstudyseq}&startListpageNumber=${pagedto.startListpageNumber}&endtListpageNumber=${pagedto.endtListpageNumber}&pagenumber=${pagenum}" >${pagenum }</a>
+						
+						</c:forEach>
+						<a class="pagingtd" onclick="page_click(this)" href="./pagingview.do?openstudyseq=${openstudyseq}&pagenumber=다음&startListpageNumber=${pagedto.startListpageNumber}&endtListpageNumber=${pagedto.endtListpageNumber}" >다음</a>
+					
+					</div>
+					<form action="./view.do" method="get">
+				<div class="menu"
+					style="display: inline-flex; justify-content: center;">
+
+
+					<select class="button" name="ck">
+
+						<option value="name" selected="selected">제목</option>
+						<option value="content">작성자</option>
+
+					</select> <input class="textbox" type="text" name="name"
+						placeholder="검색어를 입력하세요."
+						style="align-self: right; align-content: left; padding: 10px;">
+						
+					<input type="hidden" name ="openstudyseq" value= "${openstudyseq}">
+					<input class="button" type="submit" value="검색"
+						style="align-content: left;"> 
+				</div>
+				</form>
 				</table>
-				
-					    <nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-  </ul>
-</nav>
-			</form>
-				
-		
-		</div>	
-		<form action ="./view.do" method="post">
+	
+
+		</div>		
+		<form action ="./view.do" method="get" style="border: 5px solid; margin-top: 35px;   padding: 27px;
+    display: flex;
+
+    flex-direction: column;
+    margin-left: 10%;">
 			
 		<div class="mb-3">
 		
 			<input type="image"  class="profile" src="/wood/asset/img/img.jpg" >
-			<span class="content-margin " style="padding-bottom: 3px;">작성자이름</span>
+			<span class="content-margin " style="padding-bottom: 3px;">${nickname }</span>
 			
 		  <label for="exampleFormControlInput1" class="form-label">	</label>
 		  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="제목" name ="title">
@@ -262,31 +275,42 @@
 		<div class="btn">
 
 	 
-	<div class="comment-box"  >
+	<div class="comment-box" style="display: flex;
+    justify-content: flex-end;">
 			
-        	<button type="submit" class="button"  >등록하기</button>
+        	<button type="submit" class="button" style="width: 129px; padding: 0px;">게시글작성</button>
         	
         	<a href ="./list.do;" class="">
-        	<button type="button" class="button" >목록으로</button>
+        	<button type="button" class="button"  style="width: 129px; padding: 0px;">목록으로가기</button>
         	</a>
         </div>
         </form>	
-			
 
-		
-	</div >
-					
-
-
-	
-	
-
+	</div >	
 </div>
 </div>
 </div>
 
 	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 <script>
+
+
+
+/* onclick="location.href='./pagingview.do?openstudyseq=${openstudyseq}'" */
+	function page_click(item) {
+    var text = $(item).text()
+
+}
+
+
+
+
+
+
+
+window.onload=function(){
+	history.replaceState({}, null, './view.do?openstudyseq=${openstudyseq}');
+	}
 
 window.onkeydown = function() {
 	var kcode = event.keyCode;
@@ -295,6 +319,39 @@ window.onkeydown = function() {
 	history.replaceState({}, null, './view.do?openstudyseq=${openstudyseq}');
 	}
 	}
+
+	
+
+$(document).ready(function() {
+	$('#onoff').text(function(i, oldText) {
+	return oldText === 'on' ? '온라인' : '오프라인';
+	});
+	});
+	
+
+$('.date').each((index, item)=>{
+	$(item).text(clipstring($(item).text()));
+});
+function clipstring(str){
+	return str.substring(0, 21);
+}
+
+
+$('.date2').each((index, item)=>{
+	$(item).text(clipstring2($(item).text()));
+});
+function clipstring2(str){
+	return str.substring(0, 10);
+}
+
+
+
+$('.date3').each((index, item)=>{
+	$(item).text(clipstring3($(item).text()));
+});
+function clipstring3(str){
+	return str.substring(0, 18);
+}
 
 </script>
 

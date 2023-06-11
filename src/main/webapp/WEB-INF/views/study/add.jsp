@@ -28,7 +28,7 @@
 	
 	
 	
-	<form method="post" action="./add.do">
+	<form method="post" action="./add.do" >
 	
 	<div class= "addbox">
 		
@@ -52,8 +52,8 @@
             <input type="text" class="form-control" id="exampleFormControlInput1" name="name" placeholder="스터디명을 작성해주세요.">
           </div>
         <div class="form-group">
-            <label for="exampleFormControlInput1" class="ptag">정원수</label>
-            <input type="number" class="form-control" id="exampleFormControlInput1" name="recruit" placeholder="정원수룰 적어주세요.">
+            <label for="exampleFormControlInput1" class="ptag">모집인원</label>
+            <input type="number" class="form-control" id="exampleFormControlInput1" name="recruit" placeholder="모집인원수를 적어주세요.">
           </div>
         
          
@@ -76,6 +76,7 @@
 		<div><span class="content-margin">종료 날짜</spna>	<input type="date" name="enddate" class="form-control table-margin" id="floatingInput" placeholder="name@example.com">
 	  </div>
 	  </div>
+	 
 	  <div class="form-group">
             <label for="exampleFormControlTextarea1">소개 내용</label>
             <textarea class="form-control" id="exampleFormControlTextarea1" name="intro" rows="10" placeholder="소개내용을 적어주세요."></textarea>
