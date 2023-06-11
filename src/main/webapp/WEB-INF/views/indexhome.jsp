@@ -57,8 +57,12 @@
 		<h1 class="banner-text">한독 빌딩입니다.</h1>
 		<button class="banner-button">더보기</button>
 	</div> -->
-	<%@ include file="/WEB-INF/views/mainheader.jsp" %>  
-	<section class="container"></section>
+	 
+	<section class="container">
+	
+		<%@ include file="/WEB-INF/views/mainheader.jsp" %> 
+	
+	</section>
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 	<script>
 		$(document).ready(function() {
