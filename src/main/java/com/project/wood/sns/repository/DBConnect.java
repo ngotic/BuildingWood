@@ -6,22 +6,22 @@ import java.sql.DriverManager;
 public class DBConnect {
 	private Connection conn;
 		
-		//»ý¼ºÀÚ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public DBConnect() {
 		try {
-			//µå¶óÀÌ¹ö·Îµù
+			//ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½Îµï¿½
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			//Á¢¼ÓÇÒ DBÁ¤º¸
-			String url="jdbc:oracle:thin:@localhost:1521:xe"; //@localhost:1521:xe - localhost : IPÁÖ¼Ò / 1521:port ¹øÈ£ / xe: Oracle database clientÀÇ °íÀ¯ÇÑ service nameÀÌ´Ù.
-			//Á¢¼ÓÇÏ°í Connection °´Ã¼ÀÇ ÂüÁ¶°ª ¾ò¾î¿À±â(DB ¿¬µ¿ÀÇ ÇÙ½É °´Ã¼)
-			conn=DriverManager.getConnection(url, "team", "java1234"); //getConnection(url, "°èÁ¤¾ÆÀÌµð", "°èÁ¤ºñ¹ø")
-			System.out.println("oracle DB Á¢¼Ó¼º°ø");
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ DBï¿½ï¿½ï¿½ï¿½
+			String url="jdbc:oracle:thin:@13.124.238.159:1521:xe"; //@localhost:1521:xe - localhost : IPï¿½Ö¼ï¿½ / 1521:port ï¿½ï¿½È£ / xe: Oracle database clientï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ service nameï¿½Ì´ï¿½.
+			//ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ Connection ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(DB ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½Ã¼)
+			conn=DriverManager.getConnection(url, "team", "java1234"); //getConnection(url, "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")
+			System.out.println("oracle DB ï¿½ï¿½ï¿½Ó¼ï¿½ï¿½ï¿½");
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	//¸Þ¼Òµå
+	//ï¿½Þ¼Òµï¿½
 	public Connection getConn() {
 		return conn;
 	}
