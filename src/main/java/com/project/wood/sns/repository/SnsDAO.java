@@ -242,7 +242,6 @@ public class SnsDAO {
 	public int addcomment(CommentDTO cdto) {
 
 		try {
-			
 			String sql = "insert into tblsnscomment (snscommentseq, snsboardseq,id,content,writedate,editdate) values(snscommentseq.nextVal, ?, ?, ?, default,default)";
 			pstat = conn.prepareStatement(sql);
 			pstat.setString(1, cdto.getSnsboardseq());

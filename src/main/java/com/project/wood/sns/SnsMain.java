@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.project.wood.sns.repository.BuildingDTO;
@@ -79,6 +81,7 @@ public class SnsMain extends HttpServlet {
 		System.out.println(likelist.toString());
 		
 		
+		
 		req.setAttribute("plist", plist);
 		req.setAttribute("list", list);
 		req.setAttribute("commentlist", commentlist);
@@ -92,7 +95,6 @@ public class SnsMain extends HttpServlet {
 		req.setAttribute("udong", udong);
 		req.setAttribute("hidemapbox", hidemapbox);
 		req.setAttribute("likelist", likelist);
-		
 		
 		
 		
@@ -122,6 +124,7 @@ public class SnsMain extends HttpServlet {
 		}
 		
 		if("1".equals(type)) {
+			int count = 0 ;
 			String snsboardseq=req.getParameter("snsboardseq");
 			String comment = req.getParameter("comment");
 			CommentDTO cdto = new CommentDTO();

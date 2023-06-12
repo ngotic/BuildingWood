@@ -596,11 +596,12 @@
 
 	
 	 function headershow(){
-			$("#header").css('opacity','1');		 
+			$("#header").css('opacity','1');	
+			
 		 };
 		
 	    	
-   	$(document).off().ready(function() {     
+   	$(document).off().ready(function() {
    		if(hidemapbox=='t'){
    			$('#map').css("transition-duration","0s");
    			$('#content').css("transition-duration","0s");
@@ -620,7 +621,7 @@
    		//모달 생성 시 
        	$('#staticBackdrop').off().on('show.bs.modal', function(event) {       
     	 $('#header').css("opacity","0.5");
-    	 
+    	
        	var Idx =1; //현재 슬라이드 index
        	const snsboardseq=$(event.relatedTarget).data('snsboardseq');
        	const index= 1+$(event.relatedTarget).data('index');
@@ -650,6 +651,7 @@
         
         str=str.substring();
         commented=commented.substring();
+        console.log(commented);
         like = like.substring();
         str=str.replaceAll('450px','600px');
         str=str.replaceAll('300px','600px');
@@ -693,7 +695,7 @@
     	});
     	
     	//modallike
-    	$("#like").on('click',function(){
+    	$("#like").off().on('click',function(){
     		var mtblike='';
     		 var tofill = $('#like').html();
 			 var toblank =  $('#like').html();
@@ -783,7 +785,7 @@
 			
     	});
     	
-    	 $("#btndelete").on("click", function(){
+    	 $("#btndelete").off().on("click", function(){
     		 if(user==1){
 	    		 $.ajax({
 	   	            url:"/wood/snsmain.do",
@@ -810,7 +812,7 @@
     		$("#w_modal_comment").focus();
     	});
     	
-   	 	$('#btnadd').on("click",function addcomment(){
+   	 	$('#btnadd').off().on("click",function addcomment(){
      		$.ajax({
   	            url:"/wood/snsmain.do",
   	            type: "post", // post 방식
@@ -819,13 +821,39 @@
   	            	snsboardseq:snsboardseq, 
   	            	comment:$('#w_modal_comment').val()},// json 방식으로 서블릿에 보낼 데이터
 	            	success:function(data){
- 	                console.log("success");
+ 	                console.log(
+					`<div id="to_modal_commentlist" style="display:none;">` +
+							       	`<c:forEach items="${commentlist}" var="clist">`+
+							       		`<c:if test="${clist.snsboardseq==dto.snsboardseq}">`+
+						     				`<div class="modal_commentbox" >`+
+						     					`<div class="u_imagebox box">`+
+						     						`<img alt="" src="/wood/asset/sns/${clist.profile}" class="comment_userimage">`+
+							     				`</div>`+
+							     				`<div class="modal_usernick" style="width:120px;">`+
+													`<div class="box top modal_commentnick">`+
+														`${clist.nickname}`+
+												`	</div>`+
+													`<div>`+
+														`<button class="to_comment" value="${clist.nickname}">답글 달기</button>`+
+													`</div>`+
+												`</div>`+
+												`<div class="modal_comment top" style="margin-left:10px;">`+
+													`${clist.content}`+
+												`</div>`+
+						     				`</div>`+
+					     				`</c:if>`+
+		     						`</c:forEach>`+
+								`</div>`		
+ 	                
+ 	                );
+ 	                
+ 	                
+ 	                
  	               // 팝업 호출 url
- 	                  var url = 'http://localhost:8090/wood/snsmain.do?buildingseq='+$('#blist option:selected').data('buildingseq')+'&hidemapbox='+hidemapbox;
+ 	              var url = 'http://localhost:8090/wood/snsmain.do?buildingseq='+$('#blist option:selected').data('buildingseq')+'&hidemapbox='+hidemapbox;
  	               // 팝업 호출
  	               
  	              location.href=url;
- 	          		
  	               
   	            },
   	            error:function(){
@@ -833,11 +861,10 @@
   	            }
   	        });
      	});
-    	 
-    	 
+   	
        });
-       
-     });
+       	
+     });//document.ready끝
     
    	
    	//파일 용량 제한
