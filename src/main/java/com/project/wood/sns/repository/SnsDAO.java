@@ -106,7 +106,7 @@ public class SnsDAO {
 	public int addsnsboard(SnsDTO dto) {
 		try {
 
-			String sql = "Insert into tblsnsboard (snsboardseq,id,boardcategoryseq,buildingseq,content,regdate,editdate) values (snsboardseq.nextVal,?,2,1,?,default,default)";
+			String sql = "Insert into tblsnsboard (snsboardseq,id,boardcategoryseq,buildingseq,content,regdate,editdate) values (snsboardseq.nextVal,?,22,1,?,default,default)";
 
 			pstat = conn.prepareStatement(sql);
 
