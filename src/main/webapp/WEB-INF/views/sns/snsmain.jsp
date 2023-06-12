@@ -143,10 +143,10 @@
 									${dto.content}
 								</div>
 								<div class="imagebox" data-count="${dto.cpic}" id="send_modal">
-								    <ul class="slides" id="slide${status.count}" style="width:calc(${dto.cpic} * 450px)"> 
+								    <ul class="slides" id="slide${status.count}" style="width:calc(${dto.cpic} * 450px);height:300px;"> 
 								   		<c:forEach items="${plist}" var="pic">
 							   			<c:if test="${dto.snsboardseq==pic.snsboardseq}">
-								     		<li style="display: flex; justify-content: center; width:450px;height:300px;" onclick="event.stopPropagation()"><img alt="" src="/wood/asset/sns/${pic.pic}" style="max-width:450px;max-height:300px;"></li>
+								     		<li style="display: flex; justify-content: center;flex-direction: column; /*수평 정렬*/"><img alt="" src="/wood/asset/sns/${pic.pic}" style="max-width:450px;max-height:300px;object-fit:scale-down;"></li>
 								     	</c:if>
 								     	</c:forEach>
 								    </ul>  
@@ -189,7 +189,7 @@
 										<div class="like" data-index="${status.count}"data-likesnsboardseq="${dto.snsboardseq }">
 											<span class="heart material-symbols-outlined">
 												favorite
-											</span>
+											</span>{dto.clike}
 										</div>
 									</c:if>
 									<c:if test="${likelist.contains(dto.snsboardseq)}">
@@ -246,7 +246,7 @@
       <div class="modal-header" style="border-bottom: none;">
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="headershow();"></button>
       </div>
-      <div class="modal-body" style="padding: 5px 5px; ">
+      <div class="modal-body" style="padding: 0px 0px; ">
      	
      	<table>
      		<tr>
@@ -631,6 +631,9 @@
         const nickname=$(event.relatedTarget).data('nickname');
         const cpic=$(event.relatedTarget).data('cpic');
         
+        
+        
+        
         $("#modal_usernick").text(nickname);
         $("#u_imagebox").html("<img alt="+"\"\" src=\""+profile+"\"class=\"comment_userimage\">");
         $("#modal_content").text(modal_content);
@@ -639,7 +642,6 @@
         let commented = $("#boardwrap").children().eq(index).find("#to_modal_commentlist").html()
         let like = $("#boardwrap").children().eq(index).find(".like").html()
         
-       
         
         if(${ubuildingseq!=buildingseq}){
         	str= $("#boardwrap").children().eq(index-1).find("#send_modal").html();
@@ -653,16 +655,17 @@
         commented=commented.substring();
         console.log(commented);
         like = like.substring();
+        
         str=str.replaceAll('450px','600px');
-        str=str.replaceAll('300px','600px');
-        str=str.replaceAll('max-height:600px','max-height:400px');
+        str=str.replaceAll('height:300px','height:700px');
+        str=str.replaceAll('max-width:','max-width:700px');
+        str=str.replaceAll('max-height:','max-height:700px');
         str=str.replaceAll('class=\"','class=\"m');
-        str=str.replaceAll('left: -900px;','');
-        str=str.replaceAll('left: -600px;','');
-        str=str.replaceAll('left: -300px;','');
-        str=str.replaceAll('calc(1350px);','calc(1800px);');
-        str=str.replaceAll('calc(900px);','calc(1200px);');
+        str=str.replaceAll('calc(1350px);','calc(1800px);');	
+        str=str.replaceAll('calc(900px);','calc(1200px);');	
         str=str.replaceAll('calc(450px);','calc(600px);');
+        str=str.replaceAll('<li style="','<li style="width:600px;height:700px;');
+        str=str.replaceAll('<img alt','<img style="border-radius:15px; max-width:600px; max-height:700px;" alt"');
         
         
         

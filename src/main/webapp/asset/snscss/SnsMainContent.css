@@ -104,7 +104,7 @@
 	#modal_imagebox {
 		position:relative;
 		width:600px;
-		height:600px;
+		height:700px;
 		text-align:center;
 		vertical-align:center;
 		align-items: center;
@@ -307,14 +307,17 @@ color:red;
   'GRAD' 0,
   'opsz' 48
 }
-
+.slides > li {
+	width:450px; height:300px;
+}
 img{
 	border-radius:15px;
 	object-fit:cover;
 }
-.mslides > li{
-	margin-top:100px;
-	margin-bottom:100px;
+.mslides > li > img{
+	border-radius:15px;
+	object-fit:cover;
+	
 }
 
 #ddong::-ms-expand{
