@@ -392,7 +392,7 @@
 	  
 	var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);	
 	const ms=[];
-	$(document).ready(function(){
+	$(document).off().ready(function(){
 		<c:forEach items="${blist}" var="dto" varStatus="status">
 		content${status.count}='<div class="overlaybox">' +
 	    '    <div class="boxtitle">${dto.name}</div>' +
