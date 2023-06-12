@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -18,6 +19,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.project.wood.sns.repository.BuildingDTO;
 import com.project.wood.sns.repository.CommentDTO;
+import com.project.wood.sns.repository.LikeDTO;
 import com.project.wood.sns.repository.MapDAO;
 import com.project.wood.sns.repository.SnsDAO;
 import com.project.wood.sns.repository.SnsDTO;
@@ -39,16 +41,26 @@ public class SnsMain extends HttpServlet {
 		String profile = dao.getuserprofile(uid);
 		String ubuildingseq = dao.getuserbuildingseq(uid);
 		String buildingseq = req.getParameter("buildingseq");  
+		String hidemapbox = req.getParameter("hidemapbox");
+		
+		
+		
+		
 		if(req.getParameter("buildingseq")==null) {
 			buildingseq = ubuildingseq;
+		}
+		if(hidemapbox==null) {
+			hidemapbox="f";
 		}
 		
 		String udong = dao.getuserdong(buildingseq);
 		
+		List<String> likelist = dao.getUserLiked(uid);
 		List<SnsDTO> list = dao.getSNSList(buildingseq);
 		List<SnsDTO> plist = dao.getPicList();
 		List<SnsDTO> commentlist = dao.getComment();
 		
+
 		MapDAO mdao = new MapDAO();
 		
 		HashMap<String, String> buildingInfo = new HashMap<String, String>();
@@ -62,6 +74,10 @@ public class SnsMain extends HttpServlet {
 		List<BuildingDTO> dlist = mdao.dlist(); //장소 동
 		req.setAttribute("dlist", dlist);
 		
+		System.out.println(list.toString());
+
+		System.out.println(likelist.toString());
+		
 		
 		req.setAttribute("plist", plist);
 		req.setAttribute("list", list);
@@ -74,6 +90,12 @@ public class SnsMain extends HttpServlet {
 		int selected = Integer.parseInt(buildingseq)-1;
 		req.setAttribute("selected", selected);
 		req.setAttribute("udong", udong);
+		req.setAttribute("hidemapbox", hidemapbox);
+		req.setAttribute("likelist", likelist);
+		
+		
+		
+		
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/sns/snsmain.jsp");
 		dispatcher.forward(req, resp);
@@ -89,6 +111,16 @@ public class SnsMain extends HttpServlet {
 		String uid=(session.getAttribute("id").toString());
 		String type = req.getParameter("type");
 		System.out.println(type);
+		String ubuildingseq = dao.getuserbuildingseq(uid);
+		String buildingseq = req.getParameter("buildingseq"); 
+		
+		
+		
+		
+		if(req.getParameter("buildingseq")==null) {
+			buildingseq = ubuildingseq;
+		}
+		
 		if("1".equals(type)) {
 			String snsboardseq=req.getParameter("snsboardseq");
 			String comment = req.getParameter("comment");
@@ -114,6 +146,44 @@ public class SnsMain extends HttpServlet {
 			}
 			
 		}
+		else if("2".equals(type)) {
+			String likesnsboardseq =req.getParameter("likesnsboardseq");
+			
+			LikeDTO ldto = new LikeDTO();
+			ldto.setId(uid);
+			ldto.setSnsboardseq(likesnsboardseq);
+			
+			int likeadd = dao.addlike(ldto);
+			System.out.println(ldto.toString());
+			System.out.println(likesnsboardseq);
+			System.out.println("저장");
+			
+			
+		}  
+		else if("3".equals(type)) {
+			String likesnsboardseq =req.getParameter("likesnsboardseq");
+			
+			LikeDTO ldto = new LikeDTO();
+			ldto.setId(uid);
+			ldto.setSnsboardseq(likesnsboardseq);
+			
+			int likecancel = dao.cancellike(ldto);
+			System.out.println(ldto.toString());
+			System.out.println(likesnsboardseq);
+			System.out.println("지우기");
+			
+		}  
+		else if("4".equals(type)) {
+			String snsboardseq =req.getParameter("delsnsboardseq");
+			
+			SnsDTO dto = new SnsDTO();
+			dto.setId(uid);
+			dto.setSnsboardseq(snsboardseq);
+			
+			int deleteboard = dao.deleteboard(dto);
+			System.out.println("지우기");
+			
+		}  
 		else{
 			try {
 				
@@ -127,9 +197,11 @@ public class SnsMain extends HttpServlet {
 						
 						);
 				
+				System.out.println(req.getRealPath("/asset/sns"));
+				
 				String content = multi.getParameter("add_useritem");
 				
-				String pic = multi.getFilesystemName("addpic");
+				String pic1 = multi.getFilesystemName("addpic1");
 				String pic2 = multi.getFilesystemName("addpic2");
 				String pic3 = multi.getFilesystemName("addpic3");	
 				
@@ -139,7 +211,7 @@ public class SnsMain extends HttpServlet {
 				dto.setContent(content);
 				
 				ArrayList<String> piclist = new ArrayList<String>();
-				piclist.add(pic);
+				piclist.add(pic1);
 				piclist.add(pic2);
 				piclist.add(pic3);
 				
@@ -149,8 +221,8 @@ public class SnsMain extends HttpServlet {
 				int result = dao.addsnsboard(dto);
 				int result2 = dao.addpic(piclist);
 				
-				if(result!=0&&result2!=0) {
-					resp.sendRedirect("/wood/snsmain.do");
+				if(result+result2!=0) {
+					resp.sendRedirect("/wood/snsmain.do?");
 				}else {
 					PrintWriter w = resp.getWriter();
 					w.print("<script>alert('failed');history.back();</script>");
