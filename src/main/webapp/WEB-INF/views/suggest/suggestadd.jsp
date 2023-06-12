@@ -229,7 +229,7 @@
 	<!-- template.jsp > index.jsp -->
 	<%@ include file="/WEB-INF/views/include/header.jsp" %>
 	<section class="container">
-		<h1>건의 게시판<small> 작성</small></h1>
+		<h1>공지 게시판<small> 작성</small></h1>
 	</section>
 	
 	<form method="POST" action="/wood/suggest/suggestadd.do">
