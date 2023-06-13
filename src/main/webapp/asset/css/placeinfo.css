@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+
+     .frame-group1222 {
+	  top: 162px;
+	  /* left: 156px; */
+	  width: 194px;
+	  height: 43px;
+	  display: flex;
+	  position: absolute;
+	  align-items: flex-start;
+	  flex-shrink: 1;
+	  border-color: #cccccc;
+	  border-width: 0.5px;
+	  border-radius: 30px;
+	  background-color: rgba(255, 255, 255, 1);
+	}
+	.frame-mappin {
+	  top: 7px;
+	  left: 32px;
+	  width: 26px;
+	  height: 28px;
+	  display: flex;
+	  position: absolute;
+	  align-items: flex-start;
+	  flex-shrink: 1;
+	}
+	.frame-pin-stroke {
+	  top: 0px;
+	  left: 0px;
+	  width: 26px;
+	  height: 28px;
+	  position: absolute;
+	}
+	.frame-pin {
+	  top: 1.7142906188964844px;
+	  left: 1.857421875px;
+	  width: 22px;
+	  height: 25px;
+	  position: absolute;
+	}
+	.frame-circle {
+	  top: 7.428572654724121px;
+	  left: 8.047615051269531px;
+	  width: 10px;
+	  height: 9px;
+	  position: absolute;
+	}
+	.frame-text15 {
+	  top: 9px;
+	  left: 65px;
+	  color: rgba(255, 95, 95, 1);
+	  height: auto;
+	  position: absolute;
+	  font-size: 17px;
+	  font-style: Medium;
+	  text-align: left;
+	  font-family: Inter;
+	  font-weight: 500;
+	  line-height: 24px;
+	  font-stretch: normal;
+	  text-decoration: none;
+	}
+	span.material-symbols-outlined {
+    margin-top: 1px;
+    color: tomato;
+	}
+	.frame-text15 > span {
+	color: tomato;
+	}

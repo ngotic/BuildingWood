@@ -6,7 +6,7 @@
 
 	<script>
 		/* HEADER EVENT*/
-		window.onload = function() { scrollFunction()};
+		/* window.onload = function() { scrollFunction()};
 		window.onscroll = function() { scrollFunction()};
 
 		function scrollFunction() {
@@ -26,7 +26,7 @@
 					document.getElementsByTagName('body')[0].style.marginTop = '0';
 				}
 			}
-		}
+		} */
 		function menuToggle() {
 			document.getElementById('menu').classList.toggle('show');
 		}
