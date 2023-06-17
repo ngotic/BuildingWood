@@ -35,7 +35,7 @@
 
 
 # <b>📂ERD</b>
-<img src="./readImg/빌딩숲_ERD만.PNG">
+<img src="./readImg/빌딩숲_ERD만.png">
 
 # <b> 👩🏻‍🏫기능설명
 <img src="./readImg/기능설명.PNG">
